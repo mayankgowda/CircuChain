@@ -7,7 +7,7 @@ This repository contains the dataset, code, and evaluation logs for **CircuChain
 ### `data/`
 Contains the core dataset, model outputs, and grading artifacts.
 
-* **`circuchain_full_dataset - final.json`**: The canonical benchmark dataset containing 100 Control/Trap problem pairs with prompts and ground truth values.
+* **`circuchain_full_dataset - final.json`**: The canonical benchmark dataset containing Control/Trap problem pairs with prompts and ground truth values.
 * **`graded_master_dataset.json`**: The complete dataset annotated with numerical grading results (Pass/Fail) for every model and subtask.
 * **`final_accuracy_table.csv`**: The aggregated results summary used to generate the tables in the paper.
 * **`final_diagnosis_gpt5.json`**: The output of the automated Judge (GPT-5) classifying failures into categories (e.g., `ERR_SIGN_CONVENTION`, `ERR_PHYSICS_SETUP`).
