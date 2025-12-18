@@ -1,0 +1,20 @@
+* Prob 3: Bridge
+* EXPECTED TRUTH:
+* i1 (i(v_sense_i1)) = 0.181913
+* va (v(2))     = 10.0790
+* vb (v(3))     = 23.1605
+
+V_src 1_src 0 DC 26
+V_sense_i1 1_src 1 DC 0
+
+R_LT 1 2 134
+R_LB 2 0 62
+
+R_RT 1 3 45
+R_RB 3 0 1197
+
+R_Br 2 3 299
+
+.op
+.print op v(2) v(3) i(v_sense_i1)
+.end

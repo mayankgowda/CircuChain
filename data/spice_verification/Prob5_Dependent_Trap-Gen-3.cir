@@ -1,0 +1,19 @@
+* Prob 5: Dependent
+* EXPECTED TRUTH:
+* i1 (i(v_sense_i1)) = 1.530426
+* i2 (i(v_sense_i2)) = 1.452638
+* vx (v(2))  = 5.6785
+
+V1 1 0 DC 47
+R1 1 1_sense 27
+V_sense_i1 1_sense 2 DC 0
+R_share 2 0 73
+
+E_dep 3 2 2 0 10
+
+R2 3 3_sense 43
+V_sense_i2 3_sense 0 DC 0
+
+.op
+.print op v(2) i(v_sense_i1) i(v_sense_i2)
+.end

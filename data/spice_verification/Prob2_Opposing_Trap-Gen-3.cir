@@ -1,0 +1,20 @@
+* Prob 2: Opposing
+* EXPECTED TRUTH:
+* i1 (i(v_sense_i1)) = -0.531915
+* i2 (i(v_sense_i2)) = -7.680851
+* v1 (v(2))  = 28.5957
+
+V1 1 0 DC 27
+R1 1 1_sense 3
+V_sense_i1 1_sense 2 DC 0
+
+R_share 2 0 4
+
+R2 2 2_sense 5
+V_sense_i2 2_sense 3 DC 0
+
+V2 3 0 DC 67
+
+.op
+.print op v(2) i(v_sense_i1) i(v_sense_i2)
+.end

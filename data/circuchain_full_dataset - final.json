@@ -1,0 +1,1432 @@
+[
+  {
+    "id": "Prob1_Supermesh_Control-Base",
+    "values": {
+      "V1": 100,
+      "V2": 40,
+      "Is": 0.004,
+      "R1": 4000,
+      "R2": 8000,
+      "R3": 2000
+    },
+    "prompt": "Analyze the 3-Loop Supermesh Circuit.\n**Components:**\n- Mesh 1 (Left): Voltage Source V1=100V (Positive Up), Top Resistor R1=4000\u03a9.\n- Shared Branch (Mesh 1-2): Independent Current Source Is=0.004A (Flowing UP).\n- Mesh 2 (Center): Top Resistor R2=8000\u03a9.\n- Shared Branch (Mesh 2-3): Dependent Current Source 2*i1 (Flowing DOWN).\n- Mesh 3 (Right): Top Resistor R3=2000\u03a9, Voltage Source V2=40V (Positive Up).\n\n**Variables:**\n- i1, i2, i3: Mesh currents (Clockwise).\n- vx: Node voltage at top-middle (junction of R1, R2, Is).\n- vy: Node voltage at top-right (junction of R2, R3, Dep Src).\n\n**Tasks:**\n1. (KVL) Write mesh equations and solve for i1, i2, i3.\n2. (KCL) Write nodal equations and solve for vx, vy.",
+    "ground_truth": {
+      "mesh_currents": [
+        0.0020000000000000018,
+        0.006,
+        0.001999999999999995
+      ],
+      "node_voltages": {
+        "vx": 92.0,
+        "vy": 44.0
+      },
+      "verifier_map": {
+        "i1": 0.0020000000000000018,
+        "i2": 0.006,
+        "i3": 0.001999999999999995,
+        "vx": 92.0,
+        "vy": 44.0
+      }
+    }
+  },
+  {
+    "id": "Prob1_Supermesh_Control-Integer",
+    "values": {
+      "V1": 100,
+      "V2": 40,
+      "Is": 4,
+      "R1": 4,
+      "R2": 8,
+      "R3": 2
+    },
+    "prompt": "Analyze the 3-Loop Supermesh Circuit.\n**Components:**\n- Mesh 1 (Left): Voltage Source V1=100V (Positive Up), Top Resistor R1=4\u03a9.\n- Shared Branch (Mesh 1-2): Independent Current Source Is=4A (Flowing UP).\n- Mesh 2 (Center): Top Resistor R2=8\u03a9.\n- Shared Branch (Mesh 2-3): Dependent Current Source 2*i1 (Flowing DOWN).\n- Mesh 3 (Right): Top Resistor R3=2\u03a9, Voltage Source V2=40V (Positive Up).\n\n**Variables:**\n- i1, i2, i3: Mesh currents (Clockwise).\n- vx: Node voltage at top-middle (junction of R1, R2, Is).\n- vy: Node voltage at top-right (junction of R2, R3, Dep Src).\n\n**Tasks:**\n1. (KVL) Write mesh equations and solve for i1, i2, i3.\n2. (KCL) Write nodal equations and solve for vx, vy.",
+    "ground_truth": {
+      "mesh_currents": [
+        2.0000000000000036,
+        6.0,
+        1.999999999999993
+      ],
+      "node_voltages": {
+        "vx": 91.99999999999997,
+        "vy": 43.99999999999998
+      },
+      "verifier_map": {
+        "i1": 2.0000000000000036,
+        "i2": 6.0,
+        "i3": 1.999999999999993,
+        "vx": 91.99999999999997,
+        "vy": 43.99999999999998
+      }
+    }
+  },
+  {
+    "id": "Prob1_Supermesh_Trap-HighVolt-1",
+    "values": {
+      "V1": 105,
+      "V2": 40,
+      "Is": 0.004,
+      "R1": 4000,
+      "R2": 8000,
+      "R3": 2000
+    },
+    "prompt": "Analyze the 3-Loop Supermesh Circuit.\n**Components:**\n- Mesh 1 (Left): Voltage Source V1=105V (Positive Up), Top Resistor R1=4000\u03a9.\n- Shared Branch (Mesh 1-2): Independent Current Source Is=0.004A (Flowing UP).\n- Mesh 2 (Center): Top Resistor R2=8000\u03a9.\n- Shared Branch (Mesh 2-3): Dependent Current Source 2*i1 (Flowing DOWN).\n- Mesh 3 (Right): Top Resistor R3=2000\u03a9, Voltage Source V2=40V (Positive Up).\n\n**Variables:**\n- i1, i2, i3: Mesh currents (Clockwise).\n- vx: Node voltage at top-middle (junction of R1, R2, Is).\n- vy: Node voltage at top-right (junction of R2, R3, Dep Src).\n\n**Tasks:**\n1. (KVL) Write mesh equations and solve for i1, i2, i3.\n2. (KCL) Write nodal equations and solve for vx, vy.",
+    "ground_truth": {
+      "mesh_currents": [
+        0.002500000000000002,
+        0.006500000000000001,
+        0.0014999999999999944
+      ],
+      "node_voltages": {
+        "vx": 95.0,
+        "vy": 42.99999999999999
+      },
+      "verifier_map": {
+        "i1": 0.002500000000000002,
+        "i2": 0.006500000000000001,
+        "i3": 0.0014999999999999944,
+        "vx": 95.0,
+        "vy": 42.99999999999999
+      }
+    }
+  },
+  {
+    "id": "Prob1_Supermesh_Control-Var1",
+    "values": {
+      "V1": 80,
+      "V2": 45,
+      "Is": 2,
+      "R1": 6,
+      "R2": 9,
+      "R3": 2
+    },
+    "prompt": "Analyze the 3-Loop Supermesh Circuit.\n**Components:**\n- Mesh 1 (Left): Voltage Source V1=80V (Positive Up), Top Resistor R1=6\u03a9.\n- Shared Branch (Mesh 1-2): Independent Current Source Is=2A (Flowing UP).\n- Mesh 2 (Center): Top Resistor R2=9\u03a9.\n- Shared Branch (Mesh 2-3): Dependent Current Source 2*i1 (Flowing DOWN).\n- Mesh 3 (Right): Top Resistor R3=2\u03a9, Voltage Source V2=45V (Positive Up).\n\n**Variables:**\n- i1, i2, i3: Mesh currents (Clockwise).\n- vx: Node voltage at top-middle (junction of R1, R2, Is).\n- vy: Node voltage at top-right (junction of R2, R3, Dep Src).\n\n**Tasks:**\n1. (KVL) Write mesh equations and solve for i1, i2, i3.\n2. (KCL) Write nodal equations and solve for vx, vy.",
+    "ground_truth": {
+      "mesh_currents": [
+        1.0,
+        3.0,
+        1.0000000000000004
+      ],
+      "node_voltages": {
+        "vx": 74.0,
+        "vy": 46.99999999999999
+      },
+      "verifier_map": {
+        "i1": 1.0,
+        "i2": 3.0,
+        "i3": 1.0000000000000004,
+        "vx": 74.0,
+        "vy": 46.99999999999999
+      }
+    }
+  },
+  {
+    "id": "Prob1_Supermesh_Control-HighRes",
+    "values": {
+      "V1": 150,
+      "V2": 60,
+      "Is": 0.005,
+      "R1": 4000,
+      "R2": 9000,
+      "R3": 2000
+    },
+    "prompt": "Analyze the 3-Loop Supermesh Circuit.\n**Components:**\n- Mesh 1 (Left): Voltage Source V1=150V (Positive Up), Top Resistor R1=4000\u03a9.\n- Shared Branch (Mesh 1-2): Independent Current Source Is=0.005A (Flowing UP).\n- Mesh 2 (Center): Top Resistor R2=9000\u03a9.\n- Shared Branch (Mesh 2-3): Dependent Current Source 2*i1 (Flowing DOWN).\n- Mesh 3 (Right): Top Resistor R3=2000\u03a9, Voltage Source V2=60V (Positive Up).\n\n**Variables:**\n- i1, i2, i3: Mesh currents (Clockwise).\n- vx: Node voltage at top-middle (junction of R1, R2, Is).\n- vy: Node voltage at top-right (junction of R2, R3, Dep Src).\n\n**Tasks:**\n1. (KVL) Write mesh equations and solve for i1, i2, i3.\n2. (KCL) Write nodal equations and solve for vx, vy.",
+    "ground_truth": {
+      "mesh_currents": [
+        0.003181818181818187,
+        0.00818181818181818,
+        0.001818181818181816
+      ],
+      "node_voltages": {
+        "vx": 137.27272727272725,
+        "vy": 63.63636363636361
+      },
+      "verifier_map": {
+        "i1": 0.003181818181818187,
+        "i2": 0.00818181818181818,
+        "i3": 0.001818181818181816,
+        "vx": 137.27272727272725,
+        "vy": 63.63636363636361
+      }
+    }
+  },
+  {
+    "id": "Prob1_Supermesh_Control-Asym",
+    "values": {
+      "V1": 60,
+      "V2": 25,
+      "Is": 1.5,
+      "R1": 5,
+      "R2": 14,
+      "R3": 2
+    },
+    "prompt": "Analyze the 3-Loop Supermesh Circuit.\n**Components:**\n- Mesh 1 (Left): Voltage Source V1=60V (Positive Up), Top Resistor R1=5\u03a9.\n- Shared Branch (Mesh 1-2): Independent Current Source Is=1.5A (Flowing UP).\n- Mesh 2 (Center): Top Resistor R2=14\u03a9.\n- Shared Branch (Mesh 2-3): Dependent Current Source 2*i1 (Flowing DOWN).\n- Mesh 3 (Right): Top Resistor R3=2\u03a9, Voltage Source V2=25V (Positive Up).\n\n**Variables:**\n- i1, i2, i3: Mesh currents (Clockwise).\n- vx: Node voltage at top-middle (junction of R1, R2, Is).\n- vy: Node voltage at top-right (junction of R2, R3, Dep Src).\n\n**Tasks:**\n1. (KVL) Write mesh equations and solve for i1, i2, i3.\n2. (KCL) Write nodal equations and solve for vx, vy.",
+    "ground_truth": {
+      "mesh_currents": [
+        0.6470588235294109,
+        2.1470588235294117,
+        0.8529411764705918
+      ],
+      "node_voltages": {
+        "vx": 56.764705882352935,
+        "vy": 26.705882352941174
+      },
+      "verifier_map": {
+        "i1": 0.6470588235294109,
+        "i2": 2.1470588235294117,
+        "i3": 0.8529411764705918,
+        "vx": 56.764705882352935,
+        "vy": 26.705882352941174
+      }
+    }
+  },
+  {
+    "id": "Prob1_Supermesh_Control-LowCurr",
+    "values": {
+      "V1": 95,
+      "V2": 35,
+      "Is": 0.0035,
+      "R1": 5000,
+      "R2": 7000,
+      "R3": 2000
+    },
+    "prompt": "Analyze the 3-Loop Supermesh Circuit.\n**Components:**\n- Mesh 1 (Left): Voltage Source V1=95V (Positive Up), Top Resistor R1=5000\u03a9.\n- Shared Branch (Mesh 1-2): Independent Current Source Is=0.0035A (Flowing UP).\n- Mesh 2 (Center): Top Resistor R2=7000\u03a9.\n- Shared Branch (Mesh 2-3): Dependent Current Source 2*i1 (Flowing DOWN).\n- Mesh 3 (Right): Top Resistor R3=2000\u03a9, Voltage Source V2=35V (Positive Up).\n\n**Variables:**\n- i1, i2, i3: Mesh currents (Clockwise).\n- vx: Node voltage at top-middle (junction of R1, R2, Is).\n- vy: Node voltage at top-right (junction of R2, R3, Dep Src).\n\n**Tasks:**\n1. (KVL) Write mesh equations and solve for i1, i2, i3.\n2. (KCL) Write nodal equations and solve for vx, vy.",
+    "ground_truth": {
+      "mesh_currents": [
+        0.0028500000000000044,
+        0.006349999999999999,
+        0.0006499999999999945
+      ],
+      "node_voltages": {
+        "vx": 80.74999999999997,
+        "vy": 36.29999999999998
+      },
+      "verifier_map": {
+        "i1": 0.0028500000000000044,
+        "i2": 0.006349999999999999,
+        "i3": 0.0006499999999999945,
+        "vx": 80.74999999999997,
+        "vy": 36.29999999999998
+      }
+    }
+  },
+  {
+    "id": "Prob1_Supermesh_Trap-HighVolt-2",
+    "values": {
+      "V1": 192,
+      "V2": 40,
+      "Is": 4,
+      "R1": 4,
+      "R2": 8,
+      "R3": 2
+    },
+    "prompt": "Analyze the 3-Loop Supermesh Circuit.\n**Components:**\n- Mesh 1 (Left): Voltage Source V1=192V (Positive Up), Top Resistor R1=4\u03a9.\n- Shared Branch (Mesh 1-2): Independent Current Source Is=4A (Flowing UP).\n- Mesh 2 (Center): Top Resistor R2=8\u03a9.\n- Shared Branch (Mesh 2-3): Dependent Current Source 2*i1 (Flowing DOWN).\n- Mesh 3 (Right): Top Resistor R3=2\u03a9, Voltage Source V2=40V (Positive Up).\n\n**Variables:**\n- i1, i2, i3: Mesh currents (Clockwise).\n- vx: Node voltage at top-middle (junction of R1, R2, Is).\n- vy: Node voltage at top-right (junction of R2, R3, Dep Src).\n\n**Tasks:**\n1. (KVL) Write mesh equations and solve for i1, i2, i3.\n2. (KCL) Write nodal equations and solve for vx, vy.",
+    "ground_truth": {
+      "mesh_currents": [
+        11.20000000000001,
+        15.2,
+        -7.200000000000017
+      ],
+      "node_voltages": {
+        "vx": 147.19999999999996,
+        "vy": 25.59999999999996
+      },
+      "verifier_map": {
+        "i1": 11.20000000000001,
+        "i2": 15.2,
+        "i3": -7.200000000000017,
+        "vx": 147.19999999999996,
+        "vy": 25.59999999999996
+      }
+    }
+  },
+  {
+    "id": "Prob1_Supermesh_Trap-HighVolt-3",
+    "values": {
+      "V1": 298,
+      "V2": 50,
+      "Is": 4.8,
+      "R1": 4,
+      "R2": 8,
+      "R3": 2
+    },
+    "prompt": "Analyze the 3-Loop Supermesh Circuit.\n**Components:**\n- Mesh 1 (Left): Voltage Source V1=298V (Positive Up), Top Resistor R1=4\u03a9.\n- Shared Branch (Mesh 1-2): Independent Current Source Is=4.8A (Flowing UP).\n- Mesh 2 (Center): Top Resistor R2=8\u03a9.\n- Shared Branch (Mesh 2-3): Dependent Current Source 2*i1 (Flowing DOWN).\n- Mesh 3 (Right): Top Resistor R3=2\u03a9, Voltage Source V2=50V (Positive Up).\n\n**Variables:**\n- i1, i2, i3: Mesh currents (Clockwise).\n- vx: Node voltage at top-middle (junction of R1, R2, Is).\n- vy: Node voltage at top-right (junction of R2, R3, Dep Src).\n\n**Tasks:**\n1. (KVL) Write mesh equations and solve for i1, i2, i3.\n2. (KCL) Write nodal equations and solve for vx, vy.",
+    "ground_truth": {
+      "mesh_currents": [
+        20.000000000000007,
+        24.8,
+        -15.200000000000017
+      ],
+      "node_voltages": {
+        "vx": 217.99999999999994,
+        "vy": 19.599999999999962
+      },
+      "verifier_map": {
+        "i1": 20.000000000000007,
+        "i2": 24.8,
+        "i3": -15.200000000000017,
+        "vx": 217.99999999999994,
+        "vy": 19.599999999999962
+      }
+    }
+  },
+  {
+    "id": "Prob1_Supermesh_Trap-Asym-HighV",
+    "values": {
+      "V1": 270,
+      "V2": 44,
+      "Is": 3,
+      "R1": 5,
+      "R2": 10,
+      "R3": 2
+    },
+    "prompt": "Analyze the 3-Loop Supermesh Circuit.\n**Components:**\n- Mesh 1 (Left): Voltage Source V1=270V (Positive Up), Top Resistor R1=5\u03a9.\n- Shared Branch (Mesh 1-2): Independent Current Source Is=3A (Flowing UP).\n- Mesh 2 (Center): Top Resistor R2=10\u03a9.\n- Shared Branch (Mesh 2-3): Dependent Current Source 2*i1 (Flowing DOWN).\n- Mesh 3 (Right): Top Resistor R3=2\u03a9, Voltage Source V2=44V (Positive Up).\n\n**Variables:**\n- i1, i2, i3: Mesh currents (Clockwise).\n- vx: Node voltage at top-middle (junction of R1, R2, Is).\n- vy: Node voltage at top-right (junction of R2, R3, Dep Src).\n\n**Tasks:**\n1. (KVL) Write mesh equations and solve for i1, i2, i3.\n2. (KCL) Write nodal equations and solve for vx, vy.",
+    "ground_truth": {
+      "mesh_currents": [
+        14.615384615384619,
+        17.615384615384617,
+        -11.615384615384627
+      ],
+      "node_voltages": {
+        "vx": 196.92307692307688,
+        "vy": 20.769230769230735
+      },
+      "verifier_map": {
+        "i1": 14.615384615384619,
+        "i2": 17.615384615384617,
+        "i3": -11.615384615384627,
+        "vx": 196.92307692307688,
+        "vy": 20.769230769230735
+      }
+    }
+  },
+  {
+    "id": "Prob2_Opposing_Control-Base",
+    "values": {
+      "V1": 28,
+      "V2": 7,
+      "R1": 4,
+      "R2": 1,
+      "R_share": 2
+    },
+    "prompt": "Analyze the 2-Loop T-Network Circuit.\n**Components:**\n- Mesh 1 (Left): Independent Voltage Source V1=28V (Positive Up), Top Resistor R1=4\u03a9.\n- Shared Branch: Vertical Resistor R_share=2\u03a9.\n- Mesh 2 (Right): Top Resistor R2=1\u03a9, Independent Voltage Source V2=7V (Positive Up).\n\n**Variables:**\n- i1, i2: Mesh currents (Clockwise).\n- v1: Node voltage at the top-center junction (above R_share).\n\n**Tasks:**\n1. (KVL) Write mesh equations and solve for i1, i2.\n2. (KCL) Write the nodal equation and solve for v1.",
+    "ground_truth": {
+      "mesh_currents": [
+        5.0,
+        0.9999999999999994
+      ],
+      "node_voltages": {
+        "v1": 8.0
+      },
+      "verifier_map": {
+        "i1": 5.0,
+        "i2": 0.9999999999999994,
+        "v1": 8.0
+      }
+    }
+  },
+  {
+    "id": "Prob2_Opposing_Trap-Reversed",
+    "values": {
+      "V1": 28,
+      "V2": 50,
+      "R1": 4,
+      "R2": 1,
+      "R_share": 2
+    },
+    "prompt": "Analyze the 2-Loop T-Network Circuit.\n**Components:**\n- Mesh 1 (Left): Independent Voltage Source V1=28V (Positive Up), Top Resistor R1=4\u03a9.\n- Shared Branch: Vertical Resistor R_share=2\u03a9.\n- Mesh 2 (Right): Top Resistor R2=1\u03a9, Independent Voltage Source V2=50V (Positive Up).\n\n**Variables:**\n- i1, i2: Mesh currents (Clockwise).\n- v1: Node voltage at the top-center junction (above R_share).\n\n**Tasks:**\n1. (KVL) Write mesh equations and solve for i1, i2.\n2. (KCL) Write the nodal equation and solve for v1.",
+    "ground_truth": {
+      "mesh_currents": [
+        -1.1428571428571435,
+        -17.42857142857143
+      ],
+      "node_voltages": {
+        "v1": 32.57142857142857
+      },
+      "verifier_map": {
+        "i1": -1.1428571428571435,
+        "i2": -17.42857142857143,
+        "v1": 32.57142857142857
+      }
+    }
+  },
+  {
+    "id": "Prob2_Opposing_Control-Gen-1",
+    "values": {
+      "V1": 40,
+      "V2": 5,
+      "R1": 4,
+      "R2": 5,
+      "R_share": 3
+    },
+    "prompt": "Analyze the 2-Loop T-Network Circuit.\n**Components:**\n- Mesh 1 (Left): Independent Voltage Source V1=40V (Positive Up), Top Resistor R1=4\u03a9.\n- Shared Branch: Vertical Resistor R_share=3\u03a9.\n- Mesh 2 (Right): Top Resistor R2=5\u03a9, Independent Voltage Source V2=5V (Positive Up).\n\n**Variables:**\n- i1, i2: Mesh currents (Clockwise).\n- v1: Node voltage at the top-center junction (above R_share).\n\n**Tasks:**\n1. (KVL) Write mesh equations and solve for i1, i2.\n2. (KCL) Write the nodal equation and solve for v1.",
+    "ground_truth": {
+      "mesh_currents": [
+        6.48936170212766,
+        1.8085106382978722
+      ],
+      "node_voltages": {
+        "v1": 14.042553191489361
+      },
+      "verifier_map": {
+        "i1": 6.48936170212766,
+        "i2": 1.8085106382978722,
+        "v1": 14.042553191489361
+      }
+    }
+  },
+  {
+    "id": "Prob2_Opposing_Control-Gen-2",
+    "values": {
+      "V1": 36,
+      "V2": 11,
+      "R1": 3,
+      "R2": 1,
+      "R_share": 5
+    },
+    "prompt": "Analyze the 2-Loop T-Network Circuit.\n**Components:**\n- Mesh 1 (Left): Independent Voltage Source V1=36V (Positive Up), Top Resistor R1=3\u03a9.\n- Shared Branch: Vertical Resistor R_share=5\u03a9.\n- Mesh 2 (Right): Top Resistor R2=1\u03a9, Independent Voltage Source V2=11V (Positive Up).\n\n**Variables:**\n- i1, i2: Mesh currents (Clockwise).\n- v1: Node voltage at the top-center junction (above R_share).\n\n**Tasks:**\n1. (KVL) Write mesh equations and solve for i1, i2.\n2. (KCL) Write the nodal equation and solve for v1.",
+    "ground_truth": {
+      "mesh_currents": [
+        7.0,
+        4.0
+      ],
+      "node_voltages": {
+        "v1": 15.000000000000002
+      },
+      "verifier_map": {
+        "i1": 7.0,
+        "i2": 4.0,
+        "v1": 15.000000000000002
+      }
+    }
+  },
+  {
+    "id": "Prob2_Opposing_Control-Gen-3",
+    "values": {
+      "V1": 26,
+      "V2": 8,
+      "R1": 3,
+      "R2": 3,
+      "R_share": 1
+    },
+    "prompt": "Analyze the 2-Loop T-Network Circuit.\n**Components:**\n- Mesh 1 (Left): Independent Voltage Source V1=26V (Positive Up), Top Resistor R1=3\u03a9.\n- Shared Branch: Vertical Resistor R_share=1\u03a9.\n- Mesh 2 (Right): Top Resistor R2=3\u03a9, Independent Voltage Source V2=8V (Positive Up).\n\n**Variables:**\n- i1, i2: Mesh currents (Clockwise).\n- v1: Node voltage at the top-center junction (above R_share).\n\n**Tasks:**\n1. (KVL) Write mesh equations and solve for i1, i2.\n2. (KCL) Write the nodal equation and solve for v1.",
+    "ground_truth": {
+      "mesh_currents": [
+        6.4,
+        -0.4
+      ],
+      "node_voltages": {
+        "v1": 6.8
+      },
+      "verifier_map": {
+        "i1": 6.4,
+        "i2": -0.4,
+        "v1": 6.8
+      }
+    }
+  },
+  {
+    "id": "Prob2_Opposing_Control-Gen-4",
+    "values": {
+      "V1": 38,
+      "V2": 7,
+      "R1": 4,
+      "R2": 1,
+      "R_share": 2
+    },
+    "prompt": "Analyze the 2-Loop T-Network Circuit.\n**Components:**\n- Mesh 1 (Left): Independent Voltage Source V1=38V (Positive Up), Top Resistor R1=4\u03a9.\n- Shared Branch: Vertical Resistor R_share=2\u03a9.\n- Mesh 2 (Right): Top Resistor R2=1\u03a9, Independent Voltage Source V2=7V (Positive Up).\n\n**Variables:**\n- i1, i2: Mesh currents (Clockwise).\n- v1: Node voltage at the top-center junction (above R_share).\n\n**Tasks:**\n1. (KVL) Write mesh equations and solve for i1, i2.\n2. (KCL) Write the nodal equation and solve for v1.",
+    "ground_truth": {
+      "mesh_currents": [
+        7.142857142857142,
+        2.4285714285714284
+      ],
+      "node_voltages": {
+        "v1": 9.428571428571429
+      },
+      "verifier_map": {
+        "i1": 7.142857142857142,
+        "i2": 2.4285714285714284,
+        "v1": 9.428571428571429
+      }
+    }
+  },
+  {
+    "id": "Prob2_Opposing_Trap-Gen-1",
+    "values": {
+      "V1": 25,
+      "V2": 57,
+      "R1": 2,
+      "R2": 5,
+      "R_share": 1
+    },
+    "prompt": "Analyze the 2-Loop T-Network Circuit.\n**Components:**\n- Mesh 1 (Left): Independent Voltage Source V1=25V (Positive Up), Top Resistor R1=2\u03a9.\n- Shared Branch: Vertical Resistor R_share=1\u03a9.\n- Mesh 2 (Right): Top Resistor R2=5\u03a9, Independent Voltage Source V2=57V (Positive Up).\n\n**Variables:**\n- i1, i2: Mesh currents (Clockwise).\n- v1: Node voltage at the top-center junction (above R_share).\n\n**Tasks:**\n1. (KVL) Write mesh equations and solve for i1, i2.\n2. (KCL) Write the nodal equation and solve for v1.",
+    "ground_truth": {
+      "mesh_currents": [
+        5.470588235294119,
+        -8.588235294117647
+      ],
+      "node_voltages": {
+        "v1": 14.058823529411764
+      },
+      "verifier_map": {
+        "i1": 5.470588235294119,
+        "i2": -8.588235294117647,
+        "v1": 14.058823529411764
+      }
+    }
+  },
+  {
+    "id": "Prob2_Opposing_Trap-Gen-2",
+    "values": {
+      "V1": 24,
+      "V2": 62,
+      "R1": 7,
+      "R2": 2,
+      "R_share": 2
+    },
+    "prompt": "Analyze the 2-Loop T-Network Circuit.\n**Components:**\n- Mesh 1 (Left): Independent Voltage Source V1=24V (Positive Up), Top Resistor R1=7\u03a9.\n- Shared Branch: Vertical Resistor R_share=2\u03a9.\n- Mesh 2 (Right): Top Resistor R2=2\u03a9, Independent Voltage Source V2=62V (Positive Up).\n\n**Variables:**\n- i1, i2: Mesh currents (Clockwise).\n- v1: Node voltage at the top-center junction (above R_share).\n\n**Tasks:**\n1. (KVL) Write mesh equations and solve for i1, i2.\n2. (KCL) Write the nodal equation and solve for v1.",
+    "ground_truth": {
+      "mesh_currents": [
+        -0.875,
+        -15.9375
+      ],
+      "node_voltages": {
+        "v1": 30.125000000000004
+      },
+      "verifier_map": {
+        "i1": -0.875,
+        "i2": -15.9375,
+        "v1": 30.125000000000004
+      }
+    }
+  },
+  {
+    "id": "Prob2_Opposing_Trap-Gen-3",
+    "values": {
+      "V1": 27,
+      "V2": 67,
+      "R1": 3,
+      "R2": 5,
+      "R_share": 4
+    },
+    "prompt": "Analyze the 2-Loop T-Network Circuit.\n**Components:**\n- Mesh 1 (Left): Independent Voltage Source V1=27V (Positive Up), Top Resistor R1=3\u03a9.\n- Shared Branch: Vertical Resistor R_share=4\u03a9.\n- Mesh 2 (Right): Top Resistor R2=5\u03a9, Independent Voltage Source V2=67V (Positive Up).\n\n**Variables:**\n- i1, i2: Mesh currents (Clockwise).\n- v1: Node voltage at the top-center junction (above R_share).\n\n**Tasks:**\n1. (KVL) Write mesh equations and solve for i1, i2.\n2. (KCL) Write the nodal equation and solve for v1.",
+    "ground_truth": {
+      "mesh_currents": [
+        -0.5319148936170208,
+        -7.680851063829786
+      ],
+      "node_voltages": {
+        "v1": 28.595744680851062
+      },
+      "verifier_map": {
+        "i1": -0.5319148936170208,
+        "i2": -7.680851063829786,
+        "v1": 28.595744680851062
+      }
+    }
+  },
+  {
+    "id": "Prob2_Opposing_Trap-Gen-4",
+    "values": {
+      "V1": 24,
+      "V2": 45,
+      "R1": 7,
+      "R2": 4,
+      "R_share": 4
+    },
+    "prompt": "Analyze the 2-Loop T-Network Circuit.\n**Components:**\n- Mesh 1 (Left): Independent Voltage Source V1=24V (Positive Up), Top Resistor R1=7\u03a9.\n- Shared Branch: Vertical Resistor R_share=4\u03a9.\n- Mesh 2 (Right): Top Resistor R2=4\u03a9, Independent Voltage Source V2=45V (Positive Up).\n\n**Variables:**\n- i1, i2: Mesh currents (Clockwise).\n- v1: Node voltage at the top-center junction (above R_share).\n\n**Tasks:**\n1. (KVL) Write mesh equations and solve for i1, i2.\n2. (KCL) Write the nodal equation and solve for v1.",
+    "ground_truth": {
+      "mesh_currents": [
+        0.16666666666666655,
+        -5.541666666666667
+      ],
+      "node_voltages": {
+        "v1": 22.833333333333336
+      },
+      "verifier_map": {
+        "i1": 0.16666666666666655,
+        "i2": -5.541666666666667,
+        "v1": 22.833333333333336
+      }
+    }
+  },
+  {
+    "id": "Prob3_Bridge_Control-Base",
+    "values": {
+      "V": 240,
+      "R_LT": 150,
+      "R_LB": 300,
+      "R_RT": 50,
+      "R_RB": 250,
+      "R_Br": 100
+    },
+    "prompt": "Analyze the Unbalanced Wheatstone Bridge Circuit.\n\n**Components:**\n- **Source:** Independent Voltage Source V=240V connected to the Top and Bottom rails.\n- **Left Leg:** Top Resistor R_LT=150\u03a9, Bottom Resistor R_LB=300\u03a9. Their midpoint is Node A.\n- **Right Leg:** Top Resistor R_RT=50\u03a9, Bottom Resistor R_RB=250\u03a9. Their midpoint is Node B.\n- **Bridge:** Resistor R_Br=100\u03a9 connecting Node A to Node B.\n\n**Definitions:**\n- **i1**: Mesh current for the **Source Loop** (Left: V -> R_LT -> R_LB), flowing Clockwise.\n- **i2**: Mesh current for the **Top Triangle** (R_LT -> R_RT -> R_Br), flowing Clockwise.\n- **i3**: Mesh current for the **Bottom Triangle** (R_LB -> R_Br -> R_RB), flowing Clockwise.\n- **va**: Voltage at Node A (referenced to negative source terminal).\n- **vb**: Voltage at Node B (referenced to negative source terminal).\n\n**Tasks:**\n1. (KVL) Write mesh equations for i1, i2, i3.\n2. (KCL) Write nodal equations for va, vb.\n3. Solve for all variables.",
+    "ground_truth": {
+      "mesh_currents": [
+        1.360919540229885,
+        0.9379310344827586,
+        0.7724137931034483
+      ],
+      "node_voltages": {
+        "va": 176.55172413793102,
+        "vb": 193.10344827586204
+      },
+      "verifier_map": {
+        "i1": 1.360919540229885,
+        "i2": 0.9379310344827586,
+        "i3": 0.7724137931034483,
+        "va": 176.55172413793102,
+        "vb": 193.10344827586204
+      }
+    }
+  },
+  {
+    "id": "Prob3_Bridge_Trap-Unbalanced",
+    "values": {
+      "V": 24,
+      "R_LT": 150,
+      "R_LB": 100,
+      "R_RT": 50,
+      "R_RB": 500,
+      "R_Br": 250
+    },
+    "prompt": "Analyze the Unbalanced Wheatstone Bridge Circuit.\n\n**Components:**\n- **Source:** Independent Voltage Source V=24V connected to the Top and Bottom rails.\n- **Left Leg:** Top Resistor R_LT=150\u03a9, Bottom Resistor R_LB=100\u03a9. Their midpoint is Node A.\n- **Right Leg:** Top Resistor R_RT=50\u03a9, Bottom Resistor R_RB=500\u03a9. Their midpoint is Node B.\n- **Bridge:** Resistor R_Br=250\u03a9 connecting Node A to Node B.\n\n**Definitions:**\n- **i1**: Mesh current for the **Source Loop** (Left: V -> R_LT -> R_LB), flowing Clockwise.\n- **i2**: Mesh current for the **Top Triangle** (R_LT -> R_RT -> R_Br), flowing Clockwise.\n- **i3**: Mesh current for the **Bottom Triangle** (R_LB -> R_Br -> R_RB), flowing Clockwise.\n- **va**: Voltage at Node A (referenced to negative source terminal).\n- **vb**: Voltage at Node B (referenced to negative source terminal).\n\n**Tasks:**\n1. (KVL) Write mesh equations for i1, i2, i3.\n2. (KCL) Write nodal equations for va, vb.\n3. Solve for all variables.",
+    "ground_truth": {
+      "mesh_currents": [
+        0.15713554987212278,
+        0.0748849104859335,
+        0.04051150895140665
+      ],
+      "node_voltages": {
+        "va": 11.662404092071613,
+        "vb": 20.255754475703327
+      },
+      "verifier_map": {
+        "i1": 0.15713554987212278,
+        "i2": 0.0748849104859335,
+        "i3": 0.04051150895140665,
+        "va": 11.662404092071613,
+        "vb": 20.255754475703327
+      }
+    }
+  },
+  {
+    "id": "Prob3_Bridge_Control-Gen-1",
+    "values": {
+      "V": 100,
+      "R_LT": 131,
+      "R_LB": 275,
+      "R_RT": 46,
+      "R_RB": 248,
+      "R_Br": 131
+    },
+    "prompt": "Analyze the Unbalanced Wheatstone Bridge Circuit.\n\n**Components:**\n- **Source:** Independent Voltage Source V=100V connected to the Top and Bottom rails.\n- **Left Leg:** Top Resistor R_LT=131\u03a9, Bottom Resistor R_LB=275\u03a9. Their midpoint is Node A.\n- **Right Leg:** Top Resistor R_RT=46\u03a9, Bottom Resistor R_RB=248\u03a9. Their midpoint is Node B.\n- **Bridge:** Resistor R_Br=131\u03a9 connecting Node A to Node B.\n\n**Definitions:**\n- **i1**: Mesh current for the **Source Loop** (Left: V -> R_LT -> R_LB), flowing Clockwise.\n- **i2**: Mesh current for the **Top Triangle** (R_LT -> R_RT -> R_Br), flowing Clockwise.\n- **i3**: Mesh current for the **Bottom Triangle** (R_LB -> R_Br -> R_RB), flowing Clockwise.\n- **va**: Voltage at Node A (referenced to negative source terminal).\n- **vb**: Voltage at Node B (referenced to negative source terminal).\n\n**Tasks:**\n1. (KVL) Write mesh equations for i1, i2, i3.\n2. (KCL) Write nodal equations for va, vb.\n3. Solve for all variables.",
+    "ground_truth": {
+      "mesh_currents": [
+        0.5971254013570197,
+        0.39436245648934415,
+        0.33007793145762154
+      ],
+      "node_voltages": {
+        "va": 73.4380542223345,
+        "vb": 81.85932700149016
+      },
+      "verifier_map": {
+        "i1": 0.5971254013570197,
+        "i2": 0.39436245648934415,
+        "i3": 0.33007793145762154,
+        "va": 73.4380542223345,
+        "vb": 81.85932700149016
+      }
+    }
+  },
+  {
+    "id": "Prob3_Bridge_Control-Gen-2",
+    "values": {
+      "V": 296,
+      "R_LT": 170,
+      "R_LB": 328,
+      "R_RT": 59,
+      "R_RB": 240,
+      "R_Br": 138
+    },
+    "prompt": "Analyze the Unbalanced Wheatstone Bridge Circuit.\n\n**Components:**\n- **Source:** Independent Voltage Source V=296V connected to the Top and Bottom rails.\n- **Left Leg:** Top Resistor R_LT=170\u03a9, Bottom Resistor R_LB=328\u03a9. Their midpoint is Node A.\n- **Right Leg:** Top Resistor R_RT=59\u03a9, Bottom Resistor R_RB=240\u03a9. Their midpoint is Node B.\n- **Bridge:** Resistor R_Br=138\u03a9 connecting Node A to Node B.\n\n**Definitions:**\n- **i1**: Mesh current for the **Source Loop** (Left: V -> R_LT -> R_LB), flowing Clockwise.\n- **i2**: Mesh current for the **Top Triangle** (R_LT -> R_RT -> R_Br), flowing Clockwise.\n- **i3**: Mesh current for the **Bottom Triangle** (R_LB -> R_Br -> R_RB), flowing Clockwise.\n- **va**: Voltage at Node A (referenced to negative source terminal).\n- **vb**: Voltage at Node B (referenced to negative source terminal).\n\n**Tasks:**\n1. (KVL) Write mesh equations for i1, i2, i3.\n2. (KCL) Write nodal equations for va, vb.\n3. Solve for all variables.",
+    "ground_truth": {
+      "mesh_currents": [
+        1.6049993770384599,
+        1.1050692625716483,
+        0.9616704729511362
+      ],
+      "node_voltages": {
+        "va": 211.01188054064207,
+        "vb": 230.80091350827274
+      },
+      "verifier_map": {
+        "i1": 1.6049993770384599,
+        "i2": 1.1050692625716483,
+        "i3": 0.9616704729511362,
+        "va": 211.01188054064207,
+        "vb": 230.80091350827274
+      }
+    }
+  },
+  {
+    "id": "Prob3_Bridge_Control-Gen-3",
+    "values": {
+      "V": 297,
+      "R_LT": 183,
+      "R_LB": 201,
+      "R_RT": 61,
+      "R_RB": 231,
+      "R_Br": 81
+    },
+    "prompt": "Analyze the Unbalanced Wheatstone Bridge Circuit.\n\n**Components:**\n- **Source:** Independent Voltage Source V=297V connected to the Top and Bottom rails.\n- **Left Leg:** Top Resistor R_LT=183\u03a9, Bottom Resistor R_LB=201\u03a9. Their midpoint is Node A.\n- **Right Leg:** Top Resistor R_RT=61\u03a9, Bottom Resistor R_RB=231\u03a9. Their midpoint is Node B.\n- **Bridge:** Resistor R_Br=81\u03a9 connecting Node A to Node B.\n\n**Definitions:**\n- **i1**: Mesh current for the **Source Loop** (Left: V -> R_LT -> R_LB), flowing Clockwise.\n- **i2**: Mesh current for the **Top Triangle** (R_LT -> R_RT -> R_Br), flowing Clockwise.\n- **i3**: Mesh current for the **Bottom Triangle** (R_LB -> R_Br -> R_RB), flowing Clockwise.\n- **va**: Voltage at Node A (referenced to negative source terminal).\n- **vb**: Voltage at Node B (referenced to negative source terminal).\n\n**Tasks:**\n1. (KVL) Write mesh equations for i1, i2, i3.\n2. (KCL) Write nodal equations for va, vb.\n3. Solve for all variables.",
+    "ground_truth": {
+      "mesh_currents": [
+        1.8851076335736288,
+        1.2965676239009452,
+        0.943330627454729
+      ],
+      "node_voltages": {
+        "va": 189.29717822989886,
+        "vb": 217.90937494204238
+      },
+      "verifier_map": {
+        "i1": 1.8851076335736288,
+        "i2": 1.2965676239009452,
+        "i3": 0.943330627454729,
+        "va": 189.29717822989886,
+        "vb": 217.90937494204238
+      }
+    }
+  },
+  {
+    "id": "Prob3_Bridge_Control-Gen-4",
+    "values": {
+      "V": 202,
+      "R_LT": 132,
+      "R_LB": 337,
+      "R_RT": 63,
+      "R_RB": 289,
+      "R_Br": 130
+    },
+    "prompt": "Analyze the Unbalanced Wheatstone Bridge Circuit.\n\n**Components:**\n- **Source:** Independent Voltage Source V=202V connected to the Top and Bottom rails.\n- **Left Leg:** Top Resistor R_LT=132\u03a9, Bottom Resistor R_LB=337\u03a9. Their midpoint is Node A.\n- **Right Leg:** Top Resistor R_RT=63\u03a9, Bottom Resistor R_RB=289\u03a9. Their midpoint is Node B.\n- **Bridge:** Resistor R_Br=130\u03a9 connecting Node A to Node B.\n\n**Definitions:**\n- **i1**: Mesh current for the **Source Loop** (Left: V -> R_LT -> R_LB), flowing Clockwise.\n- **i2**: Mesh current for the **Top Triangle** (R_LT -> R_RT -> R_Br), flowing Clockwise.\n- **i3**: Mesh current for the **Bottom Triangle** (R_LB -> R_Br -> R_RB), flowing Clockwise.\n- **va**: Voltage at Node A (referenced to negative source terminal).\n- **vb**: Voltage at Node B (referenced to negative source terminal).\n\n**Tasks:**\n1. (KVL) Write mesh equations for i1, i2, i3.\n2. (KCL) Write nodal equations for va, vb.\n3. Solve for all variables.",
+    "ground_truth": {
+      "mesh_currents": [
+        1.0122365871742265,
+        0.6353111817805649,
+        0.5604684967052748
+      ],
+      "node_voltages": {
+        "va": 152.24584648803668,
+        "vb": 161.9753955478244
+      },
+      "verifier_map": {
+        "i1": 1.0122365871742265,
+        "i2": 0.6353111817805649,
+        "i3": 0.5604684967052748,
+        "va": 152.24584648803668,
+        "vb": 161.9753955478244
+      }
+    }
+  },
+  {
+    "id": "Prob3_Bridge_Trap-Gen-1",
+    "values": {
+      "V": 50,
+      "R_LT": 153,
+      "R_LB": 59,
+      "R_RT": 75,
+      "R_RB": 955,
+      "R_Br": 327
+    },
+    "prompt": "Analyze the Unbalanced Wheatstone Bridge Circuit.\n\n**Components:**\n- **Source:** Independent Voltage Source V=50V connected to the Top and Bottom rails.\n- **Left Leg:** Top Resistor R_LT=153\u03a9, Bottom Resistor R_LB=59\u03a9. Their midpoint is Node A.\n- **Right Leg:** Top Resistor R_RT=75\u03a9, Bottom Resistor R_RB=955\u03a9. Their midpoint is Node B.\n- **Bridge:** Resistor R_Br=327\u03a9 connecting Node A to Node B.\n\n**Definitions:**\n- **i1**: Mesh current for the **Source Loop** (Left: V -> R_LT -> R_LB), flowing Clockwise.\n- **i2**: Mesh current for the **Top Triangle** (R_LT -> R_RT -> R_Br), flowing Clockwise.\n- **i3**: Mesh current for the **Bottom Triangle** (R_LB -> R_Br -> R_RB), flowing Clockwise.\n- **va**: Voltage at Node A (referenced to negative source terminal).\n- **vb**: Voltage at Node B (referenced to negative source terminal).\n\n**Tasks:**\n1. (KVL) Write mesh equations for i1, i2, i3.\n2. (KCL) Write nodal equations for va, vb.\n3. Solve for all variables.",
+    "ground_truth": {
+      "mesh_currents": [
+        0.3323351691586356,
+        0.11704833331821121,
+        0.043163743456684986
+      ],
+      "node_voltages": {
+        "va": 17.06111411641508,
+        "vb": 41.22137500113414
+      },
+      "verifier_map": {
+        "i1": 0.3323351691586356,
+        "i2": 0.11704833331821121,
+        "i3": 0.043163743456684986,
+        "va": 17.06111411641508,
+        "vb": 41.22137500113414
+      }
+    }
+  },
+  {
+    "id": "Prob3_Bridge_Trap-Gen-2",
+    "values": {
+      "V": 26,
+      "R_LT": 134,
+      "R_LB": 62,
+      "R_RT": 45,
+      "R_RB": 1197,
+      "R_Br": 299
+    },
+    "prompt": "Analyze the Unbalanced Wheatstone Bridge Circuit.\n\n**Components:**\n- **Source:** Independent Voltage Source V=26V connected to the Top and Bottom rails.\n- **Left Leg:** Top Resistor R_LT=134\u03a9, Bottom Resistor R_LB=62\u03a9. Their midpoint is Node A.\n- **Right Leg:** Top Resistor R_RT=45\u03a9, Bottom Resistor R_RB=1197\u03a9. Their midpoint is Node B.\n- **Bridge:** Resistor R_Br=299\u03a9 connecting Node A to Node B.\n\n**Definitions:**\n- **i1**: Mesh current for the **Source Loop** (Left: V -> R_LT -> R_LB), flowing Clockwise.\n- **i2**: Mesh current for the **Top Triangle** (R_LT -> R_RT -> R_Br), flowing Clockwise.\n- **i3**: Mesh current for the **Bottom Triangle** (R_LB -> R_Br -> R_RB), flowing Clockwise.\n- **va**: Voltage at Node A (referenced to negative source terminal).\n- **vb**: Voltage at Node B (referenced to negative source terminal).\n\n**Tasks:**\n1. (KVL) Write mesh equations for i1, i2, i3.\n2. (KCL) Write nodal equations for va, vb.\n3. Solve for all variables.",
+    "ground_truth": {
+      "mesh_currents": [
+        0.18191319439239573,
+        0.06309970536260054,
+        0.01934879971485629
+      ],
+      "node_voltages": {
+        "va": 10.078992470007444,
+        "vb": 23.160513258682972
+      },
+      "verifier_map": {
+        "i1": 0.18191319439239573,
+        "i2": 0.06309970536260054,
+        "i3": 0.01934879971485629,
+        "va": 10.078992470007444,
+        "vb": 23.160513258682972
+      }
+    }
+  },
+  {
+    "id": "Prob3_Bridge_Trap-Gen-3",
+    "values": {
+      "V": 42,
+      "R_LT": 173,
+      "R_LB": 82,
+      "R_RT": 42,
+      "R_RB": 957,
+      "R_Br": 388
+    },
+    "prompt": "Analyze the Unbalanced Wheatstone Bridge Circuit.\n\n**Components:**\n- **Source:** Independent Voltage Source V=42V connected to the Top and Bottom rails.\n- **Left Leg:** Top Resistor R_LT=173\u03a9, Bottom Resistor R_LB=82\u03a9. Their midpoint is Node A.\n- **Right Leg:** Top Resistor R_RT=42\u03a9, Bottom Resistor R_RB=957\u03a9. Their midpoint is Node B.\n- **Bridge:** Resistor R_Br=388\u03a9 connecting Node A to Node B.\n\n**Definitions:**\n- **i1**: Mesh current for the **Source Loop** (Left: V -> R_LT -> R_LB), flowing Clockwise.\n- **i2**: Mesh current for the **Top Triangle** (R_LT -> R_RT -> R_Br), flowing Clockwise.\n- **i3**: Mesh current for the **Bottom Triangle** (R_LB -> R_Br -> R_RB), flowing Clockwise.\n- **va**: Voltage at Node A (referenced to negative source terminal).\n- **vb**: Voltage at Node B (referenced to negative source terminal).\n\n**Tasks:**\n1. (KVL) Write mesh equations for i1, i2, i3.\n2. (KCL) Write nodal equations for va, vb.\n3. Solve for all variables.",
+    "ground_truth": {
+      "mesh_currents": [
+        0.24190156565576915,
+        0.09495887892574882,
+        0.03971967302520225
+      ],
+      "node_voltages": {
+        "va": 16.578915195706482,
+        "vb": 38.01172708511855
+      },
+      "verifier_map": {
+        "i1": 0.24190156565576915,
+        "i2": 0.09495887892574882,
+        "i3": 0.03971967302520225,
+        "va": 16.578915195706482,
+        "vb": 38.01172708511855
+      }
+    }
+  },
+  {
+    "id": "Prob3_Bridge_Trap-Gen-4",
+    "values": {
+      "V": 27,
+      "R_LT": 194,
+      "R_LB": 87,
+      "R_RT": 41,
+      "R_RB": 1492,
+      "R_Br": 380
+    },
+    "prompt": "Analyze the Unbalanced Wheatstone Bridge Circuit.\n\n**Components:**\n- **Source:** Independent Voltage Source V=27V connected to the Top and Bottom rails.\n- **Left Leg:** Top Resistor R_LT=194\u03a9, Bottom Resistor R_LB=87\u03a9. Their midpoint is Node A.\n- **Right Leg:** Top Resistor R_RT=41\u03a9, Bottom Resistor R_RB=1492\u03a9. Their midpoint is Node B.\n- **Bridge:** Resistor R_Br=380\u03a9 connecting Node A to Node B.\n\n**Definitions:**\n- **i1**: Mesh current for the **Source Loop** (Left: V -> R_LT -> R_LB), flowing Clockwise.\n- **i2**: Mesh current for the **Top Triangle** (R_LT -> R_RT -> R_Br), flowing Clockwise.\n- **i3**: Mesh current for the **Bottom Triangle** (R_LB -> R_Br -> R_RB), flowing Clockwise.\n- **va**: Voltage at Node A (referenced to negative source terminal).\n- **vb**: Voltage at Node B (referenced to negative source terminal).\n\n**Tasks:**\n1. (KVL) Write mesh equations for i1, i2, i3.\n2. (KCL) Write nodal equations for va, vb.\n3. Solve for all variables.",
+    "ground_truth": {
+      "mesh_currents": [
+        0.13847361216410492,
+        0.05394670806043533,
+        0.016614064992977313
+      ],
+      "node_voltages": {
+        "va": 10.601780603888102,
+        "vb": 24.78818496952215
+      },
+      "verifier_map": {
+        "i1": 0.13847361216410492,
+        "i2": 0.05394670806043533,
+        "i3": 0.016614064992977313,
+        "va": 10.601780603888102,
+        "vb": 24.78818496952215
+      }
+    }
+  },
+  {
+    "id": "Prob4_Ladder_Control-10k",
+    "values": {
+      "V": 52,
+      "R1": 10000,
+      "R2": 10000,
+      "R3": 10000,
+      "R4": 10000,
+      "R5": 10000,
+      "R6": 10000
+    },
+    "prompt": "Analyze the 3-Loop Resistive Ladder Circuit.\n\n**Components:**\n- **Mesh 1 (Left):** Source V=52V (Up), Series Resistor R1=10000\u03a9 (Top), Shared Vertical R2=10000\u03a9.\n- **Mesh 2 (Center):** Shared R2, Series Resistor R3=10000\u03a9 (Top), Shared Vertical R4=10000\u03a9.\n- **Mesh 3 (Right):** Shared R4, Series Resistor R5=10000\u03a9, Termination Vertical R6=10000\u03a9.\n\n**Variables:**\n- **i1, i2, i3**: Mesh currents (Clockwise).\n- **v1**: Voltage at top of R2.\n- **v2**: Voltage at top of R4.\n- **v3**: Voltage at top of R6.\n\n**Tasks:**\n1. (KVL) Write mesh equations for i1, i2, i3.\n2. (KCL) Write nodal equations for v1, v2, v3.\n3. Solve for all variables.",
+    "ground_truth": {
+      "mesh_currents": [
+        0.0032,
+        0.0012,
+        0.0004
+      ],
+      "node_voltages": {
+        "v1": 20.0,
+        "v2": 8.0,
+        "v3": 4.0
+      },
+      "verifier_map": {
+        "i1": 0.0032,
+        "i2": 0.0012,
+        "i3": 0.0004,
+        "v1": 20.0,
+        "v2": 8.0,
+        "v3": 4.0
+      }
+    }
+  },
+  {
+    "id": "Prob4_Ladder_Control-10",
+    "values": {
+      "V": 52,
+      "R1": 10,
+      "R2": 10,
+      "R3": 10,
+      "R4": 10,
+      "R5": 10,
+      "R6": 10
+    },
+    "prompt": "Analyze the 3-Loop Resistive Ladder Circuit.\n\n**Components:**\n- **Mesh 1 (Left):** Source V=52V (Up), Series Resistor R1=10\u03a9 (Top), Shared Vertical R2=10\u03a9.\n- **Mesh 2 (Center):** Shared R2, Series Resistor R3=10\u03a9 (Top), Shared Vertical R4=10\u03a9.\n- **Mesh 3 (Right):** Shared R4, Series Resistor R5=10\u03a9, Termination Vertical R6=10\u03a9.\n\n**Variables:**\n- **i1, i2, i3**: Mesh currents (Clockwise).\n- **v1**: Voltage at top of R2.\n- **v2**: Voltage at top of R4.\n- **v3**: Voltage at top of R6.\n\n**Tasks:**\n1. (KVL) Write mesh equations for i1, i2, i3.\n2. (KCL) Write nodal equations for v1, v2, v3.\n3. Solve for all variables.",
+    "ground_truth": {
+      "mesh_currents": [
+        3.2,
+        1.2,
+        0.4
+      ],
+      "node_voltages": {
+        "v1": 19.999999999999996,
+        "v2": 7.999999999999998,
+        "v3": 3.999999999999999
+      },
+      "verifier_map": {
+        "i1": 3.2,
+        "i2": 1.2,
+        "i3": 0.4,
+        "v1": 19.999999999999996,
+        "v2": 7.999999999999998,
+        "v3": 3.999999999999999
+      }
+    }
+  },
+  {
+    "id": "Prob4_Ladder_Trap-Modified",
+    "values": {
+      "V": 60,
+      "R1": 10000,
+      "R2": 10000,
+      "R3": 10000,
+      "R4": 12000,
+      "R5": 10000,
+      "R6": 10000
+    },
+    "prompt": "Analyze the 3-Loop Resistive Ladder Circuit.\n\n**Components:**\n- **Mesh 1 (Left):** Source V=60V (Up), Series Resistor R1=10000\u03a9 (Top), Shared Vertical R2=10000\u03a9.\n- **Mesh 2 (Center):** Shared R2, Series Resistor R3=10000\u03a9 (Top), Shared Vertical R4=12000\u03a9.\n- **Mesh 3 (Right):** Shared R4, Series Resistor R5=10000\u03a9, Termination Vertical R6=10000\u03a9.\n\n**Variables:**\n- **i1, i2, i3**: Mesh currents (Clockwise).\n- **v1**: Voltage at top of R2.\n- **v2**: Voltage at top of R4.\n- **v3**: Voltage at top of R6.\n\n**Tasks:**\n1. (KVL) Write mesh equations for i1, i2, i3.\n2. (KCL) Write nodal equations for v1, v2, v3.\n3. Solve for all variables.",
+    "ground_truth": {
+      "mesh_currents": [
+        0.0036666666666666666,
+        0.0013333333333333333,
+        0.0004999999999999999
+      ],
+      "node_voltages": {
+        "v1": 23.333333333333332,
+        "v2": 10.0,
+        "v3": 5.0
+      },
+      "verifier_map": {
+        "i1": 0.0036666666666666666,
+        "i2": 0.0013333333333333333,
+        "i3": 0.0004999999999999999,
+        "v1": 23.333333333333332,
+        "v2": 10.0,
+        "v3": 5.0
+      }
+    }
+  },
+  {
+    "id": "Prob4_Ladder_Control-Gen-1",
+    "values": {
+      "V": 28,
+      "R1": 4703,
+      "R2": 3619,
+      "R3": 1824,
+      "R4": 1279,
+      "R5": 4261,
+      "R6": 2849
+    },
+    "prompt": "Analyze the 3-Loop Resistive Ladder Circuit.\n\n**Components:**\n- **Mesh 1 (Left):** Source V=28V (Up), Series Resistor R1=4703\u03a9 (Top), Shared Vertical R2=3619\u03a9.\n- **Mesh 2 (Center):** Shared R2, Series Resistor R3=1824\u03a9 (Top), Shared Vertical R4=1279\u03a9.\n- **Mesh 3 (Right):** Shared R4, Series Resistor R5=4261\u03a9, Termination Vertical R6=2849\u03a9.\n\n**Variables:**\n- **i1, i2, i3**: Mesh currents (Clockwise).\n- **v1**: Voltage at top of R2.\n- **v2**: Voltage at top of R4.\n- **v3**: Voltage at top of R6.\n\n**Tasks:**\n1. (KVL) Write mesh equations for i1, i2, i3.\n2. (KCL) Write nodal equations for v1, v2, v3.\n3. Solve for all variables.",
+    "ground_truth": {
+      "mesh_currents": [
+        0.004433615284716966,
+        0.0024582885878459792,
+        0.0003747945051680781
+      ],
+      "node_voltages": {
+        "v1": 7.148707315976103,
+        "v2": 2.6647889317450364,
+        "v3": 1.0677895452238548
+      },
+      "verifier_map": {
+        "i1": 0.004433615284716966,
+        "i2": 0.0024582885878459792,
+        "i3": 0.0003747945051680781,
+        "v1": 7.148707315976103,
+        "v2": 2.6647889317450364,
+        "v3": 1.0677895452238548
+      }
+    }
+  },
+  {
+    "id": "Prob4_Ladder_Control-Gen-2",
+    "values": {
+      "V": 43,
+      "R1": 4537,
+      "R2": 3181,
+      "R3": 1886,
+      "R4": 2725,
+      "R5": 4110,
+      "R6": 4742
+    },
+    "prompt": "Analyze the 3-Loop Resistive Ladder Circuit.\n\n**Components:**\n- **Mesh 1 (Left):** Source V=43V (Up), Series Resistor R1=4537\u03a9 (Top), Shared Vertical R2=3181\u03a9.\n- **Mesh 2 (Center):** Shared R2, Series Resistor R3=1886\u03a9 (Top), Shared Vertical R4=2725\u03a9.\n- **Mesh 3 (Right):** Shared R4, Series Resistor R5=4110\u03a9, Termination Vertical R6=4742\u03a9.\n\n**Variables:**\n- **i1, i2, i3**: Mesh currents (Clockwise).\n- **v1**: Voltage at top of R2.\n- **v2**: Voltage at top of R4.\n- **v3**: Voltage at top of R6.\n\n**Tasks:**\n1. (KVL) Write mesh equations for i1, i2, i3.\n2. (KCL) Write nodal equations for v1, v2, v3.\n3. Solve for all variables.",
+    "ground_truth": {
+      "mesh_currents": [
+        0.006822250928428823,
+        0.0030349363928367343,
+        0.0007143648328997237
+      ],
+      "node_voltages": {
+        "v1": 12.047447537718435,
+        "v2": 6.323557500828354,
+        "v3": 3.3875180376104894
+      },
+      "verifier_map": {
+        "i1": 0.006822250928428823,
+        "i2": 0.0030349363928367343,
+        "i3": 0.0007143648328997237,
+        "v1": 12.047447537718435,
+        "v2": 6.323557500828354,
+        "v3": 3.3875180376104894
+      }
+    }
+  },
+  {
+    "id": "Prob4_Ladder_Control-Gen-3",
+    "values": {
+      "V": 55,
+      "R1": 1978,
+      "R2": 2226,
+      "R3": 2917,
+      "R4": 1739,
+      "R5": 3463,
+      "R6": 1694
+    },
+    "prompt": "Analyze the 3-Loop Resistive Ladder Circuit.\n\n**Components:**\n- **Mesh 1 (Left):** Source V=55V (Up), Series Resistor R1=1978\u03a9 (Top), Shared Vertical R2=2226\u03a9.\n- **Mesh 2 (Center):** Shared R2, Series Resistor R3=2917\u03a9 (Top), Shared Vertical R4=1739\u03a9.\n- **Mesh 3 (Right):** Shared R4, Series Resistor R5=3463\u03a9, Termination Vertical R6=1694\u03a9.\n\n**Variables:**\n- **i1, i2, i3**: Mesh currents (Clockwise).\n- **v1**: Voltage at top of R2.\n- **v2**: Voltage at top of R4.\n- **v3**: Voltage at top of R6.\n\n**Tasks:**\n1. (KVL) Write mesh equations for i1, i2, i3.\n2. (KCL) Write nodal equations for v1, v2, v3.\n3. Solve for all variables.",
+    "ground_truth": {
+      "mesh_currents": [
+        0.01601168070746358,
+        0.005531494022541287,
+        0.0013949054676913135
+      ],
+      "node_voltages": {
+        "v1": 23.328895560637033,
+        "v2": 7.193527496884103,
+        "v3": 2.3629698622690847
+      },
+      "verifier_map": {
+        "i1": 0.01601168070746358,
+        "i2": 0.005531494022541287,
+        "i3": 0.0013949054676913135,
+        "v1": 23.328895560637033,
+        "v2": 7.193527496884103,
+        "v3": 2.3629698622690847
+      }
+    }
+  },
+  {
+    "id": "Prob4_Ladder_Trap-Gen-1",
+    "values": {
+      "V": 147,
+      "R1": 1000,
+      "R2": 1000,
+      "R3": 1000,
+      "R4": 17530,
+      "R5": 1000,
+      "R6": 27
+    },
+    "prompt": "Analyze the 3-Loop Resistive Ladder Circuit.\n\n**Components:**\n- **Mesh 1 (Left):** Source V=147V (Up), Series Resistor R1=1000\u03a9 (Top), Shared Vertical R2=1000\u03a9.\n- **Mesh 2 (Center):** Shared R2, Series Resistor R3=1000\u03a9 (Top), Shared Vertical R4=17530\u03a9.\n- **Mesh 3 (Right):** Shared R4, Series Resistor R5=1000\u03a9, Termination Vertical R6=27\u03a9.\n\n**Variables:**\n- **i1, i2, i3**: Mesh currents (Clockwise).\n- **v1**: Voltage at top of R2.\n- **v2**: Voltage at top of R4.\n- **v3**: Voltage at top of R6.\n\n**Tasks:**\n1. (KVL) Write mesh equations for i1, i2, i3.\n2. (KCL) Write nodal equations for v1, v2, v3.\n3. Solve for all variables.",
+    "ground_truth": {
+      "mesh_currents": [
+        0.0883775622665597,
+        0.0297551245331194,
+        0.028108386757858653
+      ],
+      "node_voltages": {
+        "v1": 58.62243773344028,
+        "v2": 28.867313200320858,
+        "v3": 0.7589264424621841
+      },
+      "verifier_map": {
+        "i1": 0.0883775622665597,
+        "i2": 0.0297551245331194,
+        "i3": 0.028108386757858653,
+        "v1": 58.62243773344028,
+        "v2": 28.867313200320858,
+        "v3": 0.7589264424621841
+      }
+    }
+  },
+  {
+    "id": "Prob4_Ladder_Trap-Gen-2",
+    "values": {
+      "V": 181,
+      "R1": 1000,
+      "R2": 1000,
+      "R3": 1000,
+      "R4": 19384,
+      "R5": 1000,
+      "R6": 45
+    },
+    "prompt": "Analyze the 3-Loop Resistive Ladder Circuit.\n\n**Components:**\n- **Mesh 1 (Left):** Source V=181V (Up), Series Resistor R1=1000\u03a9 (Top), Shared Vertical R2=1000\u03a9.\n- **Mesh 2 (Center):** Shared R2, Series Resistor R3=1000\u03a9 (Top), Shared Vertical R4=19384\u03a9.\n- **Mesh 3 (Right):** Shared R4, Series Resistor R5=1000\u03a9, Termination Vertical R6=45\u03a9.\n\n**Variables:**\n- **i1, i2, i3**: Mesh currents (Clockwise).\n- **v1**: Voltage at top of R2.\n- **v2**: Voltage at top of R4.\n- **v3**: Voltage at top of R6.\n\n**Tasks:**\n1. (KVL) Write mesh equations for i1, i2, i3.\n2. (KCL) Write nodal equations for v1, v2, v3.\n3. Solve for all variables.",
+    "ground_truth": {
+      "mesh_currents": [
+        0.10866141936173397,
+        0.036322838723467955,
+        0.03446482479884982
+      ],
+      "node_voltages": {
+        "v1": 72.33858063826602,
+        "v2": 36.015741914798056,
+        "v3": 1.5509171159482413
+      },
+      "verifier_map": {
+        "i1": 0.10866141936173397,
+        "i2": 0.036322838723467955,
+        "i3": 0.03446482479884982,
+        "v1": 72.33858063826602,
+        "v2": 36.015741914798056,
+        "v3": 1.5509171159482413
+      }
+    }
+  },
+  {
+    "id": "Prob4_Ladder_Trap-Gen-3",
+    "values": {
+      "V": 125,
+      "R1": 1000,
+      "R2": 1000,
+      "R3": 1000,
+      "R4": 19998,
+      "R5": 1000,
+      "R6": 19
+    },
+    "prompt": "Analyze the 3-Loop Resistive Ladder Circuit.\n\n**Components:**\n- **Mesh 1 (Left):** Source V=125V (Up), Series Resistor R1=1000\u03a9 (Top), Shared Vertical R2=1000\u03a9.\n- **Mesh 2 (Center):** Shared R2, Series Resistor R3=1000\u03a9 (Top), Shared Vertical R4=19998\u03a9.\n- **Mesh 3 (Right):** Shared R4, Series Resistor R5=1000\u03a9, Termination Vertical R6=19\u03a9.\n\n**Variables:**\n- **i1, i2, i3**: Mesh currents (Clockwise).\n- **v1**: Voltage at top of R2.\n- **v2**: Voltage at top of R4.\n- **v3**: Voltage at top of R6.\n\n**Tasks:**\n1. (KVL) Write mesh equations for i1, i2, i3.\n2. (KCL) Write nodal equations for v1, v2, v3.\n3. Solve for all variables.",
+    "ground_truth": {
+      "mesh_currents": [
+        0.07515390062034782,
+        0.025307801240695656,
+        0.024080763629986755
+      ],
+      "node_voltages": {
+        "v1": 49.846099379652166,
+        "v2": 24.538298138956506,
+        "v3": 0.4575345089697484
+      },
+      "verifier_map": {
+        "i1": 0.07515390062034782,
+        "i2": 0.025307801240695656,
+        "i3": 0.024080763629986755,
+        "v1": 49.846099379652166,
+        "v2": 24.538298138956506,
+        "v3": 0.4575345089697484
+      }
+    }
+  },
+  {
+    "id": "Prob4_Ladder_Trap-Gen-4",
+    "values": {
+      "V": 142,
+      "R1": 1000,
+      "R2": 1000,
+      "R3": 1000,
+      "R4": 11232,
+      "R5": 1000,
+      "R6": 82
+    },
+    "prompt": "Analyze the 3-Loop Resistive Ladder Circuit.\n\n**Components:**\n- **Mesh 1 (Left):** Source V=142V (Up), Series Resistor R1=1000\u03a9 (Top), Shared Vertical R2=1000\u03a9.\n- **Mesh 2 (Center):** Shared R2, Series Resistor R3=1000\u03a9 (Top), Shared Vertical R4=11232\u03a9.\n- **Mesh 3 (Right):** Shared R4, Series Resistor R5=1000\u03a9, Termination Vertical R6=82\u03a9.\n\n**Variables:**\n- **i1, i2, i3**: Mesh currents (Clockwise).\n- **v1**: Voltage at top of R2.\n- **v2**: Voltage at top of R4.\n- **v3**: Voltage at top of R6.\n\n**Tasks:**\n1. (KVL) Write mesh equations for i1, i2, i3.\n2. (KCL) Write nodal equations for v1, v2, v3.\n3. Solve for all variables.",
+    "ground_truth": {
+      "mesh_currents": [
+        0.08527464267922465,
+        0.028549285358449288,
+        0.02604073194300003
+      ],
+      "node_voltages": {
+        "v1": 56.725357320775345,
+        "v2": 28.176071962326038,
+        "v3": 2.135340019326003
+      },
+      "verifier_map": {
+        "i1": 0.08527464267922465,
+        "i2": 0.028549285358449288,
+        "i3": 0.02604073194300003,
+        "v1": 56.725357320775345,
+        "v2": 28.176071962326038,
+        "v3": 2.135340019326003
+      }
+    }
+  },
+  {
+    "id": "Prob5_Dependent_Control-AAC",
+    "values": {
+      "V1": 3,
+      "R1": 100,
+      "R_share": 200,
+      "R2": 300,
+      "k": 5
+    },
+    "prompt": "Analyze the Circuit with a Dependent Voltage Source.\n\n**Components:**\n- **Mesh 1 (Left):** Independent Voltage Source V1=3V (Positive Up), Top Resistor R1=100\u03a9. Shares Vertical Resistor R_share=200\u03a9 with Mesh 2.\n- **Mesh 2 (Right):** Shares R_share with Mesh 1. Top Branch contains **Dependent Voltage Source** (Negative Left, Positive Right). Right Branch contains Resistor R2=300\u03a9.\n- **Dependent Source:** Value = 5 * Vx.\n- **Control Variable:** Vx is the voltage across the shared resistor R_share (Positive at Top).\n\n**Variables:**\n- **i1, i2:** Mesh currents (Clockwise).\n- **vx:** Voltage at the top-center node.\n\n**Tasks:**\n1. (KVL) Write mesh equations for i1, i2.\n2. (KCL) Write the nodal equation for vx.\n3. Solve for i1, i2, and vx.",
+    "ground_truth": {
+      "mesh_currents": [
+        0.02142857142857143,
+        0.017142857142857144
+      ],
+      "node_voltages": {
+        "vx": 0.857142857142857
+      },
+      "verifier_map": {
+        "i1": 0.02142857142857143,
+        "i2": 0.017142857142857144,
+        "vx": 0.857142857142857
+      }
+    }
+  },
+  {
+    "id": "Prob5_Dependent_Trap-HighGain",
+    "values": {
+      "V1": 3,
+      "R1": 100,
+      "R_share": 200,
+      "R2": 300,
+      "k": 10
+    },
+    "prompt": "Analyze the Circuit with a Dependent Voltage Source.\n\n**Components:**\n- **Mesh 1 (Left):** Independent Voltage Source V1=3V (Positive Up), Top Resistor R1=100\u03a9. Shares Vertical Resistor R_share=200\u03a9 with Mesh 2.\n- **Mesh 2 (Right):** Shares R_share with Mesh 1. Top Branch contains **Dependent Voltage Source** (Negative Left, Positive Right). Right Branch contains Resistor R2=300\u03a9.\n- **Dependent Source:** Value = 10 * Vx.\n- **Control Variable:** Vx is the voltage across the shared resistor R_share (Positive at Top).\n\n**Variables:**\n- **i1, i2:** Mesh currents (Clockwise).\n- **vx:** Voltage at the top-center node.\n\n**Tasks:**\n1. (KVL) Write mesh equations for i1, i2.\n2. (KCL) Write the nodal equation for vx.\n3. Solve for i1, i2, and vx.",
+    "ground_truth": {
+      "mesh_currents": [
+        0.024193548387096777,
+        0.021290322580645164
+      ],
+      "node_voltages": {
+        "vx": 0.5806451612903225
+      },
+      "verifier_map": {
+        "i1": 0.024193548387096777,
+        "i2": 0.021290322580645164,
+        "vx": 0.5806451612903225
+      }
+    }
+  },
+  {
+    "id": "Prob5_Dependent_Control-Gen-1",
+    "values": {
+      "V1": 11,
+      "R1": 13,
+      "R_share": 50,
+      "R2": 49,
+      "k": 2
+    },
+    "prompt": "Analyze the Circuit with a Dependent Voltage Source.\n\n**Components:**\n- **Mesh 1 (Left):** Independent Voltage Source V1=11V (Positive Up), Top Resistor R1=13\u03a9. Shares Vertical Resistor R_share=50\u03a9 with Mesh 2.\n- **Mesh 2 (Right):** Shares R_share with Mesh 1. Top Branch contains **Dependent Voltage Source** (Negative Left, Positive Right). Right Branch contains Resistor R2=49\u03a9.\n- **Dependent Source:** Value = 2 * Vx.\n- **Control Variable:** Vx is the voltage across the shared resistor R_share (Positive at Top).\n\n**Variables:**\n- **i1, i2:** Mesh currents (Clockwise).\n- **vx:** Voltage at the top-center node.\n\n**Tasks:**\n1. (KVL) Write mesh equations for i1, i2.\n2. (KCL) Write the nodal equation for vx.\n3. Solve for i1, i2, and vx.",
+    "ground_truth": {
+      "mesh_currents": [
+        0.43458407782410147,
+        0.32757593805836793
+      ],
+      "node_voltages": {
+        "vx": 5.350406988286679
+      },
+      "verifier_map": {
+        "i1": 0.43458407782410147,
+        "i2": 0.32757593805836793,
+        "vx": 5.350406988286679
+      }
+    }
+  },
+  {
+    "id": "Prob5_Dependent_Control-Gen-2",
+    "values": {
+      "V1": 6,
+      "R1": 22,
+      "R_share": 15,
+      "R2": 87,
+      "k": 4
+    },
+    "prompt": "Analyze the Circuit with a Dependent Voltage Source.\n\n**Components:**\n- **Mesh 1 (Left):** Independent Voltage Source V1=6V (Positive Up), Top Resistor R1=22\u03a9. Shares Vertical Resistor R_share=15\u03a9 with Mesh 2.\n- **Mesh 2 (Right):** Shares R_share with Mesh 1. Top Branch contains **Dependent Voltage Source** (Negative Left, Positive Right). Right Branch contains Resistor R2=87\u03a9.\n- **Dependent Source:** Value = 4 * Vx.\n- **Control Variable:** Vx is the voltage across the shared resistor R_share (Positive at Top).\n\n**Variables:**\n- **i1, i2:** Mesh currents (Clockwise).\n- **vx:** Voltage at the top-center node.\n\n**Tasks:**\n1. (KVL) Write mesh equations for i1, i2.\n2. (KCL) Write the nodal equation for vx.\n3. Solve for i1, i2, and vx.",
+    "ground_truth": {
+      "mesh_currents": [
+        0.19963031423290203,
+        0.09242144177449169
+      ],
+      "node_voltages": {
+        "vx": 1.6081330868761552
+      },
+      "verifier_map": {
+        "i1": 0.19963031423290203,
+        "i2": 0.09242144177449169,
+        "vx": 1.6081330868761552
+      }
+    }
+  },
+  {
+    "id": "Prob5_Dependent_Control-Gen-3",
+    "values": {
+      "V1": 14,
+      "R1": 12,
+      "R_share": 17,
+      "R2": 37,
+      "k": 3
+    },
+    "prompt": "Analyze the Circuit with a Dependent Voltage Source.\n\n**Components:**\n- **Mesh 1 (Left):** Independent Voltage Source V1=14V (Positive Up), Top Resistor R1=12\u03a9. Shares Vertical Resistor R_share=17\u03a9 with Mesh 2.\n- **Mesh 2 (Right):** Shares R_share with Mesh 1. Top Branch contains **Dependent Voltage Source** (Negative Left, Positive Right). Right Branch contains Resistor R2=37\u03a9.\n- **Dependent Source:** Value = 3 * Vx.\n- **Control Variable:** Vx is the voltage across the shared resistor R_share (Positive at Top).\n\n**Variables:**\n- **i1, i2:** Mesh currents (Clockwise).\n- **vx:** Voltage at the top-center node.\n\n**Tasks:**\n1. (KVL) Write mesh equations for i1, i2.\n2. (KCL) Write the nodal equation for vx.\n3. Solve for i1, i2, and vx.",
+    "ground_truth": {
+      "mesh_currents": [
+        0.7781895182636315,
+        0.5039703546850185
+      ],
+      "node_voltages": {
+        "vx": 4.661725780836422
+      },
+      "verifier_map": {
+        "i1": 0.7781895182636315,
+        "i2": 0.5039703546850185,
+        "vx": 4.661725780836422
+      }
+    }
+  },
+  {
+    "id": "Prob5_Dependent_Control-Gen-4",
+    "values": {
+      "V1": 9,
+      "R1": 18,
+      "R_share": 32,
+      "R2": 65,
+      "k": 4
+    },
+    "prompt": "Analyze the Circuit with a Dependent Voltage Source.\n\n**Components:**\n- **Mesh 1 (Left):** Independent Voltage Source V1=9V (Positive Up), Top Resistor R1=18\u03a9. Shares Vertical Resistor R_share=32\u03a9 with Mesh 2.\n- **Mesh 2 (Right):** Shares R_share with Mesh 1. Top Branch contains **Dependent Voltage Source** (Negative Left, Positive Right). Right Branch contains Resistor R2=65\u03a9.\n- **Dependent Source:** Value = 4 * Vx.\n- **Control Variable:** Vx is the voltage across the shared resistor R_share (Positive at Top).\n\n**Variables:**\n- **i1, i2:** Mesh currents (Clockwise).\n- **vx:** Voltage at the top-center node.\n\n**Tasks:**\n1. (KVL) Write mesh equations for i1, i2.\n2. (KCL) Write the nodal equation for vx.\n3. Solve for i1, i2, and vx.",
+    "ground_truth": {
+      "mesh_currents": [
+        0.33034257748776513,
+        0.23491027732463296
+      ],
+      "node_voltages": {
+        "vx": 3.053833605220228
+      },
+      "verifier_map": {
+        "i1": 0.33034257748776513,
+        "i2": 0.23491027732463296,
+        "vx": 3.053833605220228
+      }
+    }
+  },
+  {
+    "id": "Prob5_Dependent_Trap-Gen-1",
+    "values": {
+      "V1": 32,
+      "R1": 22,
+      "R_share": 53,
+      "R2": 22,
+      "k": 12
+    },
+    "prompt": "Analyze the Circuit with a Dependent Voltage Source.\n\n**Components:**\n- **Mesh 1 (Left):** Independent Voltage Source V1=32V (Positive Up), Top Resistor R1=22\u03a9. Shares Vertical Resistor R_share=53\u03a9 with Mesh 2.\n- **Mesh 2 (Right):** Shares R_share with Mesh 1. Top Branch contains **Dependent Voltage Source** (Negative Left, Positive Right). Right Branch contains Resistor R2=22\u03a9.\n- **Dependent Source:** Value = 12 * Vx.\n- **Control Variable:** Vx is the voltage across the shared resistor R_share (Positive at Top).\n\n**Variables:**\n- **i1, i2:** Mesh currents (Clockwise).\n- **vx:** Voltage at the top-center node.\n\n**Tasks:**\n1. (KVL) Write mesh equations for i1, i2.\n2. (KCL) Write the nodal equation for vx.\n3. Solve for i1, i2, and vx.",
+    "ground_truth": {
+      "mesh_currents": [
+        1.353641123274631,
+        1.3117563065207043
+      ],
+      "node_voltages": {
+        "vx": 2.2198952879581153
+      },
+      "verifier_map": {
+        "i1": 1.353641123274631,
+        "i2": 1.3117563065207043,
+        "vx": 2.2198952879581153
+      }
+    }
+  },
+  {
+    "id": "Prob5_Dependent_Trap-Gen-2",
+    "values": {
+      "V1": 10,
+      "R1": 16,
+      "R_share": 92,
+      "R2": 33,
+      "k": 9
+    },
+    "prompt": "Analyze the Circuit with a Dependent Voltage Source.\n\n**Components:**\n- **Mesh 1 (Left):** Independent Voltage Source V1=10V (Positive Up), Top Resistor R1=16\u03a9. Shares Vertical Resistor R_share=92\u03a9 with Mesh 2.\n- **Mesh 2 (Right):** Shares R_share with Mesh 1. Top Branch contains **Dependent Voltage Source** (Negative Left, Positive Right). Right Branch contains Resistor R2=33\u03a9.\n- **Dependent Source:** Value = 9 * Vx.\n- **Control Variable:** Vx is the voltage across the shared resistor R_share (Positive at Top).\n\n**Variables:**\n- **i1, i2:** Mesh currents (Clockwise).\n- **vx:** Voltage at the top-center node.\n\n**Tasks:**\n1. (KVL) Write mesh equations for i1, i2.\n2. (KCL) Write the nodal equation for vx.\n3. Solve for i1, i2, and vx.",
+    "ground_truth": {
+      "mesh_currents": [
+        0.5212207394443228,
+        0.5031721723911615
+      ],
+      "node_voltages": {
+        "vx": 1.6604681688908336
+      },
+      "verifier_map": {
+        "i1": 0.5212207394443228,
+        "i2": 0.5031721723911615,
+        "vx": 1.6604681688908336
+      }
+    }
+  },
+  {
+    "id": "Prob5_Dependent_Trap-Gen-3",
+    "values": {
+      "V1": 47,
+      "R1": 27,
+      "R_share": 73,
+      "R2": 43,
+      "k": 10
+    },
+    "prompt": "Analyze the Circuit with a Dependent Voltage Source.\n\n**Components:**\n- **Mesh 1 (Left):** Independent Voltage Source V1=47V (Positive Up), Top Resistor R1=27\u03a9. Shares Vertical Resistor R_share=73\u03a9 with Mesh 2.\n- **Mesh 2 (Right):** Shares R_share with Mesh 1. Top Branch contains **Dependent Voltage Source** (Negative Left, Positive Right). Right Branch contains Resistor R2=43\u03a9.\n- **Dependent Source:** Value = 10 * Vx.\n- **Control Variable:** Vx is the voltage across the shared resistor R_share (Positive at Top).\n\n**Variables:**\n- **i1, i2:** Mesh currents (Clockwise).\n- **vx:** Voltage at the top-center node.\n\n**Tasks:**\n1. (KVL) Write mesh equations for i1, i2.\n2. (KCL) Write the nodal equation for vx.\n3. Solve for i1, i2, and vx.",
+    "ground_truth": {
+      "mesh_currents": [
+        1.5304260805973595,
+        1.4526384665717254
+      ],
+      "node_voltages": {
+        "vx": 5.67849582387129
+      },
+      "verifier_map": {
+        "i1": 1.5304260805973595,
+        "i2": 1.4526384665717254,
+        "vx": 5.67849582387129
+      }
+    }
+  },
+  {
+    "id": "Prob5_Dependent_Trap-Gen-4",
+    "values": {
+      "V1": 28,
+      "R1": 41,
+      "R_share": 100,
+      "R2": 41,
+      "k": 15
+    },
+    "prompt": "Analyze the Circuit with a Dependent Voltage Source.\n\n**Components:**\n- **Mesh 1 (Left):** Independent Voltage Source V1=28V (Positive Up), Top Resistor R1=41\u03a9. Shares Vertical Resistor R_share=100\u03a9 with Mesh 2.\n- **Mesh 2 (Right):** Shares R_share with Mesh 1. Top Branch contains **Dependent Voltage Source** (Negative Left, Positive Right). Right Branch contains Resistor R2=41\u03a9.\n- **Dependent Source:** Value = 15 * Vx.\n- **Control Variable:** Vx is the voltage across the shared resistor R_share (Positive at Top).\n\n**Variables:**\n- **i1, i2:** Mesh currents (Clockwise).\n- **vx:** Voltage at the top-center node.\n\n**Tasks:**\n1. (KVL) Write mesh equations for i1, i2.\n2. (KCL) Write the nodal equation for vx.\n3. Solve for i1, i2, and vx.",
+    "ground_truth": {
+      "mesh_currents": [
+        0.6437007046693098,
+        0.6276179935837268
+      ],
+      "node_voltages": {
+        "vx": 1.6082711085582997
+      },
+      "verifier_map": {
+        "i1": 0.6437007046693098,
+        "i2": 0.6276179935837268,
+        "vx": 1.6082711085582997
+      }
+    }
+  }
+]

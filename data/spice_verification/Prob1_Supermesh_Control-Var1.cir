@@ -1,0 +1,27 @@
+* Prob 1: Supermesh
+* EXPECTED TRUTH:
+* i1 (i(v_sense_i1)) = 1.000000
+* i2 (i(v_sense_i2)) = 3.000000
+* i3 (i(v_sense_i3)) = 1.000000
+* vx (v(2))  = 74.0000
+* vy (v(3))  = 47.0000
+
+V1 1 0 DC 80
+R1 1 1_sense 6
+V_sense_i1 1_sense 2 DC 0
+
+I_source 0 2 DC 2
+
+R2 2 2_sense 9
+V_sense_i2 2_sense 3 DC 0
+
+F_dep 3 0 V_sense_i1 2
+
+R3 3 3_sense 2
+V_sense_i3 3_sense 4 DC 0
+
+V2 4 0 DC 45
+
+.op
+.print op v(2) v(3) i(v_sense_i1) i(v_sense_i2) i(v_sense_i3)
+.end

@@ -1,0 +1,106 @@
+
+Note: No compatibility mode selected!
+
+
+Circuit: * prob 3: bridge
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+Warning: can't parse '2': ignored
+Warning: can't parse '3': ignored
+Warning: can't parse 'v_sense_i1#branch': ignored
+
+No. of Data Rows : 1
+	Node                                  Voltage
+	----                                  -------
+	----	-------
+	V(3)                             2.025575e+01
+	V(2)                             1.166240e+01
+	V(1)                             2.400000e+01
+	V(1_src)                         2.400000e+01
+
+	Source	Current
+	------	-------
+
+	v_src#branch                     -1.57136e-01
+	v_sense_i1#branch                1.571355e-01
+
+ Resistor models (Simple linear resistor)
+      model                     R
+
+        rsh                     0
+     narrow                     0
+      short                     0
+        tc1                     0
+        tc2                     0
+        tce                     0
+       defw                 1e-05
+          l                 1e-05
+         kf                     0
+         af                     0
+          r                     0
+     bv_max                 1e+99
+         lf                     1
+         wf                     1
+         ef                     1
+
+ Resistor: Simple linear resistor
+     device                  r_br                  r_rb                  r_rt
+      model                     R                     R                     R
+ resistance                   250                   500                    50
+         ac                   250                   500                    50
+      dtemp                     0                     0                     0
+     bv_max                 1e+99                 1e+99                 1e+99
+      noisy                     1                     1                     1
+          i            -0.0343734             0.0405115             0.0748849
+          p              0.295383              0.820591              0.280387
+
+ Resistor: Simple linear resistor
+     device                  r_lb                  r_lt
+      model                     R                     R
+ resistance                   100                   150
+         ac                   100                   150
+      dtemp                     0                     0
+     bv_max                 1e+99                 1e+99
+      noisy                     1                     1
+          i              0.116624             0.0822506
+          p               1.36012               1.01478
+
+ Vsource: Independent voltage source
+     device            v_sense_i1                 v_src
+         dc                     0                    24
+      acmag                     0                     0
+      pulse         -         -
+        sin         -         -
+        exp         -         -
+        pwl         -         -
+       sffm         -         -
+         am         -         -
+    trnoise         -         -
+   trrandom         -         -
+    portnum                     0                     0
+         z0                     0                     0
+        pwr                     0                     0
+       freq                     0                     0
+      phase                     0                     0
+          i              0.157136             -0.157136
+          p                     0              -3.77125
+
+                                * prob 3: bridge
+                                Operating Point  Tue Dec  9 23:48:19  2025
+--------------------------------------------------------------------------------
+Index   v(2)            v(3)            v_sense_i1#bran 
+--------------------------------------------------------------------------------
+0	1.166240e+01	2.025575e+01	1.571355e-01	
+
+
+Total analysis time (seconds) = 0.00036
+
+Total elapsed time (seconds) = 0.004 
+
+Total DRAM available = 32768.000 MB.
+DRAM currently available =  255.641 MB.
+Maximum ngspice program size =    6.969 MB.
+Current ngspice program size =    6.969 MB.
+

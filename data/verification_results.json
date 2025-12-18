@@ -1,0 +1,852 @@
+[
+  {
+    "id": "Prob1_Supermesh_Control-Asym",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 0.647059,
+      "i(v_sense_i2)": 2.147059,
+      "i(v_sense_i3)": 0.852941,
+      "v(2)": 56.7647,
+      "v(3)": 26.7059
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 0.6470588,
+      "i(v_sense_i2)": 2.147059,
+      "i(v_sense_i3)": 0.8529412,
+      "v(2)": 56.76471,
+      "v(3)": 26.70588
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob1_Supermesh_Control-Base",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 0.002,
+      "i(v_sense_i2)": 0.006,
+      "i(v_sense_i3)": 0.002,
+      "v(2)": 92.0,
+      "v(3)": 44.0
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 0.002,
+      "i(v_sense_i2)": 0.006,
+      "i(v_sense_i3)": 0.002,
+      "v(2)": 92.0,
+      "v(3)": 44.0
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob1_Supermesh_Control-HighRes",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 0.003182,
+      "i(v_sense_i2)": 0.008182,
+      "i(v_sense_i3)": 0.001818,
+      "v(2)": 137.2727,
+      "v(3)": 63.6364
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 0.003181818,
+      "i(v_sense_i2)": 0.008181818,
+      "i(v_sense_i3)": 0.001818182,
+      "v(2)": 137.2727,
+      "v(3)": 63.63636
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob1_Supermesh_Control-Integer",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 2.0,
+      "i(v_sense_i2)": 6.0,
+      "i(v_sense_i3)": 2.0,
+      "v(2)": 92.0,
+      "v(3)": 44.0
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 2.0,
+      "i(v_sense_i2)": 6.0,
+      "i(v_sense_i3)": 2.0,
+      "v(2)": 92.0,
+      "v(3)": 44.0
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob1_Supermesh_Control-LowCurr",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 0.00285,
+      "i(v_sense_i2)": 0.00635,
+      "i(v_sense_i3)": 0.00065,
+      "v(2)": 80.75,
+      "v(3)": 36.3
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 0.00285,
+      "i(v_sense_i2)": 0.00635,
+      "i(v_sense_i3)": 0.00065,
+      "v(2)": 80.75,
+      "v(3)": 36.3
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob1_Supermesh_Control-Var1",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 1.0,
+      "i(v_sense_i2)": 3.0,
+      "i(v_sense_i3)": 1.0,
+      "v(2)": 74.0,
+      "v(3)": 47.0
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 1.0,
+      "i(v_sense_i2)": 3.0,
+      "i(v_sense_i3)": 1.0,
+      "v(2)": 74.0,
+      "v(3)": 47.0
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob1_Supermesh_Trap-Asym-HighV",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 14.615385,
+      "i(v_sense_i2)": 17.615385,
+      "i(v_sense_i3)": -11.615385,
+      "v(2)": 196.9231,
+      "v(3)": 20.7692
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 14.61538,
+      "i(v_sense_i2)": 17.61538,
+      "i(v_sense_i3)": -11.6154,
+      "v(2)": 196.9231,
+      "v(3)": 20.76923
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob1_Supermesh_Trap-HighVolt-1",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 0.0025,
+      "i(v_sense_i2)": 0.0065,
+      "i(v_sense_i3)": 0.0015,
+      "v(2)": 95.0,
+      "v(3)": 43.0
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 0.0025,
+      "i(v_sense_i2)": 0.0065,
+      "i(v_sense_i3)": 0.0015,
+      "v(2)": 95.0,
+      "v(3)": 43.0
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob1_Supermesh_Trap-HighVolt-2",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 11.2,
+      "i(v_sense_i2)": 15.2,
+      "i(v_sense_i3)": -7.2,
+      "v(2)": 147.2,
+      "v(3)": 25.6
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 11.2,
+      "i(v_sense_i2)": 15.2,
+      "i(v_sense_i3)": -7.2,
+      "v(2)": 147.2,
+      "v(3)": 25.6
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob1_Supermesh_Trap-HighVolt-3",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 20.0,
+      "i(v_sense_i2)": 24.8,
+      "i(v_sense_i3)": -15.2,
+      "v(2)": 218.0,
+      "v(3)": 19.6
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 20.0,
+      "i(v_sense_i2)": 24.8,
+      "i(v_sense_i3)": -15.2,
+      "v(2)": 218.0,
+      "v(3)": 19.6
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob2_Opposing_Control-Base",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 5.0,
+      "i(v_sense_i2)": 1.0,
+      "v(2)": 8.0
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 5.0,
+      "i(v_sense_i2)": 1.0,
+      "v(2)": 8.0
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob2_Opposing_Control-Gen-1",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 6.489362,
+      "i(v_sense_i2)": 1.808511,
+      "v(2)": 14.0426
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 6.489362,
+      "i(v_sense_i2)": 1.808511,
+      "v(2)": 14.04255
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob2_Opposing_Control-Gen-2",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 7.0,
+      "i(v_sense_i2)": 4.0,
+      "v(2)": 15.0
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 7.0,
+      "i(v_sense_i2)": 4.0,
+      "v(2)": 15.0
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob2_Opposing_Control-Gen-3",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 6.4,
+      "i(v_sense_i2)": -0.4,
+      "v(2)": 6.8
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 6.4,
+      "i(v_sense_i2)": -0.4,
+      "v(2)": 6.8
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob2_Opposing_Control-Gen-4",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 7.142857,
+      "i(v_sense_i2)": 2.428571,
+      "v(2)": 9.4286
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 7.142857,
+      "i(v_sense_i2)": 2.428571,
+      "v(2)": 9.428571
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob2_Opposing_Trap-Gen-1",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 5.470588,
+      "i(v_sense_i2)": -8.588235,
+      "v(2)": 14.0588
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 5.470588,
+      "i(v_sense_i2)": -8.58824,
+      "v(2)": 14.05882
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob2_Opposing_Trap-Gen-2",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": -0.875,
+      "i(v_sense_i2)": -15.9375,
+      "v(2)": 30.125
+    },
+    "spice_values": {
+      "i(v_sense_i1)": -0.875,
+      "i(v_sense_i2)": -15.9375,
+      "v(2)": 30.125
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob2_Opposing_Trap-Gen-3",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": -0.531915,
+      "i(v_sense_i2)": -7.680851,
+      "v(2)": 28.5957
+    },
+    "spice_values": {
+      "i(v_sense_i1)": -0.531915,
+      "i(v_sense_i2)": -7.68085,
+      "v(2)": 28.59574
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob2_Opposing_Trap-Gen-4",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 0.166667,
+      "i(v_sense_i2)": -5.541667,
+      "v(2)": 22.8333
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 0.1666667,
+      "i(v_sense_i2)": -5.54167,
+      "v(2)": 22.83333
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob2_Opposing_Trap-Reversed",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": -1.142857,
+      "i(v_sense_i2)": -17.428571,
+      "v(2)": 32.5714
+    },
+    "spice_values": {
+      "i(v_sense_i1)": -1.14286,
+      "i(v_sense_i2)": -17.4286,
+      "v(2)": 32.57143
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob3_Bridge_Control-Base",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 1.36092,
+      "v(2)": 176.5517,
+      "v(3)": 193.1034
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 1.36092,
+      "v(2)": 176.5517,
+      "v(3)": 193.1034
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob3_Bridge_Control-Gen-1",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 0.597125,
+      "v(2)": 73.4381,
+      "v(3)": 81.8593
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 0.5971254,
+      "v(2)": 73.43805,
+      "v(3)": 81.85933
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob3_Bridge_Control-Gen-2",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 1.604999,
+      "v(2)": 211.0119,
+      "v(3)": 230.8009
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 1.604999,
+      "v(2)": 211.0119,
+      "v(3)": 230.8009
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob3_Bridge_Control-Gen-3",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 1.885108,
+      "v(2)": 189.2972,
+      "v(3)": 217.9094
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 1.885108,
+      "v(2)": 189.2972,
+      "v(3)": 217.9094
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob3_Bridge_Control-Gen-4",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 1.012237,
+      "v(2)": 152.2458,
+      "v(3)": 161.9754
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 1.012237,
+      "v(2)": 152.2458,
+      "v(3)": 161.9754
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob3_Bridge_Trap-Gen-1",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 0.332335,
+      "v(2)": 17.0611,
+      "v(3)": 41.2214
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 0.3323352,
+      "v(2)": 17.06111,
+      "v(3)": 41.22138
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob3_Bridge_Trap-Gen-2",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 0.181913,
+      "v(2)": 10.079,
+      "v(3)": 23.1605
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 0.1819132,
+      "v(2)": 10.07899,
+      "v(3)": 23.16051
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob3_Bridge_Trap-Gen-3",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 0.241902,
+      "v(2)": 16.5789,
+      "v(3)": 38.0117
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 0.2419016,
+      "v(2)": 16.57892,
+      "v(3)": 38.01173
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob3_Bridge_Trap-Gen-4",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 0.138474,
+      "v(2)": 10.6018,
+      "v(3)": 24.7882
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 0.1384736,
+      "v(2)": 10.60178,
+      "v(3)": 24.78818
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob3_Bridge_Trap-Unbalanced",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 0.157136,
+      "v(2)": 11.6624,
+      "v(3)": 20.2558
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 0.1571355,
+      "v(2)": 11.6624,
+      "v(3)": 20.25575
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob4_Ladder_Control-10",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 3.2,
+      "i(v_sense_i2)": 1.2,
+      "i(v_sense_i3)": 0.4,
+      "v(2)": 20.0,
+      "v(3)": 8.0,
+      "v(4)": 4.0
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 3.2,
+      "i(v_sense_i2)": 1.2,
+      "i(v_sense_i3)": 0.4,
+      "v(2)": 20.0,
+      "v(3)": 8.0,
+      "v(4)": 4.0
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob4_Ladder_Control-10k",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 0.0032,
+      "i(v_sense_i2)": 0.0012,
+      "i(v_sense_i3)": 0.0004,
+      "v(2)": 20.0,
+      "v(3)": 8.0,
+      "v(4)": 4.0
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 0.0032,
+      "i(v_sense_i2)": 0.0012,
+      "i(v_sense_i3)": 0.0004,
+      "v(2)": 20.0,
+      "v(3)": 8.0,
+      "v(4)": 4.0
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob4_Ladder_Control-Gen-1",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 0.004434,
+      "i(v_sense_i2)": 0.002458,
+      "i(v_sense_i3)": 0.000375,
+      "v(2)": 7.1487,
+      "v(3)": 2.6648,
+      "v(4)": 1.0678
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 0.004433615,
+      "i(v_sense_i2)": 0.002458289,
+      "i(v_sense_i3)": 0.0003747945,
+      "v(2)": 7.148707,
+      "v(3)": 2.664789,
+      "v(4)": 1.06779
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob4_Ladder_Control-Gen-2",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 0.006822,
+      "i(v_sense_i2)": 0.003035,
+      "i(v_sense_i3)": 0.000714,
+      "v(2)": 12.0474,
+      "v(3)": 6.3236,
+      "v(4)": 3.3875
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 0.006822251,
+      "i(v_sense_i2)": 0.003034936,
+      "i(v_sense_i3)": 0.0007143648,
+      "v(2)": 12.04745,
+      "v(3)": 6.323558,
+      "v(4)": 3.387518
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob4_Ladder_Control-Gen-3",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 0.016012,
+      "i(v_sense_i2)": 0.005531,
+      "i(v_sense_i3)": 0.001395,
+      "v(2)": 23.3289,
+      "v(3)": 7.1935,
+      "v(4)": 2.363
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 0.01601168,
+      "i(v_sense_i2)": 0.005531494,
+      "i(v_sense_i3)": 0.001394905,
+      "v(2)": 23.3289,
+      "v(3)": 7.193527,
+      "v(4)": 2.36297
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob4_Ladder_Trap-Gen-1",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 0.088378,
+      "i(v_sense_i2)": 0.029755,
+      "i(v_sense_i3)": 0.028108,
+      "v(2)": 58.6224,
+      "v(3)": 28.8673,
+      "v(4)": 0.7589
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 0.08837756,
+      "i(v_sense_i2)": 0.02975512,
+      "i(v_sense_i3)": 0.02810839,
+      "v(2)": 58.62244,
+      "v(3)": 28.86731,
+      "v(4)": 0.7589264
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob4_Ladder_Trap-Gen-2",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 0.108661,
+      "i(v_sense_i2)": 0.036323,
+      "i(v_sense_i3)": 0.034465,
+      "v(2)": 72.3386,
+      "v(3)": 36.0157,
+      "v(4)": 1.5509
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 0.1086614,
+      "i(v_sense_i2)": 0.03632284,
+      "i(v_sense_i3)": 0.03446482,
+      "v(2)": 72.33858,
+      "v(3)": 36.01574,
+      "v(4)": 1.550917
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob4_Ladder_Trap-Gen-3",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 0.075154,
+      "i(v_sense_i2)": 0.025308,
+      "i(v_sense_i3)": 0.024081,
+      "v(2)": 49.8461,
+      "v(3)": 24.5383,
+      "v(4)": 0.4575
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 0.0751539,
+      "i(v_sense_i2)": 0.0253078,
+      "i(v_sense_i3)": 0.02408076,
+      "v(2)": 49.8461,
+      "v(3)": 24.5383,
+      "v(4)": 0.4575345
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob4_Ladder_Trap-Gen-4",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 0.085275,
+      "i(v_sense_i2)": 0.028549,
+      "i(v_sense_i3)": 0.026041,
+      "v(2)": 56.7254,
+      "v(3)": 28.1761,
+      "v(4)": 2.1353
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 0.08527464,
+      "i(v_sense_i2)": 0.02854929,
+      "i(v_sense_i3)": 0.02604073,
+      "v(2)": 56.72536,
+      "v(3)": 28.17607,
+      "v(4)": 2.13534
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob4_Ladder_Trap-Modified",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 0.003667,
+      "i(v_sense_i2)": 0.001333,
+      "i(v_sense_i3)": 0.0005,
+      "v(2)": 23.3333,
+      "v(3)": 10.0,
+      "v(4)": 5.0
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 0.003666667,
+      "i(v_sense_i2)": 0.001333333,
+      "i(v_sense_i3)": 0.0005,
+      "v(2)": 23.33333,
+      "v(3)": 10.0,
+      "v(4)": 5.0
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob5_Dependent_Control-AAC",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 0.021429,
+      "i(v_sense_i2)": 0.017143,
+      "v(2)": 0.8571
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 0.02142857,
+      "i(v_sense_i2)": 0.01714286,
+      "v(2)": 0.8571429
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob5_Dependent_Control-Gen-1",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 0.434584,
+      "i(v_sense_i2)": 0.327576,
+      "v(2)": 5.3504
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 0.4345841,
+      "i(v_sense_i2)": 0.3275759,
+      "v(2)": 5.350407
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob5_Dependent_Control-Gen-2",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 0.19963,
+      "i(v_sense_i2)": 0.092421,
+      "v(2)": 1.6081
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 0.1996303,
+      "i(v_sense_i2)": 0.09242144,
+      "v(2)": 1.608133
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob5_Dependent_Control-Gen-3",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 0.77819,
+      "i(v_sense_i2)": 0.50397,
+      "v(2)": 4.6617
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 0.7781895,
+      "i(v_sense_i2)": 0.5039704,
+      "v(2)": 4.661726
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob5_Dependent_Control-Gen-4",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 0.330343,
+      "i(v_sense_i2)": 0.23491,
+      "v(2)": 3.0538
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 0.3303426,
+      "i(v_sense_i2)": 0.2349103,
+      "v(2)": 3.053834
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob5_Dependent_Trap-Gen-1",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 1.353641,
+      "i(v_sense_i2)": 1.311756,
+      "v(2)": 2.2199
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 1.353641,
+      "i(v_sense_i2)": 1.311756,
+      "v(2)": 2.219895
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob5_Dependent_Trap-Gen-2",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 0.521221,
+      "i(v_sense_i2)": 0.503172,
+      "v(2)": 1.6605
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 0.5212207,
+      "i(v_sense_i2)": 0.5031722,
+      "v(2)": 1.660468
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob5_Dependent_Trap-Gen-3",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 1.530426,
+      "i(v_sense_i2)": 1.452638,
+      "v(2)": 5.6785
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 1.530426,
+      "i(v_sense_i2)": 1.452638,
+      "v(2)": 5.678496
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob5_Dependent_Trap-Gen-4",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 0.643701,
+      "i(v_sense_i2)": 0.627618,
+      "v(2)": 1.6083
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 0.6437007,
+      "i(v_sense_i2)": 0.627618,
+      "v(2)": 1.608271
+    },
+    "errors": []
+  },
+  {
+    "id": "Prob5_Dependent_Trap-HighGain",
+    "status": "PASS",
+    "verifier_map": {
+      "i(v_sense_i1)": 0.024194,
+      "i(v_sense_i2)": 0.02129,
+      "v(2)": 0.5806
+    },
+    "spice_values": {
+      "i(v_sense_i1)": 0.02419355,
+      "i(v_sense_i2)": 0.02129032,
+      "v(2)": 0.5806452
+    },
+    "errors": []
+  }
+]

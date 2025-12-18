@@ -1,0 +1,25 @@
+* Prob 4: Ladder
+* EXPECTED TRUTH:
+* i1 (i(v_sense_i1)) = 0.088378
+* i2 (i(v_sense_i2)) = 0.029755
+* i3 (i(v_sense_i3)) = 0.028108
+* v1 (v(2))  = 58.6224
+* v2 (v(3))  = 28.8673
+* v3 (v(4))  = 0.7589
+
+V1 1 0 DC 147
+R1 1 1_sense 1000
+V_sense_i1 1_sense 2 DC 0
+R2 2 0 1000
+
+R3 2 2_sense 1000
+V_sense_i2 2_sense 3 DC 0
+R4 3 0 17530
+
+R5 3 3_sense 1000
+V_sense_i3 3_sense 4 DC 0
+R6 4 0 27
+
+.op
+.print op v(2) v(3) v(4) i(v_sense_i1) i(v_sense_i2) i(v_sense_i3)
+.end
