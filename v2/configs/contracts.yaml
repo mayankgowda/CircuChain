@@ -1,0 +1,42 @@
+# T1 — Convention-contract design (the causal core).
+#
+# Five orthogonal factors, each acting on a DISJOINT variable-role set so each factor's marginal
+# effect on compliance is identifiable without confounding. Ground truth is computed once in the
+# canonical DEFAULT frame; every contract's expected signed answer is a pure closed-form transform
+# (see circuchain/contract.py), so NO re-simulation and NO LLM is needed to grade compliance.
+
+factors:
+  mesh_direction:            [cw, ccw]        # ccw negates every mesh_current
+  passive_sign_convention:   [passive, active] # active negates branch_current + element_voltage
+  reference_node:            [bottom, top]     # top ref: V'(n) = V(n) - V(top_ref)  (affine)
+  naming_scheme:             [scheme1, scheme2] # permute label -> quantity (structural)
+  required_method:           [mesh_kvl, nodal_kcl] # no sign action; graded structurally
+
+# v1's implicit textbook prior. verifier_map for any v1 instance == expected_under(default).
+default_contract: {mesh_dir: cw, psc: passive, ref_node: bottom, method: mesh_kvl}
+
+# Three-part design to keep compute sane while retaining causal identifiability.
+# Unit of pairing is `physics_id`: every factor contrast is a within-physics, within-model matched pair.
+design:
+  golden_full_factorial:
+    anchors: 40                # physics instances
+    cells: 32                  # 2^4 sign factors x 2 methods
+    panel: all                 # full 10-model panel
+    purpose: all main effects + 2-way interactions
+  causal_fractional:
+    anchors: 150
+    cells: 16                  # 2^(4-1) resolution-IV (D=ABC), 8 sign cells x 2 methods
+    panel: [qwen3-14b, qwen3-14b-nothink, llama33-70b, ds-r1-llama-70b, qwen3-32b, gpt-oss-20b]
+    purpose: ">=600 within-model pairs per factor; per-factor causal odds ratios"
+  oa_screen:
+    anchors: 300
+    cells: 1                   # balanced orthogonal array OA(16,4,2,2), 1 cell/anchor
+    panel: all
+    purpose: variance-balanced population marginals, cheap
+
+# Construct-validity controls (fold into the causal run) — neutralize the "sign-flip == arithmetic
+# difficulty / unfamiliarity" confound. See CIRCUCHAIN_V2_BRAINDUMP.md section 4.5.
+controls:
+  capability_floor_transform: true   # isolated "given i2=+6mA CW, what is it CCW?" per model
+  instructed_vs_uninstructed: true   # same physics, explicit CCW vs free-to-choose-and-state
+  difficulty_covariates: [n_sign_ops, max_r_ratio]  # enter into the mixed-effects model

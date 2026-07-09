@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "circuchain"
+version = "2.0.0-dev"
+description = "CircuChain v2 — causal, deterministically-graded benchmark for Convention Blindness in LLMs (M5-local)"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Mayank Ravishankara" }]
+dependencies = [
+    "httpx>=0.27",
+    "pyyaml>=6.0",
+    "numpy>=1.26",
+    "sympy>=1.12",
+    "pandas>=2.1",
+    "scipy>=1.11",          # McNemar, Wilson CIs, mixed-model helpers
+    "matplotlib>=3.8",
+    "typer>=0.12",          # CLI
+]
+
+[project.optional-dependencies]
+mlx = ["mlx-lm>=0.14"]                       # Apple-Silicon "official numbers" engine
+api = ["openai>=1.40", "anthropic>=0.34"]    # optional frontier ceiling only
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+circuchain = "circuchain.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["circuchain*"]

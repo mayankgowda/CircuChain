@@ -1,0 +1,16 @@
+# Tiny end-to-end smoke config: runs in minutes on a laptop / in CI. `make smoke`.
+seed: 1
+n_physics: 4
+methods: [KVL, KCL]
+tolerance_rel: 1.0e-4
+topologies:
+  - {name: supermesh, weight: 1.0}
+parameters:
+  resistor:       {dist: loguniform, low: 1.0e2, high: 1.0e5}
+  voltage_source: {dist: uniform, low: -100, high: 100}
+  current_source: {dist: uniform, low: -10, high: 10}
+  dependent_gain: {dist: uniform, low: -4, high: 4}
+  round_sig_figs: 3
+# single tiny model for the smoke run
+models:
+  - {key: qwen3-1.7b, model_id: "qwen3:1.7b", backend: ollama, family: qwen, role_axis: reasoning, think: true, enabled: true}

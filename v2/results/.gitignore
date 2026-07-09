@@ -1,0 +1,7 @@
+# Generated outputs are not committed, except manifests + the regrade summary (the citable artifact).
+*
+!.gitignore
+!regrade_v1/
+!regrade_v1/**
+!manifests/
+!manifests/**

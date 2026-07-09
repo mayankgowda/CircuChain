@@ -1,0 +1,99 @@
+{
+  "n_subtasks": 500,
+  "n_matched_to_judge": 500,
+  "kappa_3way": 0.9438246801311198,
+  "agreement_3way": 0.966,
+  "kappa_failures_only": 0.8657731033155904,
+  "agreement_failures_only": 0.9531772575250836,
+  "confusion_rule_rows_judge_cols": {
+    "CORRECT": {
+      "CORRECT": 198,
+      "COMPLIANCE": 0,
+      "COMPETENCE": 0
+    },
+    "COMPLIANCE": {
+      "CORRECT": 0,
+      "COMPLIANCE": 60,
+      "COMPETENCE": 0
+    },
+    "COMPETENCE": {
+      "CORRECT": 3,
+      "COMPLIANCE": 14,
+      "COMPETENCE": 225
+    }
+  },
+  "off_diagonal": [
+    {
+      "rule": "COMPETENCE",
+      "judge": "CORRECT",
+      "n": 3
+    },
+    {
+      "rule": "COMPETENCE",
+      "judge": "COMPLIANCE",
+      "n": 14
+    }
+  ],
+  "per_model": [
+    {
+      "model": "GPT-4o Mini",
+      "n": 100,
+      "rule_acc": 0.03,
+      "judge_acc": 0.03,
+      "rule_compliance": 0.0,
+      "rule_competence": 0.97,
+      "judge_compliance": 0.01,
+      "judge_competence": 0.96,
+      "mag_correct_rate": 0.03,
+      "sign_compliant_given_mag": 1.0
+    },
+    {
+      "model": "gpt-4o",
+      "n": 100,
+      "rule_acc": 0.07,
+      "judge_acc": 0.1,
+      "rule_compliance": 0.0,
+      "rule_competence": 0.93,
+      "judge_compliance": 0.01,
+      "judge_competence": 0.89,
+      "mag_correct_rate": 0.07,
+      "sign_compliant_given_mag": 1.0
+    },
+    {
+      "model": "o4-mini",
+      "n": 100,
+      "rule_acc": 0.57,
+      "judge_acc": 0.57,
+      "rule_compliance": 0.24,
+      "rule_competence": 0.19,
+      "judge_compliance": 0.31,
+      "judge_competence": 0.12,
+      "mag_correct_rate": 0.81,
+      "sign_compliant_given_mag": 0.7037037037037037
+    },
+    {
+      "model": "Claude Opus 4.5",
+      "n": 100,
+      "rule_acc": 0.65,
+      "judge_acc": 0.65,
+      "rule_compliance": 0.02,
+      "rule_competence": 0.33,
+      "judge_compliance": 0.07,
+      "judge_competence": 0.28,
+      "mag_correct_rate": 0.67,
+      "sign_compliant_given_mag": 0.9701492537313433
+    },
+    {
+      "model": "gpt-5",
+      "n": 100,
+      "rule_acc": 0.66,
+      "judge_acc": 0.66,
+      "rule_compliance": 0.34,
+      "rule_competence": 0.0,
+      "judge_compliance": 0.34,
+      "judge_competence": 0.0,
+      "mag_correct_rate": 1.0,
+      "sign_compliant_given_mag": 0.66
+    }
+  ]
+}

@@ -25,3 +25,20 @@ Contains the Python automation for generating and validating the benchmark.
 
 ## 🚀 Usage Note
 To verify the ground truth values, ensure you have `ngspice` installed and run the verification script in the `scripts/` directory. The dataset provided in `data/` is already pre-verified.
+
+## 🔭 v2 (local Apple-M5 harness)
+
+`v2/` holds the next iteration: a **causal, statistically-powered, deterministically-graded**
+benchmark for *Convention Blindness* that runs **entirely on local open-weights models** (Ollama / MLX),
+at zero API cost. The v1 `data/` and `scripts/` above are **frozen for provenance** — v2 builds
+alongside them and never edits them.
+
+Start here:
+* [`v2/CIRCUCHAIN_V2_BRAINDUMP.md`](v2/CIRCUCHAIN_V2_BRAINDUMP.md) — the full strategy + go/no-go verdict.
+* [`v2/FEASIBILITY.md`](v2/FEASIBILITY.md) — reviewer-2 red-team, ROI, risk register, timeline.
+* [`v2/ENGINEERING_PLAN.md`](v2/ENGINEERING_PLAN.md) — file-by-file build order.
+* [`v2/README.md`](v2/README.md) — clone-and-run quickstart.
+
+**Already runs (CPU-only, ~2 s):** `python3 v2/scripts/regrade_v1_logs.py` re-grades the 500 v1 log
+rows with the deterministic compliance grader and reproduces **rule-vs-judge Cohen's κ = 0.944**
+(vs v1's judge-audit κ ≈ 0.57) — the headline credibility result, with no LLM in the loop.
