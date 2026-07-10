@@ -1,16 +1,19 @@
 """CircuChain v2 CLI.
 
-Implemented now (proven, runnable):
+Implemented (proven, runnable):
     circuchain regrade                 -- re-grade the v1 logs -> rule-vs-judge kappa (GNG-1)
-    circuchain models --installed      -- cross-check configs/models.yaml against local Ollama
+    circuchain models --installed      -- cross-check configs/models.yaml against the backend
+    circuchain generate                -- procedural generation + inline exact-MNA gate
+    circuchain verify                  -- NGSPICE + exact-MNA dual-verification of a dataset
+    circuchain run                     -- run the model panel (cached, resumable)
+    circuchain grade                   -- deterministic extract + compliance grading
 
-Stubs (see ENGINEERING_PLAN.md build order — implement in this order):
-    generate  verify  run  grade  analyze  judge
-Each stub explains what to build and where. This keeps the installed package honest: it never
-pretends a stage works before it does.
+Stub (build step 13):
+    circuchain analyze                 -- McNemar paired tests, tables + figures
 """
 from __future__ import annotations
 
+import json
 import os
 import subprocess
 import sys
@@ -21,6 +24,11 @@ app = typer.Typer(add_completion=False, help="CircuChain v2 — Convention Blind
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 V2 = os.path.abspath(os.path.join(HERE, ".."))
+REPO = os.path.abspath(os.path.join(V2, ".."))
+
+
+def _v2path(p: str) -> str:
+    return p if os.path.isabs(p) else os.path.join(V2, p)
 
 
 @app.command()
@@ -56,7 +64,7 @@ def models(
         state = m.get("state") or ""
         typer.echo(f"  {name:<34} {' '.join(b for b in bits if b):<26} {state}{vision}")
 
-    cfg_path = config if os.path.isabs(config) else os.path.join(V2, config)
+    cfg_path = _v2path(config)
     if not (installed and os.path.exists(cfg_path)):
         return
 
@@ -72,7 +80,6 @@ def models(
     for m in missing_enabled:
         typer.echo(f"  MISSING (enabled)  {m['key']:<20} id={m['model_id']}")
 
-    # Which causal contrasts are currently satisfiable?
     typer.echo("\nCausal-contrast coverage (this is what makes the paper causal, not a leaderboard):")
     by_contrast: dict = {}
     for m in entries:
@@ -97,40 +104,84 @@ def models(
     )
 
 
-def _todo(stage: str, builds: str):
-    typer.echo(f"[not-yet-implemented] `circuchain {stage}` — see v2/ENGINEERING_PLAN.md build order.")
-    typer.echo(f"  Implement: {builds}")
-    raise typer.Exit(2)
+@app.command()
+def generate(
+    config: str = typer.Option("configs/dataset.yaml", help="generator config"),
+    seed: int = typer.Option(0, help="override the config seed (0 = use config)"),
+    out: str = typer.Option("", help="output dir (default results/datasets/v2_seed<SEED>)"),
+):
+    """Procedurally generate contract-varied instances (inline mesh/nodal/MNA verification)."""
+    import yaml
+    from .generate import generate_dataset
+
+    cfg = yaml.safe_load(open(_v2path(config)))
+    the_seed = seed or int(cfg.get("seed", 20260709))
+    out_dir = _v2path(out or f"results/datasets/v2_seed{the_seed}")
+    manifest = generate_dataset(cfg, the_seed, out_dir, REPO)
+    typer.echo(json.dumps({k: manifest[k] for k in
+                           ("seed", "n_physics", "n_instances", "regime_counts", "rejects",
+                            "canary_guid")}, indent=2))
+    typer.echo(f"Wrote {out_dir}/instances.jsonl (+ manifest.json)")
 
 
 @app.command()
-def generate(config: str = "configs/dataset.yaml", seed: int = 20260709):
-    """(stub) Procedurally generate + dual-verify N>=500 contract-varied instances."""
-    _todo("generate", "circuchain/topologies/*, analytic.py, generate.py, verify.py (build steps 3-8)")
+def verify(
+    dataset: str = typer.Option("results/datasets/v2_seed20260709", help="dataset dir"),
+    tol: float = typer.Option(1e-4, help="relative tolerance for the SPICE gate"),
+):
+    """NGSPICE + exact-MNA dual-verification of every unique physics instance."""
+    from .verify import verify_dataset, ngspice_available
+
+    if not ngspice_available():
+        typer.echo("ngspice not found — install it: brew install ngspice")
+        raise typer.Exit(1)
+    s = verify_dataset(_v2path(dataset), rel_tol=tol)
+    typer.echo(f"verified physics: {s['n_pass']}/{s['n_physics']} PASS "
+               f"(tol={s['rel_tol']}, ngspice={s['ngspice']})")
+    for r in s["results"]:
+        if r["status"] == "FAIL":
+            typer.echo(f"  FAIL {r['physics_id']}: {r['errors']}")
+    if s["n_fail"]:
+        raise typer.Exit(1)
 
 
 @app.command()
-def verify(dataset: str = ""):
-    """(stub) NGSPICE(.op) + SymPy dual-verification of a generated dataset."""
-    _todo("verify", "circuchain/verify.py + tests/test_analytic_vs_spice.py (build step 6)")
+def run(
+    models: str = typer.Option("configs/models.yaml", help="panel config"),
+    backend: str = typer.Option("lmstudio", help="default backend override"),
+    dataset: str = typer.Option("results/datasets/v2_seed20260709", help="dataset dir"),
+    out: str = typer.Option("results", help="output root (cache/ + responses/)"),
+):
+    """Run the enabled model panel over the dataset (content-addressed cache, resumable)."""
+    import yaml
+    from .run import run_panel
+
+    cfg = yaml.safe_load(open(_v2path(models)))
+    cfg.setdefault("defaults", {})["backend"] = backend
+    results = run_panel(cfg, _v2path(dataset), _v2path(out), progress=typer.echo)
+    typer.echo(json.dumps(results, indent=2))
 
 
 @app.command()
-def run(models: str = "configs/models.yaml", backend: str = "ollama"):
-    """(stub) Run the model panel over the dataset (resumable, cached)."""
-    _todo("run", "circuchain/run.py + cache.py (providers/ollama.py already built) (build steps 9-10)")
+def grade(
+    responses: str = typer.Option("results/responses", help="responses dir"),
+    dataset: str = typer.Option("results/datasets/v2_seed20260709", help="dataset dir"),
+    out: str = typer.Option("results/graded", help="graded output dir"),
+):
+    """Deterministic extract + numeric + compliance grading (no LLM on this path)."""
+    from .grade.numeric import grade_responses, format_summary
 
-
-@app.command()
-def grade(responses: str = "results/responses"):
-    """(stub) Deterministic extract + numeric + compliance grading (grade/compliance.py is built)."""
-    _todo("grade", "circuchain/grade/extract.py + numeric.py + trace.py (build steps 11-12)")
+    summary = grade_responses(_v2path(dataset), _v2path(responses), _v2path(out))
+    typer.echo(format_summary(summary))
+    typer.echo(f"\nWrote {_v2path(out)}/summary.json")
 
 
 @app.command()
 def analyze(graded: str = "results/graded"):
     """(stub) McNemar paired tests, mixed-effects ORs, tables + figures."""
-    _todo("analyze", "circuchain/analyze/stats.py + tables.py + figures.py (build step 13)")
+    typer.echo("[not-yet-implemented] `circuchain analyze` — see v2/ENGINEERING_PLAN.md "
+               "build step 13. Implement: circuchain/analyze/stats.py + tables.py + figures.py")
+    raise typer.Exit(2)
 
 
 if __name__ == "__main__":

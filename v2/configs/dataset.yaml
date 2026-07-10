@@ -1,34 +1,44 @@
-# Procedural generator config (T3/T8). Every instance is dual-verified (SymPy MNA == NGSPICE .op)
-# and regime-tagged BY CODE (not by hand). Trap:Control is rejection-sampled to ~1:1.
+# Procedural generator config (T3/T8). Every instance is dual-verified (numpy mesh == numpy
+# nodal == exact-MNA sympy == NGSPICE .op) and regime-tagged BY CODE (not by hand).
+# Trap:Control is rejection-sampled to ~1:1.
+#
+# TOTAL N = n_physics x 4 contract cells (dflt/ccw/act/top) x 2 methods (KVL/KCL).
+#   n_physics: 125  ->  1000 instances   (the headline size; a config knob, not a redesign)
+#   Every physics instance yields a within-physics matched pair for every sign factor, which
+#   is exactly what the McNemar paired tests consume. Size N for power per (topology x factor)
+#   cell, not for a round number: 125 physics / 7 topologies ~ 18 physics per topology, each
+#   contributing 2 method-variants per factor pair.
 
 seed: 20260709
-n_physics: 500              # distinct physics instances (before contract x method expansion)
-methods: [KVL, KCL]         # each physics instance is posed under both
-tolerance_rel: 1.0e-4       # SymPy vs NGSPICE agreement gate (reject instance if exceeded)
+n_physics: 125
+methods: [KVL, KCL]
+tolerance_rel: 1.0e-4       # analytic vs NGSPICE agreement gate (reject instance if exceeded)
 
-topologies:                 # 5 v1 families port directly; each gains branch_current + element_voltage outputs
-  - {name: supermesh,   weight: 1.0}
-  - {name: opposing_t,  weight: 1.0}
-  - {name: wheatstone,  weight: 1.0}
-  - {name: ladder,      weight: 1.0}
-  - {name: vcvs,        weight: 1.0}
+topologies:                 # 5 v1 ports + 2 new families (supernode, vccs_ladder)
+  - {name: supermesh,   weight: 1}
+  - {name: opposing_t,  weight: 1}
+  - {name: wheatstone,  weight: 1}
+  - {name: ladder,      weight: 1}
+  - {name: vcvs,        weight: 1}
+  - {name: supernode,   weight: 1}
+  - {name: vccs_ladder, weight: 1}
 
-parameters:                 # sampling distributions (sign allowed on sources -> drives sign-flip Traps)
+parameters:                 # sampling distributions (sign allowed on sources -> sign-flip Traps)
   resistor:        {dist: loguniform, low: 1.0e2, high: 1.0e5}   # ohms
-  voltage_source:  {dist: uniform,    low: -100,  high: 100}     # volts
-  current_source:  {dist: uniform,    low: -10,   high: 10}      # mA
-  dependent_gain:  {dist: uniform,    low: -4,    high: 4}
+  voltage_source:  {dist: uniform,    low: -100,  high: 100}     # volts   (|V| >= 5 enforced)
+  current_source:  {dist: uniform,    low: -10,   high: 10}      # mA      (|I| >= 0.2 enforced)
+  dependent_gain:  {dist: uniform,    low: -4,    high: 4}       # (|k| >= 0.25 enforced)
   round_sig_figs:  3
 
-regime_tags:                # code predicates on `values`/solution; presence of any trap tag => Trap
-  - dominant_current_negative   # net flow opposes left-to-right intuition
+regime_tags:                # code predicates on values/solution; any trap tag => Trap
+  - dominant_current_negative   # canonical i1 < 0 (net flow opposes left-to-right intuition)
   - max_r_ratio_gt_100          # extreme resistance ratio (stiff coupled system)
-  - near_cancellation           # sources nearly cancel -> small signed result
-  - dependent_dominates         # dependent source drives the sign (vcvs only)
+  - near_cancellation           # some requested current < 2% of the largest (small signed result)
+  - dependent_dominates         # |dependent gain| > 2 (dep source drives the sign)
 target_trap_fraction: 0.5
 
 contamination_guard:
-  dedupe_instance_hash: true    # sha over (topology, rounded values, contract) across all splits
-  exclude_v1_manifest: true     # never emit an instance whose hash collides with the 50 v1 instances
-  canary_guid_per_release: true # embedded canary string to detect future leakage
+  dedupe_instance_hash: true    # sha over (topology, values) + (cell, method) across the run
+  exclude_v1_manifest: true     # never emit a physics whose hash collides with the 50 v1 rows
+  canary_guid_per_release: true # uuid5(seed) embedded in manifest + every record
   hold_test_split_unreleased: true

@@ -1,12 +1,15 @@
 # Tiny end-to-end smoke config: runs in minutes. `make smoke`.
-# Point model_id at the SMALLEST text model you actually have (`lms ls`), and pre-load it:
-#     lms load <model_id> --context-length 8192 --gpu max -y
+# model_id below is the smallest VIABLE text model on this M5 (verified via lms ls;
+# qwen2.5-7b-instruct is a corrupt 84MB download). Pre-load it first:
+#     lms load qwen/qwen3.5-9b --context-length 8192 --gpu max -y
+# N = n_physics x 4 cells x 2 methods = 16 completions.
 seed: 1
-n_physics: 4
+n_physics: 2
 methods: [KVL, KCL]
 tolerance_rel: 1.0e-4
 topologies:
-  - {name: supermesh, weight: 1.0}
+  - {name: supermesh, weight: 1}
+  - {name: supernode, weight: 1}
 parameters:
   resistor:       {dist: loguniform, low: 1.0e2, high: 1.0e5}
   voltage_source: {dist: uniform, low: -100, high: 100}
@@ -19,8 +22,9 @@ defaults:
   host: "http://localhost:1234"
   temperature: 0.0
   seed: 1
-  max_tokens: 2048
+  max_tokens: 4096          # unconditional reasoners need headroom before the ANSWER line
   num_ctx: 8192
 
 models:
-  - {key: smoke, model_id: "qwen/qwen3.6-27b", backend: lmstudio, family: qwen3.6, role_axis: reasoning, think: true, think_style: qwen_slash, enabled: true}
+  - {key: smoke-9b, model_id: "qwen/qwen3.5-9b", backend: lmstudio, family: qwen3.5,
+     role_axis: reasoning, think: true, think_style: qwen_slash, enabled: true}

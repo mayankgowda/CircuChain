@@ -12,10 +12,13 @@ DS      := results/datasets/v2_seed$(SEED)
 regrade:
 	python scripts/regrade_v1_logs.py
 
-## Unit tests (contract transforms + compliance grader).
+## Unit tests (contract transforms + compliance grader + topology goldens + SPICE gate).
 test:
 	python tests/test_contract_transforms.py
 	python tests/test_compliance_grader.py
+	python tests/test_topologies_golden.py
+	python tests/test_analytic_vs_spice.py
+	python tests/test_extract.py
 
 generate:
 	circuchain generate --config configs/dataset.yaml --seed $(SEED)
@@ -24,10 +27,10 @@ verify: generate
 	circuchain verify --dataset $(DS)
 
 run: verify
-	circuchain run --models $(MODELS) --backend $(BACKEND)
+	circuchain run --models $(MODELS) --backend $(BACKEND) --dataset $(DS)
 
 grade: run
-	circuchain grade --responses results/responses
+	circuchain grade --responses results/responses --dataset $(DS)
 
 analyze: grade
 	circuchain analyze --graded results/graded
@@ -39,18 +42,17 @@ models:
 	circuchain models --installed --backend $(BACKEND) --config configs/models.yaml
 
 ## Pre-load one model with a constrained context (JIT defaults to full 262k ctx and OOMs).
-## Usage: make load MODEL=qwen/qwen3.6-27b [CTX=8192]
+## Usage: make load MODEL=qwen/qwen3.5-9b [CTX=8192]
 CTX ?= 8192
 load:
 	lms load $(MODEL) --context-length $(CTX) --gpu max -y
 
-## Tiny end-to-end run for CI / a laptop.
+## Tiny end-to-end run for CI / a laptop (pre-load the smoke model first, see configs/smoke.yaml).
 smoke:
 	circuchain generate --config configs/smoke.yaml --seed 1
 	circuchain verify --dataset results/datasets/v2_seed1
-	circuchain run --models configs/smoke.yaml
-	circuchain grade --responses results/responses
-	circuchain analyze --graded results/graded
+	circuchain run --models configs/smoke.yaml --dataset results/datasets/v2_seed1 --out results/smoke
+	circuchain grade --responses results/smoke/responses --dataset results/datasets/v2_seed1 --out results/smoke/graded
 
 clean:
-	rm -rf results/cache results/responses results/graded
+	rm -rf results/cache results/responses results/graded results/smoke
