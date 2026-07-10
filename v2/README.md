@@ -17,7 +17,12 @@ fully reproducible. The v1 artifacts under `../data` and `../scripts` are frozen
 | T1 convention-contract transforms (`circuchain/contract.py`) | ✅ built + tested |
 | Local providers (`providers/lmstudio.py` ← primary, `ollama.py`, `mlx.py`) | ✅ built, API-validated |
 | Schema, configs, CLI skeleton | ✅ built |
-| Procedural generator, topologies, verify, run, analyze | ⏳ stubs — see build order |
+| Topologies (5 v1 ports + `supernode` + `vccs_ladder`), 4-way dual verify | ✅ built + tested (v1 anchor 50/50, exact-MNA, ngspice) |
+| Procedural generator (`generate.py`) — N is a config knob (125→1000, 250→2000) | ✅ built; byte-identical regeneration per seed |
+| Verify gate (`verify.py`): numpy == exact-MNA == ngspice, poison-tested | ✅ built; 125/125 PASS at 1e-4 |
+| Runner (`run.py` + `cache.py`): resumable, content-addressed cache | ✅ built; smoke-validated vs LM Studio |
+| Deterministic extractor + grading (`grade/extract.py`, `grade/numeric.py`) | ✅ built + tested (retires GPT-4o extraction) |
+| Analysis (`analyze/`): McNemar, mixed-effects, tables, figures | ⏳ the one remaining stub (build step 13) |
 
 ## Quickstart (what to run the minute you clone onto the M5)
 
@@ -65,7 +70,7 @@ provenance sidecar as the `engine` tag. Running the same model under both runtim
 **cross-engine reproducibility receipt** the paper wants. Note LM Studio exposes no weight digest,
 so provenance is the tuple `(publisher, arch, quantization, engine, loaded_context_length)`.
 
-## Pipeline (once the generator/runner stages are built — see ENGINEERING_PLAN.md)
+## Pipeline (generate → verify → run → grade all live; only `analyze` remains a stub)
 
 ```bash
 make generate     # procedurally sample + dual-verify (SymPy==NGSPICE) N>=500 contract-varied instances

@@ -1,7 +1,7 @@
 # Tiny end-to-end smoke config: runs in minutes. `make smoke`.
 # model_id below is the smallest VIABLE text model on this M5 (verified via lms ls;
 # qwen2.5-7b-instruct is a corrupt 84MB download). Pre-load it first:
-#     lms load qwen/qwen3.5-9b --context-length 8192 --gpu max -y
+#     lms load qwen/qwen3.5-9b --context-length 16384 --gpu max -y
 # N = n_physics x 4 cells x 2 methods = 16 completions.
 seed: 1
 n_physics: 2
@@ -22,8 +22,8 @@ defaults:
   host: "http://localhost:1234"
   temperature: 0.0
   seed: 1
-  max_tokens: 4096          # unconditional reasoners need headroom before the ANSWER line
-  num_ctx: 8192
+  max_tokens: 12288         # 9B thinks 3-4k tokens on real problems; 4096 truncated 16/16
+  num_ctx: 16384
 
 models:
   - {key: smoke-9b, model_id: "qwen/qwen3.5-9b", backend: lmstudio, family: qwen3.5,
