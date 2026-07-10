@@ -15,7 +15,7 @@ fully reproducible. The v1 artifacts under `../data` and `../scripts` are frozen
 | Deterministic compliance grader (`circuchain/grade/compliance.py`) | ✅ built + tested |
 | v1 log re-grade → rule-vs-judge κ (`scripts/regrade_v1_logs.py`) | ✅ **runs today, κ=0.944** |
 | T1 convention-contract transforms (`circuchain/contract.py`) | ✅ built + tested |
-| Local providers (`providers/ollama.py`, `providers/mlx.py`) | ✅ built (Ollama proven interface) |
+| Local providers (`providers/lmstudio.py` ← primary, `ollama.py`, `mlx.py`) | ✅ built, API-validated |
 | Schema, configs, CLI skeleton | ✅ built |
 | Procedural generator, topologies, verify, run, analyze | ⏳ stubs — see build order |
 
@@ -34,28 +34,44 @@ python3 scripts/regrade_v1_logs.py         # -> rule-vs-judge Cohen's kappa (tar
 # 2. unit tests
 make test                                  # contract transforms + grader, 14 cases
 
-# 3. see which panel models you already have pulled
-ollama serve &                             # if not already running
-circuchain models --installed              # cross-checks configs/models.yaml vs `ollama list`
+# 3. see which models you have, and which causal contrasts they can support
+lms server start                           # LM Studio's OpenAI-compatible API on :1234
+circuchain models --installed              # cross-checks configs/models.yaml vs `lms ls`
 ```
 
-## The local model panel
+## The local model panel (served by LM Studio)
 
-`configs/models.yaml` defines a 10-model open-weights panel spanning three orthogonal factors so
-the paper can make *causal* claims, not just a leaderboard:
+`configs/models.yaml` defines an open-weights panel spanning three orthogonal factors so the paper
+can make *causal* claims, not just a leaderboard. `circuchain models --installed` prints a
+**contrast-coverage report** telling you which are satisfiable with what you've downloaded:
 
-- **C1** reasoning toggle on one base — `qwen3:14b` with `/think` on vs off
-- **C2** reasoning-SFT natural experiment — `llama3.3:70b` vs `deepseek-r1:70b` (same base ± R1 distill)
-- **C3** pure scale ladder — `qwen3` 1.7b → 4b → 8b → 14b → 32b
+- **C1** reasoning toggle on one base — `qwen/qwen3.6-27b` with `/think` vs `/no_think` (same
+  weights, zero confounds — the cleanest contrast in the panel)
+- **C2** reasoning-SFT natural experiment — an Instruct base vs its reasoning-distilled sibling
+- **C3** pure scale ladder — one family across 1.7b → 4b → 8b → 14b → 27b
 
-Pull what you're missing with the `ollama pull` lines `circuchain models --installed` prints.
+> ### ⚠️ The LM Studio context-length trap
+> LM Studio's JIT loader defaults to a model's **full** `max_context_length` (often 262,144) and
+> reserves a KV cache to match — it will refuse to load with *"requires approximately 86.30 GB of
+> memory."* **Always pre-load with a constrained context** before a sweep:
+> ```bash
+> lms load qwen/qwen3.6-27b --context-length 8192 --gpu max -y   # or: make load MODEL=...
+> ```
+> The provider calls `assert_loaded()` and fails fast with this exact command rather than letting a
+> multi-day run die on an OOM at hour 40. `num_ctx` in the config must match what you loaded with.
+
+LM Studio reports each model's `compatibility_type` (**gguf** vs **mlx**) — recorded in the
+provenance sidecar as the `engine` tag. Running the same model under both runtimes is exactly the
+**cross-engine reproducibility receipt** the paper wants. Note LM Studio exposes no weight digest,
+so provenance is the tuple `(publisher, arch, quantization, engine, loaded_context_length)`.
 
 ## Pipeline (once the generator/runner stages are built — see ENGINEERING_PLAN.md)
 
 ```bash
 make generate     # procedurally sample + dual-verify (SymPy==NGSPICE) N>=500 contract-varied instances
 make verify
-make run BACKEND=mlx      # run the panel (resumable, cached; MLX for official numbers, Ollama for the receipt)
+make load MODEL=qwen/qwen3.6-27b   # pre-load with a constrained context (see the trap above)
+make run                  # run the panel (resumable, cached); BACKEND=lmstudio by default
 make grade                # deterministic extract + numeric + compliance + T6 trace
 make analyze              # McNemar paired tests, mixed-effects ORs, tables + figures
 # or: make all

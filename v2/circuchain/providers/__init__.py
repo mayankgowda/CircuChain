@@ -3,8 +3,11 @@ from __future__ import annotations
 
 
 def build_provider(cfg: dict):
-    """Factory: cfg['backend'] in {ollama, mlx, openai, anthropic} -> a Provider instance."""
-    backend = cfg.get("backend", "ollama")
+    """Factory: cfg['backend'] in {lmstudio, ollama, mlx, openai, anthropic} -> a Provider."""
+    backend = cfg.get("backend", "lmstudio")
+    if backend == "lmstudio":
+        from .lmstudio import LMStudioProvider
+        return LMStudioProvider(cfg)
     if backend == "ollama":
         from .ollama import OllamaProvider
         return OllamaProvider(cfg)

@@ -1,50 +1,66 @@
-# CircuChain v2 — local model panel (M5).  Each enabled entry is one column in every results table.
+# CircuChain v2 — local model panel served by LM STUDIO (OpenAI-compatible API on :1234).
 #
-# The panel is deliberately built to span THREE orthogonal factors so the paper can make causal
+# The panel is deliberately built to span THREE orthogonal factors so the paper can make CAUSAL
 # claims about what drives the compliance-competence trade-off, not just rank models:
-#   C1  reasoning toggle, same base   : qwen3 :think vs :nothink  (or Instruct vs Thinking siblings)
-#   C2  reasoning-SFT, same 70B base  : llama3.3-70b  vs  deepseek-r1-distill-llama-70b
-#   C3  pure scale ladder, one family : qwen3 1.7b -> 4b -> 8b -> 14b -> 32b
+#   C1  reasoning toggle, SAME weights  : qwen3.6-27b with /think vs /no_think   (within-model)
+#   C2  reasoning-SFT, same base        : an Instruct base vs its reasoning-distilled sibling
+#   C3  pure scale ladder, one family   : qwen3.6 at 4b -> 8b -> 14b -> 27b
 #
-# model_id is an Ollama tag by default (backend: ollama). For MLX set backend: mlx and put the
-# HF repo id in model_id (e.g. mlx-community/Qwen3-14B-4bit). Verify availability with:
-#   circuchain models --installed        (cross-checks this file against `ollama list`)
-# Entries marked `verify: true` are H1-2026 releases — confirm the tag is live before freezing.
+# model_id must EXACTLY match an id from `lms ls` / GET /api/v0/models.
+# Check what you actually have and what's missing:   circuchain models --installed
+#
+# !! CONTEXT-LENGTH TRAP !! LM Studio's JIT loader defaults to the model's full max_context_length
+# (often 262144) and will refuse to load ("requires ~86 GB"). ALWAYS pre-load with a constrained
+# context before a sweep:
+#     lms load <model_id> --context-length 8192 --gpu max -y
+# The provider fails fast with this exact command if a model isn't loaded.
 
 defaults:
-  backend: ollama
+  backend: lmstudio
+  host: "http://localhost:1234"
   temperature: 0.0
   seed: 20260709
-  max_tokens: 8192          # non-reasoning; runner overrides to 16384 for role_axis: reasoning
-  num_ctx: 8192
+  max_tokens: 8192          # non-reasoning; runner raises to 16384 for role_axis: reasoning
+  num_ctx: 8192             # must match the --context-length you loaded with
 
 models:
-  # ---- C3: pure scale ladder (hold family + recipe fixed, vary params) ----
-  - {key: qwen3-1.7b,  model_id: "qwen3:1.7b",  family: qwen, role_axis: reasoning, scale_tier: 1.7b, think: true, contrast: C3-scale, enabled: true}
-  - {key: qwen3-4b,    model_id: "qwen3:4b",    family: qwen, role_axis: reasoning, scale_tier: 4b,   think: true, contrast: C3-scale, enabled: true}
-  - {key: qwen3-8b,    model_id: "qwen3:8b",    family: qwen, role_axis: reasoning, scale_tier: 8b,   think: true, contrast: C3-scale, enabled: true}
-  - {key: qwen3-14b,   model_id: "qwen3:14b",   family: qwen, role_axis: reasoning, scale_tier: 14b,  think: true, contrast: "C3-scale,C1-reason", enabled: true}
-  - {key: qwen3-32b,   model_id: "qwen3:32b",   family: qwen, role_axis: reasoning, scale_tier: 32b,  think: true, contrast: C3-scale, enabled: true}
+  # ---------------------------------------------------------------------------
+  # CONFIRMED PRESENT (observed via `lms ls` on the M1 Max, 2026-07-09).
+  # Re-verify on the M5 with: circuchain models --installed
+  # ---------------------------------------------------------------------------
 
-  # ---- C1: reasoning toggle on a single base (same weights, /think on vs off) ----
-  # Qwen3 supports a runtime think toggle; run qwen3-14b twice (think:true / think:false) to get a
-  # WITHIN-MODEL reasoning contrast with zero confounds. The runner emits both as separate columns.
-  - {key: qwen3-14b-nothink, model_id: "qwen3:14b", family: qwen, role_axis: base, scale_tier: 14b, think: false, contrast: C1-reason, enabled: true}
+  # C1 — within-model reasoning toggle. SAME weights, only the /think switch differs.
+  # This is the single cleanest causal contrast in the whole panel: zero confounds.
+  - {key: qwen36-27b-think,   model_id: "qwen/qwen3.6-27b", family: qwen3.6, role_axis: reasoning, scale_tier: 27b, engine: mlx, quant: 8bit, think: true,  think_style: qwen_slash, contrast: C1-reason, enabled: true}
+  - {key: qwen36-27b-nothink, model_id: "qwen/qwen3.6-27b", family: qwen3.6, role_axis: base,      scale_tier: 27b, engine: mlx, quant: 8bit, think: false, think_style: qwen_slash, contrast: C1-reason, enabled: true}
 
-  # ---- C2: reasoning-SFT natural experiment (same 70B base, +/- R1 distillation) ----
-  - {key: llama33-70b,    model_id: "llama3.3:70b",   family: llama,           role_axis: base,      scale_tier: 70b, think: false, contrast: C2-sft, enabled: true}
-  - {key: ds-r1-llama-70b, model_id: "deepseek-r1:70b", family: deepseek-distill, role_axis: reasoning, scale_tier: 70b, think: true,  contrast: C2-sft, enabled: true}
+  # MoE top tier — sparse, so decode stays cheap. Also a VLM (unlocks a future schematic track).
+  - {key: qwen36-35b-a3b, model_id: "qwen/qwen3.6-35b-a3b", family: qwen3.6, role_axis: reasoning, scale_tier: 35b-moe, engine: mlx, quant: 8bit, think: true, think_style: qwen_slash, enabled: true}
 
-  # ---- lineage / diversity anchors (rule out "Qwen artifact") ----
-  - {key: gpt-oss-20b, model_id: "gpt-oss:20b", family: openai-oss, role_axis: reasoning, scale_tier: 20b-moe, quant: mxfp4, think: true,  enabled: true}
-  - {key: gemma3-27b,  model_id: "gemma3:27b",  family: gemma,      role_axis: base,      scale_tier: 27b,     think: false, enabled: true}
+  # Lineage anchor — non-Qwen, rules out a "Qwen artifact" in the headline result.
+  - {key: gemma4-31b, model_id: "google/gemma-4-31b-qat", family: gemma4, role_axis: base, scale_tier: 31b, engine: gguf, quant: Q4_0, think_style: none, enabled: true}
 
-  # ---- top reasoning tier (MoE keeps decode cheap; verify tag before freezing) ----
-  - {key: qwen3-next-80b, model_id: "qwen3-next:80b-a3b", family: qwen, role_axis: reasoning, scale_tier: 80b-moe, think: true, verify: true, enabled: false}
-  # fallbacks if the 80B tag isn't available: gpt-oss:120b (fits 128GB) or deepseek-r1:32b
+  # ---------------------------------------------------------------------------
+  # NEEDS DOWNLOAD to complete the causal design. Search these in LM Studio, then flip enabled.
+  # Model ids below are PLACEHOLDERS — replace with the exact id `lms ls` reports after download.
+  # ---------------------------------------------------------------------------
 
-# Optional frontier ceiling — generalization only, NEVER a headline number, T6-impossible (no trace).
-# Needs API keys in .env; ~$150-300 total at full N. Left disabled by default.
+  # C3 — pure scale ladder (hold family + recipe fixed, vary params). 27b rung already present.
+  - {key: qwen36-4b,  model_id: "qwen/qwen3.6-4b",  family: qwen3.6, role_axis: reasoning, scale_tier: 4b,  think: true, think_style: qwen_slash, contrast: C3-scale, needs_download: true, enabled: false}
+  - {key: qwen36-8b,  model_id: "qwen/qwen3.6-8b",  family: qwen3.6, role_axis: reasoning, scale_tier: 8b,  think: true, think_style: qwen_slash, contrast: C3-scale, needs_download: true, enabled: false}
+  - {key: qwen36-14b, model_id: "qwen/qwen3.6-14b", family: qwen3.6, role_axis: reasoning, scale_tier: 14b, think: true, think_style: qwen_slash, contrast: C3-scale, needs_download: true, enabled: false}
+
+  # C2 — reasoning-SFT natural experiment (same base, +/- reasoning distillation).
+  # Pick ONE pair that LM Studio actually offers, e.g. a Llama-3.3-70B-Instruct vs its
+  # DeepSeek-R1-Distill-Llama-70B sibling, or a Qwen Instruct vs Thinking pair at one size.
+  - {key: base-70b,   model_id: "meta-llama/llama-3.3-70b-instruct",      family: llama,            role_axis: base,      scale_tier: 70b, think_style: none, contrast: C2-sft, needs_download: true, enabled: false}
+  - {key: r1-70b,     model_id: "deepseek/deepseek-r1-distill-llama-70b", family: deepseek-distill, role_axis: reasoning, scale_tier: 70b, think_style: none, contrast: C2-sft, needs_download: true, enabled: false}
+
+  # Small rung for the smoke test + the bottom of the scale ladder.
+  - {key: qwen36-1.7b, model_id: "qwen/qwen3.6-1.7b", family: qwen3.6, role_axis: reasoning, scale_tier: 1.7b, think: true, think_style: qwen_slash, contrast: C3-scale, needs_download: true, enabled: false}
+
+# Optional frontier ceiling — generalization only, NEVER a headline number (no trace -> T6 impossible).
+# Needs API keys in .env; ~$150-300 at full N. Disabled by default; the local panel needs zero keys.
 api_models:
-  - {key: gpt-5,    backend: openai,    model_id: "gpt-5",                          role_axis: reasoning, enabled: false}
-  - {key: opus-4-5, backend: anthropic, model_id: "claude-opus-4-5-20251101",       role_axis: reasoning, enabled: false}
+  - {key: gpt-5,    backend: openai,    model_id: "gpt-5",                    role_axis: reasoning, enabled: false}
+  - {key: opus-4-5, backend: anthropic, model_id: "claude-opus-4-5-20251101", role_axis: reasoning, enabled: false}

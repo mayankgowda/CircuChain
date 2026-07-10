@@ -31,33 +31,70 @@ def regrade():
 
 @app.command()
 def models(
-    installed: bool = typer.Option(False, "--installed", help="list locally-pulled Ollama models"),
+    installed: bool = typer.Option(False, "--installed", help="cross-check the panel config"),
+    backend: str = typer.Option("lmstudio", help="lmstudio | ollama"),
     config: str = typer.Option("configs/models.yaml", help="panel config to cross-check"),
 ):
-    """Enumerate installed models and flag any configured model that isn't pulled yet."""
-    from .providers.ollama import OllamaProvider
+    """Enumerate downloaded models and report which causal contrasts the panel can support."""
+    if backend == "lmstudio":
+        from .providers.lmstudio import LMStudioProvider as P
+        hint = "Start it with: lms server start   (and check `lms ls`)"
+    else:
+        from .providers.ollama import OllamaProvider as P
+        hint = "Start it with: ollama serve"
 
     try:
-        have = {m["name"]: m for m in OllamaProvider.list_installed()}
+        have = {m["name"]: m for m in P.list_installed()}
     except Exception as e:  # noqa: BLE001
-        typer.echo(f"Could not reach Ollama at localhost:11434 ({e}). Is `ollama serve` running?")
+        typer.echo(f"Could not reach the {backend} server ({e}).\n{hint}")
         raise typer.Exit(1)
 
-    typer.echo(f"Installed locally ({len(have)}):")
+    typer.echo(f"Downloaded text models ({len(have)}) via {backend}:")
     for name, m in sorted(have.items()):
-        gb = (m.get("size") or 0) / 1e9
-        typer.echo(f"  {name:<34} {gb:5.1f} GB  {m.get('quant') or ''}")
+        bits = [str(m.get("arch") or ""), str(m.get("engine") or ""), str(m.get("quant") or "")]
+        vision = " [vision]" if m.get("vision") else ""
+        state = m.get("state") or ""
+        typer.echo(f"  {name:<34} {' '.join(b for b in bits if b):<26} {state}{vision}")
 
     cfg_path = config if os.path.isabs(config) else os.path.join(V2, config)
-    if installed and os.path.exists(cfg_path):
-        import yaml
+    if not (installed and os.path.exists(cfg_path)):
+        return
 
-        cfg = yaml.safe_load(open(cfg_path))
-        want = [m for m in cfg.get("models", []) if m.get("enabled", True)]
-        missing = [m for m in want if m["model_id"] not in have]
-        typer.echo(f"\nConfigured & enabled: {len(want)}   missing locally: {len(missing)}")
-        for m in missing:
-            typer.echo(f"  MISSING  {m['key']:<20} -> ollama pull {m['model_id']}")
+    import yaml
+
+    cfg = yaml.safe_load(open(cfg_path))
+    entries = cfg.get("models", [])
+    enabled = [m for m in entries if m.get("enabled", True)]
+    missing_enabled = [m for m in enabled if m["model_id"] not in have]
+    to_download = [m for m in entries if m.get("needs_download")]
+
+    typer.echo(f"\nPanel: {len(enabled)} enabled, {len(missing_enabled)} of those missing locally.")
+    for m in missing_enabled:
+        typer.echo(f"  MISSING (enabled)  {m['key']:<20} id={m['model_id']}")
+
+    # Which causal contrasts are currently satisfiable?
+    typer.echo("\nCausal-contrast coverage (this is what makes the paper causal, not a leaderboard):")
+    by_contrast: dict = {}
+    for m in entries:
+        for c in str(m.get("contrast", "")).split(","):
+            if c:
+                by_contrast.setdefault(c.strip(), []).append(m)
+    for c, members in sorted(by_contrast.items()):
+        present = [m for m in members if m["model_id"] in have]
+        ok = "OK " if len(present) >= 2 else "GAP"
+        names = ", ".join(m["key"] for m in present) or "none present"
+        typer.echo(f"  [{ok}] {c:<12} {len(present)}/{len(members)} present  ({names})")
+
+    if to_download:
+        typer.echo("\nTo complete the design, download these in LM Studio (then fix the id + enable):")
+        for m in to_download:
+            typer.echo(f"  {m['key']:<14} search: {m['model_id']}")
+
+    typer.echo(
+        "\nBefore any sweep, PRE-LOAD each model with a constrained context "
+        "(JIT defaults to full 262k ctx and will OOM):\n"
+        "    lms load <model_id> --context-length 8192 --gpu max -y"
+    )
 
 
 def _todo(stage: str, builds: str):

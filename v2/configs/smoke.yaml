@@ -1,4 +1,6 @@
-# Tiny end-to-end smoke config: runs in minutes on a laptop / in CI. `make smoke`.
+# Tiny end-to-end smoke config: runs in minutes. `make smoke`.
+# Point model_id at the SMALLEST text model you actually have (`lms ls`), and pre-load it:
+#     lms load <model_id> --context-length 8192 --gpu max -y
 seed: 1
 n_physics: 4
 methods: [KVL, KCL]
@@ -11,6 +13,14 @@ parameters:
   current_source: {dist: uniform, low: -10, high: 10}
   dependent_gain: {dist: uniform, low: -4, high: 4}
   round_sig_figs: 3
-# single tiny model for the smoke run
+
+defaults:
+  backend: lmstudio
+  host: "http://localhost:1234"
+  temperature: 0.0
+  seed: 1
+  max_tokens: 2048
+  num_ctx: 8192
+
 models:
-  - {key: qwen3-1.7b, model_id: "qwen3:1.7b", backend: ollama, family: qwen, role_axis: reasoning, think: true, enabled: true}
+  - {key: smoke, model_id: "qwen/qwen3.6-27b", backend: lmstudio, family: qwen3.6, role_axis: reasoning, think: true, think_style: qwen_slash, enabled: true}

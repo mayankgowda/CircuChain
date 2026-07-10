@@ -2,7 +2,7 @@
 # Override SEED / BACKEND / MODELS on the command line, e.g. `make run BACKEND=mlx`.
 
 SEED    ?= 20260709
-BACKEND ?= ollama
+BACKEND ?= lmstudio
 MODELS  ?= configs/models.yaml
 DS      := results/datasets/v2_seed$(SEED)
 
@@ -34,9 +34,15 @@ analyze: grade
 
 all: analyze
 
-## List which configured models are actually pulled locally (cross-checks Ollama).
+## List downloaded models + which causal contrasts the panel can currently support.
 models:
-	circuchain models --installed --config configs/models.yaml
+	circuchain models --installed --backend $(BACKEND) --config configs/models.yaml
+
+## Pre-load one model with a constrained context (JIT defaults to full 262k ctx and OOMs).
+## Usage: make load MODEL=qwen/qwen3.6-27b [CTX=8192]
+CTX ?= 8192
+load:
+	lms load $(MODEL) --context-length $(CTX) --gpu max -y
 
 ## Tiny end-to-end run for CI / a laptop.
 smoke:
