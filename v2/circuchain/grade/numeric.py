@@ -31,9 +31,13 @@ def grade_responses(dataset_dir: str, responses_dir: str, out_dir: str) -> dict:
             continue
         model = fname[:-6]
         graded_path = os.path.join(out_dir, fname)
+        seen_ids = set()      # timeout/late-success races can append duplicate rows; first wins
         with open(os.path.join(responses_dir, fname)) as f_in, open(graded_path, "w") as f_out:
             for line in f_in:
                 resp = json.loads(line)
+                if resp["instance_id"] in seen_ids:
+                    continue
+                seen_ids.add(resp["instance_id"])
                 inst = instances.get(resp["instance_id"])
                 if inst is None:
                     continue
