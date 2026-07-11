@@ -79,22 +79,46 @@ async def run_model(model_cfg: dict, defaults: dict, instances: List[dict],
     fingerprint = provider.fingerprint()      # once — not one HTTP GET per instance
     sem = asyncio.Semaphore(concurrency)
     write_lock = asyncio.Lock()
+    reload_lock = asyncio.Lock()
+    health = {"consecutive_failures": 0}
 
     failures_path = os.path.join(out_dir, "responses", f"{model_key}.failures.jsonl")
 
+    async def _reload_model() -> None:
+        """LM Studio evicts models under GUI/memory pressure (observed mid-sweep: a 24h-TTL
+        32k load replaced by a JIT 8192/60m one, killing 946 requests). Re-issue the load."""
+        cmd = ["lms", "load", cfg["model_id"], "--context-length", str(gp.num_ctx),
+               "--gpu", "max", "--ttl", "86400", "-y"]
+        progress(f"[{model_key}] model looks evicted — reloading: {' '.join(cmd)}")
+        proc = await asyncio.create_subprocess_exec(
+            *cmd, stdout=asyncio.subprocess.DEVNULL, stderr=asyncio.subprocess.DEVNULL)
+        await proc.wait()
+        await asyncio.sleep(2)
+
     async def one(inst: dict) -> None:
+        # circuit breaker: if >30% of the plan has failed, stop burning the queue
+        if counters.get("failed", 0) > max(20, 0.3 * len(instances)):
+            raise RuntimeError(f"[{model_key}] aborting: failure rate exceeded 30% of plan")
         key = cache_key(model_key, fingerprint, SYSTEM_PROMPT, inst["prompt"], gp)
         comp = cache.get(model_key, key)
         if comp is None:
             last_err = None
-            for attempt in range(3):          # transient-flake armor for multi-day sweeps
+            for attempt in range(4):          # transient-flake armor for multi-day sweeps
                 try:
                     async with sem:
                         comp = await provider.generate(SYSTEM_PROMPT, inst["prompt"], gp)
+                    health["consecutive_failures"] = 0
                     break
                 except Exception as e:  # noqa: BLE001
                     last_err = e
-                    await asyncio.sleep(2 * 4 ** attempt)
+                    health["consecutive_failures"] += 1
+                    # several failures in a row across slots -> assume eviction, reload once
+                    if health["consecutive_failures"] >= 4 and not reload_lock.locked():
+                        async with reload_lock:
+                            if health["consecutive_failures"] >= 4:
+                                await _reload_model()
+                                health["consecutive_failures"] = 0
+                    await asyncio.sleep(2 * 3 ** attempt)
             if comp is None:
                 # record and skip — the id stays out of responses, so resume retries it later
                 async with write_lock:
