@@ -11,6 +11,7 @@ from __future__ import annotations
 import asyncio
 import json
 import os
+import subprocess
 from typing import Dict, List
 
 from .cache import CompletionCache, cache_key
@@ -68,9 +69,21 @@ async def run_model(model_cfg: dict, defaults: dict, instances: List[dict],
         top_k=(int(cfg["top_k"]) if cfg.get("top_k") is not None else None),
     )
 
-    # fail fast on a not-loaded model (the 262k-ctx JIT trap) before issuing the plan
+    # Ensure the serving instance exists before issuing the plan. Instances get evicted while
+    # queued behind another column (observed: a sequential C2 pair died at handoff because the
+    # second model was flushed hours earlier), so a column START must load, not just assert.
     if hasattr(provider, "assert_loaded"):
-        provider.assert_loaded(gp.num_ctx)
+        try:
+            provider.assert_loaded(gp.num_ctx)
+        except Exception:  # noqa: BLE001
+            serve = cfg["model_id"]
+            progress(f"[{model_key}] not loaded at column start — loading {load_id} as {serve}")
+            load_cmd = ["lms", "load", load_id, "--context-length", str(gp.num_ctx),
+                        "--gpu", "max", "--ttl", "86400", "-y"]
+            if serve != load_id:
+                load_cmd += ["--identifier", serve]
+            subprocess.run(load_cmd, capture_output=True, timeout=300)
+            provider.assert_loaded(gp.num_ctx)     # still fails fast if the load didn't stick
 
     cache = CompletionCache(cache_dir or os.path.join(out_dir, "cache"))
     responses_path = os.path.join(out_dir, "responses", f"{model_key}.jsonl")
