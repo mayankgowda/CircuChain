@@ -16,7 +16,7 @@ from __future__ import annotations
 
 import json
 import os
-from collections import defaultdict
+from collections import Counter, defaultdict
 from typing import Dict, List
 
 from .stats import mcnemar_exact, paired_counts, wilson_ci
@@ -95,6 +95,26 @@ def analyze_graded(graded_dir: str, out_dir: str) -> dict:
                     "rate_flipped": _rate(counts["both_ok"] + counts["c"], len(pairs)),
                 }
 
+    # ---------------- variable-level convention analysis ----------------
+    # Subtask-level outcomes conjoin 5-8 variables and hit floor effects on weak models.
+    # At the variable level: among vars whose MAGNITUDE was right, what share carries the
+    # wrong sign — and of those, how many match the competing convention exactly?
+    var_level: dict = {}
+    by_mc: dict = defaultdict(lambda: Counter())
+    for r in rows:
+        for _var, lab in r["var_labels"].items():
+            by_mc[(r["model"], r["cell"])][lab] += 1
+    for (model, cell), c in sorted(by_mc.items()):
+        mag_ok = c["PASS"] + c["ERR_SIGN_CONVENTION"] + c["ERR_SIGN_INCOHERENT"]
+        var_level[f"{model}|{cell}"] = {
+            "n_vars": sum(c.values()),
+            "labels": dict(c),
+            "var_mag_correct": _rate(mag_ok, sum(c.values())),
+            "convention_blind_given_mag": _rate(c["ERR_SIGN_CONVENTION"], mag_ok),
+            "sign_wrong_given_mag": _rate(
+                c["ERR_SIGN_CONVENTION"] + c["ERR_SIGN_INCOHERENT"], mag_ok),
+        }
+
     # ---------------- write ----------------
     with open(os.path.join(out_dir, "cell_rates.csv"), "w") as f:
         f.write("model,cell,regime,n,correct,compliance,competence,completed_rate,"
@@ -117,8 +137,19 @@ def analyze_graded(graded_dir: str, out_dir: str) -> dict:
                     f"{s['both_bad']},{mc['odds_ratio']:.4g},{mc['p']:.4g},"
                     f"{s['rate_default']['rate']:.4f},{s['rate_flipped']['rate']:.4f}\n")
 
+    with open(os.path.join(out_dir, "var_level.csv"), "w") as f:
+        f.write("model,cell,n_vars,var_mag_correct,convention_blind_given_mag,"
+                "sign_wrong_given_mag,cb_wilson_lo,cb_wilson_hi\n")
+        for key, s in var_level.items():
+            m, c = key.split("|")
+            cb = s["convention_blind_given_mag"]
+            f.write(f"{m},{c},{s['n_vars']},{s['var_mag_correct']['rate']:.4f},"
+                    f"{cb['rate']:.4f},{s['sign_wrong_given_mag']['rate']:.4f},"
+                    f"{cb['wilson_lo']:.4f},{cb['wilson_hi']:.4f}\n")
+
     summary = {"n_rows": len(rows), "models": models,
-               "cell_rates": cell_stats, "factor_pairs": factor_stats}
+               "cell_rates": cell_stats, "factor_pairs": factor_stats,
+               "var_level": var_level}
     with open(os.path.join(out_dir, "analysis.json"), "w") as f:
         json.dump(summary, f, indent=2)
     return summary
