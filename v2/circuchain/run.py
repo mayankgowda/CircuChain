@@ -49,8 +49,14 @@ async def run_model(model_cfg: dict, defaults: dict, instances: List[dict],
     # Loaded-ness is asserted ONCE below. The per-request assert reads /api/v0/models state,
     # which flaps to "not-loaded" under parallel generation and killed real requests.
     cfg["require_loaded"] = False
+    # Dedicated serving identifier: GUI activity and JIT loading churn instances under the
+    # bare model id (rogue 8192/1h instances, orphaned `id:2` suffixes). A custom identifier
+    # is untouchable by both. `load_id` stays the real model id for lms load commands.
+    load_id = cfg["model_id"]
+    if cfg.get("serve_id"):
+        cfg = {**cfg, "model_id": cfg["serve_id"]}
     provider = build_provider(cfg)
-    model_key = cfg.get("key", cfg["model_id"])
+    model_key = cfg.get("key", load_id)
 
     gp = GenParams(
         temperature=float(cfg.get("temperature", 0.0)),
@@ -85,26 +91,27 @@ async def run_model(model_cfg: dict, defaults: dict, instances: List[dict],
     failures_path = os.path.join(out_dir, "responses", f"{model_key}.failures.jsonl")
 
     async def _reload_model() -> None:
-        """LM Studio evicts models under GUI/memory pressure, and JIT + CLI loads race to
-        mint SUFFIXED instances (`id:2`) while a rogue 8192-ctx/1h-TTL JIT instance holds the
-        bare id and serves requests; wedged engines also emit permanent "Compute error"s.
-        The only reliable recovery is unload-everything-under-this-id, then one clean load."""
+        """LM Studio evicts models under GUI/memory pressure, JIT + CLI loads race to mint
+        SUFFIXED instances (`id:2`), and wedged engines emit "Compute error" INTERMITTENTLY
+        (~50% of requests — a consecutive-failure trigger never fires; count in a window
+        instead). Recovery: unload everything under the serving id, one clean re-load."""
         async def _run(*cmd: str) -> None:
             proc = await asyncio.create_subprocess_exec(
                 *cmd, stdout=asyncio.subprocess.DEVNULL, stderr=asyncio.subprocess.DEVNULL)
             await proc.wait()
 
-        progress(f"[{model_key}] model unhealthy — clean reload of {cfg['model_id']}")
-        await _run("lms", "unload", cfg["model_id"])       # clears rogue/JIT/wedged instances
+        serve = cfg["model_id"]
+        progress(f"[{model_key}] model unhealthy — clean reload of {load_id} as {serve}")
+        await _run("lms", "unload", serve)
         await asyncio.sleep(1)
-        await _run("lms", "load", cfg["model_id"], "--context-length", str(gp.num_ctx),
-                   "--gpu", "max", "--ttl", "86400", "-y")
+        load_cmd = ["lms", "load", load_id, "--context-length", str(gp.num_ctx),
+                    "--gpu", "max", "--ttl", "86400", "-y"]
+        if serve != load_id:
+            load_cmd += ["--identifier", serve]
+        await _run(*load_cmd)
         await asyncio.sleep(2)
 
     async def one(inst: dict) -> None:
-        # circuit breaker: if >30% of the plan has failed, stop burning the queue
-        if counters.get("failed", 0) > max(20, 0.3 * len(instances)):
-            raise RuntimeError(f"[{model_key}] aborting: failure rate exceeded 30% of plan")
         key = cache_key(model_key, fingerprint, SYSTEM_PROMPT, inst["prompt"], gp)
         comp = cache.get(model_key, key)
         if comp is None:
@@ -112,18 +119,35 @@ async def run_model(model_cfg: dict, defaults: dict, instances: List[dict],
             for attempt in range(4):          # transient-flake armor for multi-day sweeps
                 try:
                     async with sem:
+                        # circuit breaker: checked at EXECUTION time (inside the semaphore),
+                        # not at gather-scheduling time when counters are still zero
+                        if counters.get("failed", 0) > max(20, 0.3 * len(instances)):
+                            raise RuntimeError(
+                                f"[{model_key}] aborting: failure rate exceeded 30% of plan")
                         comp = await provider.generate(SYSTEM_PROMPT, inst["prompt"], gp)
                     health["consecutive_failures"] = 0
                     break
+                except RuntimeError as e:
+                    if "failure rate exceeded" in str(e):
+                        raise
+                    last_err = e
+                    health["consecutive_failures"] += 1
+                    health["since_reload"] = health.get("since_reload", 0) + 1
                 except Exception as e:  # noqa: BLE001
                     last_err = e
                     health["consecutive_failures"] += 1
-                    # several failures in a row across slots -> assume eviction, reload once
-                    if health["consecutive_failures"] >= 4 and not reload_lock.locked():
+                    health["since_reload"] = health.get("since_reload", 0) + 1
+                if comp is None:
+                    # trigger: burst of failures OR steady intermittent bleed since last reload
+                    if ((health["consecutive_failures"] >= 4
+                         or health.get("since_reload", 0) >= 10)
+                            and not reload_lock.locked()):
                         async with reload_lock:
-                            if health["consecutive_failures"] >= 4:
+                            if (health["consecutive_failures"] >= 4
+                                    or health.get("since_reload", 0) >= 10):
                                 await _reload_model()
                                 health["consecutive_failures"] = 0
+                                health["since_reload"] = 0
                     await asyncio.sleep(2 * 3 ** attempt)
             if comp is None:
                 # record and skip — the id stays out of responses, so resume retries it later

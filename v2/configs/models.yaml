@@ -39,13 +39,13 @@ models:
   # ===========================================================================
 
   # --- C1 + C3: the Qwen3 hybrid dense family (toggle verified working) ---
-  - {key: qwen3-1.7b-think,   model_id: "qwen/qwen3-1.7b", family: qwen3, role_axis: reasoning, scale_tier: 1.7b, engine: mlx, quant: 8bit, think: true,  think_style: qwen_slash, contrast: "C1-reason,C3-scale", enabled: true}
-  - {key: qwen3-1.7b-nothink, model_id: "qwen/qwen3-1.7b", family: qwen3, role_axis: base,      scale_tier: 1.7b, engine: mlx, quant: 8bit, think: false, think_style: qwen_slash, contrast: "C1-reason", max_tokens: 4096, enabled: true}
-  - {key: qwen3-4b-think,     model_id: "qwen/qwen3-4b",   family: qwen3, role_axis: reasoning, scale_tier: 4b,   engine: mlx, quant: 8bit, think: true,  think_style: qwen_slash, contrast: "C1-reason,C3-scale", enabled: true}
-  - {key: qwen3-4b-nothink,   model_id: "qwen/qwen3-4b",   family: qwen3, role_axis: base,      scale_tier: 4b,   engine: mlx, quant: 8bit, think: false, think_style: qwen_slash, contrast: "C1-reason", max_tokens: 4096, enabled: true}
+  - {key: qwen3-1.7b-think, serve_id: "sweep-qwen3-1.7b",   model_id: "qwen/qwen3-1.7b", family: qwen3, role_axis: reasoning, scale_tier: 1.7b, engine: mlx, quant: 8bit, think: true,  think_style: qwen_slash, contrast: "C1-reason,C3-scale", enabled: true}
+  - {key: qwen3-1.7b-nothink, serve_id: "sweep-qwen3-1.7b", model_id: "qwen/qwen3-1.7b", family: qwen3, role_axis: base,      scale_tier: 1.7b, engine: mlx, quant: 8bit, think: false, think_style: qwen_slash, contrast: "C1-reason", max_tokens: 4096, enabled: true}
+  - {key: qwen3-4b-think, serve_id: "sweep-qwen3-4b",     model_id: "qwen/qwen3-4b",   family: qwen3, role_axis: reasoning, scale_tier: 4b,   engine: mlx, quant: 8bit, think: true,  think_style: qwen_slash, contrast: "C1-reason,C3-scale", enabled: true}
+  - {key: qwen3-4b-nothink, serve_id: "sweep-qwen3-4b",   model_id: "qwen/qwen3-4b",   family: qwen3, role_axis: base,      scale_tier: 4b,   engine: mlx, quant: 8bit, think: false, think_style: qwen_slash, contrast: "C1-reason", max_tokens: 4096, enabled: true}
 
   # --- C2 base (re-downloaded 2026-07-11, now a healthy 4.68 GB; the old 84MB copy was corrupt) ---
-  - {key: qwen25-7b-instruct, model_id: "qwen2.5-7b-instruct", family: qwen2.5, role_axis: base, scale_tier: 7b, engine: gguf, quant: Q4_K_M, think_style: none, contrast: "C2-sft", max_tokens: 4096, enabled: true}
+  - {key: qwen25-7b-instruct, serve_id: "sweep-qwen2.5-7b-instruct", model_id: "qwen2.5-7b-instruct", family: qwen2.5, role_axis: base, scale_tier: 7b, engine: gguf, quant: Q4_K_M, think_style: none, contrast: "C2-sft", max_tokens: 4096, enabled: true}
 
   # --- anchors (newer-gen Qwen + MoE + non-Qwen lineage) ---
   - {key: qwen36-27b,     model_id: "qwen3.6-27b-mlx",      family: qwen3.6, role_axis: reasoning, scale_tier: 27b,     engine: mlx,  quant: 8bit, think: true, think_style: qwen_slash, enabled: true}
