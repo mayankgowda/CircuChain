@@ -22,6 +22,10 @@ _UNIT_MULT = {
 _ANSWER_LINE = re.compile(r"^\s*\**\s*ANSWER\s*\**\s*[:=]\s*(.+?)\s*$",
                           re.IGNORECASE | re.MULTILINE)
 _PAIR = re.compile(rf"([A-Za-z][A-Za-z0-9_]*)\s*[=:≈]\s*({_NUM})\s*([a-zA-Zµ]*)")
+# Weak models sometimes write the expression then its value: "i_ds=-0.651*0.002= -0.0013".
+# The chained form takes the LAST number of the '='-chain as the reported value.
+_PAIR_CHAIN = re.compile(
+    rf"([A-Za-z][A-Za-z0-9_]*)\s*[=:≈]\s*[^,;=]*(?:=\s*[^,;=]*)*=\s*({_NUM})\s*([a-zA-Zµ]*)\s*(?=[,;]|$)")
 
 
 def _apply_unit(val: float, unit: str) -> Optional[float]:
@@ -40,6 +44,11 @@ def parse_answer_line(text: str) -> Dict[str, float]:
         return {}
     out: Dict[str, float] = {}
     for name, num, unit in _PAIR.findall(matches[-1]):
+        val = _apply_unit(float(num), unit)
+        if val is not None:
+            out[name.lower()] = val
+    # chained '=' forms override the naive first-number capture for the same variable
+    for name, num, unit in _PAIR_CHAIN.findall(matches[-1]):
         val = _apply_unit(float(num), unit)
         if val is not None:
             out[name.lower()] = val

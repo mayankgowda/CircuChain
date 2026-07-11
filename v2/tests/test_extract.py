@@ -56,6 +56,16 @@ def test_no_answer_at_all():
     assert mode == "none" and all(v is None for v in pred.values())
 
 
+
+def test_chained_equals_takes_final_value():
+    # weak models write the expression then evaluate it; the LAST number is the answer
+    line = "ANSWER: i1=0.002, i_ds=-0.651*0.00200= -0.00130, v_r2=0.00200*778.0= 1.556"
+    d = parse_answer_line(line)
+    assert d["i1"] == 0.002
+    assert abs(d["i_ds"] - (-0.00130)) < 1e-12
+    assert abs(d["v_r2"] - 1.556) < 1e-12
+
+
 if __name__ == "__main__":
     import traceback
     fns = [v for k, v in sorted(globals().items()) if k.startswith("test_") and callable(v)]
