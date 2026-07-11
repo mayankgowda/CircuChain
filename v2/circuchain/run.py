@@ -191,7 +191,32 @@ async def run_model(model_cfg: dict, defaults: dict, instances: List[dict],
         if n % 10 == 0 or n == len(todo):
             progress(f"[{model_key}] {n}/{len(todo)} (cache_hits={counters['cache_hits']})")
 
-    await asyncio.gather(*(one(i) for i in todo))
+    # Outer convergence passes: eviction waves (GUI activity, download indexing, memory
+    # pressure) can outpace per-request reloads and drain a plan into retryable failures.
+    # Re-sweep the failed remainder until done or a pass makes no progress (max 6 passes).
+    remaining = todo
+    for sweep_pass in range(6):
+        if not remaining:
+            break
+        if sweep_pass > 0:
+            progress(f"[{model_key}] pass {sweep_pass + 1}: retrying {len(remaining)} "
+                     f"failed/incomplete instances after 120s settle")
+            await asyncio.sleep(120)
+            await _reload_model()
+        before = _done_ids(responses_path)
+        counters["failed"] = 0
+        health["consecutive_failures"] = 0
+        health["since_reload"] = 0
+        try:
+            await asyncio.gather(*(one(i) for i in remaining))
+        except RuntimeError as e:
+            progress(f"[{model_key}] pass aborted: {e}")
+        after = _done_ids(responses_path)
+        remaining = [i for i in remaining if i["id"] not in after]
+        if len(after) == len(before) and remaining:
+            progress(f"[{model_key}] no progress this pass ({len(remaining)} left) — giving up; "
+                     f"re-run to resume")
+            break
     return counters
 
 
