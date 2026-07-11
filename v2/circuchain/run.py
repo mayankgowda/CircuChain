@@ -92,24 +92,35 @@ async def run_model(model_cfg: dict, defaults: dict, instances: List[dict],
 
     async def _reload_model() -> None:
         """LM Studio evicts models under GUI/memory pressure, JIT + CLI loads race to mint
-        SUFFIXED instances (`id:2`), and wedged engines emit "Compute error" INTERMITTENTLY
-        (~50% of requests — a consecutive-failure trigger never fires; count in a window
-        instead). Recovery: unload everything under the serving id, one clean re-load."""
-        async def _run(*cmd: str) -> None:
+        SUFFIXED instances (`id:2`), wedged engines emit "Compute error" INTERMITTENTLY, and
+        `lms` CLI calls can HANG against a busy daemon (a hung reload once held the lock while
+        313 requests burned). Hence: hard subprocess timeouts, captured output, and a body that
+        can never raise — a failed reload is logged and retried at the next threshold."""
+        async def _run(*cmd: str) -> str:
             proc = await asyncio.create_subprocess_exec(
-                *cmd, stdout=asyncio.subprocess.DEVNULL, stderr=asyncio.subprocess.DEVNULL)
-            await proc.wait()
+                *cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.STDOUT)
+            try:
+                out, _ = await asyncio.wait_for(proc.communicate(), timeout=120)
+                return (out or b"").decode(errors="ignore")[-300:]
+            except asyncio.TimeoutError:
+                proc.kill()
+                return f"TIMEOUT after 120s: {' '.join(cmd)}"
 
         serve = cfg["model_id"]
-        progress(f"[{model_key}] model unhealthy — clean reload of {load_id} as {serve}")
-        await _run("lms", "unload", serve)
-        await asyncio.sleep(1)
-        load_cmd = ["lms", "load", load_id, "--context-length", str(gp.num_ctx),
-                    "--gpu", "max", "--ttl", "86400", "-y"]
-        if serve != load_id:
-            load_cmd += ["--identifier", serve]
-        await _run(*load_cmd)
-        await asyncio.sleep(2)
+        try:
+            progress(f"[{model_key}] model unhealthy — clean reload of {load_id} as {serve}")
+            out1 = await _run("lms", "unload", serve)
+            await asyncio.sleep(1)
+            load_cmd = ["lms", "load", load_id, "--context-length", str(gp.num_ctx),
+                        "--gpu", "max", "--ttl", "86400", "-y"]
+            if serve != load_id:
+                load_cmd += ["--identifier", serve]
+            out2 = await _run(*load_cmd)
+            progress(f"[{model_key}] reload done: {out2.strip().splitlines()[-1] if out2.strip() else out1.strip()[-80:]}")
+        except Exception as e:  # noqa: BLE001
+            progress(f"[{model_key}] reload attempt failed (will retry at next threshold): {e}")
+        finally:
+            health["last_reload_at"] = asyncio.get_event_loop().time()
 
     async def one(inst: dict) -> None:
         key = cache_key(model_key, fingerprint, SYSTEM_PROMPT, inst["prompt"], gp)
@@ -138,10 +149,13 @@ async def run_model(model_cfg: dict, defaults: dict, instances: List[dict],
                     health["consecutive_failures"] += 1
                     health["since_reload"] = health.get("since_reload", 0) + 1
                 if comp is None:
-                    # trigger: burst of failures OR steady intermittent bleed since last reload
-                    if ((health["consecutive_failures"] >= 4
-                         or health.get("since_reload", 0) >= 10)
-                            and not reload_lock.locked()):
+                    # trigger: burst of failures OR steady intermittent bleed since last
+                    # reload, with a 60s cooldown so reloads can't thrash
+                    now = asyncio.get_event_loop().time()
+                    due = (health["consecutive_failures"] >= 4
+                           or health.get("since_reload", 0) >= 10)
+                    cooled = now - health.get("last_reload_at", 0) > 60
+                    if due and cooled and not reload_lock.locked():
                         async with reload_lock:
                             if (health["consecutive_failures"] >= 4
                                     or health.get("since_reload", 0) >= 10):
