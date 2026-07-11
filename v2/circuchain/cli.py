@@ -185,11 +185,17 @@ def grade(
 
 
 @app.command()
-def analyze(graded: str = "results/graded"):
-    """(stub) McNemar paired tests, mixed-effects ORs, tables + figures."""
-    typer.echo("[not-yet-implemented] `circuchain analyze` — see v2/ENGINEERING_PLAN.md "
-               "build step 13. Implement: circuchain/analyze/stats.py + tables.py + figures.py")
-    raise typer.Exit(2)
+def analyze(
+    graded: str = typer.Option("results/graded", help="graded rows dir"),
+    out: str = typer.Option("results/tables", help="tables output dir"),
+):
+    """Within-physics McNemar paired tests per factor, Wilson CIs, rate tables."""
+    from .analyze.tables import analyze_graded, format_factor_table
+
+    summary = analyze_graded(_v2path(graded), _v2path(out))
+    typer.echo(f"analyzed {summary['n_rows']} graded rows across {len(summary['models'])} models\n")
+    typer.echo(format_factor_table(summary))
+    typer.echo(f"\nWrote {_v2path(out)}/cell_rates.csv, factor_pairs.csv, analysis.json")
 
 
 if __name__ == "__main__":

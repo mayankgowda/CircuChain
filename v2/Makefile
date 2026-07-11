@@ -19,6 +19,7 @@ test:
 	python tests/test_topologies_golden.py
 	python tests/test_analytic_vs_spice.py
 	python tests/test_extract.py
+	python tests/test_analyze.py
 
 generate:
 	circuchain generate --config configs/dataset.yaml --seed $(SEED)
