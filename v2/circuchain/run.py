@@ -85,14 +85,20 @@ async def run_model(model_cfg: dict, defaults: dict, instances: List[dict],
     failures_path = os.path.join(out_dir, "responses", f"{model_key}.failures.jsonl")
 
     async def _reload_model() -> None:
-        """LM Studio evicts models under GUI/memory pressure (observed mid-sweep: a 24h-TTL
-        32k load replaced by a JIT 8192/60m one, killing 946 requests). Re-issue the load."""
-        cmd = ["lms", "load", cfg["model_id"], "--context-length", str(gp.num_ctx),
-               "--gpu", "max", "--ttl", "86400", "-y"]
-        progress(f"[{model_key}] model looks evicted — reloading: {' '.join(cmd)}")
-        proc = await asyncio.create_subprocess_exec(
-            *cmd, stdout=asyncio.subprocess.DEVNULL, stderr=asyncio.subprocess.DEVNULL)
-        await proc.wait()
+        """LM Studio evicts models under GUI/memory pressure, and JIT + CLI loads race to
+        mint SUFFIXED instances (`id:2`) while a rogue 8192-ctx/1h-TTL JIT instance holds the
+        bare id and serves requests; wedged engines also emit permanent "Compute error"s.
+        The only reliable recovery is unload-everything-under-this-id, then one clean load."""
+        async def _run(*cmd: str) -> None:
+            proc = await asyncio.create_subprocess_exec(
+                *cmd, stdout=asyncio.subprocess.DEVNULL, stderr=asyncio.subprocess.DEVNULL)
+            await proc.wait()
+
+        progress(f"[{model_key}] model unhealthy — clean reload of {cfg['model_id']}")
+        await _run("lms", "unload", cfg["model_id"])       # clears rogue/JIT/wedged instances
+        await asyncio.sleep(1)
+        await _run("lms", "load", cfg["model_id"], "--context-length", str(gp.num_ctx),
+                   "--gpu", "max", "--ttl", "86400", "-y")
         await asyncio.sleep(2)
 
     async def one(inst: dict) -> None:
