@@ -75,7 +75,12 @@ class LMStudioProvider(Provider):
         if params.stop:
             payload["stop"] = params.stop
 
-        async with httpx.AsyncClient(timeout=None) as c:
+        # Finite read timeout scaled to the token budget: a wedged engine (observed: GENERATING
+        # for 20+ min with zero rows landing) must surface as a retryable error, not hold a
+        # concurrency slot forever. Generous ceiling — only hung requests ever hit it.
+        read_timeout = 300 + params.max_tokens / 5
+        timeout = httpx.Timeout(connect=15, read=read_timeout, write=60, pool=60)
+        async with httpx.AsyncClient(timeout=timeout) as c:
             r = await c.post(f"{self.host}/v1/chat/completions", json=payload)
             if r.status_code >= 400:
                 raise RuntimeError(
