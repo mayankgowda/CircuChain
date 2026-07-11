@@ -1,0 +1,13 @@
+model,cell,n_vars,var_mag_correct,convention_blind_given_mag,sign_wrong_given_mag,cb_wilson_lo,cb_wilson_hi
+qwen25-7b-instruct,act,1606,0.0430,0.2029,0.2029,0.1249,0.3122
+qwen25-7b-instruct,ccw,1606,0.0349,0.4821,0.4821,0.3567,0.6099
+qwen25-7b-instruct,dflt,1606,0.0349,0.1964,0.1964,0.1134,0.3184
+qwen25-7b-instruct,top,1606,0.0386,0.1290,0.3387,0.0669,0.2345
+qwen3-1.7b-nothink,act,1606,0.0299,0.2708,0.2708,0.1657,0.4100
+qwen3-1.7b-nothink,ccw,1606,0.0280,0.4444,0.4444,0.3094,0.5882
+qwen3-1.7b-nothink,dflt,1606,0.0237,0.3684,0.3684,0.2338,0.5272
+qwen3-1.7b-nothink,top,1606,0.0255,0.2439,0.5122,0.1383,0.3934
+qwen3-4b-nothink,act,1606,0.0417,0.3134,0.3134,0.2151,0.4320
+qwen3-4b-nothink,ccw,1606,0.0423,0.4412,0.4412,0.3295,0.5592
+qwen3-4b-nothink,dflt,1606,0.0405,0.1231,0.1231,0.0637,0.2245
+qwen3-4b-nothink,top,1606,0.0417,0.1940,0.2836,0.1171,0.3042

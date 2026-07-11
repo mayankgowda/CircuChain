@@ -9,3 +9,5 @@
 pilot/*
 !pilot/reports/
 !pilot/reports/**
+!tables/
+!tables/**
