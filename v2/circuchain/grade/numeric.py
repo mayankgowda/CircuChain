@@ -27,7 +27,7 @@ def grade_responses(dataset_dir: str, responses_dir: str, out_dir: str) -> dict:
     summary_rows: List[dict] = []
 
     for fname in sorted(os.listdir(responses_dir)):
-        if not fname.endswith(".jsonl"):
+        if not fname.endswith(".jsonl") or fname.endswith(".failures.jsonl"):
             continue
         model = fname[:-6]
         graded_path = os.path.join(out_dir, fname)

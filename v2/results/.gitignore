@@ -5,3 +5,7 @@
 !regrade_v1/**
 !manifests/
 !manifests/**
+!pilot/
+pilot/*
+!pilot/reports/
+!pilot/reports/**

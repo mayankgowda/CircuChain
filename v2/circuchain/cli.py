@@ -151,6 +151,7 @@ def run(
     backend: str = typer.Option("lmstudio", help="default backend override"),
     dataset: str = typer.Option("results/datasets/v2_seed20260709", help="dataset dir"),
     out: str = typer.Option("results", help="output root (cache/ + responses/)"),
+    only: str = typer.Option("", help="comma-separated model keys to run (default: all enabled)"),
 ):
     """Run the enabled model panel over the dataset (content-addressed cache, resumable)."""
     import yaml
@@ -158,6 +159,13 @@ def run(
 
     cfg = yaml.safe_load(open(_v2path(models)))
     cfg.setdefault("defaults", {})["backend"] = backend
+    if only:
+        keys = {k.strip() for k in only.split(",") if k.strip()}
+        cfg["models"] = [m for m in cfg.get("models", []) if m.get("key") in keys]
+        missing = keys - {m.get("key") for m in cfg["models"]}
+        if missing:
+            typer.echo(f"unknown model keys: {sorted(missing)}")
+            raise typer.Exit(1)
     results = run_panel(cfg, _v2path(dataset), _v2path(out), progress=typer.echo)
     typer.echo(json.dumps(results, indent=2))
 

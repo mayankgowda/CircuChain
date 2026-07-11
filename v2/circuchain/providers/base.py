@@ -16,6 +16,10 @@ class GenParams:
     num_ctx: int = 8192
     stop: List[str] = field(default_factory=list)
     think: Optional[bool] = None      # request/allow a reasoning channel if the model has one
+    # Vendor-recommended sampling for thinking models (greedy decoding provably ruminates on
+    # this task; see the calibration pilot). None -> parameter not sent to the backend.
+    top_p: Optional[float] = None
+    top_k: Optional[int] = None
 
 
 class Provider(ABC):

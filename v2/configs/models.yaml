@@ -1,95 +1,82 @@
 # CircuChain v2 — local model panel served by LM STUDIO (OpenAI-compatible API on :1234).
 #
-# The panel is deliberately built to span THREE orthogonal factors so the paper can make CAUSAL
-# claims about what drives the compliance-competence trade-off, not just rank models:
-#   C1  reasoning toggle, SAME weights  : qwen3.6-27b with /think vs /no_think   (within-model)
-#   C2  reasoning-SFT, same base        : an Instruct base vs its reasoning-distilled sibling
-#   C3  pure scale ladder, one family   : qwen3.6 at 1.7b -> 4b -> 8b -> 14b -> 27b
+# Causal design (updated 2026-07-11 after inventory verification):
+#   C1  reasoning toggle, SAME weights : the ORIGINAL Qwen3 hybrid family, /think vs /no_think.
+#       VERIFIED WORKING through LM Studio MLX on 1.7b (258->1 reasoning tokens) and 4b (217->1).
+#       The qwen3.5/3.6 generation is thinking-only (all off-switches are no-ops; verified).
+#   C2  reasoning-SFT, same base       : Qwen2.5-Instruct vs its DeepSeek-R1 distilled sibling.
+#   C3  pure scale ladder, one family  : Qwen3 dense 1.7b -> 4b -> 8b -> 14b -> 32b.
+#       (Qwen3.6 has NO small dense sizes — the family is only 27B + 35B-A3B. C3 therefore
+#        lives in the Qwen3 hybrid family, which also carries C1 at every rung.)
+#
+# DECODING POLICY (uniform across the panel — kills cross-column sampling confounds):
+#   temperature 0.6, top_p 0.95, top_k 20, single sample per instance.
+#   Rationale: greedy temp=0 provably drives thinking models into unbounded rumination on this
+#   task (smoke 2026-07-10: qwen3.5-9b truncated 32/32; qwen3.6-27b truncated at 12k tokens).
+#   Vendor guidance for Qwen thinking models explicitly recommends this sampled policy.
+#   LM Studio's MLX engine IGNORES `seed` (verified) -> sampled completions are not bit-
+#   reproducible; the content-addressed cache under results/cache is the frozen artifact.
+#   Within-pair contrasts (C1 think/nothink) hold sampling FIXED so the toggle is the only diff.
 #
 # model_id must EXACTLY match an id from `lms ls` / GET /api/v0/models.
-# Check what you actually have and what's missing:   circuchain models --installed
-#
-# RECONCILED against THIS machine (Apple M5 Max, 128 GB) via /api/v0/models on 2026-07-10.
-# The original file was seeded from an M1 Max inventory (2026-07-09) with GUESSED ids; every id
-# below is now either an exact live id (present models) or an explicitly-flagged placeholder.
-#
-# !! CONTEXT-LENGTH TRAP !! LM Studio's JIT loader defaults to the model's full max_context_length
-# (262144 for every MLX/gemma model here) and will refuse to load ("requires ~86 GB"). ALWAYS
-# pre-load with a constrained context before a sweep:
-#     lms load <model_id> --context-length 8192 --gpu max -y
-# The provider fails fast with this exact command if a model isn't loaded.
+# !! CONTEXT TRAP !! Always pre-load with a constrained context (JIT defaults to 262144):
+#     lms load <model_id> --context-length 32768 --gpu max -y
 
 defaults:
   backend: lmstudio
   host: "http://localhost:1234"
-  temperature: 0.0
-  seed: 20260709
-  max_tokens: 8192          # non-reasoning; runner raises to 16384 for role_axis: reasoning
-  num_ctx: 8192             # must match the --context-length you loaded with
+  temperature: 0.6
+  top_p: 0.95
+  top_k: 20
+  seed: 20260709            # recorded for provenance; MLX ignores it (see policy note)
+  max_tokens: 16384         # per-model override below after the calibration pilot
+  num_ctx: 32768            # must match the --context-length you loaded with
+  concurrency: 4            # LM Studio serves 4 parallel slots (lms ps: PARALLEL 4)
 
 models:
   # ===========================================================================
-  # CONFIRMED PRESENT on this M5 (exact /api/v0/models ids, verified 2026-07-10).
+  # PRESENT on this M5 (ids verified via /api/v0/models, 2026-07-11)
   # ===========================================================================
 
-  # C1 — within-model reasoning toggle (/think vs /no_think on SAME weights).
-  # !! EMPIRICALLY BROKEN on EVERY present model (verified 2026-07-10). Neither inline
-  # /no_think, chat_template_kwargs.enable_thinking=false, top-level enable_thinking=false,
-  # nor reasoning_effort=none changed reasoning_tokens on qwen3.6-27b-mlx (245 flat),
-  # qwen3.6-35b-a3b (233 flat), qwen3.5-9b (~363), or gemma-4-31b (~140). These .5/.6 builds
-  # are thinking-only; the MLX runtime exposes no working off-switch.
-  # -> A valid C1 needs a DOWNLOADED, VERIFIED hybrid-toggle model (confirm reasoning_tokens->~0
-  #    before trusting it). The coverage report cannot detect this: it only checks downloaded-ness.
-  # The 27b stays ONLY as a reasoning data point + the C3 top rung (NOT a C1 member).
-  # id fixed: was the guessed "qwen/qwen3.6-27b" -> live id is "qwen3.6-27b-mlx".
-  - {key: qwen36-27b-think, model_id: "qwen3.6-27b-mlx", family: qwen3.6, role_axis: reasoning, scale_tier: 27b, engine: mlx, quant: 8bit, think: true, think_style: qwen_slash, contrast: "C3-scale", enabled: true}
-  # -nothink is a NO-OP on this build (thinking can't be turned off) -> DISABLED so it can't
-  # silently duplicate -think and manufacture a null "contrast". Re-enable only on a real hybrid.
-  - {key: qwen36-27b-nothink, model_id: "qwen3.6-27b-mlx", family: qwen3.6, role_axis: base, scale_tier: 27b, engine: mlx, quant: 8bit, think: false, think_style: qwen_slash, enabled: false}
+  # --- C1 + C3: the Qwen3 hybrid dense family (toggle verified working) ---
+  - {key: qwen3-1.7b-think,   model_id: "qwen/qwen3-1.7b", family: qwen3, role_axis: reasoning, scale_tier: 1.7b, engine: mlx, quant: 8bit, think: true,  think_style: qwen_slash, contrast: "C1-reason,C3-scale", enabled: true}
+  - {key: qwen3-1.7b-nothink, model_id: "qwen/qwen3-1.7b", family: qwen3, role_axis: base,      scale_tier: 1.7b, engine: mlx, quant: 8bit, think: false, think_style: qwen_slash, contrast: "C1-reason", max_tokens: 4096, enabled: true}
+  - {key: qwen3-4b-think,     model_id: "qwen/qwen3-4b",   family: qwen3, role_axis: reasoning, scale_tier: 4b,   engine: mlx, quant: 8bit, think: true,  think_style: qwen_slash, contrast: "C1-reason,C3-scale", enabled: true}
+  - {key: qwen3-4b-nothink,   model_id: "qwen/qwen3-4b",   family: qwen3, role_axis: base,      scale_tier: 4b,   engine: mlx, quant: 8bit, think: false, think_style: qwen_slash, contrast: "C1-reason", max_tokens: 4096, enabled: true}
 
-  # C1 target — DOWNLOAD a genuine hybrid-thinking model whose toggle actually collapses
-  # reasoning to ~0 (the qwen3.5/3.6 line does NOT). Set the exact id + enable AFTER verifying.
-  - {key: c1-hybrid, model_id: "<verified-hybrid-toggle-model-TBD>", family: TBD, role_axis: reasoning, scale_tier: "?", think_style: qwen_slash, contrast: "C1-reason", needs_download: true, enabled: false}
+  # --- C2 base (re-downloaded 2026-07-11, now a healthy 4.68 GB; the old 84MB copy was corrupt) ---
+  - {key: qwen25-7b-instruct, model_id: "qwen2.5-7b-instruct", family: qwen2.5, role_axis: base, scale_tier: 7b, engine: gguf, quant: Q4_K_M, think_style: none, contrast: "C2-sft", max_tokens: 4096, enabled: true}
 
-  # MoE top tier — sparse (a3b = ~3B active), decode stays cheap. VLM. id EXACT-matched. PRESENT.
-  # Not a dense C3 rung (different architecture); kept as an auxiliary reasoning column.
-  - {key: qwen36-35b-a3b, model_id: "qwen/qwen3.6-35b-a3b", family: qwen3.6, role_axis: reasoning, scale_tier: 35b-moe, engine: mlx, quant: 8bit, think: true, think_style: qwen_slash, enabled: true}
-
-  # Lineage anchor — non-Qwen base, rules out a "Qwen artifact" in the headline. id EXACT. PRESENT.
-  - {key: gemma4-31b, model_id: "google/gemma-4-31b-qat", family: gemma4, role_axis: base, scale_tier: 31b, engine: gguf, quant: Q4_0, think_style: none, enabled: true}
-
-  # Auxiliary present model — a DIFFERENT generation (qwen3.5, not 3.6), so NOT a clean C3 rung.
-  # Kept enabled as an extra data point (and a possible qwen3.5-vs-3.6 side comparison). PRESENT.
-  # NOTE: /think support unverified for 3.5 — the smoke test empirically checks the think channel.
-  - {key: qwen35-9b, model_id: "qwen/qwen3.5-9b", family: qwen3.5, role_axis: reasoning, scale_tier: 9b, engine: mlx, quant: 8bit, think: true, think_style: qwen_slash, enabled: true}
-
-  # PRESENT ON DISK BUT LOOKS CORRUPT: `lms ls` reports only 83.94 MB for a 7B Q4_K_M
-  # (expect ~4.7 GB) -> almost certainly a partial/failed download. DISABLED until re-pulled.
-  # If re-downloaded it is the CHEAPEST C2 base: pair with deepseek-r1-distill-qwen-7b (see C2).
-  - {key: qwen25-7b-instruct, model_id: "qwen2.5-7b-instruct", family: qwen2.5, role_axis: base, scale_tier: 7b, engine: gguf, quant: Q4_K_M, think_style: none, needs_download: true, enabled: false}
+  # --- anchors (newer-gen Qwen + MoE + non-Qwen lineage) ---
+  - {key: qwen36-27b,     model_id: "qwen3.6-27b-mlx",      family: qwen3.6, role_axis: reasoning, scale_tier: 27b,     engine: mlx,  quant: 8bit, think: true, think_style: qwen_slash, enabled: true}
+  - {key: qwen36-35b-a3b, model_id: "qwen/qwen3.6-35b-a3b", family: qwen3.6, role_axis: reasoning, scale_tier: 35b-moe, engine: mlx,  quant: 8bit, think: true, think_style: qwen_slash, enabled: true}
+  - {key: gemma4-31b,     model_id: "google/gemma-4-31b-qat", family: gemma4, role_axis: base,     scale_tier: 31b,     engine: gguf, quant: Q4_0, think_style: none, enabled: true}
 
   # ===========================================================================
-  # NEEDS DOWNLOAD to complete the causal design. Ids are PLACEHOLDERS — after
-  # downloading, set model_id to the EXACT id `lms ls` reports, then flip enabled: true.
+  # DOWNLOADING / TO DOWNLOAD — flip enabled once `lms ls` shows them; fix ids to the live id.
   # ===========================================================================
+  - {key: qwen3-8b-think,    model_id: "qwen/qwen3-8b",  family: qwen3, role_axis: reasoning, scale_tier: 8b,  think: true,  think_style: qwen_slash, contrast: "C1-reason,C3-scale", needs_download: true, enabled: false}
+  - {key: qwen3-8b-nothink,  model_id: "qwen/qwen3-8b",  family: qwen3, role_axis: base,      scale_tier: 8b,  think: false, think_style: qwen_slash, contrast: "C1-reason", max_tokens: 4096, needs_download: true, enabled: false}
+  - {key: qwen3-14b-think,   model_id: "qwen/qwen3-14b", family: qwen3, role_axis: reasoning, scale_tier: 14b, think: true,  think_style: qwen_slash, contrast: "C1-reason,C3-scale", needs_download: true, enabled: false}
+  - {key: qwen3-14b-nothink, model_id: "qwen/qwen3-14b", family: qwen3, role_axis: base,      scale_tier: 14b, think: false, think_style: qwen_slash, contrast: "C1-reason", max_tokens: 4096, needs_download: true, enabled: false}
+  - {key: qwen3-32b-think,   model_id: "qwen/qwen3-32b", family: qwen3, role_axis: reasoning, scale_tier: 32b, think: true,  think_style: qwen_slash, contrast: "C1-reason,C3-scale", needs_download: true, enabled: false}
+  - {key: qwen3-32b-nothink, model_id: "qwen/qwen3-32b", family: qwen3, role_axis: base,      scale_tier: 32b, think: false, think_style: qwen_slash, contrast: "C1-reason", max_tokens: 4096, needs_download: true, enabled: false}
 
-  # C3 — pure DENSE scale ladder in the qwen3.6 family (hold family + recipe fixed, vary params).
-  # 27b rung already PRESENT (above). Download 1.7b/4b/8b/14b to complete 1.7b->4b->8b->14b->27b.
-  - {key: qwen36-1.7b, model_id: "qwen/qwen3.6-1.7b", family: qwen3.6, role_axis: reasoning, scale_tier: 1.7b, think: true, think_style: qwen_slash, contrast: "C3-scale", needs_download: true, enabled: false}
-  - {key: qwen36-4b,   model_id: "qwen/qwen3.6-4b",   family: qwen3.6, role_axis: reasoning, scale_tier: 4b,   think: true, think_style: qwen_slash, contrast: "C3-scale", needs_download: true, enabled: false}
-  - {key: qwen36-8b,   model_id: "qwen/qwen3.6-8b",   family: qwen3.6, role_axis: reasoning, scale_tier: 8b,   think: true, think_style: qwen_slash, contrast: "C3-scale", needs_download: true, enabled: false}
-  - {key: qwen36-14b,  model_id: "qwen/qwen3.6-14b",  family: qwen3.6, role_axis: reasoning, scale_tier: 14b,  think: true, think_style: qwen_slash, contrast: "C3-scale", needs_download: true, enabled: false}
+  - {key: r1-distill-7b,   model_id: "deepseek-r1-distill-qwen-7b",             family: deepseek-distill, role_axis: reasoning, scale_tier: 7b,  think_style: none, contrast: "C2-sft", needs_download: true, enabled: false}
+  - {key: qwen25-32b,      model_id: "qwen2.5-32b-instruct",                    family: qwen2.5,          role_axis: base,      scale_tier: 32b, think_style: none, contrast: "C2-sft-32b", needs_download: true, enabled: false}
+  - {key: r1-distill-32b,  model_id: "deepseek-r1-distill-qwen-32b",            family: deepseek-distill, role_axis: reasoning, scale_tier: 32b, think_style: none, contrast: "C2-sft-32b", needs_download: true, enabled: false}
+  - {key: gpt-oss-120b,    model_id: "gpt-oss-120b",                            family: openai-oss,       role_axis: reasoning, scale_tier: 120b-moe, think_style: none, needs_download: true, enabled: false}
 
-  # C2 — reasoning-SFT natural experiment (SAME base, +/- reasoning distillation).
-  # Option A (heavy, as originally stubbed): Llama-3.3-70B-Instruct vs its R1-distilled sibling
-  #   (~2 x 40 GB at 4-bit; fits in 128 GB but the heaviest pair in the panel).
-  # Option B (cheap): re-pull qwen2.5-7b-instruct (above) + deepseek-r1-distill-qwen-7b — same
-  #   Qwen2.5-7B base, +/- reasoning SFT. Verify exact ids in LM Studio after download.
-  - {key: base-70b, model_id: "meta-llama/llama-3.3-70b-instruct",      family: llama,            role_axis: base,      scale_tier: 70b, think_style: none, contrast: "C2-sft", needs_download: true, enabled: false}
-  - {key: r1-70b,   model_id: "deepseek/deepseek-r1-distill-llama-70b", family: deepseek-distill, role_axis: reasoning, scale_tier: 70b, think_style: none, contrast: "C2-sft", needs_download: true, enabled: false}
+  # ===========================================================================
+  # EXCLUDED (documented for the paper's panel-selection appendix)
+  # ===========================================================================
+  # qwen3.5-9b        : pathological ruminator — truncated 32/32 at 4096 AND 12288 max_tokens
+  #                     (temp=0, 2026-07-10). Not usable at feasible budgets.
+  # qwen2.5-vl-7b     : vision variant; its R1-distill sibling is text-base — pairing would
+  #                     confound modality with reasoning-SFT.
+  # gemma-4-12b-*tau2 : community fine-tune, uncontrolled provenance.
 
-# Optional frontier ceiling — generalization only, NEVER a headline number (no trace -> T6 impossible).
-# Needs API keys in .env; ~$150-300 at full N. Disabled by default; the local panel needs zero keys.
+# Optional frontier ceiling — generalization only, NEVER a headline number.
 api_models:
   - {key: gpt-5,    backend: openai,    model_id: "gpt-5",                    role_axis: reasoning, enabled: false}
   - {key: opus-4-5, backend: anthropic, model_id: "claude-opus-4-5-20251101", role_axis: reasoning, enabled: false}

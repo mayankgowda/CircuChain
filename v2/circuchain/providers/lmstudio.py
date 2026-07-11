@@ -65,13 +65,21 @@ class LMStudioProvider(Provider):
             "stream": False,
         }
         if params.seed is not None:
-            payload["seed"] = params.seed        # honored by the llama.cpp runtime; MLX may ignore
+            payload["seed"] = params.seed        # honored by llama.cpp; MLX ignores it (verified
+            #                                      2026-07-10: sampled runs are NOT reproducible on
+            #                                      MLX — the content-addressed cache is the artifact)
+        if params.top_p is not None:
+            payload["top_p"] = params.top_p
+        if params.top_k is not None:
+            payload["top_k"] = params.top_k
         if params.stop:
             payload["stop"] = params.stop
 
         async with httpx.AsyncClient(timeout=None) as c:
             r = await c.post(f"{self.host}/v1/chat/completions", json=payload)
-            r.raise_for_status()
+            if r.status_code >= 400:
+                raise RuntimeError(
+                    f"LM Studio HTTP {r.status_code} for {self.model_id}: {r.text[:400]}")
             data = r.json()
 
         if "error" in data:

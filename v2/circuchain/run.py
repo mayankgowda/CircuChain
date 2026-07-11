@@ -42,9 +42,13 @@ def _done_ids(responses_path: str) -> set:
 
 
 async def run_model(model_cfg: dict, defaults: dict, instances: List[dict],
-                    out_dir: str, concurrency: int = 1, progress=print) -> Dict[str, int]:
+                    out_dir: str, concurrency: int = 1, progress=print,
+                    cache_dir: str | None = None) -> Dict[str, int]:
     """Run one model over the instance plan. Returns counters."""
     cfg = {**defaults, **model_cfg}
+    # Loaded-ness is asserted ONCE below. The per-request assert reads /api/v0/models state,
+    # which flaps to "not-loaded" under parallel generation and killed real requests.
+    cfg["require_loaded"] = False
     provider = build_provider(cfg)
     model_key = cfg.get("key", cfg["model_id"])
 
@@ -54,30 +58,52 @@ async def run_model(model_cfg: dict, defaults: dict, instances: List[dict],
         max_tokens=int(cfg.get("max_tokens", 8192)),
         num_ctx=int(cfg.get("num_ctx", 8192)),
         think=cfg.get("think"),
+        top_p=(float(cfg["top_p"]) if cfg.get("top_p") is not None else None),
+        top_k=(int(cfg["top_k"]) if cfg.get("top_k") is not None else None),
     )
 
     # fail fast on a not-loaded model (the 262k-ctx JIT trap) before issuing the plan
     if hasattr(provider, "assert_loaded"):
         provider.assert_loaded(gp.num_ctx)
 
-    cache = CompletionCache(os.path.join(out_dir, "cache"))
+    cache = CompletionCache(cache_dir or os.path.join(out_dir, "cache"))
     responses_path = os.path.join(out_dir, "responses", f"{model_key}.jsonl")
     os.makedirs(os.path.dirname(responses_path), exist_ok=True)
 
     done = _done_ids(responses_path)
     todo = [inst for inst in instances if inst["id"] not in done]
     counters = {"planned": len(instances), "resumed": len(done), "run": 0, "cache_hits": 0}
-    progress(f"[{model_key}] plan={len(instances)} done={len(done)} todo={len(todo)}")
+    progress(f"[{model_key}] plan={len(instances)} done={len(done)} todo={len(todo)} "
+             f"concurrency={concurrency}")
 
+    fingerprint = provider.fingerprint()      # once — not one HTTP GET per instance
     sem = asyncio.Semaphore(concurrency)
     write_lock = asyncio.Lock()
 
+    failures_path = os.path.join(out_dir, "responses", f"{model_key}.failures.jsonl")
+
     async def one(inst: dict) -> None:
-        key = cache_key(model_key, provider.fingerprint(), SYSTEM_PROMPT, inst["prompt"], gp)
+        key = cache_key(model_key, fingerprint, SYSTEM_PROMPT, inst["prompt"], gp)
         comp = cache.get(model_key, key)
         if comp is None:
-            async with sem:
-                comp = await provider.generate(SYSTEM_PROMPT, inst["prompt"], gp)
+            last_err = None
+            for attempt in range(3):          # transient-flake armor for multi-day sweeps
+                try:
+                    async with sem:
+                        comp = await provider.generate(SYSTEM_PROMPT, inst["prompt"], gp)
+                    break
+                except Exception as e:  # noqa: BLE001
+                    last_err = e
+                    await asyncio.sleep(2 * 4 ** attempt)
+            if comp is None:
+                # record and skip — the id stays out of responses, so resume retries it later
+                async with write_lock:
+                    with open(failures_path, "a") as f:
+                        f.write(json.dumps({"instance_id": inst["id"],
+                                            "error": str(last_err)[:500]}) + "\n")
+                counters["failed"] = counters.get("failed", 0) + 1
+                progress(f"[{model_key}] FAILED {inst['id']}: {str(last_err)[:160]}")
+                return
             cache.put(model_key, key, comp)
             counters["run"] += 1
         else:
@@ -109,6 +135,7 @@ def run_panel(models_cfg: dict, dataset_dir: str, out_dir: str, progress=print) 
     for m in models_cfg.get("models", []):
         if not m.get("enabled", True):
             continue
+        conc = int(m.get("concurrency", defaults.get("concurrency", 1)))
         results[m.get("key", m["model_id"])] = asyncio.run(
-            run_model(m, defaults, instances, out_dir, progress=progress))
+            run_model(m, defaults, instances, out_dir, concurrency=conc, progress=progress))
     return results
