@@ -1,7 +1,8 @@
 {
-  "n_rows": 5024,
+  "n_rows": 5950,
   "models": [
     "gemma4-31b",
+    "gemma4-31b-api",
     "gpt-oss-120b-api",
     "qwen25-32b",
     "qwen25-7b-instruct",
@@ -231,6 +232,450 @@
         "wilson_hi": 1.0
       },
       "extraction_issues": 0
+    },
+    "gemma4-31b-api|act|all": {
+      "n": 212,
+      "dichotomy": {
+        "CORRECT": 167,
+        "COMPLIANCE": 11,
+        "COMPETENCE": 34
+      },
+      "completed_within_budget": {
+        "k": 194,
+        "n": 212,
+        "rate": 0.9150943396226415,
+        "wilson_lo": 0.8697937055926274,
+        "wilson_hi": 0.9456196119489687
+      },
+      "final_correct": {
+        "k": 167,
+        "n": 212,
+        "rate": 0.7877358490566038,
+        "wilson_lo": 0.7278231796367213,
+        "wilson_hi": 0.8374065063864305
+      },
+      "magnitude_correct": {
+        "k": 178,
+        "n": 212,
+        "rate": 0.839622641509434,
+        "wilson_lo": 0.7842517452719425,
+        "wilson_hi": 0.8829046054439088
+      },
+      "sign_compliant_given_mag": {
+        "k": 167,
+        "n": 178,
+        "rate": 0.9382022471910112,
+        "wilson_lo": 0.8927440421782473,
+        "wilson_hi": 0.965146127707734
+      },
+      "extraction_issues": 18
+    },
+    "gemma4-31b-api|act|control": {
+      "n": 107,
+      "dichotomy": {
+        "CORRECT": 89,
+        "COMPLIANCE": 6,
+        "COMPETENCE": 12
+      },
+      "completed_within_budget": {
+        "k": 99,
+        "n": 107,
+        "rate": 0.9252336448598131,
+        "wilson_lo": 0.8593625455360884,
+        "wilson_hi": 0.9616298968965648
+      },
+      "final_correct": {
+        "k": 89,
+        "n": 107,
+        "rate": 0.8317757009345794,
+        "wilson_lo": 0.749696651648759,
+        "wilson_hi": 0.8908578913481461
+      },
+      "magnitude_correct": {
+        "k": 95,
+        "n": 107,
+        "rate": 0.8878504672897196,
+        "wilson_lo": 0.8141461014738314,
+        "wilson_hi": 0.9346711811845225
+      },
+      "sign_compliant_given_mag": {
+        "k": 89,
+        "n": 95,
+        "rate": 0.9368421052631579,
+        "wilson_lo": 0.8689934899993075,
+        "wilson_hi": 0.970735111645153
+      },
+      "extraction_issues": 8
+    },
+    "gemma4-31b-api|act|trap": {
+      "n": 105,
+      "dichotomy": {
+        "CORRECT": 78,
+        "COMPLIANCE": 5,
+        "COMPETENCE": 22
+      },
+      "completed_within_budget": {
+        "k": 95,
+        "n": 105,
+        "rate": 0.9047619047619048,
+        "wilson_lo": 0.8335087237779633,
+        "wilson_hi": 0.9474436901365668
+      },
+      "final_correct": {
+        "k": 78,
+        "n": 105,
+        "rate": 0.7428571428571429,
+        "wilson_lo": 0.65173054142379,
+        "wilson_hi": 0.816840906924928
+      },
+      "magnitude_correct": {
+        "k": 83,
+        "n": 105,
+        "rate": 0.7904761904761904,
+        "wilson_lo": 0.7030837307062462,
+        "wilson_hi": 0.8573644722206518
+      },
+      "sign_compliant_given_mag": {
+        "k": 78,
+        "n": 83,
+        "rate": 0.9397590361445783,
+        "wilson_lo": 0.8666157190676159,
+        "wilson_hi": 0.973996598958118
+      },
+      "extraction_issues": 10
+    },
+    "gemma4-31b-api|ccw|all": {
+      "n": 212,
+      "dichotomy": {
+        "CORRECT": 24,
+        "COMPLIANCE": 160,
+        "COMPETENCE": 28
+      },
+      "completed_within_budget": {
+        "k": 203,
+        "n": 212,
+        "rate": 0.9575471698113207,
+        "wilson_lo": 0.9213006386159815,
+        "wilson_hi": 0.9775072227650959
+      },
+      "final_correct": {
+        "k": 24,
+        "n": 212,
+        "rate": 0.11320754716981132,
+        "wilson_lo": 0.07726491740597835,
+        "wilson_hi": 0.16291812761207983
+      },
+      "magnitude_correct": {
+        "k": 184,
+        "n": 212,
+        "rate": 0.8679245283018868,
+        "wilson_lo": 0.815735976750673,
+        "wilson_hi": 0.9070167365248326
+      },
+      "sign_compliant_given_mag": {
+        "k": 24,
+        "n": 184,
+        "rate": 0.13043478260869565,
+        "wilson_lo": 0.08924167071913741,
+        "wilson_hi": 0.18674350926277428
+      },
+      "extraction_issues": 9
+    },
+    "gemma4-31b-api|ccw|control": {
+      "n": 105,
+      "dichotomy": {
+        "CORRECT": 14,
+        "COMPLIANCE": 78,
+        "COMPETENCE": 13
+      },
+      "completed_within_budget": {
+        "k": 99,
+        "n": 105,
+        "rate": 0.9428571428571428,
+        "wilson_lo": 0.8809034520143957,
+        "wilson_hi": 0.9735503655626783
+      },
+      "final_correct": {
+        "k": 14,
+        "n": 105,
+        "rate": 0.13333333333333333,
+        "wilson_lo": 0.08111392144662205,
+        "wilson_hi": 0.21143506830139186
+      },
+      "magnitude_correct": {
+        "k": 92,
+        "n": 105,
+        "rate": 0.8761904761904762,
+        "wilson_lo": 0.7996280033768919,
+        "wilson_hi": 0.9261983577907302
+      },
+      "sign_compliant_given_mag": {
+        "k": 14,
+        "n": 92,
+        "rate": 0.15217391304347827,
+        "wilson_lo": 0.09286540270143614,
+        "wilson_hi": 0.23936512897551807
+      },
+      "extraction_issues": 6
+    },
+    "gemma4-31b-api|ccw|trap": {
+      "n": 107,
+      "dichotomy": {
+        "CORRECT": 10,
+        "COMPLIANCE": 82,
+        "COMPETENCE": 15
+      },
+      "completed_within_budget": {
+        "k": 104,
+        "n": 107,
+        "rate": 0.9719626168224299,
+        "wilson_lo": 0.9207918591418474,
+        "wilson_hi": 0.9904195330086796
+      },
+      "final_correct": {
+        "k": 10,
+        "n": 107,
+        "rate": 0.09345794392523364,
+        "wilson_lo": 0.0515582662185042,
+        "wilson_hi": 0.16353687123599236
+      },
+      "magnitude_correct": {
+        "k": 92,
+        "n": 107,
+        "rate": 0.8598130841121495,
+        "wilson_lo": 0.7815182005609461,
+        "wilson_hi": 0.9131677122666834
+      },
+      "sign_compliant_given_mag": {
+        "k": 10,
+        "n": 92,
+        "rate": 0.10869565217391304,
+        "wilson_lo": 0.06012152356953175,
+        "wilson_hi": 0.18863782456704176
+      },
+      "extraction_issues": 3
+    },
+    "gemma4-31b-api|dflt|all": {
+      "n": 211,
+      "dichotomy": {
+        "CORRECT": 174,
+        "COMPLIANCE": 7,
+        "COMPETENCE": 30
+      },
+      "completed_within_budget": {
+        "k": 198,
+        "n": 211,
+        "rate": 0.9383886255924171,
+        "wilson_lo": 0.8974561179061311,
+        "wilson_hi": 0.9636439742990717
+      },
+      "final_correct": {
+        "k": 174,
+        "n": 211,
+        "rate": 0.8246445497630331,
+        "wilson_lo": 0.767660546595185,
+        "wilson_hi": 0.8700189811459652
+      },
+      "magnitude_correct": {
+        "k": 181,
+        "n": 211,
+        "rate": 0.8578199052132701,
+        "wilson_lo": 0.8042868058706661,
+        "wilson_hi": 0.8985570531724995
+      },
+      "sign_compliant_given_mag": {
+        "k": 174,
+        "n": 181,
+        "rate": 0.9613259668508287,
+        "wilson_lo": 0.922334788168879,
+        "wilson_hi": 0.9811421756328336
+      },
+      "extraction_issues": 11
+    },
+    "gemma4-31b-api|dflt|control": {
+      "n": 106,
+      "dichotomy": {
+        "CORRECT": 93,
+        "COMPLIANCE": 2,
+        "COMPETENCE": 11
+      },
+      "completed_within_budget": {
+        "k": 102,
+        "n": 106,
+        "rate": 0.9622641509433962,
+        "wilson_lo": 0.906965843891179,
+        "wilson_hi": 0.9852291528993844
+      },
+      "final_correct": {
+        "k": 93,
+        "n": 106,
+        "rate": 0.8773584905660378,
+        "wilson_lo": 0.8014136606026787,
+        "wilson_hi": 0.9269087857569649
+      },
+      "magnitude_correct": {
+        "k": 95,
+        "n": 106,
+        "rate": 0.8962264150943396,
+        "wilson_lo": 0.8236781566158943,
+        "wilson_hi": 0.9410604120617315
+      },
+      "sign_compliant_given_mag": {
+        "k": 93,
+        "n": 95,
+        "rate": 0.9789473684210527,
+        "wilson_lo": 0.9264588050529105,
+        "wilson_hi": 0.9942074931355945
+      },
+      "extraction_issues": 3
+    },
+    "gemma4-31b-api|dflt|trap": {
+      "n": 105,
+      "dichotomy": {
+        "CORRECT": 81,
+        "COMPLIANCE": 5,
+        "COMPETENCE": 19
+      },
+      "completed_within_budget": {
+        "k": 96,
+        "n": 105,
+        "rate": 0.9142857142857143,
+        "wilson_lo": 0.8450772435843179,
+        "wilson_hi": 0.9542505212458481
+      },
+      "final_correct": {
+        "k": 81,
+        "n": 105,
+        "rate": 0.7714285714285715,
+        "wilson_lo": 0.6823814295650403,
+        "wilson_hi": 0.8413160715305859
+      },
+      "magnitude_correct": {
+        "k": 86,
+        "n": 105,
+        "rate": 0.819047619047619,
+        "wilson_lo": 0.7345909190245711,
+        "wilson_hi": 0.8809833366492349
+      },
+      "sign_compliant_given_mag": {
+        "k": 81,
+        "n": 86,
+        "rate": 0.9418604651162791,
+        "wilson_lo": 0.8710215519732145,
+        "wilson_hi": 0.9749130643789203
+      },
+      "extraction_issues": 8
+    },
+    "gemma4-31b-api|top|all": {
+      "n": 209,
+      "dichotomy": {
+        "CORRECT": 123,
+        "COMPLIANCE": 8,
+        "COMPETENCE": 78
+      },
+      "completed_within_budget": {
+        "k": 203,
+        "n": 209,
+        "rate": 0.9712918660287081,
+        "wilson_lo": 0.9387937755007709,
+        "wilson_hi": 0.9867777794562942
+      },
+      "final_correct": {
+        "k": 123,
+        "n": 209,
+        "rate": 0.5885167464114832,
+        "wilson_lo": 0.5207885901213841,
+        "wilson_hi": 0.653049722230958
+      },
+      "magnitude_correct": {
+        "k": 131,
+        "n": 209,
+        "rate": 0.6267942583732058,
+        "wilson_lo": 0.559488983111719,
+        "wilson_hi": 0.6895226535010955
+      },
+      "sign_compliant_given_mag": {
+        "k": 123,
+        "n": 131,
+        "rate": 0.9389312977099237,
+        "wilson_lo": 0.8841196490252834,
+        "wilson_hi": 0.9687337760694541
+      },
+      "extraction_issues": 5
+    },
+    "gemma4-31b-api|top|control": {
+      "n": 101,
+      "dichotomy": {
+        "CORRECT": 61,
+        "COMPLIANCE": 5,
+        "COMPETENCE": 35
+      },
+      "completed_within_budget": {
+        "k": 99,
+        "n": 101,
+        "rate": 0.9801980198019802,
+        "wilson_lo": 0.9306538303741566,
+        "wilson_hi": 0.994552677538853
+      },
+      "final_correct": {
+        "k": 61,
+        "n": 101,
+        "rate": 0.6039603960396039,
+        "wilson_lo": 0.5064566738465976,
+        "wilson_hi": 0.6938457660108579
+      },
+      "magnitude_correct": {
+        "k": 66,
+        "n": 101,
+        "rate": 0.6534653465346535,
+        "wilson_lo": 0.5565798302066218,
+        "wilson_hi": 0.7391047238686699
+      },
+      "sign_compliant_given_mag": {
+        "k": 61,
+        "n": 66,
+        "rate": 0.9242424242424242,
+        "wilson_lo": 0.8346080497938948,
+        "wilson_hi": 0.9672079624370398
+      },
+      "extraction_issues": 2
+    },
+    "gemma4-31b-api|top|trap": {
+      "n": 108,
+      "dichotomy": {
+        "CORRECT": 62,
+        "COMPLIANCE": 3,
+        "COMPETENCE": 43
+      },
+      "completed_within_budget": {
+        "k": 104,
+        "n": 108,
+        "rate": 0.9629629629629629,
+        "wilson_lo": 0.9086183563893868,
+        "wilson_hi": 0.9855044586600972
+      },
+      "final_correct": {
+        "k": 62,
+        "n": 108,
+        "rate": 0.5740740740740741,
+        "wilson_lo": 0.4798518547874811,
+        "wilson_hi": 0.6632077956204363
+      },
+      "magnitude_correct": {
+        "k": 65,
+        "n": 108,
+        "rate": 0.6018518518518519,
+        "wilson_lo": 0.5075638312572535,
+        "wilson_hi": 0.6891431880536332
+      },
+      "sign_compliant_given_mag": {
+        "k": 62,
+        "n": 65,
+        "rate": 0.9538461538461539,
+        "wilson_lo": 0.8728615273666118,
+        "wilson_hi": 0.9841801595864874
+      },
+      "extraction_issues": 3
     },
     "gpt-oss-120b-api|act|all": {
       "n": 250,
@@ -2453,69 +2898,106 @@
       "extraction_issues": 1
     },
     "qwen3-4b-think|act|all": {
-      "n": 4,
+      "n": 27,
       "dichotomy": {
         "CORRECT": 0,
-        "COMPLIANCE": 0,
-        "COMPETENCE": 4
+        "COMPLIANCE": 1,
+        "COMPETENCE": 26
       },
       "completed_within_budget": {
-        "k": 2,
-        "n": 4,
-        "rate": 0.5,
-        "wilson_lo": 0.15003898915214953,
-        "wilson_hi": 0.8499610108478505
+        "k": 12,
+        "n": 27,
+        "rate": 0.4444444444444444,
+        "wilson_lo": 0.27585858177023004,
+        "wilson_hi": 0.6268697548677552
       },
       "final_correct": {
         "k": 0,
-        "n": 4,
+        "n": 27,
         "rate": 0.0,
         "wilson_lo": 0.0,
-        "wilson_hi": 0.4898908364545973
+        "wilson_hi": 0.12455502974186705
       },
       "magnitude_correct": {
-        "k": 0,
-        "n": 4,
-        "rate": 0.0,
-        "wilson_lo": 0.0,
-        "wilson_hi": 0.4898908364545973
+        "k": 1,
+        "n": 27,
+        "rate": 0.037037037037037035,
+        "wilson_lo": 0.006568145980785117,
+        "wilson_hi": 0.18283465933575843
       },
       "sign_compliant_given_mag": {
         "k": 0,
-        "n": 0,
-        "rate": NaN,
-        "wilson_lo": NaN,
-        "wilson_hi": NaN
+        "n": 1,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.7934506856227626
       },
-      "extraction_issues": 2
+      "extraction_issues": 15
     },
     "qwen3-4b-think|act|control": {
-      "n": 1,
+      "n": 13,
       "dichotomy": {
         "CORRECT": 0,
-        "COMPLIANCE": 0,
-        "COMPETENCE": 1
+        "COMPLIANCE": 1,
+        "COMPETENCE": 12
       },
       "completed_within_budget": {
-        "k": 0,
-        "n": 1,
-        "rate": 0.0,
-        "wilson_lo": 0.0,
-        "wilson_hi": 0.7934506856227626
+        "k": 6,
+        "n": 13,
+        "rate": 0.46153846153846156,
+        "wilson_lo": 0.232060678095383,
+        "wilson_hi": 0.7085620428549398
       },
       "final_correct": {
         "k": 0,
-        "n": 1,
+        "n": 13,
         "rate": 0.0,
         "wilson_lo": 0.0,
-        "wilson_hi": 0.7934506856227626
+        "wilson_hi": 0.22809537235419838
       },
       "magnitude_correct": {
+        "k": 1,
+        "n": 13,
+        "rate": 0.07692307692307693,
+        "wilson_lo": 0.013710421242556559,
+        "wilson_hi": 0.3331395092109959
+      },
+      "sign_compliant_given_mag": {
         "k": 0,
         "n": 1,
         "rate": 0.0,
         "wilson_lo": 0.0,
         "wilson_hi": 0.7934506856227626
+      },
+      "extraction_issues": 7
+    },
+    "qwen3-4b-think|act|trap": {
+      "n": 14,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 14
+      },
+      "completed_within_budget": {
+        "k": 6,
+        "n": 14,
+        "rate": 0.42857142857142855,
+        "wilson_lo": 0.21380798904474121,
+        "wilson_hi": 0.6740935542034926
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 14,
+        "rate": 0.0,
+        "wilson_lo": 1.3877787807814457e-17,
+        "wilson_hi": 0.2153108027376358
+      },
+      "magnitude_correct": {
+        "k": 0,
+        "n": 14,
+        "rate": 0.0,
+        "wilson_lo": 1.3877787807814457e-17,
+        "wilson_hi": 0.2153108027376358
       },
       "sign_compliant_given_mag": {
         "k": 0,
@@ -2524,157 +3006,157 @@
         "wilson_lo": NaN,
         "wilson_hi": NaN
       },
-      "extraction_issues": 1
+      "extraction_issues": 8
     },
-    "qwen3-4b-think|act|trap": {
-      "n": 3,
+    "qwen3-4b-think|ccw|all": {
+      "n": 27,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 3,
+        "COMPETENCE": 24
+      },
+      "completed_within_budget": {
+        "k": 7,
+        "n": 27,
+        "rate": 0.25925925925925924,
+        "wilson_lo": 0.13170374561907186,
+        "wilson_hi": 0.4467857131455307
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 27,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.12455502974186705
+      },
+      "magnitude_correct": {
+        "k": 3,
+        "n": 27,
+        "rate": 0.1111111111111111,
+        "wilson_lo": 0.038520348283098374,
+        "wilson_hi": 0.2805780081827982
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 3,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.5614970317550455
+      },
+      "extraction_issues": 20
+    },
+    "qwen3-4b-think|ccw|control": {
+      "n": 11,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 3,
+        "COMPETENCE": 8
+      },
+      "completed_within_budget": {
+        "k": 6,
+        "n": 11,
+        "rate": 0.5454545454545454,
+        "wilson_lo": 0.280091537409322,
+        "wilson_hi": 0.7872872837754024
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 11,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.2588329669680317
+      },
+      "magnitude_correct": {
+        "k": 3,
+        "n": 11,
+        "rate": 0.2727272727272727,
+        "wilson_lo": 0.09746059290024889,
+        "wilson_hi": 0.5656453011761291
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 3,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.5614970317550455
+      },
+      "extraction_issues": 5
+    },
+    "qwen3-4b-think|ccw|trap": {
+      "n": 16,
       "dichotomy": {
         "CORRECT": 0,
         "COMPLIANCE": 0,
-        "COMPETENCE": 3
+        "COMPETENCE": 16
       },
       "completed_within_budget": {
+        "k": 1,
+        "n": 16,
+        "rate": 0.0625,
+        "wilson_lo": 0.01111934476464252,
+        "wilson_hi": 0.28328737570298945
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 16,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.1936076805344365
+      },
+      "magnitude_correct": {
+        "k": 0,
+        "n": 16,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.1936076805344365
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      },
+      "extraction_issues": 15
+    },
+    "qwen3-4b-think|dflt|all": {
+      "n": 25,
+      "dichotomy": {
+        "CORRECT": 2,
+        "COMPLIANCE": 1,
+        "COMPETENCE": 22
+      },
+      "completed_within_budget": {
+        "k": 4,
+        "n": 25,
+        "rate": 0.16,
+        "wilson_lo": 0.06403451456676443,
+        "wilson_hi": 0.3465362160717885
+      },
+      "final_correct": {
+        "k": 2,
+        "n": 25,
+        "rate": 0.08,
+        "wilson_lo": 0.022220401284847563,
+        "wilson_hi": 0.24966108950395313
+      },
+      "magnitude_correct": {
+        "k": 3,
+        "n": 25,
+        "rate": 0.12,
+        "wilson_lo": 0.04166817150440358,
+        "wilson_hi": 0.2995579392092732
+      },
+      "sign_compliant_given_mag": {
         "k": 2,
         "n": 3,
         "rate": 0.6666666666666666,
         "wilson_lo": 0.20765960080204765,
         "wilson_hi": 0.9385080552796037
       },
-      "final_correct": {
-        "k": 0,
-        "n": 3,
-        "rate": 0.0,
-        "wilson_lo": 0.0,
-        "wilson_hi": 0.5614970317550455
-      },
-      "magnitude_correct": {
-        "k": 0,
-        "n": 3,
-        "rate": 0.0,
-        "wilson_lo": 0.0,
-        "wilson_hi": 0.5614970317550455
-      },
-      "sign_compliant_given_mag": {
-        "k": 0,
-        "n": 0,
-        "rate": NaN,
-        "wilson_lo": NaN,
-        "wilson_hi": NaN
-      },
-      "extraction_issues": 1
+      "extraction_issues": 21
     },
-    "qwen3-4b-think|ccw|all": {
-      "n": 6,
-      "dichotomy": {
-        "CORRECT": 0,
-        "COMPLIANCE": 2,
-        "COMPETENCE": 4
-      },
-      "completed_within_budget": {
-        "k": 2,
-        "n": 6,
-        "rate": 0.3333333333333333,
-        "wilson_lo": 0.09677141110578041,
-        "wilson_hi": 0.700006684861608
-      },
-      "final_correct": {
-        "k": 0,
-        "n": 6,
-        "rate": 0.0,
-        "wilson_lo": 0.0,
-        "wilson_hi": 0.39033428790216534
-      },
-      "magnitude_correct": {
-        "k": 2,
-        "n": 6,
-        "rate": 0.3333333333333333,
-        "wilson_lo": 0.09677141110578041,
-        "wilson_hi": 0.700006684861608
-      },
-      "sign_compliant_given_mag": {
-        "k": 0,
-        "n": 2,
-        "rate": 0.0,
-        "wilson_lo": 0.0,
-        "wilson_hi": 0.6576197724933469
-      },
-      "extraction_issues": 4
-    },
-    "qwen3-4b-think|ccw|control": {
-      "n": 4,
-      "dichotomy": {
-        "CORRECT": 0,
-        "COMPLIANCE": 2,
-        "COMPETENCE": 2
-      },
-      "completed_within_budget": {
-        "k": 2,
-        "n": 4,
-        "rate": 0.5,
-        "wilson_lo": 0.15003898915214953,
-        "wilson_hi": 0.8499610108478505
-      },
-      "final_correct": {
-        "k": 0,
-        "n": 4,
-        "rate": 0.0,
-        "wilson_lo": 0.0,
-        "wilson_hi": 0.4898908364545973
-      },
-      "magnitude_correct": {
-        "k": 2,
-        "n": 4,
-        "rate": 0.5,
-        "wilson_lo": 0.15003898915214953,
-        "wilson_hi": 0.8499610108478505
-      },
-      "sign_compliant_given_mag": {
-        "k": 0,
-        "n": 2,
-        "rate": 0.0,
-        "wilson_lo": 0.0,
-        "wilson_hi": 0.6576197724933469
-      },
-      "extraction_issues": 2
-    },
-    "qwen3-4b-think|ccw|trap": {
-      "n": 2,
-      "dichotomy": {
-        "CORRECT": 0,
-        "COMPLIANCE": 0,
-        "COMPETENCE": 2
-      },
-      "completed_within_budget": {
-        "k": 0,
-        "n": 2,
-        "rate": 0.0,
-        "wilson_lo": 0.0,
-        "wilson_hi": 0.6576197724933469
-      },
-      "final_correct": {
-        "k": 0,
-        "n": 2,
-        "rate": 0.0,
-        "wilson_lo": 0.0,
-        "wilson_hi": 0.6576197724933469
-      },
-      "magnitude_correct": {
-        "k": 0,
-        "n": 2,
-        "rate": 0.0,
-        "wilson_lo": 0.0,
-        "wilson_hi": 0.6576197724933469
-      },
-      "sign_compliant_given_mag": {
-        "k": 0,
-        "n": 0,
-        "rate": NaN,
-        "wilson_lo": NaN,
-        "wilson_hi": NaN
-      },
-      "extraction_issues": 2
-    },
-    "qwen3-4b-think|dflt|all": {
+    "qwen3-4b-think|dflt|control": {
       "n": 6,
       "dichotomy": {
         "CORRECT": 0,
@@ -2711,107 +3193,70 @@
       },
       "extraction_issues": 5
     },
-    "qwen3-4b-think|dflt|control": {
-      "n": 4,
-      "dichotomy": {
-        "CORRECT": 0,
-        "COMPLIANCE": 1,
-        "COMPETENCE": 3
-      },
-      "completed_within_budget": {
-        "k": 1,
-        "n": 4,
-        "rate": 0.25,
-        "wilson_lo": 0.04558726080970055,
-        "wilson_hi": 0.6993581574175981
-      },
-      "final_correct": {
-        "k": 0,
-        "n": 4,
-        "rate": 0.0,
-        "wilson_lo": 0.0,
-        "wilson_hi": 0.4898908364545973
-      },
-      "magnitude_correct": {
-        "k": 1,
-        "n": 4,
-        "rate": 0.25,
-        "wilson_lo": 0.04558726080970055,
-        "wilson_hi": 0.6993581574175981
-      },
-      "sign_compliant_given_mag": {
-        "k": 0,
-        "n": 1,
-        "rate": 0.0,
-        "wilson_lo": 0.0,
-        "wilson_hi": 0.7934506856227626
-      },
-      "extraction_issues": 3
-    },
     "qwen3-4b-think|dflt|trap": {
-      "n": 2,
+      "n": 19,
       "dichotomy": {
-        "CORRECT": 0,
+        "CORRECT": 2,
         "COMPLIANCE": 0,
-        "COMPETENCE": 2
+        "COMPETENCE": 17
       },
       "completed_within_budget": {
-        "k": 0,
-        "n": 2,
-        "rate": 0.0,
-        "wilson_lo": 0.0,
-        "wilson_hi": 0.6576197724933469
+        "k": 3,
+        "n": 19,
+        "rate": 0.15789473684210525,
+        "wilson_lo": 0.05520471638534141,
+        "wilson_hi": 0.37565475270329074
       },
       "final_correct": {
-        "k": 0,
-        "n": 2,
-        "rate": 0.0,
-        "wilson_lo": 0.0,
-        "wilson_hi": 0.6576197724933469
+        "k": 2,
+        "n": 19,
+        "rate": 0.10526315789473684,
+        "wilson_lo": 0.02935856029887013,
+        "wilson_hi": 0.31394082711109006
       },
       "magnitude_correct": {
-        "k": 0,
-        "n": 2,
-        "rate": 0.0,
-        "wilson_lo": 0.0,
-        "wilson_hi": 0.6576197724933469
+        "k": 2,
+        "n": 19,
+        "rate": 0.10526315789473684,
+        "wilson_lo": 0.02935856029887013,
+        "wilson_hi": 0.31394082711109006
       },
       "sign_compliant_given_mag": {
-        "k": 0,
-        "n": 0,
-        "rate": NaN,
-        "wilson_lo": NaN,
-        "wilson_hi": NaN
+        "k": 2,
+        "n": 2,
+        "rate": 1.0,
+        "wilson_lo": 0.34238022750665303,
+        "wilson_hi": 1.0
       },
-      "extraction_issues": 2
+      "extraction_issues": 16
     },
     "qwen3-4b-think|top|all": {
-      "n": 4,
+      "n": 23,
       "dichotomy": {
         "CORRECT": 0,
         "COMPLIANCE": 0,
-        "COMPETENCE": 4
+        "COMPETENCE": 23
       },
       "completed_within_budget": {
-        "k": 1,
-        "n": 4,
-        "rate": 0.25,
-        "wilson_lo": 0.04558726080970055,
-        "wilson_hi": 0.6993581574175981
+        "k": 9,
+        "n": 23,
+        "rate": 0.391304347826087,
+        "wilson_lo": 0.22157622792477952,
+        "wilson_hi": 0.592144776086183
       },
       "final_correct": {
         "k": 0,
-        "n": 4,
+        "n": 23,
         "rate": 0.0,
         "wilson_lo": 0.0,
-        "wilson_hi": 0.4898908364545973
+        "wilson_hi": 0.14311661845042686
       },
       "magnitude_correct": {
         "k": 0,
-        "n": 4,
+        "n": 23,
         "rate": 0.0,
         "wilson_lo": 0.0,
-        "wilson_hi": 0.4898908364545973
+        "wilson_hi": 0.14311661845042686
       },
       "sign_compliant_given_mag": {
         "k": 0,
@@ -2820,35 +3265,72 @@
         "wilson_lo": NaN,
         "wilson_hi": NaN
       },
-      "extraction_issues": 3
+      "extraction_issues": 14
+    },
+    "qwen3-4b-think|top|control": {
+      "n": 14,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 14
+      },
+      "completed_within_budget": {
+        "k": 6,
+        "n": 14,
+        "rate": 0.42857142857142855,
+        "wilson_lo": 0.21380798904474121,
+        "wilson_hi": 0.6740935542034926
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 14,
+        "rate": 0.0,
+        "wilson_lo": 1.3877787807814457e-17,
+        "wilson_hi": 0.2153108027376358
+      },
+      "magnitude_correct": {
+        "k": 0,
+        "n": 14,
+        "rate": 0.0,
+        "wilson_lo": 1.3877787807814457e-17,
+        "wilson_hi": 0.2153108027376358
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      },
+      "extraction_issues": 8
     },
     "qwen3-4b-think|top|trap": {
-      "n": 4,
+      "n": 9,
       "dichotomy": {
         "CORRECT": 0,
         "COMPLIANCE": 0,
-        "COMPETENCE": 4
+        "COMPETENCE": 9
       },
       "completed_within_budget": {
-        "k": 1,
-        "n": 4,
-        "rate": 0.25,
-        "wilson_lo": 0.04558726080970055,
-        "wilson_hi": 0.6993581574175981
+        "k": 3,
+        "n": 9,
+        "rate": 0.3333333333333333,
+        "wilson_lo": 0.1205838183869109,
+        "wilson_hi": 0.6457978644196036
       },
       "final_correct": {
         "k": 0,
-        "n": 4,
+        "n": 9,
         "rate": 0.0,
-        "wilson_lo": 0.0,
-        "wilson_hi": 0.4898908364545973
+        "wilson_lo": 2.7755575615628914e-17,
+        "wilson_hi": 0.29914504841954404
       },
       "magnitude_correct": {
         "k": 0,
-        "n": 4,
+        "n": 9,
         "rate": 0.0,
-        "wilson_lo": 0.0,
-        "wilson_hi": 0.4898908364545973
+        "wilson_lo": 2.7755575615628914e-17,
+        "wilson_hi": 0.29914504841954404
       },
       "sign_compliant_given_mag": {
         "k": 0,
@@ -2857,7 +3339,7 @@
         "wilson_lo": NaN,
         "wilson_hi": NaN
       },
-      "extraction_issues": 3
+      "extraction_issues": 6
     }
   },
   "factor_pairs": {
@@ -3021,6 +3503,168 @@
         "rate": NaN,
         "wilson_lo": NaN,
         "wilson_hi": NaN
+      }
+    },
+    "gemma4-31b-api|ccw|final_correct": {
+      "n_pairs": 205,
+      "both_ok": 21,
+      "b": 148,
+      "c": 2,
+      "both_bad": 34,
+      "mcnemar": {
+        "b": 148,
+        "c": 2,
+        "odds_ratio": 74.0,
+        "p": 1.5871106406942878e-41
+      },
+      "rate_default": {
+        "k": 169,
+        "n": 205,
+        "rate": 0.824390243902439,
+        "wilson_lo": 0.766475881710992,
+        "wilson_hi": 0.8703708476263583
+      },
+      "rate_flipped": {
+        "k": 23,
+        "n": 205,
+        "rate": 0.11219512195121951,
+        "wilson_lo": 0.07593403029686763,
+        "wilson_hi": 0.16272288726223977
+      }
+    },
+    "gemma4-31b-api|ccw|sign_given_mag": {
+      "n_pairs": 153,
+      "both_ok": 21,
+      "b": 129,
+      "c": 0,
+      "both_bad": 3,
+      "mcnemar": {
+        "b": 129,
+        "c": 0,
+        "odds_ratio": Infinity,
+        "p": 2.938735877055719e-39
+      },
+      "rate_default": {
+        "k": 150,
+        "n": 153,
+        "rate": 0.9803921568627451,
+        "wilson_lo": 0.9439426735787184,
+        "wilson_hi": 0.9933095115597457
+      },
+      "rate_flipped": {
+        "k": 21,
+        "n": 153,
+        "rate": 0.13725490196078433,
+        "wilson_lo": 0.09155693706059637,
+        "wilson_hi": 0.20072202518178794
+      }
+    },
+    "gemma4-31b-api|act|final_correct": {
+      "n_pairs": 203,
+      "both_ok": 139,
+      "b": 29,
+      "c": 21,
+      "both_bad": 14,
+      "mcnemar": {
+        "b": 29,
+        "c": 21,
+        "odds_ratio": 1.380952380952381,
+        "p": 0.3222363203575469
+      },
+      "rate_default": {
+        "k": 168,
+        "n": 203,
+        "rate": 0.8275862068965517,
+        "wilson_lo": 0.7696659790320913,
+        "wilson_hi": 0.8733385750756734
+      },
+      "rate_flipped": {
+        "k": 160,
+        "n": 203,
+        "rate": 0.7881773399014779,
+        "wilson_lo": 0.7268850757749082,
+        "wilson_hi": 0.8387655470116216
+      }
+    },
+    "gemma4-31b-api|act|sign_given_mag": {
+      "n_pairs": 152,
+      "both_ok": 139,
+      "b": 9,
+      "c": 4,
+      "both_bad": 0,
+      "mcnemar": {
+        "b": 9,
+        "c": 4,
+        "odds_ratio": 2.25,
+        "p": 0.266845703125
+      },
+      "rate_default": {
+        "k": 148,
+        "n": 152,
+        "rate": 0.9736842105263158,
+        "wilson_lo": 0.934296226793606,
+        "wilson_hi": 0.9897197641352359
+      },
+      "rate_flipped": {
+        "k": 143,
+        "n": 152,
+        "rate": 0.9407894736842105,
+        "wilson_lo": 0.8913085177664228,
+        "wilson_hi": 0.9685396960145829
+      }
+    },
+    "gemma4-31b-api|top|final_correct": {
+      "n_pairs": 202,
+      "both_ok": 100,
+      "b": 66,
+      "c": 18,
+      "both_bad": 18,
+      "mcnemar": {
+        "b": 66,
+        "c": 18,
+        "odds_ratio": 3.6666666666666665,
+        "p": 1.3328736909323258e-07
+      },
+      "rate_default": {
+        "k": 166,
+        "n": 202,
+        "rate": 0.8217821782178217,
+        "wilson_lo": 0.7631532433314602,
+        "wilson_hi": 0.8684007727778084
+      },
+      "rate_flipped": {
+        "k": 118,
+        "n": 202,
+        "rate": 0.5841584158415841,
+        "wilson_lo": 0.5152391562953871,
+        "wilson_hi": 0.6499365094562677
+      }
+    },
+    "gemma4-31b-api|top|sign_given_mag": {
+      "n_pairs": 110,
+      "both_ok": 100,
+      "b": 5,
+      "c": 3,
+      "both_bad": 2,
+      "mcnemar": {
+        "b": 5,
+        "c": 3,
+        "odds_ratio": 1.6666666666666667,
+        "p": 0.7265625
+      },
+      "rate_default": {
+        "k": 105,
+        "n": 110,
+        "rate": 0.9545454545454546,
+        "wilson_lo": 0.8979840649336309,
+        "wilson_hi": 0.9804305393407652
+      },
+      "rate_flipped": {
+        "k": 103,
+        "n": 110,
+        "rate": 0.9363636363636364,
+        "wilson_lo": 0.874442538117898,
+        "wilson_hi": 0.9688354819855223
       }
     },
     "gpt-oss-120b-api|ccw|final_correct": {
@@ -3834,30 +4478,30 @@
       }
     },
     "qwen3-4b-think|ccw|final_correct": {
-      "n_pairs": 6,
+      "n_pairs": 21,
       "both_ok": 0,
-      "b": 0,
+      "b": 2,
       "c": 0,
-      "both_bad": 6,
+      "both_bad": 19,
       "mcnemar": {
-        "b": 0,
+        "b": 2,
         "c": 0,
-        "odds_ratio": NaN,
-        "p": 1.0
+        "odds_ratio": Infinity,
+        "p": 0.5
       },
       "rate_default": {
-        "k": 0,
-        "n": 6,
-        "rate": 0.0,
-        "wilson_lo": 0.0,
-        "wilson_hi": 0.39033428790216534
+        "k": 2,
+        "n": 21,
+        "rate": 0.09523809523809523,
+        "wilson_lo": 0.02651876743807452,
+        "wilson_hi": 0.2891413907391826
       },
       "rate_flipped": {
         "k": 0,
-        "n": 6,
+        "n": 21,
         "rate": 0.0,
         "wilson_lo": 0.0,
-        "wilson_hi": 0.39033428790216534
+        "wilson_hi": 0.15463901892484697
       }
     },
     "qwen3-4b-think|ccw|sign_given_mag": {
@@ -3888,30 +4532,30 @@
       }
     },
     "qwen3-4b-think|act|final_correct": {
-      "n_pairs": 3,
+      "n_pairs": 17,
       "both_ok": 0,
-      "b": 0,
+      "b": 1,
       "c": 0,
-      "both_bad": 3,
+      "both_bad": 16,
       "mcnemar": {
-        "b": 0,
+        "b": 1,
         "c": 0,
-        "odds_ratio": NaN,
+        "odds_ratio": Infinity,
         "p": 1.0
       },
       "rate_default": {
-        "k": 0,
-        "n": 3,
-        "rate": 0.0,
-        "wilson_lo": 0.0,
-        "wilson_hi": 0.5614970317550455
+        "k": 1,
+        "n": 17,
+        "rate": 0.058823529411764705,
+        "wilson_lo": 0.01046040098499762,
+        "wilson_hi": 0.269820306375754
       },
       "rate_flipped": {
         "k": 0,
-        "n": 3,
+        "n": 17,
         "rate": 0.0,
         "wilson_lo": 0.0,
-        "wilson_hi": 0.5614970317550455
+        "wilson_hi": 0.1843181350088518
       }
     },
     "qwen3-4b-think|act|sign_given_mag": {
@@ -3942,30 +4586,30 @@
       }
     },
     "qwen3-4b-think|top|final_correct": {
-      "n_pairs": 2,
+      "n_pairs": 11,
       "both_ok": 0,
-      "b": 0,
+      "b": 1,
       "c": 0,
-      "both_bad": 2,
+      "both_bad": 10,
       "mcnemar": {
-        "b": 0,
+        "b": 1,
         "c": 0,
-        "odds_ratio": NaN,
+        "odds_ratio": Infinity,
         "p": 1.0
       },
       "rate_default": {
-        "k": 0,
-        "n": 2,
-        "rate": 0.0,
-        "wilson_lo": 0.0,
-        "wilson_hi": 0.6576197724933469
+        "k": 1,
+        "n": 11,
+        "rate": 0.09090909090909091,
+        "wilson_lo": 0.016232172885884855,
+        "wilson_hi": 0.37735843645159567
       },
       "rate_flipped": {
         "k": 0,
-        "n": 2,
+        "n": 11,
         "rate": 0.0,
         "wilson_lo": 0.0,
-        "wilson_hi": 0.6576197724933469
+        "wilson_hi": 0.2588329669680317
       }
     },
     "qwen3-4b-think|top|sign_given_mag": {
@@ -4077,6 +4721,127 @@
         "rate": 0.0,
         "wilson_lo": 1.3877787807814457e-17,
         "wilson_hi": 0.2153108027376358
+      }
+    },
+    "gemma4-31b-api|act": {
+      "n_vars": 1362,
+      "labels": {
+        "PASS": 1177,
+        "ERR_SIGN_CONVENTION": 28,
+        "ERR_MISSING": 120,
+        "ERR_VAL": 37
+      },
+      "var_mag_correct": {
+        "k": 1205,
+        "n": 1362,
+        "rate": 0.8847283406754772,
+        "wilson_lo": 0.866675622159291,
+        "wilson_hi": 0.900616945533648
+      },
+      "convention_blind_given_mag": {
+        "k": 28,
+        "n": 1205,
+        "rate": 0.023236514522821577,
+        "wilson_lo": 0.016124834612714262,
+        "wilson_hi": 0.03337831436024824
+      },
+      "sign_wrong_given_mag": {
+        "k": 28,
+        "n": 1205,
+        "rate": 0.023236514522821577,
+        "wilson_lo": 0.016124834612714262,
+        "wilson_hi": 0.03337831436024824
+      }
+    },
+    "gemma4-31b-api|ccw": {
+      "n_vars": 1362,
+      "labels": {
+        "ERR_SIGN_CONVENTION": 385,
+        "PASS": 835,
+        "ERR_MISSING": 61,
+        "ERR_VAL": 81
+      },
+      "var_mag_correct": {
+        "k": 1220,
+        "n": 1362,
+        "rate": 0.895741556534508,
+        "wilson_lo": 0.8783836373990317,
+        "wilson_hi": 0.9108734121935143
+      },
+      "convention_blind_given_mag": {
+        "k": 385,
+        "n": 1220,
+        "rate": 0.3155737704918033,
+        "wilson_lo": 0.2901087230713008,
+        "wilson_hi": 0.34219659167622823
+      },
+      "sign_wrong_given_mag": {
+        "k": 385,
+        "n": 1220,
+        "rate": 0.3155737704918033,
+        "wilson_lo": 0.2901087230713008,
+        "wilson_hi": 0.34219659167622823
+      }
+    },
+    "gemma4-31b-api|dflt": {
+      "n_vars": 1350,
+      "labels": {
+        "PASS": 1175,
+        "ERR_MISSING": 80,
+        "ERR_VAL": 67,
+        "ERR_SIGN_CONVENTION": 28
+      },
+      "var_mag_correct": {
+        "k": 1203,
+        "n": 1350,
+        "rate": 0.8911111111111111,
+        "wilson_lo": 0.8733713978540272,
+        "wilson_hi": 0.906631307130249
+      },
+      "convention_blind_given_mag": {
+        "k": 28,
+        "n": 1203,
+        "rate": 0.023275145469659187,
+        "wilson_lo": 0.0161517220681851,
+        "wilson_hi": 0.033433464439386676
+      },
+      "sign_wrong_given_mag": {
+        "k": 28,
+        "n": 1203,
+        "rate": 0.023275145469659187,
+        "wilson_lo": 0.0161517220681851,
+        "wilson_hi": 0.033433464439386676
+      }
+    },
+    "gemma4-31b-api|top": {
+      "n_vars": 1337,
+      "labels": {
+        "PASS": 924,
+        "ERR_VAL": 354,
+        "ERR_MISSING": 37,
+        "ERR_SIGN_CONVENTION": 19,
+        "ERR_SIGN_INCOHERENT": 3
+      },
+      "var_mag_correct": {
+        "k": 946,
+        "n": 1337,
+        "rate": 0.7075542258788332,
+        "wilson_lo": 0.68260440816061,
+        "wilson_hi": 0.7313147739686012
+      },
+      "convention_blind_given_mag": {
+        "k": 19,
+        "n": 946,
+        "rate": 0.0200845665961945,
+        "wilson_lo": 0.01289510176996476,
+        "wilson_hi": 0.031155890563686083
+      },
+      "sign_wrong_given_mag": {
+        "k": 22,
+        "n": 946,
+        "rate": 0.023255813953488372,
+        "wilson_lo": 0.015407203719992095,
+        "wilson_hi": 0.03496063227665224
       }
     },
     "gpt-oss-120b-api|act": {
@@ -4682,119 +5447,122 @@
       }
     },
     "qwen3-4b-think|act": {
-      "n_vars": 26,
+      "n_vars": 170,
       "labels": {
-        "ERR_VAL": 8,
-        "PASS": 3,
-        "ERR_MISSING": 14,
-        "ERR_SIGN_CONVENTION": 1
+        "ERR_VAL": 51,
+        "PASS": 11,
+        "ERR_MISSING": 101,
+        "ERR_SIGN_CONVENTION": 7
       },
       "var_mag_correct": {
-        "k": 4,
-        "n": 26,
-        "rate": 0.15384615384615385,
-        "wilson_lo": 0.061500337235783575,
-        "wilson_hi": 0.33531199328213473
+        "k": 18,
+        "n": 170,
+        "rate": 0.10588235294117647,
+        "wilson_lo": 0.06803125056212435,
+        "wilson_hi": 0.16115147196546287
       },
       "convention_blind_given_mag": {
-        "k": 1,
-        "n": 4,
-        "rate": 0.25,
-        "wilson_lo": 0.04558726080970055,
-        "wilson_hi": 0.6993581574175981
+        "k": 7,
+        "n": 18,
+        "rate": 0.3888888888888889,
+        "wilson_lo": 0.20305246572163624,
+        "wilson_hi": 0.613809583977621
       },
       "sign_wrong_given_mag": {
-        "k": 1,
-        "n": 4,
-        "rate": 0.25,
-        "wilson_lo": 0.04558726080970055,
-        "wilson_hi": 0.6993581574175981
+        "k": 7,
+        "n": 18,
+        "rate": 0.3888888888888889,
+        "wilson_lo": 0.20305246572163624,
+        "wilson_hi": 0.613809583977621
       }
     },
     "qwen3-4b-think|ccw": {
-      "n_vars": 38,
+      "n_vars": 173,
       "labels": {
-        "ERR_MISSING": 28,
-        "ERR_SIGN_CONVENTION": 5,
-        "PASS": 5
+        "ERR_MISSING": 136,
+        "ERR_SIGN_CONVENTION": 8,
+        "PASS": 9,
+        "ERR_VAL": 20
       },
       "var_mag_correct": {
-        "k": 10,
-        "n": 38,
-        "rate": 0.2631578947368421,
-        "wilson_lo": 0.1497162125479814,
-        "wilson_hi": 0.42008846187466364
+        "k": 17,
+        "n": 173,
+        "rate": 0.09826589595375723,
+        "wilson_lo": 0.06226018303746737,
+        "wilson_hi": 0.15172503894072797
       },
       "convention_blind_given_mag": {
-        "k": 5,
-        "n": 10,
-        "rate": 0.5,
-        "wilson_lo": 0.236593090512564,
-        "wilson_hi": 0.7634069094874361
+        "k": 8,
+        "n": 17,
+        "rate": 0.47058823529411764,
+        "wilson_lo": 0.2616510644240944,
+        "wilson_hi": 0.6903676493999558
       },
       "sign_wrong_given_mag": {
-        "k": 5,
-        "n": 10,
-        "rate": 0.5,
-        "wilson_lo": 0.236593090512564,
-        "wilson_hi": 0.7634069094874361
+        "k": 8,
+        "n": 17,
+        "rate": 0.47058823529411764,
+        "wilson_lo": 0.2616510644240944,
+        "wilson_hi": 0.6903676493999558
       }
     },
     "qwen3-4b-think|dflt": {
-      "n_vars": 38,
+      "n_vars": 163,
       "labels": {
-        "ERR_MISSING": 33,
-        "PASS": 4,
-        "ERR_SIGN_CONVENTION": 1
+        "ERR_MISSING": 141,
+        "PASS": 20,
+        "ERR_SIGN_CONVENTION": 1,
+        "ERR_VAL": 1
       },
       "var_mag_correct": {
-        "k": 5,
-        "n": 38,
-        "rate": 0.13157894736842105,
-        "wilson_lo": 0.05753867690120132,
-        "wilson_hi": 0.2732685944229132
+        "k": 21,
+        "n": 163,
+        "rate": 0.12883435582822086,
+        "wilson_lo": 0.08583202711922758,
+        "wilson_hi": 0.18892856982544617
       },
       "convention_blind_given_mag": {
         "k": 1,
-        "n": 5,
-        "rate": 0.2,
-        "wilson_lo": 0.036224108632430085,
-        "wilson_hi": 0.6244653702374747
+        "n": 21,
+        "rate": 0.047619047619047616,
+        "wilson_lo": 0.008455987809826399,
+        "wilson_hi": 0.22669360074122563
       },
       "sign_wrong_given_mag": {
         "k": 1,
-        "n": 5,
-        "rate": 0.2,
-        "wilson_lo": 0.036224108632430085,
-        "wilson_hi": 0.6244653702374747
+        "n": 21,
+        "rate": 0.047619047619047616,
+        "wilson_lo": 0.008455987809826399,
+        "wilson_hi": 0.22669360074122563
       }
     },
     "qwen3-4b-think|top": {
-      "n_vars": 24,
+      "n_vars": 141,
       "labels": {
-        "ERR_MISSING": 19,
-        "ERR_VAL": 5
+        "ERR_MISSING": 87,
+        "ERR_VAL": 53,
+        "ERR_SIGN_INCOHERENT": 1
       },
       "var_mag_correct": {
-        "k": 0,
-        "n": 24,
-        "rate": 0.0,
-        "wilson_lo": 1.3877787807814457e-17,
-        "wilson_hi": 0.13797620467498017
+        "k": 1,
+        "n": 141,
+        "rate": 0.0070921985815602835,
+        "wilson_lo": 0.0012530461940498637,
+        "wilson_hi": 0.03907697304391938
       },
       "convention_blind_given_mag": {
         "k": 0,
-        "n": 0,
-        "rate": NaN,
-        "wilson_lo": NaN,
-        "wilson_hi": NaN
+        "n": 1,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.7934506856227626
       },
       "sign_wrong_given_mag": {
-        "k": 0,
-        "n": 0,
-        "rate": NaN,
-        "wilson_lo": NaN,
-        "wilson_hi": NaN
+        "k": 1,
+        "n": 1,
+        "rate": 1.0,
+        "wilson_lo": 0.20654931437723745,
+        "wilson_hi": 1.0
       }
     }
   }
