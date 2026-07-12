@@ -64,7 +64,7 @@ models:
 
   - {key: r1-distill-7b,   model_id: "deepseek-r1-distill-qwen-7b",             family: deepseek-distill, role_axis: reasoning, scale_tier: 7b,  think_style: none, contrast: "C2-sft", needs_download: true, enabled: false}
   - {key: qwen25-32b, serve_id: "sweep-qwen2.5-32b",      model_id: "qwen2.5-32b-instruct", family: qwen2.5, role_axis: base, scale_tier: 32b, think_style: none, contrast: "C2-sft-32b", max_tokens: 4096, enabled: true}
-  - {key: r1-distill-32b, serve_id: "sweep-r1-distill-32b", concurrency: 3,  model_id: "deepseek-r1-distill-qwen-32b-mlx", family: deepseek-distill, role_axis: reasoning, scale_tier: 32b, think_style: none, contrast: "C2-sft-32b", enabled: true}
+  - {key: r1-distill-32b, serve_id: "sweep-r1-distill-32b", concurrency: 4,  model_id: "deepseek-r1-distill-qwen-32b-mlx", family: deepseek-distill, role_axis: reasoning, scale_tier: 32b, think_style: none, contrast: "C2-sft-32b", enabled: true}
   - {key: gpt-oss-120b,    model_id: "gpt-oss-120b",                            family: openai-oss,       role_axis: reasoning, scale_tier: 120b-moe, think_style: none, needs_download: true, enabled: false}
 
   # ===========================================================================
