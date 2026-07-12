@@ -50,7 +50,7 @@ models:
   # --- anchors (newer-gen Qwen + MoE + non-Qwen lineage) ---
   - {key: qwen36-27b,     model_id: "qwen3.6-27b-mlx",      family: qwen3.6, role_axis: reasoning, scale_tier: 27b,     engine: mlx,  quant: 8bit, think: true, think_style: qwen_slash, enabled: true}
   - {key: qwen36-35b-a3b, model_id: "qwen/qwen3.6-35b-a3b", family: qwen3.6, role_axis: reasoning, scale_tier: 35b-moe, engine: mlx,  quant: 8bit, think: true, think_style: qwen_slash, enabled: true}
-  - {key: gemma4-31b, serve_id: "sweep-gemma4-31b", concurrency: 2,     model_id: "google/gemma-4-31b-qat", family: gemma4, role_axis: base,     scale_tier: 31b,     engine: gguf, quant: Q4_0, think_style: none, enabled: true}
+  - {key: gemma4-31b, serve_id: "sweep-gemma4-31b", concurrency: 4,     model_id: "google/gemma-4-31b-qat", family: gemma4, role_axis: base,     scale_tier: 31b,     engine: gguf, quant: Q4_0, think_style: none, enabled: true}
 
   # ===========================================================================
   # DOWNLOADING / TO DOWNLOAD — flip enabled once `lms ls` shows them; fix ids to the live id.
