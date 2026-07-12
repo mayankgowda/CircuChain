@@ -27,6 +27,22 @@ V2 = os.path.abspath(os.path.join(HERE, ".."))
 REPO = os.path.abspath(os.path.join(V2, ".."))
 
 
+def _load_dotenv() -> None:
+    """Load v2/.env (gitignored) into os.environ so API keys never touch config, CLI args,
+    logs, or this chat. Real env vars win; only simple KEY=VALUE lines are parsed."""
+    path = os.path.join(V2, ".env")
+    if not os.path.exists(path):
+        return
+    for line in open(path):
+        line = line.strip()
+        if line and not line.startswith("#") and "=" in line:
+            k, _, v = line.partition("=")
+            os.environ.setdefault(k.strip(), v.strip().strip('"').strip("'"))
+
+
+_load_dotenv()
+
+
 def _v2path(p: str) -> str:
     return p if os.path.isabs(p) else os.path.join(V2, p)
 
