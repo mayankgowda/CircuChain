@@ -8,6 +8,9 @@ def build_provider(cfg: dict):
     if backend == "lmstudio":
         from .lmstudio import LMStudioProvider
         return LMStudioProvider(cfg)
+    if backend in ("openai_compat", "api"):
+        from .openai_compat import OpenAICompatProvider
+        return OpenAICompatProvider(cfg)
     if backend == "ollama":
         from .ollama import OllamaProvider
         return OllamaProvider(cfg)

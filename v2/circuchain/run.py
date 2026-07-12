@@ -96,6 +96,7 @@ async def run_model(model_cfg: dict, defaults: dict, instances: List[dict],
              f"concurrency={concurrency}")
 
     fingerprint = provider.fingerprint()      # once — not one HTTP GET per instance
+    is_local = cfg.get("backend", "lmstudio") == "lmstudio"
     sem = asyncio.Semaphore(concurrency)
     write_lock = asyncio.Lock()
     reload_lock = asyncio.Lock()
@@ -162,19 +163,20 @@ async def run_model(model_cfg: dict, defaults: dict, instances: List[dict],
                     health["consecutive_failures"] += 1
                     health["since_reload"] = health.get("since_reload", 0) + 1
                 if comp is None:
-                    # trigger: burst of failures OR steady intermittent bleed since last
-                    # reload, with a 60s cooldown so reloads can't thrash
-                    now = asyncio.get_event_loop().time()
-                    due = (health["consecutive_failures"] >= 4
-                           or health.get("since_reload", 0) >= 10)
-                    cooled = now - health.get("last_reload_at", 0) > 60
-                    if due and cooled and not reload_lock.locked():
-                        async with reload_lock:
-                            if (health["consecutive_failures"] >= 4
-                                    or health.get("since_reload", 0) >= 10):
-                                await _reload_model()
-                                health["consecutive_failures"] = 0
-                                health["since_reload"] = 0
+                    # LOCAL only: reload the evicted/wedged instance. API failures (429/5xx)
+                    # are handled by the backoff below — `lms load` would be nonsensical.
+                    if is_local:
+                        now = asyncio.get_event_loop().time()
+                        due = (health["consecutive_failures"] >= 4
+                               or health.get("since_reload", 0) >= 10)
+                        cooled = now - health.get("last_reload_at", 0) > 60
+                        if due and cooled and not reload_lock.locked():
+                            async with reload_lock:
+                                if (health["consecutive_failures"] >= 4
+                                        or health.get("since_reload", 0) >= 10):
+                                    await _reload_model()
+                                    health["consecutive_failures"] = 0
+                                    health["since_reload"] = 0
                     await asyncio.sleep(2 * 3 ** attempt)
             if comp is None:
                 # record and skip — the id stays out of responses, so resume retries it later
