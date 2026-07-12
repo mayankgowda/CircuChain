@@ -11,3 +11,5 @@ pilot/*
 !pilot/reports/**
 !tables/
 !tables/**
+!figures/
+!figures/**

@@ -213,7 +213,15 @@ def analyze(
     summary = analyze_graded(_v2path(graded), _v2path(out), _v2path(dataset))
     typer.echo(f"analyzed {summary['n_rows']} graded rows across {len(summary['models'])} models\n")
     typer.echo(format_factor_table(summary))
-    typer.echo(f"\nWrote {_v2path(out)}/cell_rates.csv, factor_pairs.csv, analysis.json")
+    typer.echo(f"\nWrote {_v2path(out)}/cell_rates.csv, factor_pairs.csv, "
+               "var_level*.csv, analysis.json")
+    try:
+        from .analyze.figures import make_figures
+        figs = make_figures(os.path.join(_v2path(out), "analysis.json"),
+                            _v2path("results/figures"))
+        typer.echo(f"Wrote {len(figs)} figure files to {_v2path('results/figures')}")
+    except Exception as e:  # noqa: BLE001  — figures are optional; never fail the analysis on them
+        typer.echo(f"(figures skipped: {e})")
 
 
 if __name__ == "__main__":
