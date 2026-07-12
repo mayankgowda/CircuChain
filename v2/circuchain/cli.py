@@ -204,11 +204,13 @@ def grade(
 def analyze(
     graded: str = typer.Option("results/graded", help="graded rows dir"),
     out: str = typer.Option("results/tables", help="tables output dir"),
+    dataset: str = typer.Option("results/datasets/v2_seed20260709",
+                                help="dataset dir (for the diagnostic-vars-restricted table)"),
 ):
     """Within-physics McNemar paired tests per factor, Wilson CIs, rate tables."""
     from .analyze.tables import analyze_graded, format_factor_table
 
-    summary = analyze_graded(_v2path(graded), _v2path(out))
+    summary = analyze_graded(_v2path(graded), _v2path(out), _v2path(dataset))
     typer.echo(f"analyzed {summary['n_rows']} graded rows across {len(summary['models'])} models\n")
     typer.echo(format_factor_table(summary))
     typer.echo(f"\nWrote {_v2path(out)}/cell_rates.csv, factor_pairs.csv, analysis.json")

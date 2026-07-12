@@ -39,9 +39,25 @@ def _rate(k: int, n: int) -> dict:
             "wilson_lo": lo, "wilson_hi": hi}
 
 
-def analyze_graded(graded_dir: str, out_dir: str) -> dict:
+def _load_diagnostic_map(dataset_dir: str) -> dict:
+    """instance_id -> {var: bool} from the dataset. A var is 'diagnostic' for its cell when the
+    contract-correct and default-prior answers disagree in sign — i.e. the ONLY vars where a
+    given factor flip can produce a convention error. Restricting to these de-dilutes the
+    per-factor rates (a node voltage can't be mesh-direction-blind)."""
+    path = os.path.join(dataset_dir, "instances.jsonl")
+    out = {}
+    if os.path.exists(path):
+        with open(path) as f:
+            for line in f:
+                row = json.loads(line)
+                out[row["id"]] = row.get("diagnostic_vars", {})
+    return out
+
+
+def analyze_graded(graded_dir: str, out_dir: str, dataset_dir: str = "") -> dict:
     rows = _load_graded(graded_dir)
     os.makedirs(out_dir, exist_ok=True)
+    diag_map = _load_diagnostic_map(dataset_dir) if dataset_dir else {}
 
     # ---------------- per model x cell x regime rates ----------------
     cell_stats: dict = {}
@@ -100,20 +116,30 @@ def analyze_graded(graded_dir: str, out_dir: str) -> dict:
     # At the variable level: among vars whose MAGNITUDE was right, what share carries the
     # wrong sign — and of those, how many match the competing convention exactly?
     var_level: dict = {}
-    by_mc: dict = defaultdict(lambda: Counter())
+    by_mc: dict = defaultdict(lambda: Counter())          # all vars
+    by_mc_diag: dict = defaultdict(lambda: Counter())     # sign-diagnostic vars only
     for r in rows:
-        for _var, lab in r["var_labels"].items():
+        diag = diag_map.get(r["instance_id"], {})
+        for var, lab in r["var_labels"].items():
             by_mc[(r["model"], r["cell"])][lab] += 1
-    for (model, cell), c in sorted(by_mc.items()):
-        mag_ok = c["PASS"] + c["ERR_SIGN_CONVENTION"] + c["ERR_SIGN_INCOHERENT"]
-        var_level[f"{model}|{cell}"] = {
-            "n_vars": sum(c.values()),
-            "labels": dict(c),
-            "var_mag_correct": _rate(mag_ok, sum(c.values())),
-            "convention_blind_given_mag": _rate(c["ERR_SIGN_CONVENTION"], mag_ok),
+            if diag.get(var):
+                by_mc_diag[(r["model"], r["cell"])][lab] += 1
+
+    def _vl(counter: Counter) -> dict:
+        mag_ok = counter["PASS"] + counter["ERR_SIGN_CONVENTION"] + counter["ERR_SIGN_INCOHERENT"]
+        return {
+            "n_vars": sum(counter.values()),
+            "labels": dict(counter),
+            "var_mag_correct": _rate(mag_ok, sum(counter.values())),
+            "convention_blind_given_mag": _rate(counter["ERR_SIGN_CONVENTION"], mag_ok),
             "sign_wrong_given_mag": _rate(
-                c["ERR_SIGN_CONVENTION"] + c["ERR_SIGN_INCOHERENT"], mag_ok),
+                counter["ERR_SIGN_CONVENTION"] + counter["ERR_SIGN_INCOHERENT"], mag_ok),
         }
+
+    for (model, cell), c in sorted(by_mc.items()):
+        var_level[f"{model}|{cell}"] = _vl(c)
+    # diagnostic-restricted: only vars whose sign actually differs default-vs-flip for this cell
+    var_level_diag: dict = {f"{m}|{c}": _vl(cnt) for (m, c), cnt in sorted(by_mc_diag.items())}
 
     # ---------------- write ----------------
     with open(os.path.join(out_dir, "cell_rates.csv"), "w") as f:
@@ -147,9 +173,20 @@ def analyze_graded(graded_dir: str, out_dir: str) -> dict:
                     f"{cb['rate']:.4f},{s['sign_wrong_given_mag']['rate']:.4f},"
                     f"{cb['wilson_lo']:.4f},{cb['wilson_hi']:.4f}\n")
 
+    if var_level_diag:
+        with open(os.path.join(out_dir, "var_level_diagnostic.csv"), "w") as f:
+            f.write("model,cell,n_diag_vars,var_mag_correct,convention_blind_given_mag,"
+                    "sign_wrong_given_mag,cb_wilson_lo,cb_wilson_hi\n")
+            for key, s in var_level_diag.items():
+                m, c = key.split("|")
+                cb = s["convention_blind_given_mag"]
+                f.write(f"{m},{c},{s['n_vars']},{s['var_mag_correct']['rate']:.4f},"
+                        f"{cb['rate']:.4f},{s['sign_wrong_given_mag']['rate']:.4f},"
+                        f"{cb['wilson_lo']:.4f},{cb['wilson_hi']:.4f}\n")
+
     summary = {"n_rows": len(rows), "models": models,
                "cell_rates": cell_stats, "factor_pairs": factor_stats,
-               "var_level": var_level}
+               "var_level": var_level, "var_level_diagnostic": var_level_diag}
     with open(os.path.join(out_dir, "analysis.json"), "w") as f:
         json.dump(summary, f, indent=2)
     return summary
