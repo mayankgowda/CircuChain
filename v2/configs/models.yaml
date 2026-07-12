@@ -50,7 +50,7 @@ models:
   # --- anchors (newer-gen Qwen + MoE + non-Qwen lineage) ---
   - {key: qwen36-27b,     model_id: "qwen3.6-27b-mlx",      family: qwen3.6, role_axis: reasoning, scale_tier: 27b,     engine: mlx,  quant: 8bit, think: true, think_style: qwen_slash, enabled: true}
   - {key: qwen36-35b-a3b, model_id: "qwen/qwen3.6-35b-a3b", family: qwen3.6, role_axis: reasoning, scale_tier: 35b-moe, engine: mlx,  quant: 8bit, think: true, think_style: qwen_slash, enabled: true}
-  - {key: gemma4-31b,     model_id: "google/gemma-4-31b-qat", family: gemma4, role_axis: base,     scale_tier: 31b,     engine: gguf, quant: Q4_0, think_style: none, enabled: false}  # -> API
+  - {key: gemma4-31b, serve_id: "sweep-gemma4-31b", concurrency: 2,     model_id: "google/gemma-4-31b-qat", family: gemma4, role_axis: base,     scale_tier: 31b,     engine: gguf, quant: Q4_0, think_style: none, enabled: true}
 
   # ===========================================================================
   # DOWNLOADING / TO DOWNLOAD — flip enabled once `lms ls` shows them; fix ids to the live id.
@@ -81,7 +81,7 @@ models:
   - {key: qwen3-14b-nothink-api, backend: openai_compat, provider: together, base_url: "https://api.together.xyz/v1", api_key_env: TOGETHER_API_KEY, model_id: "Qwen/Qwen3-14B", role_axis: base, scale_tier: 14b, think: false, think_style: qwen_slash, contrast: "C1-reason", max_tokens: 4096, concurrency: 16, enabled: false}  # NON-serverless on Together -> run local
   - {key: qwen3-32b-think-api, backend: openai_compat, provider: together, base_url: "https://api.together.xyz/v1", api_key_env: TOGETHER_API_KEY, model_id: "Qwen/Qwen3-32B", role_axis: reasoning, scale_tier: 32b, think: true, think_style: qwen_slash, contrast: "C1-reason,C3-scale", max_tokens: 16384, concurrency: 16, enabled: false}  # NON-serverless on Together -> run local
   - {key: qwen3-32b-nothink-api, backend: openai_compat, provider: together, base_url: "https://api.together.xyz/v1", api_key_env: TOGETHER_API_KEY, model_id: "Qwen/Qwen3-32B", role_axis: base, scale_tier: 32b, think: false, think_style: qwen_slash, contrast: "C1-reason", max_tokens: 4096, concurrency: 16, enabled: false}  # NON-serverless on Together -> run local
-  - {key: gemma4-31b-api, backend: openai_compat, provider: together, base_url: "https://api.together.xyz/v1", api_key_env: TOGETHER_API_KEY, model_id: "google/gemma-4-31B-it", role_axis: base, scale_tier: 31b, think_style: none, max_tokens: 16384, concurrency: 16, enabled: true}
+  - {key: gemma4-31b-api, backend: openai_compat, provider: together, base_url: "https://api.together.xyz/v1", api_key_env: TOGETHER_API_KEY, model_id: "google/gemma-4-31B-it", role_axis: base, scale_tier: 31b, think_style: none, max_tokens: 16384, concurrency: 16, enabled: false}  # running local instead
   - {key: qwen36-35b-a3b-api, backend: openai_compat, provider: together, base_url: "https://api.together.xyz/v1", api_key_env: TOGETHER_API_KEY, model_id: "Qwen/Qwen3.6-35B-A3B-FP8", role_axis: reasoning, scale_tier: 35b-moe, think_style: none, max_tokens: 16384, concurrency: 16, enabled: false}  # NON-serverless on Together -> run local
   - {key: gpt-oss-120b-api, backend: openai_compat, provider: together, base_url: "https://api.together.xyz/v1", api_key_env: TOGETHER_API_KEY, model_id: "openai/gpt-oss-120b", role_axis: reasoning, scale_tier: 120b-moe, think_style: none, max_tokens: 16384, concurrency: 16, enabled: true}
 
