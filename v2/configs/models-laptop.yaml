@@ -1,0 +1,36 @@
+# CircuChain v2 — M1 Max 32 GB laptop panel (mid-tier local columns).
+#
+# WHY A SEPARATE FILE: the M1 Max and the M5 Max both run Apple **MLX at 8-bit**, so a
+# column produced here is the SAME serving stack as one produced on the M5 — no
+# scale-vs-stack confound in C1 (think/no_think) or C3 (scale ladder). That is the whole
+# reason it is safe to split the local ladder across the two Macs. Do NOT run these on a
+# different quant or engine (e.g. GGUF Q4) — that would break homogeneity with the M5 rungs.
+#
+# ASSIGNMENT: this box owns the mid-tier (8b, 14b) that the 32 GB budget handles comfortably.
+# The M5 keeps 1.7b (fast there), the 32b pair, r1-distill-32b, and the 27b/35b anchors.
+# Run ONE full 1000-instance column at a time (see LAPTOP_RUNBOOK.md). Recommended order —
+# think columns first, because they gate the C3 scale ladder:
+#     qwen3-14b-think  ->  qwen3-8b-think  ->  qwen3-14b-nothink  ->  qwen3-8b-nothink
+#
+# Every value below MUST match the M5 panel (configs/models.yaml) exactly, or provenance
+# diverges: temp 0.6 / top_p 0.95 / top_k 20, max_tokens 16384, num_ctx 24576.
+# concurrency 2 is the 32 GB-safe MLX profile (the M5 uses 3 with 128 GB headroom; both are
+# fine — concurrency does not affect sampled outputs, only throughput). Try 3 only if
+# `lms ps` shows plenty of free memory and no "model has crashed" errors appear.
+
+defaults:
+  backend: lmstudio
+  concurrency: 2
+  num_ctx: 24576
+  max_tokens: 16384
+  temperature: 0.6
+  top_p: 0.95
+  top_k: 20
+
+models:
+  # scale_tier 14b — highest-value rungs this box can hold (~15 GB weights @ 8-bit + KV).
+  - {key: qwen3-14b-think,   serve_id: "laptop-qwen3-14b", model_id: "qwen/qwen3-14b", family: qwen3, role_axis: reasoning, scale_tier: 14b, engine: mlx, quant: 8bit, think: true,  think_style: qwen_slash, contrast: "C1-reason,C3-scale", enabled: true}
+  - {key: qwen3-14b-nothink, serve_id: "laptop-qwen3-14b", model_id: "qwen/qwen3-14b", family: qwen3, role_axis: base,      scale_tier: 14b, engine: mlx, quant: 8bit, think: false, think_style: qwen_slash, contrast: "C1-reason",         enabled: true}
+  # scale_tier 8b — the safe/fast pair; low OOM risk if you want to start conservatively.
+  - {key: qwen3-8b-think,    serve_id: "laptop-qwen3-8b",  model_id: "qwen/qwen3-8b",  family: qwen3, role_axis: reasoning, scale_tier: 8b,  engine: mlx, quant: 8bit, think: true,  think_style: qwen_slash, contrast: "C1-reason,C3-scale", enabled: true}
+  - {key: qwen3-8b-nothink,  serve_id: "laptop-qwen3-8b",  model_id: "qwen/qwen3-8b",  family: qwen3, role_axis: base,      scale_tier: 8b,  engine: mlx, quant: 8bit, think: false, think_style: qwen_slash, contrast: "C1-reason",         enabled: true}
