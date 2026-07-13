@@ -96,7 +96,13 @@ async def run_model(model_cfg: dict, defaults: dict, instances: List[dict],
              f"concurrency={concurrency}")
 
     fingerprint = provider.fingerprint()      # once — not one HTTP GET per instance
-    is_local = cfg.get("backend", "lmstudio") == "lmstudio"
+    # "local" gates the `lms`-CLI reload armor, which can only control THIS machine's LM Studio.
+    # A remote LM Studio (another Mac serving on the LAN, host=http://<ip>:1234) is same-stack for
+    # provenance (still MLX) but its models can't be reloaded from here — disable the armor and
+    # rely on the provider-agnostic 4-attempt retry + convergence passes instead.
+    host = cfg.get("host", "http://localhost:1234")
+    host_is_local = ("localhost" in host) or ("127.0.0.1" in host)
+    is_local = (cfg.get("backend", "lmstudio") == "lmstudio") and host_is_local
     sem = asyncio.Semaphore(concurrency)
     write_lock = asyncio.Lock()
     reload_lock = asyncio.Lock()
@@ -217,7 +223,8 @@ async def run_model(model_cfg: dict, defaults: dict, instances: List[dict],
             progress(f"[{model_key}] pass {sweep_pass + 1}: retrying {len(remaining)} "
                      f"failed/incomplete instances after 120s settle")
             await asyncio.sleep(120)
-            await _reload_model()
+            if is_local:                       # remote host: can't reload it from here, just settle
+                await _reload_model()
         before = _done_ids(responses_path)
         counters["failed"] = 0
         health["consecutive_failures"] = 0
