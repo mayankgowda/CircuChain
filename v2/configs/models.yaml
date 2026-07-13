@@ -86,6 +86,35 @@ models:
   - {key: gpt-oss-120b-api, backend: openai_compat, provider: together, base_url: "https://api.together.xyz/v1", api_key_env: TOGETHER_API_KEY, model_id: "openai/gpt-oss-120b", role_axis: reasoning, scale_tier: 120b-moe, think_style: none, max_tokens: 16384, concurrency: 16, enabled: true}
 
   # ===========================================================================
+  # API OFFLOAD via OpenRouter (backend openai_compat, key from env OPENROUTER_API_KEY
+  # in gitignored v2/.env).
+  #
+  # PROVENANCE POLICY — read before enabling anything here:
+  #   OpenRouter is a DIFFERENT serving stack from the local MLX-8bit Macs. Mixing an
+  #   OpenRouter rung into a causal contrast (C1 think/no_think, C2 base/distill, C3 scale
+  #   ladder) confounds the effect with the inference stack. Therefore ONLY standalone
+  #   anchors (no `contrast:` tag) are OpenRouter-eligible. The qwen3 ladder + all C1/C2/C3
+  #   columns stay on the Macs. (The two Macs are the SAME stack, so splitting the ladder
+  #   across M5 + M1 is fine — see LAPTOP_RUNBOOK.md.)
+  #
+  #   Routing is PINNED so a run is reproducible: extra_body.provider forces one upstream
+  #   provider + one quantization and forbids fallback; require_parameters drops providers
+  #   that can't honor temp/top_p/top_k. api_quant is recorded in the provenance sidecar.
+  #
+  # GATE (all disabled): before enabling, add OPENROUTER_API_KEY to v2/.env, then run a
+  # catalog check to confirm (a) the model slug exists, (b) which provider serves it and at
+  # what quant, and set model_id / provider.order / quantizations / api_quant to real values.
+  # The slugs + quants below are PLACEHOLDERS — do not trust them unverified.
+  - {key: qwen36-27b-api, backend: openai_compat, provider: openrouter, base_url: "https://openrouter.ai/api/v1", api_key_env: OPENROUTER_API_KEY,
+     model_id: "qwen/qwen3.6-27b", role_axis: base, scale_tier: 27b, think_style: none, max_tokens: 16384, concurrency: 8,
+     api_quant: "VERIFY", needs_catalog_check: true, enabled: false,
+     extra_body: {provider: {order: ["VERIFY"], allow_fallbacks: false, quantizations: ["VERIFY"]}, require_parameters: true}}   # standalone anchor -> OpenRouter-eligible
+  - {key: qwen36-35b-a3b-openrouter, backend: openai_compat, provider: openrouter, base_url: "https://openrouter.ai/api/v1", api_key_env: OPENROUTER_API_KEY,
+     model_id: "qwen/qwen3.6-35b-a3b", role_axis: reasoning, scale_tier: 35b-moe, think_style: none, max_tokens: 16384, concurrency: 8,
+     api_quant: "VERIFY", needs_catalog_check: true, enabled: false,
+     extra_body: {provider: {order: ["VERIFY"], allow_fallbacks: false, quantizations: ["VERIFY"]}, require_parameters: true}}   # standalone anchor -> OpenRouter-eligible
+
+  # ===========================================================================
   # EXCLUDED (documented for the paper's panel-selection appendix)
   # ===========================================================================
   # qwen3.5-9b        : pathological ruminator — truncated 32/32 at 4096 AND 12288 max_tokens
