@@ -72,10 +72,15 @@ async def run_model(model_cfg: dict, defaults: dict, instances: List[dict],
     # Ensure the serving instance exists before issuing the plan. Instances get evicted while
     # queued behind another column (observed: a sequential C2 pair died at handoff because the
     # second model was flushed hours earlier), so a column START must load, not just assert.
+    remote_link = bool(cfg.get("remote_link", False))
     if hasattr(provider, "assert_loaded"):
         try:
             provider.assert_loaded(gp.num_ctx)
         except Exception:  # noqa: BLE001
+            if remote_link:
+                # Served on a linked device via LM Link — cannot `lms load` it from here.
+                # Surface it so the operator loads it on that machine, don't load locally.
+                raise
             serve = cfg["model_id"]
             progress(f"[{model_key}] not loaded at column start — loading {load_id} as {serve}")
             load_cmd = ["lms", "load", load_id, "--context-length", str(gp.num_ctx),
@@ -102,7 +107,12 @@ async def run_model(model_cfg: dict, defaults: dict, instances: List[dict],
     # rely on the provider-agnostic 4-attempt retry + convergence passes instead.
     host = cfg.get("host", "http://localhost:1234")
     host_is_local = ("localhost" in host) or ("127.0.0.1" in host)
-    is_local = (cfg.get("backend", "lmstudio") == "lmstudio") and host_is_local
+    # remote_link: the model is served on ANOTHER machine but reached through THIS box's LM Studio
+    # via LM Link (host is localhost, but the instance lives on a linked device). Same MLX stack
+    # for provenance, yet `lms unload/load <id>` here would disturb the linked instance — so treat
+    # it as non-local: no reload armor, rely on retry + convergence passes.
+    is_local = ((cfg.get("backend", "lmstudio") == "lmstudio")
+                and host_is_local and not cfg.get("remote_link", False))
     sem = asyncio.Semaphore(concurrency)
     write_lock = asyncio.Lock()
     reload_lock = asyncio.Lock()

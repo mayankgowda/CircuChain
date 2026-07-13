@@ -1,0 +1,31 @@
+# CircuChain v2 — columns served on the M1 Max (32 GB) via LM Studio **LM Link**.
+#
+# The M1 runs the model; this M5 reaches it through its OWN localhost:1234, which LM Link
+# forwards to the linked M1 instance (seen in `lms ps` with DEVICE=Mayanks-MacBook-Pro-M1-Max).
+# So `host` stays the default localhost and `model_id` is the LINK instance id as it appears in
+# the M5's `/api/v0/models` (e.g. `qwen3-1.7b-mlx`, NOT `qwen/qwen3-1.7b`).
+#
+# Same serving stack as the M5 (Apple MLX 8-bit) -> no scale/stack confound in C1/C3.
+# `remote_link: true` disables the local `lms` reload-armor (it would disturb the M1 instance);
+# transient flakes fall back to the runner's 4-attempt retry + convergence passes.
+#
+# Sampling policy is identical to the M5 panel and is applied PER REQUEST by the runner
+# (temp 0.6 / top_p 0.95 / top_k 20) — independent of how the model was loaded on the M1.
+# concurrency 2 keeps the smaller/less-optimized box comfortable.
+#
+# To add the 8b columns: load `qwen/qwen3-8b` (MLX 8-bit) on the M1, then read its link id from
+# `lms ps` on the M5 and set model_id to that id below (uncomment + fix).
+
+defaults:
+  backend: lmstudio
+  concurrency: 2
+  num_ctx: 24576
+  max_tokens: 16384
+  temperature: 0.6
+  top_p: 0.95
+  top_k: 20
+
+models:
+  - {key: qwen3-1.7b-think, model_id: "qwen3-1.7b-mlx", remote_link: true, family: qwen3, role_axis: reasoning, scale_tier: 1.7b, engine: mlx, quant: 8bit, think: true, think_style: qwen_slash, contrast: "C1-reason,C3-scale", enabled: true}
+  # - {key: qwen3-8b-think,   model_id: "<M1 link id for qwen3-8b>", remote_link: true, family: qwen3, role_axis: reasoning, scale_tier: 8b, engine: mlx, quant: 8bit, think: true,  think_style: qwen_slash, contrast: "C1-reason,C3-scale", enabled: true}
+  # - {key: qwen3-8b-nothink, model_id: "<M1 link id for qwen3-8b>", remote_link: true, family: qwen3, role_axis: base,      scale_tier: 8b, engine: mlx, quant: 8bit, think: false, think_style: qwen_slash, contrast: "C1-reason",         enabled: true}
