@@ -48,19 +48,21 @@ models:
   - {key: qwen25-7b-instruct, serve_id: "sweep-qwen2.5-7b-instruct", model_id: "qwen2.5-7b-instruct", family: qwen2.5, role_axis: base, scale_tier: 7b, engine: gguf, quant: Q4_K_M, think_style: none, contrast: "C2-sft", max_tokens: 4096, enabled: true}
 
   # --- anchors (newer-gen Qwen + MoE + non-Qwen lineage) ---
-  - {key: qwen36-27b,     model_id: "qwen3.6-27b-mlx",      family: qwen3.6, role_axis: reasoning, scale_tier: 27b,     engine: mlx,  quant: 8bit, think: true, think_style: qwen_slash, enabled: true}
-  - {key: qwen36-35b-a3b, model_id: "qwen/qwen3.6-35b-a3b", family: qwen3.6, role_axis: reasoning, scale_tier: 35b-moe, engine: mlx,  quant: 8bit, think: true, think_style: qwen_slash, enabled: true}
+  - {key: qwen36-27b,     model_id: "qwen3.6-27b-mlx",      family: qwen3.6, role_axis: reasoning, scale_tier: 27b,     engine: mlx,  quant: 8bit, think: true, think_style: qwen_slash, enabled: false}  # -> OpenRouter (qwen36-27b-api) to free the M5
+  - {key: qwen36-35b-a3b, model_id: "qwen/qwen3.6-35b-a3b", family: qwen3.6, role_axis: reasoning, scale_tier: 35b-moe, engine: mlx,  quant: 8bit, think: true, think_style: qwen_slash, enabled: false}  # -> OpenRouter (qwen36-35b-a3b-openrouter) to free the M5
   - {key: gemma4-31b, serve_id: "sweep-gemma4-31b", concurrency: 4,     model_id: "google/gemma-4-31b-qat", family: gemma4, role_axis: base,     scale_tier: 31b,     engine: gguf, quant: Q4_0, think_style: none, enabled: false}  # -> back to API (frees GPU for local-only work)
 
   # ===========================================================================
   # DOWNLOADING / TO DOWNLOAD — flip enabled once `lms ls` shows them; fix ids to the live id.
   # ===========================================================================
-  - {key: qwen3-8b-think, serve_id: "sweep-qwen3-8b", concurrency: 2, num_ctx: 24576,   model_id: "qwen/qwen3-8b",  family: qwen3, role_axis: reasoning, scale_tier: 8b,  think: true,  think_style: qwen_slash, contrast: "C1-reason,C3-scale", enabled: true}
+  - {key: qwen3-8b-think, serve_id: "sweep-qwen3-8b", concurrency: 3, num_ctx: 24576,   model_id: "qwen/qwen3-8b",  family: qwen3, role_axis: reasoning, scale_tier: 8b,  think: true,  think_style: qwen_slash, contrast: "C1-reason,C3-scale", enabled: true}
   - {key: qwen3-8b-nothink, serve_id: "sweep-qwen3-8b",  model_id: "qwen/qwen3-8b",  family: qwen3, role_axis: base,      scale_tier: 8b,  think: false, think_style: qwen_slash, contrast: "C1-reason", max_tokens: 4096, enabled: true}
-  - {key: qwen3-14b-think, serve_id: "sweep-qwen3-14b", concurrency: 2, num_ctx: 24576,   model_id: "qwen/qwen3-14b", family: qwen3, role_axis: reasoning, scale_tier: 14b, think: true,  think_style: qwen_slash, contrast: "C1-reason,C3-scale", enabled: true}
-  - {key: qwen3-14b-nothink, serve_id: "sweep-qwen3-14b", model_id: "qwen/qwen3-14b", family: qwen3, role_axis: base,      scale_tier: 14b, think: false, think_style: qwen_slash, contrast: "C1-reason", max_tokens: 4096, enabled: true}
-  - {key: qwen3-32b-think, serve_id: "sweep-qwen3-32b", concurrency: 2, num_ctx: 24576,   model_id: "qwen/qwen3-32b", family: qwen3, role_axis: reasoning, scale_tier: 32b, think: true,  think_style: qwen_slash, contrast: "C1-reason,C3-scale", enabled: true}
-  - {key: qwen3-32b-nothink, serve_id: "sweep-qwen3-32b", model_id: "qwen/qwen3-32b", family: qwen3, role_axis: base,      scale_tier: 32b, think: false, think_style: qwen_slash, contrast: "C1-reason", max_tokens: 4096, enabled: true}
+  # C1@14b + C1@32b via OpenRouter/DeepInfra-fp8 (both halves of each pair on ONE stack -> valid within-model C1).
+  # /no_think toggle verified on DeepInfra 2026-07-17 (reasoning 204 -> 1 tokens). think budget 16384 == DeepInfra max_out.
+  - {key: qwen3-14b-think,   backend: openai_compat, provider: openrouter, base_url: "https://openrouter.ai/api/v1", api_key_env: OPENROUTER_API_KEY, model_id: "qwen/qwen3-14b", family: qwen3, role_axis: reasoning, scale_tier: 14b, engine: api, quant: fp8, think: true,  think_style: qwen_slash, contrast: "C1-reason,C3-scale", max_tokens: 16384, concurrency: 8, api_quant: "fp8", enabled: true, extra_body: {provider: {order: ["DeepInfra"], allow_fallbacks: false, quantizations: ["fp8"], require_parameters: true}}}
+  - {key: qwen3-14b-nothink, backend: openai_compat, provider: openrouter, base_url: "https://openrouter.ai/api/v1", api_key_env: OPENROUTER_API_KEY, model_id: "qwen/qwen3-14b", family: qwen3, role_axis: base,      scale_tier: 14b, engine: api, quant: fp8, think: false, think_style: qwen_slash, contrast: "C1-reason",         max_tokens: 4096,  concurrency: 8, api_quant: "fp8", enabled: true, extra_body: {provider: {order: ["DeepInfra"], allow_fallbacks: false, quantizations: ["fp8"], require_parameters: true}}}
+  - {key: qwen3-32b-think,   backend: openai_compat, provider: openrouter, base_url: "https://openrouter.ai/api/v1", api_key_env: OPENROUTER_API_KEY, model_id: "qwen/qwen3-32b", family: qwen3, role_axis: reasoning, scale_tier: 32b, engine: api, quant: fp8, think: true,  think_style: qwen_slash, contrast: "C1-reason,C3-scale", max_tokens: 16384, concurrency: 8, api_quant: "fp8", enabled: true, extra_body: {provider: {order: ["DeepInfra"], allow_fallbacks: false, quantizations: ["fp8"], require_parameters: true}}}
+  - {key: qwen3-32b-nothink, backend: openai_compat, provider: openrouter, base_url: "https://openrouter.ai/api/v1", api_key_env: OPENROUTER_API_KEY, model_id: "qwen/qwen3-32b", family: qwen3, role_axis: base,      scale_tier: 32b, engine: api, quant: fp8, think: false, think_style: qwen_slash, contrast: "C1-reason",         max_tokens: 4096,  concurrency: 8, api_quant: "fp8", enabled: true, extra_body: {provider: {order: ["DeepInfra"], allow_fallbacks: false, quantizations: ["fp8"], require_parameters: true}}}
 
   - {key: r1-distill-7b,   model_id: "deepseek-r1-distill-qwen-7b",             family: deepseek-distill, role_axis: reasoning, scale_tier: 7b,  think_style: none, contrast: "C2-sft", needs_download: true, enabled: false}
   - {key: qwen25-32b, serve_id: "sweep-qwen2.5-32b",      model_id: "qwen2.5-32b-instruct", family: qwen2.5, role_axis: base, scale_tier: 32b, think_style: none, contrast: "C2-sft-32b", max_tokens: 4096, enabled: true}
@@ -106,13 +108,13 @@ models:
   # what quant, and set model_id / provider.order / quantizations / api_quant to real values.
   # The slugs + quants below are PLACEHOLDERS — do not trust them unverified.
   - {key: qwen36-27b-api, backend: openai_compat, provider: openrouter, base_url: "https://openrouter.ai/api/v1", api_key_env: OPENROUTER_API_KEY,
-     model_id: "qwen/qwen3.6-27b", role_axis: base, scale_tier: 27b, think_style: none, max_tokens: 16384, concurrency: 8,
-     api_quant: "VERIFY", needs_catalog_check: true, enabled: false,
-     extra_body: {provider: {order: ["VERIFY"], allow_fallbacks: false, quantizations: ["VERIFY"]}, require_parameters: true}}   # standalone anchor -> OpenRouter-eligible
+     model_id: "qwen/qwen3.6-27b", role_axis: reasoning, scale_tier: 27b, think_style: none, max_tokens: 16384, concurrency: 8,
+     api_quant: "fp8", enabled: true,   # verified 2026-07-16: SiliconFlow fp8, reasoning present, answer correct
+     extra_body: {provider: {order: ["SiliconFlow"], allow_fallbacks: false, quantizations: ["fp8"], require_parameters: true}}}   # standalone anchor -> OpenRouter (pinned)
   - {key: qwen36-35b-a3b-openrouter, backend: openai_compat, provider: openrouter, base_url: "https://openrouter.ai/api/v1", api_key_env: OPENROUTER_API_KEY,
      model_id: "qwen/qwen3.6-35b-a3b", role_axis: reasoning, scale_tier: 35b-moe, think_style: none, max_tokens: 16384, concurrency: 8,
-     api_quant: "VERIFY", needs_catalog_check: true, enabled: false,
-     extra_body: {provider: {order: ["VERIFY"], allow_fallbacks: false, quantizations: ["VERIFY"]}, require_parameters: true}}   # standalone anchor -> OpenRouter-eligible
+     api_quant: "fp8", enabled: true,   # verified 2026-07-16: SiliconFlow fp8
+     extra_body: {provider: {order: ["SiliconFlow"], allow_fallbacks: false, quantizations: ["fp8"], require_parameters: true}}}   # standalone anchor -> OpenRouter (pinned)
 
   # ===========================================================================
   # EXCLUDED (documented for the paper's panel-selection appendix)
