@@ -1,0 +1,427 @@
+% ============================================================================
+% The Clockwise Prior — CircuChain v2 paper draft
+% Compiles standalone with pdflatex (article class). For ARR submission, swap
+% the preamble for the ACL style files (\documentclass[11pt]{article} +
+% \usepackage{acl}) — the body is template-agnostic by design.
+% All numbers come from generated/macros.tex (rebuild:
+%   .venv/bin/python v2/scripts/make_paper_macros.py) — never hard-code results.
+% ============================================================================
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{microtype}
+\input{generated/macros.tex}
+
+\title{\textbf{The Clockwise Prior: Language Models Revert to Trained
+Conventions at Every Scale}\\[4pt]
+\large CircuChain~v2: an oracle-verified, within-problem causal probe of
+instruction following under a strong trained prior}
+\author{Mayank Ravishankara}
+\date{}
+
+\begin{document}
+\maketitle
+
+% ----------------------------------------------------------------------------
+\begin{abstract}
+When an instruction conflicts with a convention that dominates a model's
+training corpus, which wins? We instruct language models to solve linear DC
+circuits under explicitly stated sign conventions --- including one
+counter-normative choice: defining mesh currents \emph{counter-clockwise},
+where textbooks overwhelmingly teach clockwise. Because a circuit's answer is
+verifiable to the sign by a four-way solver agreement (two independent
+hand-derived solvers, exact symbolic MNA, and NGSPICE), obedience is measurable
+exactly, per variable, with no LLM judge. Across \NColumns{} model
+configurations spanning \NFamilies{} families (1.7B--120B+, including GPT-5,
+Gemma-4, GPT-OSS-120B, DeepSeek-V3) and a \CompetenceSpanX$\times$ range of
+task competence, models that solve the physics correctly still report signs in
+the \emph{trained} clockwise frame \BandMin--\BandMax\% of the time (mean
+\BandMean\%) --- a rate strikingly invariant to scale, family, serving stack,
+and reasoning mode. Within-problem matched pairs make the effect causal and
+asymmetric: across all models, flipping the mesh-direction instruction breaks
+\AggB{} previously-solved problems while fixing \AggC{}
+(\AggRatio:1). The failure is convention-specific, not generic
+instruction decay: the same models follow matched \emph{non-convention}
+unusual instructions at \CtlDsRev--\CtlGemmaSci\%$+$, and several obey the
+other two convention factors while disobeying this one. Enabling step-by-step
+reasoning raises competence at every scale but never reduces the reversion;
+the blindness also persists when models solve via nodal analysis --- where loop
+orientation never enters the derivation --- showing the prior acts at the
+\emph{reporting frame}, not the solution procedure. Test--retest resampling
+shows a stable population rate (SD \RetestSD{}pp) arising from stochastic
+per-item behavior: reversion is a biased coin, not a fixed property of items.
+These results identify entrenched conventions as a distinct, quantifiable
+failure mode of instruction following that capability scaling does not fix.
+\end{abstract}
+
+% ----------------------------------------------------------------------------
+\section{Introduction}
+
+Instruction-following evaluations mostly ask whether models comply with
+instructions that are \emph{unopposed}: formatting demands, length limits,
+content constraints. But many real instructions oppose a prior the model has
+absorbed from its training distribution --- a house style, a legacy code
+convention, a discipline-specific sign choice, a safety policy that differs
+from common practice. The operative question is not \emph{can the model follow
+instructions?} but \emph{which wins when an explicit instruction conflicts
+with an entrenched convention?}
+
+Answering that question cleanly requires three things that are rarely
+available at once: (i) a task whose output is \emph{objectively verifiable at
+the precision the convention affects}; (ii) a way to \emph{isolate} the
+convention from the task content, so disobedience is not confounded with
+difficulty; and (iii) models spanning a wide competence range, so
+instruction-following failures can be separated from inability.
+
+Linear DC circuit analysis provides all three. A circuit's solution is exact;
+a sign convention (the direction mesh currents are defined, the reference node
+for voltages, the passive/active sign choice) changes \emph{only the reporting
+frame} of the answer, never the physics; and the dominant textbook convention
+is overwhelmingly one-sided (clockwise mesh currents; bottom-rail ground).
+We build CircuChain~v2: \NInstances{} instances derived from \NPhysics{}
+procedurally generated, four-way-verified physics configurations, each posed
+under a default contract and three single-factor convention flips, in both
+mesh (KVL) and nodal (KCL) methods. Every expected answer --- in every
+convention frame --- is validated independently of the transformation code,
+including a \emph{physically re-grounded} SPICE realization of the
+reference-node flip (\TvPass{} configurations pass).
+
+\paragraph{Contributions.}
+\begin{enumerate}
+  \item \textbf{A sign-exact, LLM-free causal probe of instruction vs.\
+  prior.} Within-physics matched pairs (default vs.\ one flipped factor,
+  identical physics) graded deterministically against a four-way oracle,
+  yielding exact McNemar tests per model and factor
+  (\S\ref{sec:method}).
+  \item \textbf{The clockwise prior, quantified.} Instructed to define mesh
+  currents counter-clockwise, models that get magnitudes right revert to the
+  clockwise frame \BandMin--\BandMax\% of the time --- across
+  \NColumns{} configurations, \NFamilies{} families, and a
+  \CompetenceSpanX$\times$ competence span, including GPT-5. The paired
+  asymmetry is \AggB{} broken vs.\ \AggC{} fixed (\AggRatio:1)
+  (\S\ref{sec:headline}--\S\ref{sec:invariance}).
+  \item \textbf{Specificity.} The same models follow matched non-convention
+  unusual instructions at \CtlGemmaRev--\CtlDsRev\%$+$, and the most capable
+  models obey the other two convention factors (passive-sign, reference-node)
+  while disobeying mesh direction --- an \emph{entrenchment hierarchy} that
+  tracks corpus one-sidedness (\S\ref{sec:specificity}).
+  \item \textbf{Reasoning does not fix it.} Toggling the same weights between
+  reasoning and non-reasoning modes at five scales (1.7B--32B) raises
+  competence but leaves reversion flat; GPT-5 probes show reasoning carries
+  the \emph{competence} while leaving the \emph{frame} untouched
+  (\S\ref{sec:reasoning}).
+  \item \textbf{Frame, not procedure.} The reversion persists when models
+  solve via nodal analysis, where loop orientation never enters the
+  derivation (\S\ref{sec:frame}).
+\end{enumerate}
+
+This work extends our published CircuChain study
+\cite{ravishankara2026circuchain} (100 hand-checked tasks, 5 topologies),
+which identified a compliance--competence divergence. Version~2 scales the
+instrument $10\times$ with a procedural, seed-reproducible generator, replaces
+hand-checking with a four-way verified oracle plus independent transform
+validation, adds the causal matched-pair design, closes a reasoning-toggle
+contrast at five scales, and adds controls, resampling, and frontier models.
+The larger lens also \emph{refines} v1's headline: the reversion \emph{rate}
+is roughly constant everywhere; competence determines only whether the
+reversion is visible at the whole-problem level.
+
+% ----------------------------------------------------------------------------
+\section{Related Work}
+\label{sec:related}
+
+\paragraph{Instructions vs.\ trained priors.}
+Inverse IFEval \cite{inverseifeval2025} benchmarks ``counter-intuitive''
+instructions that require overriding training conventions, scoring compliance
+with rubrics/LLM judges. Wu et al.'s ``Reasoning or Reciting''
+\cite{wu2024reasoning} pose counterfactual task variants (e.g., base-9
+arithmetic) that change task \emph{semantics}. Our probe differs in both
+measurement and design: the oracle is sign-exact and LLM-free; and a
+convention flip leaves the physics \emph{identical}, moving only the reporting
+frame --- so the matched pair isolates pure instruction-vs-prior conflict.
+Semantic-override and sycophancy studies \cite{semanticoverride2026}
+document reversion to pretrained defaults under local redefinition; we
+contribute the quantified reversion \emph{rate}, its cross-family invariance,
+its specificity controls, and its causal (paired) identification.
+
+\paragraph{Instruction-following evaluation.}
+IFEval-style benchmarks measure compliance with verifiable but unopposed
+constraints. Our results argue such suites overestimate steerability
+precisely where it matters: constraints that \emph{oppose} a dominant prior.
+
+\paragraph{CircuChain v1.}
+Our IEEE SoutheastCon 2026 paper \cite{ravishankara2026circuchain}
+introduced the competence/compliance disentanglement on 100 tasks and observed
+that stronger models violated conventions more. \S\ref{sec:invariance}
+reinterprets that observation under a $10\times$ larger, verified instrument.
+
+% ----------------------------------------------------------------------------
+\section{The CircuChain v2 Instrument}
+\label{sec:method}
+
+\paragraph{Physics factory with a four-way oracle.}
+\NPhysics{} physics configurations are sampled across seven linear-DC
+topologies (three-loop supermesh, opposing-T, Wheatstone bridge, ladder, VCVS,
+supernode, VCCS ladder) with sign-permissive component ranges. A candidate is
+accepted only if two independently hand-derived solvers (mesh and nodal
+formulations), an exact rational-arithmetic MNA solver operating on the SPICE
+netlist, and NGSPICE itself agree on every quantity ($10^{-4}$ relative;
+symbolic gate at $10^{-8}$); \emph{zero} accepted configurations required
+retro-correction. Difficulty is tagged by code predicates
+(sign-traps vs.\ controls, balanced $\sim$1:1), never by hand.
+
+\paragraph{Contracts.}
+Each physics is posed under the textbook-default contract and three
+single-factor flips --- mesh direction (\texttt{ccw}), passive$\to$active sign
+(\texttt{act}), reference node bottom$\to$top (\texttt{top}) --- crossed with
+both solution methods (KVL, KCL): eight instances per physics,
+\NInstances{} total. The expected answer under every contract is produced by a
+closed-form frame transform, and \emph{independently validated}: the
+reference-node flip is realized physically (the netlist is re-grounded at the
+top node and re-simulated; node potentials must match, currents must not
+move), the mesh/sign flips are re-derived from raw SPICE branch observables
+per the prompt's stated reference directions, and the diagnostic-variable mask
+is recomputed from stored numbers --- \TvPass{} configurations pass all
+checks. Variables whose sign differs between the instructed and default frames
+are marked \emph{diagnostic}; only they can reveal frame reversion.
+
+\paragraph{Panel, decoding, grading.}
+We evaluate \NColumns{} configurations across \NFamilies{} model families
+(Qwen3 1.7B--32B with its native reasoning toggle; Qwen2.5 7B/32B/72B;
+Llama-3.3-70B; DeepSeek-V3; Gemma-4-31B; GPT-OSS-120B; GPT-5), under one
+decoding policy (temperature 0.6, top-$p$ 0.95, fixed token budgets;
+truncation is a recorded outcome). Serving stacks are pinned and recorded
+(local MLX-8bit for the Qwen3 ladder; single pinned API providers otherwise);
+within-model contrasts never mix stacks. Grading is deterministic: a
+structured \texttt{ANSWER}-line parser, magnitude at 2\% relative tolerance,
+and sign compliance evaluated in the \emph{instructed} frame (agreement of the
+rule grader with an LLM judge on v1 logs: $\kappa=0.944$). No LLM
+participates in generation, verification, or grading of ground truth.
+
+\paragraph{Causal design.}
+For each model, factor, and method, the default-cell and flipped-cell
+responses to the \emph{same physics} form a matched pair; McNemar's exact test
+on discordant pairs ($b$: correct at default, wrong at flip; $c$: the
+reverse) isolates the causal effect of the instruction. We report
+Haldane-corrected odds ratios with seeded bootstrap 95\% CIs and
+Benjamini--Hochberg $q$-values across the factor-pair family.
+
+% ----------------------------------------------------------------------------
+\section{Results}
+
+\subsection{Flipping one instruction collapses solved problems}
+\label{sec:headline}
+
+Table~\ref{tab:main} shows the mesh-direction (\texttt{ccw}) effect for the
+four most competent models. The signature is the \emph{empty $c$ cell}:
+essentially no problem is ever solved under the counter-normative frame while
+failing under the default. Across the entire panel the paired asymmetry is
+$b=\AggB$ vs.\ $c=\AggC$ (\AggRatio:1). For Gemma-4-31B --- the most
+competent model (79\% magnitude-correct) --- whole-problem correctness falls
+from 0.82 to 0.12 under the flip ($\mathrm{OR}_H=\GemmaOrH$,
+$p=\GemmaP$).
+
+\begin{table}[t]
+\centering\small
+\begin{tabular}{lccccccccc}
+\toprule
+Model & Mag. & \multicolumn{2}{c}{Correct rate} & $b$ & $c$ & OR &
+OR$_H$ [95\% CI] & $p$ & $q_{\mathrm{BH}}$\\
+ & corr. & dflt & ccw & & & & & & \\
+\midrule
+\input{generated/table_main.tex}
+\bottomrule
+\end{tabular}
+\caption{Mesh-direction flip, whole-problem level, within-physics matched
+pairs (250 per model; GPT-5 piloted on 62). $b$: correct at default, wrong
+under \texttt{ccw}; $c$: the reverse. OR$_H$ is Haldane-corrected with a
+seeded 10k-replicate bootstrap CI; $q$ is Benjamini--Hochberg across the
+factor-pair family.}
+\label{tab:main}
+\end{table}
+
+\subsection{The rate is invariant: \BandMean\% everywhere}
+\label{sec:invariance}
+
+At the variable level --- among sign-\emph{diagnostic} variables whose
+magnitude the model got right --- the share reported in the trained clockwise
+frame rather than the instructed frame occupies a narrow band:
+\BandMin--\BandMax\% across all \BandN{} configurations
+(Table~\ref{tab:invariance}), spanning a \CompetenceSpanX$\times$ range of
+task competence (0.1\%--79\% magnitude-correct), seven families, two serving
+stacks, and both reasoning modes. Capability determines whether the physics
+gets solved; it does not move the reversion rate. This refines v1's
+``stronger models violate more'': stronger models merely make the constant
+rate \emph{visible} at the whole-problem level. (Because on a diagnostic
+variable the only admissible signs are the two frames', this variable-level
+rate equals sign-error-given-magnitude; the \emph{directional} evidence that
+errors specifically target the trained frame is the paired asymmetry of
+\S\ref{sec:headline} and the controls of \S\ref{sec:specificity}. We report
+the undiluted all-variable rates alongside in the appendix.)
+
+\begin{table}[t]
+\centering\small
+\begin{tabular}{lccc}
+\toprule
+Configuration & Mag.\ correct & CW-frame reversion [95\% CI] & $n$ diag.\\
+\midrule
+\input{generated/table_invariance.tex}
+\bottomrule
+\end{tabular}
+\caption{Reversion to the clockwise frame among magnitude-correct diagnostic
+variables, all \BandN{} panel configurations, sorted by rate. Wilson 95\%
+intervals.}
+\label{tab:invariance}
+\end{table}
+
+\subsection{Reasoning raises competence, not obedience}
+\label{sec:reasoning}
+
+Qwen3's native \texttt{/think} toggle holds weights, prompt, and stack fixed
+while switching reasoning on or off. At all five scales, reasoning raises
+magnitude competence (up to $3\times$) and leaves reversion statistically flat
+(Table~\ref{tab:c1}). Probing GPT-5's reasoning-effort control makes the
+dissociation vivid: at \texttt{minimal} effort it answers instantly from the
+prior and gets the physics \emph{wrong}; at \texttt{low} effort it solves a
+sign-trap to nine decimals --- and still reverts to clockwise at 70.6\%.
+Reasoning is where the competence lives; the frame is chosen elsewhere.
+
+\begin{table}[t]
+\centering\small
+\begin{tabular}{lcccc}
+\toprule
+ & \multicolumn{2}{c}{No-think} & \multicolumn{2}{c}{Think}\\
+Scale & Mag. & Reversion ($n$) & Mag. & Reversion ($n$)\\
+\midrule
+\input{generated/table_c1.tex}
+\bottomrule
+\end{tabular}
+\caption{Reasoning toggle (same weights) across the Qwen3 ladder:
+magnitude-correct rate and CW-frame reversion among magnitude-correct
+diagnostic variables.}
+\label{tab:c1}
+\end{table}
+
+\subsection{The failure is convention-specific}
+\label{sec:specificity}
+
+Three controls rule out generic instruction decay. (1)~\emph{Matched unusual
+non-convention instructions}: on the same default-frame circuits, instructed
+to report variables in reversed order or all values in scientific notation,
+Gemma complies at \CtlGemmaRev\%/\CtlGemmaSci\% and DeepSeek-V3 at
+\CtlDsRev\%/\CtlDsSci\% --- versus $\sim$20\% compliance with the \texttt{ccw}
+convention on the same physics. (2)~\emph{Within-convention dissociation}:
+GPT-5 and Gemma obey the passive-sign and reference-node instructions
+(McNemar $p>0.2$; Gemma \texttt{act} reversion 3.4\%) while disobeying mesh
+direction --- whereas the Qwen family and DeepSeek also show strong
+passive-sign reversion: an \emph{entrenchment hierarchy} in which the
+universally one-sided textbook convention (clockwise) binds every family, and
+factors with more corpus variance bind family-specifically.
+(3)~\emph{Difficulty}: the collapse is equally large on sign-trap and control
+physics (Gemma: $0.77\to0.10$ vs.\ $0.87\to0.13$).
+
+\subsection{Frame, not procedure}
+\label{sec:frame}
+
+If reversion arose from executing the familiar clockwise \emph{procedure},
+it should weaken when the model never uses loops at all. It does not: under
+nodal (KCL) solving --- where mesh currents are only derived at the end ---
+the paired asymmetry persists in full (Gemma $b{=}90,c{=}3$ nodal vs.\
+$b{=}89,c{=}0$ mesh; GPT-OSS $43/1$ vs.\ $20/0$). The prior governs the
+\emph{reporting frame} of the answer, not the derivation route.
+
+\subsection{A stable rate from stochastic items}
+\label{sec:reliability}
+
+Five independent resamples of Gemma on 124 paired instances give reversion
+rates with mean \RetestMean\% and SD \RetestSD{}pp --- the population rate is
+robust to decoding noise --- while only \RetestUnanimity\% of items behave
+unanimously across all \RetestK{} samples. Reversion is a biased coin flipped
+per item ($\sim$4:1 toward the trained frame), not a deterministic property
+of particular problems; claims in this paper are therefore about rates, never
+about items.
+
+% ----------------------------------------------------------------------------
+\section{Discussion}
+
+\paragraph{Why clockwise?} Instructional sources that state a mesh direction
+overwhelmingly prescribe clockwise; we found no mainstream source prescribing
+counter-clockwise as a default. The invariance of the reversion rate across
+families trained on different mixes is consistent with a corpus-frequency
+prior so one-sided that every training distribution inherits it. The
+entrenchment hierarchy (\S\ref{sec:specificity}) matches this reading:
+factors with real corpus variance (reference node, sign convention) bind
+weakly or family-specifically; the one-sided factor binds everyone.
+
+\paragraph{Implications.} (1)~Instruction-following benchmarks that avoid
+prior-opposed constraints overestimate steerability; a compliance suite
+should include \emph{convention-conflict} probes with exact oracles.
+(2)~Scaling, reasoning modes, and RLHF'd frontier polish did not buy
+obedience here --- ``more capable'' is not ``more steerable'' when the
+instruction opposes the corpus. (3)~For engineering applications (CAD,
+netlist generation, safety-critical sign discipline), a model can be
+numerically excellent and systematically wrong in frame; deterministic
+frame-checking layers, not better prompting alone, are the near-term
+mitigation. (4)~The biased-coin behavior suggests the frame choice is sampled
+rather than committed --- a target for steering interventions at the
+representation level.
+
+\paragraph{Limitations.} One domain (linear DC circuits) --- the pattern's
+generality across other convention-laden domains (chirality/handedness,
+thermodynamic sign of work, date orders) is the immediate next question; a
+second-domain replication is in progress. Whole-problem effects rest on the
+few models competent enough to solve multi-loop circuits at all (a finding in
+itself: even 70B-class instruct models sit under 14\% magnitude-correct);
+variable-level results cover the full panel. GPT-5 was piloted at 248
+instances under a bounded reasoning budget with substantial truncation;
+its numbers are conservative. Single-sample decoding for most columns is
+mitigated by the k=\RetestK{} resampling study and the cross-column
+invariance.
+
+% ----------------------------------------------------------------------------
+\section*{Reproducibility and Release}
+The generator is seeded and byte-reproducible (\NPhysics{} physics
+$\to$ SHA-verified \texttt{instances.jsonl}); every response records full
+serving provenance (engine, quantization, provider, context); grading and
+analysis are deterministic code with \TvPass{} independent transform
+validation. We release the generator, harness, verification and analysis
+code, and the evaluation subset with a canary GUID; a held-out split remains
+private for contamination control. Total API cost of the full study was
+under \$100.
+
+\section*{Acknowledgments}
+Panel infrastructure ran on a single Apple M5 Max plus commodity inference
+APIs.
+
+% ----------------------------------------------------------------------------
+\begin{thebibliography}{9}\small
+\bibitem{ravishankara2026circuchain}
+M.~Ravishankara.
+\newblock CircuChain: Disentangling competence and compliance in LLM circuit
+analysis.
+\newblock In \emph{Proc.\ IEEE SoutheastCon}, 2026. arXiv:2602.15037.
+
+\bibitem{inverseifeval2025}
+[Inverse IFEval authors].
+\newblock Inverse IFEval: Can LLMs unlearn stubborn training conventions to
+follow real instructions?
+\newblock arXiv:2509.04292, 2025.
+
+\bibitem{wu2024reasoning}
+Z.~Wu et al.
+\newblock Reasoning or reciting? Exploring the capabilities and limitations of
+language models through counterfactual tasks.
+\newblock In \emph{NAACL}, 2024.
+
+\bibitem{semanticoverride2026}
+[Semantic-override authors].
+\newblock Semantic override hallucinations: reversion to pretrained defaults
+under local redefinition.
+\newblock arXiv:2602.17520, 2026.
+\end{thebibliography}
+
+\end{document}
