@@ -75,7 +75,7 @@ models:
   # ===========================================================================
   - {key: qwen25-14b-api, backend: openai_compat, provider: together, base_url: "https://api.together.xyz/v1", api_key_env: TOGETHER_API_KEY, model_id: "Qwen/Qwen2.5-14B-Instruct", role_axis: base, scale_tier: 14b, think_style: none, contrast: "C2-sft-14b", max_tokens: 4096, concurrency: 16, enabled: false}  # Together: distill half non-serverless -> C2 stays local/other provider
   - {key: r1-distill-qwen-14b-api, backend: openai_compat, provider: together, base_url: "https://api.together.xyz/v1", api_key_env: TOGETHER_API_KEY, model_id: "deepseek-ai/DeepSeek-R1-Distill-Qwen-14B", role_axis: reasoning, scale_tier: 14b, think_style: none, contrast: "C2-sft-14b", max_tokens: 16384, concurrency: 16, enabled: false}  # Together: distill half non-serverless -> C2 stays local/other provider
-  - {key: llama33-70b-api, backend: openai_compat, provider: together, base_url: "https://api.together.xyz/v1", api_key_env: TOGETHER_API_KEY, model_id: "meta-llama/Llama-3.3-70B-Instruct-Turbo", role_axis: base, scale_tier: 70b, think_style: none, contrast: "C2-sft-70b", max_tokens: 4096, concurrency: 16, enabled: false}  # Together: distill half non-serverless -> C2 stays local/other provider
+  - {key: llama33-70b-together-unused, backend: openai_compat, provider: together, base_url: "https://api.together.xyz/v1", api_key_env: TOGETHER_API_KEY, model_id: "meta-llama/Llama-3.3-70B-Instruct-Turbo", role_axis: base, scale_tier: 70b, think_style: none, contrast: "C2-sft-70b", max_tokens: 4096, concurrency: 16, enabled: false}  # Together: distill half non-serverless -> C2 stays local/other provider
   - {key: r1-distill-llama-70b-api, backend: openai_compat, provider: together, base_url: "https://api.together.xyz/v1", api_key_env: TOGETHER_API_KEY, model_id: "deepseek-ai/DeepSeek-R1-Distill-Llama-70B", role_axis: reasoning, scale_tier: 70b, think_style: none, contrast: "C2-sft-70b", max_tokens: 16384, concurrency: 16, enabled: false}  # Together: distill half non-serverless -> C2 stays local/other provider
   - {key: qwen3-8b-think-api, backend: openai_compat, provider: together, base_url: "https://api.together.xyz/v1", api_key_env: TOGETHER_API_KEY, model_id: "Qwen/Qwen3-8B", role_axis: reasoning, scale_tier: 8b, think: true, think_style: qwen_slash, contrast: "C1-reason,C3-scale", max_tokens: 16384, concurrency: 16, enabled: false}  # NON-serverless on Together -> run local
   - {key: qwen3-8b-nothink-api, backend: openai_compat, provider: together, base_url: "https://api.together.xyz/v1", api_key_env: TOGETHER_API_KEY, model_id: "Qwen/Qwen3-8B", role_axis: base, scale_tier: 8b, think: false, think_style: qwen_slash, contrast: "C1-reason", max_tokens: 4096, concurrency: 16, enabled: false}  # NON-serverless on Together -> run local
@@ -115,6 +115,36 @@ models:
      model_id: "qwen/qwen3.6-35b-a3b", role_axis: reasoning, scale_tier: 35b-moe, think_style: none, max_tokens: 16384, concurrency: 8,
      api_quant: "fp8", enabled: true,   # verified 2026-07-16: SiliconFlow fp8
      extra_body: {provider: {order: ["SiliconFlow"], allow_fallbacks: false, quantizations: ["fp8"], require_parameters: true}}}   # standalone anchor -> OpenRouter (pinned)
+
+  # ===========================================================================
+  # COMPETENT ANCHORS (2026-07-17, review-panel gap #1: broaden the competent set).
+  # All standalone (no contrast tag) -> no same-stack constraint, cannot confound C1/C2/C3.
+  # Open trio: full 1000, pinned provider+quant, ~\$3 total.
+  # Frontier trio: PILOT against results/datasets/v2_pilot248 first (~\$20); full run only
+  # after actual-cost review (usage.cost is recorded per row). No top_k for frontier
+  # (OpenAI rejects it); closed models serve native precision -> no quant pin needed.
+  # ===========================================================================
+  - {key: llama33-70b-api, backend: openai_compat, provider: openrouter, base_url: "https://openrouter.ai/api/v1", api_key_env: OPENROUTER_API_KEY,
+     model_id: "meta-llama/llama-3.3-70b-instruct", family: llama3, role_axis: base, scale_tier: 70b, think_style: none, max_tokens: 4096, concurrency: 16,
+     api_quant: "fp8", enabled: true,
+     extra_body: {provider: {order: ["DeepInfra"], allow_fallbacks: false, quantizations: ["fp8"], require_parameters: true}}}
+  - {key: qwen25-72b-api, backend: openai_compat, provider: openrouter, base_url: "https://openrouter.ai/api/v1", api_key_env: OPENROUTER_API_KEY,
+     model_id: "qwen/qwen-2.5-72b-instruct", family: qwen2.5, role_axis: base, scale_tier: 72b, think_style: none, max_tokens: 4096, concurrency: 16,
+     api_quant: "fp8", enabled: true,
+     extra_body: {provider: {order: ["DeepInfra"], allow_fallbacks: false, quantizations: ["fp8"], require_parameters: true}}}
+  - {key: deepseek-v3-api, backend: openai_compat, provider: openrouter, base_url: "https://openrouter.ai/api/v1", api_key_env: OPENROUTER_API_KEY,
+     model_id: "deepseek/deepseek-chat", family: deepseek, role_axis: base, scale_tier: v3-moe, think_style: none, max_tokens: 4096, concurrency: 16,
+     api_quant: "fp8", enabled: true,
+     extra_body: {provider: {order: ["Novita"], allow_fallbacks: false, quantizations: ["fp8"], require_parameters: true}}}
+  - {key: gpt5-api, backend: openai_compat, provider: openrouter, base_url: "https://openrouter.ai/api/v1", api_key_env: OPENROUTER_API_KEY,
+     model_id: "openai/gpt-5", family: gpt, role_axis: reasoning, scale_tier: frontier, think_style: none, max_tokens: 8192, concurrency: 8,
+     top_k: null, api_quant: "native", enabled: true}
+  - {key: claude-sonnet4-api, backend: openai_compat, provider: openrouter, base_url: "https://openrouter.ai/api/v1", api_key_env: OPENROUTER_API_KEY,
+     model_id: "anthropic/claude-sonnet-4", family: claude, role_axis: base, scale_tier: frontier, think_style: none, max_tokens: 8192, concurrency: 8,
+     top_k: null, api_quant: "native", enabled: true}
+  - {key: gemini25-pro-api, backend: openai_compat, provider: openrouter, base_url: "https://openrouter.ai/api/v1", api_key_env: OPENROUTER_API_KEY,
+     model_id: "google/gemini-2.5-pro", family: gemini, role_axis: reasoning, scale_tier: frontier, think_style: none, max_tokens: 8192, concurrency: 8,
+     top_k: null, api_quant: "native", enabled: true}
 
   # ===========================================================================
   # EXCLUDED (documented for the paper's panel-selection appendix)
