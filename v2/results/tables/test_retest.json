@@ -1,0 +1,36 @@
+{
+  "model": "google/gemma-4-31B-it",
+  "k": 5,
+  "n_items": 118,
+  "per_sample_rates": [
+    {
+      "n": 115,
+      "mag_correct_ccw": 0.8620689655172413,
+      "conv_blind_given_mag_ccw": 0.86
+    },
+    {
+      "n": 113,
+      "mag_correct_ccw": 0.8928571428571429,
+      "conv_blind_given_mag_ccw": 0.82
+    },
+    {
+      "n": 114,
+      "mag_correct_ccw": 0.7719298245614035,
+      "conv_blind_given_mag_ccw": 0.8409090909090909
+    },
+    {
+      "n": 116,
+      "mag_correct_ccw": 0.8070175438596491,
+      "conv_blind_given_mag_ccw": 0.8478260869565217
+    },
+    {
+      "n": 115,
+      "mag_correct_ccw": 0.8793103448275862,
+      "conv_blind_given_mag_ccw": 0.9411764705882353
+    }
+  ],
+  "conv_blind_ccw_mean": 0.8619823296907696,
+  "conv_blind_ccw_sd": 0.0465903374930243,
+  "items_with_all_k": 111,
+  "item_unanimity_rate": 0.3963963963963964
+}
