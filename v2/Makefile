@@ -21,6 +21,7 @@ test:
 	python tests/test_extract.py
 	python tests/test_analyze.py
 	python tests/test_validate_transforms.py
+	python tests/test_stats_extra.py
 
 generate:
 	circuchain generate --config configs/dataset.yaml --seed $(SEED)

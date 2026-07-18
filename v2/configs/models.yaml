@@ -136,6 +136,16 @@ models:
      model_id: "deepseek/deepseek-chat", family: deepseek, role_axis: base, scale_tier: v3-moe, think_style: none, max_tokens: 4096, concurrency: 16,
      api_quant: "fp8", enabled: true,
      extra_body: {provider: {order: ["Novita"], allow_fallbacks: false, quantizations: ["fp8"], require_parameters: true}}}
+  # POSITIVE CONTROLS (V2-2): same serving configs as their parents, separate keys so the
+  # control rows land in their own response files. Run ONLY against datasets/v2_control124
+  # (unusual-but-non-convention instructions; numerics unchanged).
+  - {key: gemma4-31b-ctl, backend: openai_compat, provider: together, base_url: "https://api.together.xyz/v1", api_key_env: TOGETHER_API_KEY,
+     model_id: "google/gemma-4-31B-it", family: gemma4, role_axis: base, scale_tier: 31b, think_style: none, max_tokens: 16384, concurrency: 16, enabled: true}
+  - {key: deepseek-v3-ctl, backend: openai_compat, provider: openrouter, base_url: "https://openrouter.ai/api/v1", api_key_env: OPENROUTER_API_KEY,
+     model_id: "deepseek/deepseek-chat", family: deepseek, role_axis: base, scale_tier: v3-moe, think_style: none, max_tokens: 4096, concurrency: 16,
+     api_quant: "fp8", enabled: true,
+     extra_body: {provider: {order: ["Novita"], allow_fallbacks: false, quantizations: ["fp8"], require_parameters: true}}}
+
   # Frontier probe results (2026-07-17, real trap instance, canonical i1=-0.001338):
   #   gpt-5 default        -> reasoning ate the whole 8192 budget, 119/119 truncated, $0.083/row. USELESS.
   #   gpt-5 effort=low     -> CORRECT to 9 decimals, 6.6k reasoning, $0.074/row. The proven config.

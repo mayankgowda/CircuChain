@@ -237,6 +237,14 @@ def analyze(
     from .analyze.tables import analyze_graded, format_factor_table
 
     summary = analyze_graded(_v2path(graded), _v2path(out), _v2path(dataset))
+
+    # V2-3 stats hygiene: bootstrap ORs, BH q-values, both var-level denominators.
+    from .analyze.stats_extra import augment_analysis, write_outputs
+    augment_analysis(summary)
+    write_outputs(summary, _v2path(out))
+    with open(os.path.join(_v2path(out), "analysis.json"), "w") as f:
+        json.dump(summary, f, indent=2)
+
     typer.echo(f"analyzed {summary['n_rows']} graded rows across {len(summary['models'])} models\n")
     typer.echo(format_factor_table(summary))
     typer.echo(f"\nWrote {_v2path(out)}/cell_rates.csv, factor_pairs.csv, "
