@@ -1,0 +1,34 @@
+{
+  "gemma4-31b-ctl|ctlrev": {
+    "n": 62,
+    "instruction_compliant": 53,
+    "rate": 0.8548387096774194,
+    "wilson_lo": 0.7465637464683085,
+    "wilson_hi": 0.92170676943653,
+    "magnitude_all_correct": 48
+  },
+  "gemma4-31b-ctl|ctlsci": {
+    "n": 62,
+    "instruction_compliant": 55,
+    "rate": 0.8870967741935484,
+    "wilson_lo": 0.7848003079004455,
+    "wilson_hi": 0.9442220730866507,
+    "magnitude_all_correct": 51
+  },
+  "deepseek-v3-ctl|ctlrev": {
+    "n": 62,
+    "instruction_compliant": 60,
+    "rate": 0.967741935483871,
+    "wilson_lo": 0.8897932286898178,
+    "wilson_hi": 0.9911088150029237,
+    "magnitude_all_correct": 11
+  },
+  "deepseek-v3-ctl|ctlsci": {
+    "n": 62,
+    "instruction_compliant": 56,
+    "rate": 0.9032258064516129,
+    "wilson_lo": 0.8045095713255586,
+    "wilson_hi": 0.954888742202667,
+    "magnitude_all_correct": 11
+  }
+}
