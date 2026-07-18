@@ -1,0 +1,640 @@
+{
+  "n_physics": 125,
+  "n_pass": 125,
+  "n_fail": 0,
+  "checks": [
+    "dflt==spice",
+    "ccw==\u00b1raw",
+    "act==\u00b1raw",
+    "top==re-grounded-spice + invariants",
+    "diag-mask recomputation"
+  ],
+  "rel_tol": 0.0001,
+  "results": [
+    {
+      "physics_id": "ladder-0003",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "ladder-0010",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "ladder-0017",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "ladder-0024",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "ladder-0031",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "ladder-0038",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "ladder-0045",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "ladder-0052",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "ladder-0059",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "ladder-0066",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "ladder-0073",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "ladder-0080",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "ladder-0087",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "ladder-0094",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "ladder-0101",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "ladder-0108",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "ladder-0115",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "ladder-0122",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "opposing_t-0001",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "opposing_t-0008",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "opposing_t-0015",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "opposing_t-0022",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "opposing_t-0029",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "opposing_t-0036",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "opposing_t-0043",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "opposing_t-0050",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "opposing_t-0057",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "opposing_t-0064",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "opposing_t-0071",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "opposing_t-0078",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "opposing_t-0085",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "opposing_t-0092",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "opposing_t-0099",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "opposing_t-0106",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "opposing_t-0113",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "opposing_t-0120",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "supermesh-0000",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "supermesh-0007",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "supermesh-0014",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "supermesh-0021",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "supermesh-0028",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "supermesh-0035",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "supermesh-0042",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "supermesh-0049",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "supermesh-0056",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "supermesh-0063",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "supermesh-0070",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "supermesh-0077",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "supermesh-0084",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "supermesh-0091",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "supermesh-0098",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "supermesh-0105",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "supermesh-0112",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "supermesh-0119",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "supernode-0005",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "supernode-0012",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "supernode-0019",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "supernode-0026",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "supernode-0033",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "supernode-0040",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "supernode-0047",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "supernode-0054",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "supernode-0061",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "supernode-0068",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "supernode-0075",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "supernode-0082",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "supernode-0089",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "supernode-0096",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "supernode-0103",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "supernode-0110",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "supernode-0117",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "supernode-0124",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "vccs_ladder-0006",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "vccs_ladder-0013",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "vccs_ladder-0020",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "vccs_ladder-0027",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "vccs_ladder-0034",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "vccs_ladder-0041",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "vccs_ladder-0048",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "vccs_ladder-0055",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "vccs_ladder-0062",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "vccs_ladder-0069",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "vccs_ladder-0076",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "vccs_ladder-0083",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "vccs_ladder-0090",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "vccs_ladder-0097",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "vccs_ladder-0104",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "vccs_ladder-0111",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "vccs_ladder-0118",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "vcvs-0004",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "vcvs-0011",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "vcvs-0018",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "vcvs-0025",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "vcvs-0032",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "vcvs-0039",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "vcvs-0046",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "vcvs-0053",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "vcvs-0060",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "vcvs-0067",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "vcvs-0074",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "vcvs-0081",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "vcvs-0088",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "vcvs-0095",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "vcvs-0102",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "vcvs-0109",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "vcvs-0116",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "vcvs-0123",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "wheatstone-0002",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "wheatstone-0009",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "wheatstone-0016",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "wheatstone-0023",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "wheatstone-0030",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "wheatstone-0037",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "wheatstone-0044",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "wheatstone-0051",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "wheatstone-0058",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "wheatstone-0065",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "wheatstone-0072",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "wheatstone-0079",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "wheatstone-0086",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "wheatstone-0093",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "wheatstone-0100",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "wheatstone-0107",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "wheatstone-0114",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "wheatstone-0121",
+      "status": "PASS",
+      "errors": []
+    }
+  ]
+}

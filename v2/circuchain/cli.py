@@ -161,6 +161,32 @@ def verify(
         raise typer.Exit(1)
 
 
+@app.command("validate-transforms")
+def validate_transforms(
+    dataset: str = typer.Option("results/datasets/v2_seed20260709", help="dataset dir"),
+    out: str = typer.Option("results/tables/transform_validation.json", help="summary path"),
+):
+    """Independent validation of expected_under_contract + diagnostic_vars (methods-hole fix):
+    physical re-grounded NGSPICE run for ref_node=top, raw-observable re-derivation for
+    ccw/act, and diagnostic-mask recomputation from stored numbers."""
+    from .validate_transforms import validate_dataset
+    from .verify import ngspice_available
+
+    if not ngspice_available():
+        typer.echo("ngspice not found — install it: brew install ngspice")
+        raise typer.Exit(1)
+    s = validate_dataset(_v2path(dataset), _v2path(out))
+    typer.echo(f"transform validation: {s['n_pass']}/{s['n_physics']} physics PASS "
+               f"(checks: {', '.join(s['checks'])})")
+    for r in s["results"]:
+        if r["status"] == "FAIL":
+            typer.echo(f"  FAIL {r['physics_id']}:")
+            for e in r["errors"][:6]:
+                typer.echo(f"    {e}")
+    if s["n_fail"]:
+        raise typer.Exit(1)
+
+
 @app.command()
 def run(
     models: str = typer.Option("configs/models.yaml", help="panel config"),
