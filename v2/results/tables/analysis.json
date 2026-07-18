@@ -1,12 +1,17 @@
 {
-  "n_rows": 13027,
+  "n_rows": 16810,
   "models": [
+    "deepseek-v3-api",
     "gemma4-31b",
     "gemma4-31b-api",
     "gpt-oss-120b-api",
+    "gpt5-api",
+    "llama33-70b-api",
     "qwen25-32b",
+    "qwen25-72b-api",
     "qwen25-7b-instruct",
     "qwen3-1.7b-nothink",
+    "qwen3-1.7b-think",
     "qwen3-14b-nothink",
     "qwen3-14b-think",
     "qwen3-32b-nothink",
@@ -18,6 +23,450 @@
     "r1-distill-32b"
   ],
   "cell_rates": {
+    "deepseek-v3-api|act|all": {
+      "n": 250,
+      "dichotomy": {
+        "CORRECT": 3,
+        "COMPLIANCE": 36,
+        "COMPETENCE": 211
+      },
+      "completed_within_budget": {
+        "k": 250,
+        "n": 250,
+        "rate": 1.0,
+        "wilson_lo": 0.9848667005045553,
+        "wilson_hi": 0.9999999999999998
+      },
+      "final_correct": {
+        "k": 3,
+        "n": 250,
+        "rate": 0.012,
+        "wilson_lo": 0.004089319880534296,
+        "wilson_hi": 0.03468078042701961
+      },
+      "magnitude_correct": {
+        "k": 39,
+        "n": 250,
+        "rate": 0.156,
+        "wilson_lo": 0.11626576522540502,
+        "wilson_hi": 0.20614594482746082
+      },
+      "sign_compliant_given_mag": {
+        "k": 3,
+        "n": 39,
+        "rate": 0.07692307692307693,
+        "wilson_lo": 0.026507395303779754,
+        "wilson_hi": 0.20321071167954996
+      },
+      "extraction_issues": 34
+    },
+    "deepseek-v3-api|act|control": {
+      "n": 124,
+      "dichotomy": {
+        "CORRECT": 2,
+        "COMPLIANCE": 17,
+        "COMPETENCE": 105
+      },
+      "completed_within_budget": {
+        "k": 124,
+        "n": 124,
+        "rate": 1.0,
+        "wilson_lo": 0.9699513846593223,
+        "wilson_hi": 0.9999999999999999
+      },
+      "final_correct": {
+        "k": 2,
+        "n": 124,
+        "rate": 0.016129032258064516,
+        "wilson_lo": 0.004434364460542482,
+        "wilson_hi": 0.056903005223984324
+      },
+      "magnitude_correct": {
+        "k": 19,
+        "n": 124,
+        "rate": 0.1532258064516129,
+        "wilson_lo": 0.10034252876653711,
+        "wilson_hi": 0.2269492528407071
+      },
+      "sign_compliant_given_mag": {
+        "k": 2,
+        "n": 19,
+        "rate": 0.10526315789473684,
+        "wilson_lo": 0.02935856029887013,
+        "wilson_hi": 0.31394082711109006
+      },
+      "extraction_issues": 17
+    },
+    "deepseek-v3-api|act|trap": {
+      "n": 126,
+      "dichotomy": {
+        "CORRECT": 1,
+        "COMPLIANCE": 19,
+        "COMPETENCE": 106
+      },
+      "completed_within_budget": {
+        "k": 126,
+        "n": 126,
+        "rate": 1.0,
+        "wilson_lo": 0.9704142355178014,
+        "wilson_hi": 0.9999999999999998
+      },
+      "final_correct": {
+        "k": 1,
+        "n": 126,
+        "rate": 0.007936507936507936,
+        "wilson_lo": 0.0014023650608123127,
+        "wilson_hi": 0.04358679998516077
+      },
+      "magnitude_correct": {
+        "k": 20,
+        "n": 126,
+        "rate": 0.15873015873015872,
+        "wilson_lo": 0.10516625713947376,
+        "wilson_hi": 0.2324875186182172
+      },
+      "sign_compliant_given_mag": {
+        "k": 1,
+        "n": 20,
+        "rate": 0.05,
+        "wilson_lo": 0.008881448800795402,
+        "wilson_hi": 0.23613119344674205
+      },
+      "extraction_issues": 17
+    },
+    "deepseek-v3-api|ccw|all": {
+      "n": 250,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 41,
+        "COMPETENCE": 209
+      },
+      "completed_within_budget": {
+        "k": 250,
+        "n": 250,
+        "rate": 1.0,
+        "wilson_lo": 0.9848667005045553,
+        "wilson_hi": 0.9999999999999998
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 250,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.015133299495444574
+      },
+      "magnitude_correct": {
+        "k": 41,
+        "n": 250,
+        "rate": 0.164,
+        "wilson_lo": 0.12325149320629131,
+        "wilson_hi": 0.21491808405464746
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 41,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.08566757018443186
+      },
+      "extraction_issues": 29
+    },
+    "deepseek-v3-api|ccw|control": {
+      "n": 124,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 23,
+        "COMPETENCE": 101
+      },
+      "completed_within_budget": {
+        "k": 124,
+        "n": 124,
+        "rate": 1.0,
+        "wilson_lo": 0.9699513846593223,
+        "wilson_hi": 0.9999999999999999
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 124,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.030048615340677695
+      },
+      "magnitude_correct": {
+        "k": 23,
+        "n": 124,
+        "rate": 0.18548387096774194,
+        "wilson_lo": 0.1268975225128448,
+        "wilson_hi": 0.26297176778209763
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 23,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.14311661845042686
+      },
+      "extraction_issues": 10
+    },
+    "deepseek-v3-api|ccw|trap": {
+      "n": 126,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 18,
+        "COMPETENCE": 108
+      },
+      "completed_within_budget": {
+        "k": 126,
+        "n": 126,
+        "rate": 1.0,
+        "wilson_lo": 0.9704142355178014,
+        "wilson_hi": 0.9999999999999998
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 126,
+        "rate": 0.0,
+        "wilson_lo": 1.734723475976807e-18,
+        "wilson_hi": 0.02958576448219845
+      },
+      "magnitude_correct": {
+        "k": 18,
+        "n": 126,
+        "rate": 0.14285714285714285,
+        "wilson_lo": 0.09231379654107666,
+        "wilson_hi": 0.21453317808906505
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 18,
+        "rate": 0.0,
+        "wilson_lo": 1.3877787807814457e-17,
+        "wilson_hi": 0.17587922364665765
+      },
+      "extraction_issues": 19
+    },
+    "deepseek-v3-api|dflt|all": {
+      "n": 250,
+      "dichotomy": {
+        "CORRECT": 36,
+        "COMPLIANCE": 11,
+        "COMPETENCE": 203
+      },
+      "completed_within_budget": {
+        "k": 250,
+        "n": 250,
+        "rate": 1.0,
+        "wilson_lo": 0.9848667005045553,
+        "wilson_hi": 0.9999999999999998
+      },
+      "final_correct": {
+        "k": 36,
+        "n": 250,
+        "rate": 0.144,
+        "wilson_lo": 0.10586256867804505,
+        "wilson_hi": 0.19291234056271145
+      },
+      "magnitude_correct": {
+        "k": 47,
+        "n": 250,
+        "rate": 0.188,
+        "wilson_lo": 0.1444258093511374,
+        "wilson_hi": 0.24101736953401998
+      },
+      "sign_compliant_given_mag": {
+        "k": 36,
+        "n": 47,
+        "rate": 0.7659574468085106,
+        "wilson_lo": 0.6277574244984441,
+        "wilson_hi": 0.8639672541377281
+      },
+      "extraction_issues": 29
+    },
+    "deepseek-v3-api|dflt|control": {
+      "n": 124,
+      "dichotomy": {
+        "CORRECT": 20,
+        "COMPLIANCE": 5,
+        "COMPETENCE": 99
+      },
+      "completed_within_budget": {
+        "k": 124,
+        "n": 124,
+        "rate": 1.0,
+        "wilson_lo": 0.9699513846593223,
+        "wilson_hi": 0.9999999999999999
+      },
+      "final_correct": {
+        "k": 20,
+        "n": 124,
+        "rate": 0.16129032258064516,
+        "wilson_lo": 0.10690465442449376,
+        "wilson_hi": 0.23603150435467501
+      },
+      "magnitude_correct": {
+        "k": 25,
+        "n": 124,
+        "rate": 0.20161290322580644,
+        "wilson_lo": 0.14045648042948655,
+        "wilson_hi": 0.280701564209305
+      },
+      "sign_compliant_given_mag": {
+        "k": 20,
+        "n": 25,
+        "rate": 0.8,
+        "wilson_lo": 0.6086904963045967,
+        "wilson_hi": 0.9113941531319742
+      },
+      "extraction_issues": 12
+    },
+    "deepseek-v3-api|dflt|trap": {
+      "n": 126,
+      "dichotomy": {
+        "CORRECT": 16,
+        "COMPLIANCE": 6,
+        "COMPETENCE": 104
+      },
+      "completed_within_budget": {
+        "k": 126,
+        "n": 126,
+        "rate": 1.0,
+        "wilson_lo": 0.9704142355178014,
+        "wilson_hi": 0.9999999999999998
+      },
+      "final_correct": {
+        "k": 16,
+        "n": 126,
+        "rate": 0.12698412698412698,
+        "wilson_lo": 0.07969646065163147,
+        "wilson_hi": 0.196343712850961
+      },
+      "magnitude_correct": {
+        "k": 22,
+        "n": 126,
+        "rate": 0.1746031746031746,
+        "wilson_lo": 0.1182265752111826,
+        "wilson_hi": 0.2502340016740576
+      },
+      "sign_compliant_given_mag": {
+        "k": 16,
+        "n": 22,
+        "rate": 0.7272727272727273,
+        "wilson_lo": 0.5184826598759762,
+        "wilson_hi": 0.8684923971201053
+      },
+      "extraction_issues": 17
+    },
+    "deepseek-v3-api|top|all": {
+      "n": 250,
+      "dichotomy": {
+        "CORRECT": 5,
+        "COMPLIANCE": 1,
+        "COMPETENCE": 244
+      },
+      "completed_within_budget": {
+        "k": 248,
+        "n": 250,
+        "rate": 0.992,
+        "wilson_lo": 0.9713054704167919,
+        "wilson_hi": 0.9978033628796906
+      },
+      "final_correct": {
+        "k": 5,
+        "n": 250,
+        "rate": 0.02,
+        "wilson_lo": 0.008572324384058198,
+        "wilson_hi": 0.045955643131568594
+      },
+      "magnitude_correct": {
+        "k": 6,
+        "n": 250,
+        "rate": 0.024,
+        "wilson_lo": 0.011044777306136767,
+        "wilson_hi": 0.05136212381352647
+      },
+      "sign_compliant_given_mag": {
+        "k": 5,
+        "n": 6,
+        "rate": 0.8333333333333334,
+        "wilson_lo": 0.43649717781352987,
+        "wilson_hi": 0.9699466302516935
+      },
+      "extraction_issues": 31
+    },
+    "deepseek-v3-api|top|control": {
+      "n": 124,
+      "dichotomy": {
+        "CORRECT": 3,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 121
+      },
+      "completed_within_budget": {
+        "k": 124,
+        "n": 124,
+        "rate": 1.0,
+        "wilson_lo": 0.9699513846593223,
+        "wilson_hi": 0.9999999999999999
+      },
+      "final_correct": {
+        "k": 3,
+        "n": 124,
+        "rate": 0.024193548387096774,
+        "wilson_lo": 0.00826161867185984,
+        "wilson_hi": 0.0687201281845915
+      },
+      "magnitude_correct": {
+        "k": 3,
+        "n": 124,
+        "rate": 0.024193548387096774,
+        "wilson_lo": 0.00826161867185984,
+        "wilson_hi": 0.0687201281845915
+      },
+      "sign_compliant_given_mag": {
+        "k": 3,
+        "n": 3,
+        "rate": 1.0,
+        "wilson_lo": 0.43850296824495455,
+        "wilson_hi": 1.0
+      },
+      "extraction_issues": 16
+    },
+    "deepseek-v3-api|top|trap": {
+      "n": 126,
+      "dichotomy": {
+        "CORRECT": 2,
+        "COMPLIANCE": 1,
+        "COMPETENCE": 123
+      },
+      "completed_within_budget": {
+        "k": 124,
+        "n": 126,
+        "rate": 0.9841269841269841,
+        "wilson_lo": 0.9439712362150748,
+        "wilson_hi": 0.9956361981751772
+      },
+      "final_correct": {
+        "k": 2,
+        "n": 126,
+        "rate": 0.015873015873015872,
+        "wilson_lo": 0.004363801824822707,
+        "wilson_hi": 0.056028763784924995
+      },
+      "magnitude_correct": {
+        "k": 3,
+        "n": 126,
+        "rate": 0.023809523809523808,
+        "wilson_lo": 0.008129952024257238,
+        "wilson_hi": 0.0676660141492651
+      },
+      "sign_compliant_given_mag": {
+        "k": 2,
+        "n": 3,
+        "rate": 0.6666666666666666,
+        "wilson_lo": 0.20765960080204765,
+        "wilson_hi": 0.9385080552796037
+      },
+      "extraction_issues": 15
+    },
     "gemma4-31b|act|all": {
       "n": 1,
       "dichotomy": {
@@ -1128,6 +1577,894 @@
       },
       "extraction_issues": 15
     },
+    "gpt5-api|act|all": {
+      "n": 62,
+      "dichotomy": {
+        "CORRECT": 13,
+        "COMPLIANCE": 10,
+        "COMPETENCE": 39
+      },
+      "completed_within_budget": {
+        "k": 28,
+        "n": 62,
+        "rate": 0.45161290322580644,
+        "wilson_lo": 0.33419713167599524,
+        "wilson_hi": 0.5746748753015569
+      },
+      "final_correct": {
+        "k": 13,
+        "n": 62,
+        "rate": 0.20967741935483872,
+        "wilson_lo": 0.1268398928951199,
+        "wilson_hi": 0.3263921489701932
+      },
+      "magnitude_correct": {
+        "k": 23,
+        "n": 62,
+        "rate": 0.3709677419354839,
+        "wilson_lo": 0.26157165984141106,
+        "wilson_hi": 0.4954203587653947
+      },
+      "sign_compliant_given_mag": {
+        "k": 13,
+        "n": 23,
+        "rate": 0.5652173913043478,
+        "wilson_lo": 0.3681137508501646,
+        "wilson_hi": 0.743653646743258
+      },
+      "extraction_issues": 34
+    },
+    "gpt5-api|act|control": {
+      "n": 30,
+      "dichotomy": {
+        "CORRECT": 9,
+        "COMPLIANCE": 5,
+        "COMPETENCE": 16
+      },
+      "completed_within_budget": {
+        "k": 17,
+        "n": 30,
+        "rate": 0.5666666666666667,
+        "wilson_lo": 0.3919730700081361,
+        "wilson_hi": 0.7262251442353347
+      },
+      "final_correct": {
+        "k": 9,
+        "n": 30,
+        "rate": 0.3,
+        "wilson_lo": 0.1666474826824379,
+        "wilson_hi": 0.47875787458714947
+      },
+      "magnitude_correct": {
+        "k": 14,
+        "n": 30,
+        "rate": 0.4666666666666667,
+        "wilson_lo": 0.3023238890769976,
+        "wilson_hi": 0.638577003801267
+      },
+      "sign_compliant_given_mag": {
+        "k": 9,
+        "n": 14,
+        "rate": 0.6428571428571429,
+        "wilson_lo": 0.38764423103907397,
+        "wilson_hi": 0.8365526824644587
+      },
+      "extraction_issues": 13
+    },
+    "gpt5-api|act|trap": {
+      "n": 32,
+      "dichotomy": {
+        "CORRECT": 4,
+        "COMPLIANCE": 5,
+        "COMPETENCE": 23
+      },
+      "completed_within_budget": {
+        "k": 11,
+        "n": 32,
+        "rate": 0.34375,
+        "wilson_lo": 0.20410437924433175,
+        "wilson_hi": 0.5168891202103777
+      },
+      "final_correct": {
+        "k": 4,
+        "n": 32,
+        "rate": 0.125,
+        "wilson_lo": 0.04970134387480074,
+        "wilson_hi": 0.2806830548165022
+      },
+      "magnitude_correct": {
+        "k": 9,
+        "n": 32,
+        "rate": 0.28125,
+        "wilson_lo": 0.15564580497742764,
+        "wilson_hi": 0.45374509425916565
+      },
+      "sign_compliant_given_mag": {
+        "k": 4,
+        "n": 9,
+        "rate": 0.4444444444444444,
+        "wilson_lo": 0.18877852109766458,
+        "wilson_hi": 0.7333487065045069
+      },
+      "extraction_issues": 21
+    },
+    "gpt5-api|ccw|all": {
+      "n": 62,
+      "dichotomy": {
+        "CORRECT": 1,
+        "COMPLIANCE": 21,
+        "COMPETENCE": 40
+      },
+      "completed_within_budget": {
+        "k": 23,
+        "n": 62,
+        "rate": 0.3709677419354839,
+        "wilson_lo": 0.26157165984141106,
+        "wilson_hi": 0.4954203587653947
+      },
+      "final_correct": {
+        "k": 1,
+        "n": 62,
+        "rate": 0.016129032258064516,
+        "wilson_lo": 0.002852867168621827,
+        "wilson_hi": 0.08586720260689992
+      },
+      "magnitude_correct": {
+        "k": 22,
+        "n": 62,
+        "rate": 0.3548387096774194,
+        "wilson_lo": 0.24742732851049898,
+        "wilson_hi": 0.47918869242215756
+      },
+      "sign_compliant_given_mag": {
+        "k": 1,
+        "n": 22,
+        "rate": 0.045454545454545456,
+        "wilson_lo": 0.00806942762126385,
+        "wilson_hi": 0.21798045838657332
+      },
+      "extraction_issues": 39
+    },
+    "gpt5-api|ccw|control": {
+      "n": 30,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 10,
+        "COMPETENCE": 20
+      },
+      "completed_within_budget": {
+        "k": 10,
+        "n": 30,
+        "rate": 0.3333333333333333,
+        "wilson_lo": 0.19230498083676134,
+        "wilson_hi": 0.5121994835545616
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 30,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.11351339317396876
+      },
+      "magnitude_correct": {
+        "k": 10,
+        "n": 30,
+        "rate": 0.3333333333333333,
+        "wilson_lo": 0.19230498083676134,
+        "wilson_hi": 0.5121994835545616
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 10,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.2775327998628892
+      },
+      "extraction_issues": 20
+    },
+    "gpt5-api|ccw|trap": {
+      "n": 32,
+      "dichotomy": {
+        "CORRECT": 1,
+        "COMPLIANCE": 11,
+        "COMPETENCE": 20
+      },
+      "completed_within_budget": {
+        "k": 13,
+        "n": 32,
+        "rate": 0.40625,
+        "wilson_lo": 0.25519634842665434,
+        "wilson_hi": 0.5773997512461713
+      },
+      "final_correct": {
+        "k": 1,
+        "n": 32,
+        "rate": 0.03125,
+        "wilson_lo": 0.005537860164003122,
+        "wilson_hi": 0.15744263820012558
+      },
+      "magnitude_correct": {
+        "k": 12,
+        "n": 32,
+        "rate": 0.375,
+        "wilson_lo": 0.2293388730945421,
+        "wilson_hi": 0.5474559264692256
+      },
+      "sign_compliant_given_mag": {
+        "k": 1,
+        "n": 12,
+        "rate": 0.08333333333333333,
+        "wilson_lo": 0.014865094404917095,
+        "wilson_hi": 0.35387991114111694
+      },
+      "extraction_issues": 19
+    },
+    "gpt5-api|dflt|all": {
+      "n": 62,
+      "dichotomy": {
+        "CORRECT": 11,
+        "COMPLIANCE": 8,
+        "COMPETENCE": 43
+      },
+      "completed_within_budget": {
+        "k": 25,
+        "n": 62,
+        "rate": 0.4032258064516129,
+        "wilson_lo": 0.29024869095910666,
+        "wilson_hi": 0.5274953229959977
+      },
+      "final_correct": {
+        "k": 11,
+        "n": 62,
+        "rate": 0.1774193548387097,
+        "wilson_lo": 0.10206437766005086,
+        "wilson_hi": 0.2904156688569637
+      },
+      "magnitude_correct": {
+        "k": 19,
+        "n": 62,
+        "rate": 0.3064516129032258,
+        "wilson_lo": 0.20581586585634157,
+        "wilson_hi": 0.42967216205386716
+      },
+      "sign_compliant_given_mag": {
+        "k": 11,
+        "n": 19,
+        "rate": 0.5789473684210527,
+        "wilson_lo": 0.3627590353425504,
+        "wilson_hi": 0.7685810871754576
+      },
+      "extraction_issues": 36
+    },
+    "gpt5-api|dflt|control": {
+      "n": 30,
+      "dichotomy": {
+        "CORRECT": 4,
+        "COMPLIANCE": 5,
+        "COMPETENCE": 21
+      },
+      "completed_within_budget": {
+        "k": 11,
+        "n": 30,
+        "rate": 0.36666666666666664,
+        "wilson_lo": 0.21873920806100708,
+        "wilson_hi": 0.5448643634520511
+      },
+      "final_correct": {
+        "k": 4,
+        "n": 30,
+        "rate": 0.13333333333333333,
+        "wilson_lo": 0.053096554840547455,
+        "wilson_hi": 0.296813266820363
+      },
+      "magnitude_correct": {
+        "k": 9,
+        "n": 30,
+        "rate": 0.3,
+        "wilson_lo": 0.1666474826824379,
+        "wilson_hi": 0.47875787458714947
+      },
+      "sign_compliant_given_mag": {
+        "k": 4,
+        "n": 9,
+        "rate": 0.4444444444444444,
+        "wilson_lo": 0.18877852109766458,
+        "wilson_hi": 0.7333487065045069
+      },
+      "extraction_issues": 18
+    },
+    "gpt5-api|dflt|trap": {
+      "n": 32,
+      "dichotomy": {
+        "CORRECT": 7,
+        "COMPLIANCE": 3,
+        "COMPETENCE": 22
+      },
+      "completed_within_budget": {
+        "k": 14,
+        "n": 32,
+        "rate": 0.4375,
+        "wilson_lo": 0.2816533111504036,
+        "wilson_hi": 0.6067440886314801
+      },
+      "final_correct": {
+        "k": 7,
+        "n": 32,
+        "rate": 0.21875,
+        "wilson_lo": 0.11023836252604186,
+        "wilson_hi": 0.3875499364924353
+      },
+      "magnitude_correct": {
+        "k": 10,
+        "n": 32,
+        "rate": 0.3125,
+        "wilson_lo": 0.17952541633609737,
+        "wilson_hi": 0.48566678300955407
+      },
+      "sign_compliant_given_mag": {
+        "k": 7,
+        "n": 10,
+        "rate": 0.7,
+        "wilson_lo": 0.39677814746114537,
+        "wilson_hi": 0.8922087325936989
+      },
+      "extraction_issues": 18
+    },
+    "gpt5-api|top|all": {
+      "n": 62,
+      "dichotomy": {
+        "CORRECT": 15,
+        "COMPLIANCE": 2,
+        "COMPETENCE": 45
+      },
+      "completed_within_budget": {
+        "k": 28,
+        "n": 62,
+        "rate": 0.45161290322580644,
+        "wilson_lo": 0.33419713167599524,
+        "wilson_hi": 0.5746748753015569
+      },
+      "final_correct": {
+        "k": 15,
+        "n": 62,
+        "rate": 0.24193548387096775,
+        "wilson_lo": 0.15245896205333753,
+        "wilson_hi": 0.3615250751602741
+      },
+      "magnitude_correct": {
+        "k": 17,
+        "n": 62,
+        "rate": 0.27419354838709675,
+        "wilson_lo": 0.17881063614202042,
+        "wilson_hi": 0.39592539641988966
+      },
+      "sign_compliant_given_mag": {
+        "k": 15,
+        "n": 17,
+        "rate": 0.8823529411764706,
+        "wilson_lo": 0.6566364940511413,
+        "wilson_hi": 0.9671202262362073
+      },
+      "extraction_issues": 34
+    },
+    "gpt5-api|top|control": {
+      "n": 30,
+      "dichotomy": {
+        "CORRECT": 8,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 22
+      },
+      "completed_within_budget": {
+        "k": 13,
+        "n": 30,
+        "rate": 0.43333333333333335,
+        "wilson_lo": 0.2737748557646652,
+        "wilson_hi": 0.6080269299918639
+      },
+      "final_correct": {
+        "k": 8,
+        "n": 30,
+        "rate": 0.26666666666666666,
+        "wilson_lo": 0.1418266331959632,
+        "wilson_hi": 0.44447961695188876
+      },
+      "magnitude_correct": {
+        "k": 8,
+        "n": 30,
+        "rate": 0.26666666666666666,
+        "wilson_lo": 0.1418266331959632,
+        "wilson_hi": 0.44447961695188876
+      },
+      "sign_compliant_given_mag": {
+        "k": 8,
+        "n": 8,
+        "rate": 1.0,
+        "wilson_lo": 0.6755924351161198,
+        "wilson_hi": 1.0
+      },
+      "extraction_issues": 17
+    },
+    "gpt5-api|top|trap": {
+      "n": 32,
+      "dichotomy": {
+        "CORRECT": 7,
+        "COMPLIANCE": 2,
+        "COMPETENCE": 23
+      },
+      "completed_within_budget": {
+        "k": 15,
+        "n": 32,
+        "rate": 0.46875,
+        "wilson_lo": 0.30869387108068835,
+        "wilson_hi": 0.6355048288102536
+      },
+      "final_correct": {
+        "k": 7,
+        "n": 32,
+        "rate": 0.21875,
+        "wilson_lo": 0.11023836252604186,
+        "wilson_hi": 0.3875499364924353
+      },
+      "magnitude_correct": {
+        "k": 9,
+        "n": 32,
+        "rate": 0.28125,
+        "wilson_lo": 0.15564580497742764,
+        "wilson_hi": 0.45374509425916565
+      },
+      "sign_compliant_given_mag": {
+        "k": 7,
+        "n": 9,
+        "rate": 0.7777777777777778,
+        "wilson_lo": 0.4525889691069889,
+        "wilson_hi": 0.9367748928821533
+      },
+      "extraction_issues": 17
+    },
+    "llama33-70b-api|act|all": {
+      "n": 250,
+      "dichotomy": {
+        "CORRECT": 1,
+        "COMPLIANCE": 18,
+        "COMPETENCE": 231
+      },
+      "completed_within_budget": {
+        "k": 250,
+        "n": 250,
+        "rate": 1.0,
+        "wilson_lo": 0.9848667005045553,
+        "wilson_hi": 0.9999999999999998
+      },
+      "final_correct": {
+        "k": 1,
+        "n": 250,
+        "rate": 0.004,
+        "wilson_lo": 0.0007064475340650966,
+        "wilson_hi": 0.02230578556541592
+      },
+      "magnitude_correct": {
+        "k": 19,
+        "n": 250,
+        "rate": 0.076,
+        "wilson_lo": 0.04919164066173632,
+        "wilson_hi": 0.11564139731040066
+      },
+      "sign_compliant_given_mag": {
+        "k": 1,
+        "n": 19,
+        "rate": 0.05263157894736842,
+        "wilson_lo": 0.009351994062300362,
+        "wilson_hi": 0.24638731166898786
+      },
+      "extraction_issues": 0
+    },
+    "llama33-70b-api|act|control": {
+      "n": 124,
+      "dichotomy": {
+        "CORRECT": 1,
+        "COMPLIANCE": 9,
+        "COMPETENCE": 114
+      },
+      "completed_within_budget": {
+        "k": 124,
+        "n": 124,
+        "rate": 1.0,
+        "wilson_lo": 0.9699513846593223,
+        "wilson_hi": 0.9999999999999999
+      },
+      "final_correct": {
+        "k": 1,
+        "n": 124,
+        "rate": 0.008064516129032258,
+        "wilson_lo": 0.0014250064581251692,
+        "wilson_hi": 0.04426798605447708
+      },
+      "magnitude_correct": {
+        "k": 10,
+        "n": 124,
+        "rate": 0.08064516129032258,
+        "wilson_lo": 0.04439298476897466,
+        "wilson_hi": 0.14209940229094858
+      },
+      "sign_compliant_given_mag": {
+        "k": 1,
+        "n": 10,
+        "rate": 0.1,
+        "wilson_lo": 0.017876213095072868,
+        "wilson_hi": 0.4041500267952385
+      },
+      "extraction_issues": 0
+    },
+    "llama33-70b-api|act|trap": {
+      "n": 126,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 9,
+        "COMPETENCE": 117
+      },
+      "completed_within_budget": {
+        "k": 126,
+        "n": 126,
+        "rate": 1.0,
+        "wilson_lo": 0.9704142355178014,
+        "wilson_hi": 0.9999999999999998
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 126,
+        "rate": 0.0,
+        "wilson_lo": 1.734723475976807e-18,
+        "wilson_hi": 0.02958576448219845
+      },
+      "magnitude_correct": {
+        "k": 9,
+        "n": 126,
+        "rate": 0.07142857142857142,
+        "wilson_lo": 0.038031143767313015,
+        "wilson_hi": 0.13018522578885708
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 9,
+        "rate": 0.0,
+        "wilson_lo": 2.7755575615628914e-17,
+        "wilson_hi": 0.29914504841954404
+      },
+      "extraction_issues": 0
+    },
+    "llama33-70b-api|ccw|all": {
+      "n": 250,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 13,
+        "COMPETENCE": 237
+      },
+      "completed_within_budget": {
+        "k": 250,
+        "n": 250,
+        "rate": 1.0,
+        "wilson_lo": 0.9848667005045553,
+        "wilson_hi": 0.9999999999999998
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 250,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.015133299495444574
+      },
+      "magnitude_correct": {
+        "k": 13,
+        "n": 250,
+        "rate": 0.052,
+        "wilson_lo": 0.030637655164191247,
+        "wilson_hi": 0.08692178118372709
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 13,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.22809537235419838
+      },
+      "extraction_issues": 1
+    },
+    "llama33-70b-api|ccw|control": {
+      "n": 124,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 4,
+        "COMPETENCE": 120
+      },
+      "completed_within_budget": {
+        "k": 124,
+        "n": 124,
+        "rate": 1.0,
+        "wilson_lo": 0.9699513846593223,
+        "wilson_hi": 0.9999999999999999
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 124,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.030048615340677695
+      },
+      "magnitude_correct": {
+        "k": 4,
+        "n": 124,
+        "rate": 0.03225806451612903,
+        "wilson_lo": 0.012614619069790334,
+        "wilson_hi": 0.08001150495858558
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 4,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.4898908364545973
+      },
+      "extraction_issues": 0
+    },
+    "llama33-70b-api|ccw|trap": {
+      "n": 126,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 9,
+        "COMPETENCE": 117
+      },
+      "completed_within_budget": {
+        "k": 126,
+        "n": 126,
+        "rate": 1.0,
+        "wilson_lo": 0.9704142355178014,
+        "wilson_hi": 0.9999999999999998
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 126,
+        "rate": 0.0,
+        "wilson_lo": 1.734723475976807e-18,
+        "wilson_hi": 0.02958576448219845
+      },
+      "magnitude_correct": {
+        "k": 9,
+        "n": 126,
+        "rate": 0.07142857142857142,
+        "wilson_lo": 0.038031143767313015,
+        "wilson_hi": 0.13018522578885708
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 9,
+        "rate": 0.0,
+        "wilson_lo": 2.7755575615628914e-17,
+        "wilson_hi": 0.29914504841954404
+      },
+      "extraction_issues": 1
+    },
+    "llama33-70b-api|dflt|all": {
+      "n": 250,
+      "dichotomy": {
+        "CORRECT": 10,
+        "COMPLIANCE": 3,
+        "COMPETENCE": 237
+      },
+      "completed_within_budget": {
+        "k": 250,
+        "n": 250,
+        "rate": 1.0,
+        "wilson_lo": 0.9848667005045553,
+        "wilson_hi": 0.9999999999999998
+      },
+      "final_correct": {
+        "k": 10,
+        "n": 250,
+        "rate": 0.04,
+        "wilson_lo": 0.021869911954542545,
+        "wilson_hi": 0.07205272358126646
+      },
+      "magnitude_correct": {
+        "k": 13,
+        "n": 250,
+        "rate": 0.052,
+        "wilson_lo": 0.030637655164191247,
+        "wilson_hi": 0.08692178118372709
+      },
+      "sign_compliant_given_mag": {
+        "k": 10,
+        "n": 13,
+        "rate": 0.7692307692307693,
+        "wilson_lo": 0.49743624053272495,
+        "wilson_hi": 0.9182047128150143
+      },
+      "extraction_issues": 0
+    },
+    "llama33-70b-api|dflt|control": {
+      "n": 124,
+      "dichotomy": {
+        "CORRECT": 6,
+        "COMPLIANCE": 1,
+        "COMPETENCE": 117
+      },
+      "completed_within_budget": {
+        "k": 124,
+        "n": 124,
+        "rate": 1.0,
+        "wilson_lo": 0.9699513846593223,
+        "wilson_hi": 0.9999999999999999
+      },
+      "final_correct": {
+        "k": 6,
+        "n": 124,
+        "rate": 0.04838709677419355,
+        "wilson_lo": 0.022362410534384827,
+        "wilson_hi": 0.1015524678378402
+      },
+      "magnitude_correct": {
+        "k": 7,
+        "n": 124,
+        "rate": 0.056451612903225805,
+        "wilson_lo": 0.02761127094810196,
+        "wilson_hi": 0.1119479845960476
+      },
+      "sign_compliant_given_mag": {
+        "k": 6,
+        "n": 7,
+        "rate": 0.8571428571428571,
+        "wilson_lo": 0.4868721707256811,
+        "wilson_hi": 0.9743203756552565
+      },
+      "extraction_issues": 0
+    },
+    "llama33-70b-api|dflt|trap": {
+      "n": 126,
+      "dichotomy": {
+        "CORRECT": 4,
+        "COMPLIANCE": 2,
+        "COMPETENCE": 120
+      },
+      "completed_within_budget": {
+        "k": 126,
+        "n": 126,
+        "rate": 1.0,
+        "wilson_lo": 0.9704142355178014,
+        "wilson_hi": 0.9999999999999998
+      },
+      "final_correct": {
+        "k": 4,
+        "n": 126,
+        "rate": 0.031746031746031744,
+        "wilson_lo": 0.012413278972689408,
+        "wilson_hi": 0.07878608776460755
+      },
+      "magnitude_correct": {
+        "k": 6,
+        "n": 126,
+        "rate": 0.047619047619047616,
+        "wilson_lo": 0.02200448838795111,
+        "wilson_hi": 0.10000167947689512
+      },
+      "sign_compliant_given_mag": {
+        "k": 4,
+        "n": 6,
+        "rate": 0.6666666666666666,
+        "wilson_lo": 0.299993315138392,
+        "wilson_hi": 0.9032285888942195
+      },
+      "extraction_issues": 0
+    },
+    "llama33-70b-api|top|all": {
+      "n": 250,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 250
+      },
+      "completed_within_budget": {
+        "k": 250,
+        "n": 250,
+        "rate": 1.0,
+        "wilson_lo": 0.9848667005045553,
+        "wilson_hi": 0.9999999999999998
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 250,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.015133299495444574
+      },
+      "magnitude_correct": {
+        "k": 0,
+        "n": 250,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.015133299495444574
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      },
+      "extraction_issues": 0
+    },
+    "llama33-70b-api|top|control": {
+      "n": 124,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 124
+      },
+      "completed_within_budget": {
+        "k": 124,
+        "n": 124,
+        "rate": 1.0,
+        "wilson_lo": 0.9699513846593223,
+        "wilson_hi": 0.9999999999999999
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 124,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.030048615340677695
+      },
+      "magnitude_correct": {
+        "k": 0,
+        "n": 124,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.030048615340677695
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      },
+      "extraction_issues": 0
+    },
+    "llama33-70b-api|top|trap": {
+      "n": 126,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 126
+      },
+      "completed_within_budget": {
+        "k": 126,
+        "n": 126,
+        "rate": 1.0,
+        "wilson_lo": 0.9704142355178014,
+        "wilson_hi": 0.9999999999999998
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 126,
+        "rate": 0.0,
+        "wilson_lo": 1.734723475976807e-18,
+        "wilson_hi": 0.02958576448219845
+      },
+      "magnitude_correct": {
+        "k": 0,
+        "n": 126,
+        "rate": 0.0,
+        "wilson_lo": 1.734723475976807e-18,
+        "wilson_hi": 0.02958576448219845
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      },
+      "extraction_issues": 0
+    },
     "qwen25-32b|act|all": {
       "n": 250,
       "dichotomy": {
@@ -1571,6 +2908,450 @@
         "wilson_hi": NaN
       },
       "extraction_issues": 1
+    },
+    "qwen25-72b-api|act|all": {
+      "n": 250,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 14,
+        "COMPETENCE": 236
+      },
+      "completed_within_budget": {
+        "k": 250,
+        "n": 250,
+        "rate": 1.0,
+        "wilson_lo": 0.9848667005045553,
+        "wilson_hi": 0.9999999999999998
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 250,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.015133299495444574
+      },
+      "magnitude_correct": {
+        "k": 14,
+        "n": 250,
+        "rate": 0.056,
+        "wilson_lo": 0.03364764921901088,
+        "wilson_hi": 0.0917907207329439
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 14,
+        "rate": 0.0,
+        "wilson_lo": 1.3877787807814457e-17,
+        "wilson_hi": 0.2153108027376358
+      },
+      "extraction_issues": 33
+    },
+    "qwen25-72b-api|act|control": {
+      "n": 124,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 8,
+        "COMPETENCE": 116
+      },
+      "completed_within_budget": {
+        "k": 124,
+        "n": 124,
+        "rate": 1.0,
+        "wilson_lo": 0.9699513846593223,
+        "wilson_hi": 0.9999999999999999
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 124,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.030048615340677695
+      },
+      "magnitude_correct": {
+        "k": 8,
+        "n": 124,
+        "rate": 0.06451612903225806,
+        "wilson_lo": 0.033050909778555196,
+        "wilson_hi": 0.12215272293751893
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 8,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.32440756488388023
+      },
+      "extraction_issues": 20
+    },
+    "qwen25-72b-api|act|trap": {
+      "n": 126,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 6,
+        "COMPETENCE": 120
+      },
+      "completed_within_budget": {
+        "k": 126,
+        "n": 126,
+        "rate": 1.0,
+        "wilson_lo": 0.9704142355178014,
+        "wilson_hi": 0.9999999999999998
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 126,
+        "rate": 0.0,
+        "wilson_lo": 1.734723475976807e-18,
+        "wilson_hi": 0.02958576448219845
+      },
+      "magnitude_correct": {
+        "k": 6,
+        "n": 126,
+        "rate": 0.047619047619047616,
+        "wilson_lo": 0.02200448838795111,
+        "wilson_hi": 0.10000167947689512
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 6,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.39033428790216534
+      },
+      "extraction_issues": 13
+    },
+    "qwen25-72b-api|ccw|all": {
+      "n": 250,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 8,
+        "COMPETENCE": 242
+      },
+      "completed_within_budget": {
+        "k": 248,
+        "n": 250,
+        "rate": 0.992,
+        "wilson_lo": 0.9713054704167919,
+        "wilson_hi": 0.9978033628796906
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 250,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.015133299495444574
+      },
+      "magnitude_correct": {
+        "k": 8,
+        "n": 250,
+        "rate": 0.032,
+        "wilson_lo": 0.01630236549364963,
+        "wilson_hi": 0.06186240283408649
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 8,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.32440756488388023
+      },
+      "extraction_issues": 40
+    },
+    "qwen25-72b-api|ccw|control": {
+      "n": 124,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 4,
+        "COMPETENCE": 120
+      },
+      "completed_within_budget": {
+        "k": 123,
+        "n": 124,
+        "rate": 0.9919354838709677,
+        "wilson_lo": 0.9557320139455229,
+        "wilson_hi": 0.9985749935418747
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 124,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.030048615340677695
+      },
+      "magnitude_correct": {
+        "k": 4,
+        "n": 124,
+        "rate": 0.03225806451612903,
+        "wilson_lo": 0.012614619069790334,
+        "wilson_hi": 0.08001150495858558
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 4,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.4898908364545973
+      },
+      "extraction_issues": 18
+    },
+    "qwen25-72b-api|ccw|trap": {
+      "n": 126,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 4,
+        "COMPETENCE": 122
+      },
+      "completed_within_budget": {
+        "k": 125,
+        "n": 126,
+        "rate": 0.9920634920634921,
+        "wilson_lo": 0.9564132000148392,
+        "wilson_hi": 0.9985976349391875
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 126,
+        "rate": 0.0,
+        "wilson_lo": 1.734723475976807e-18,
+        "wilson_hi": 0.02958576448219845
+      },
+      "magnitude_correct": {
+        "k": 4,
+        "n": 126,
+        "rate": 0.031746031746031744,
+        "wilson_lo": 0.012413278972689408,
+        "wilson_hi": 0.07878608776460755
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 4,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.4898908364545973
+      },
+      "extraction_issues": 22
+    },
+    "qwen25-72b-api|dflt|all": {
+      "n": 250,
+      "dichotomy": {
+        "CORRECT": 8,
+        "COMPLIANCE": 2,
+        "COMPETENCE": 240
+      },
+      "completed_within_budget": {
+        "k": 246,
+        "n": 250,
+        "rate": 0.984,
+        "wilson_lo": 0.9595901906588808,
+        "wilson_hi": 0.9937607754295288
+      },
+      "final_correct": {
+        "k": 8,
+        "n": 250,
+        "rate": 0.032,
+        "wilson_lo": 0.01630236549364963,
+        "wilson_hi": 0.06186240283408649
+      },
+      "magnitude_correct": {
+        "k": 10,
+        "n": 250,
+        "rate": 0.04,
+        "wilson_lo": 0.021869911954542545,
+        "wilson_hi": 0.07205272358126646
+      },
+      "sign_compliant_given_mag": {
+        "k": 8,
+        "n": 10,
+        "rate": 0.8,
+        "wilson_lo": 0.4901624715366418,
+        "wilson_hi": 0.9433178485456248
+      },
+      "extraction_issues": 24
+    },
+    "qwen25-72b-api|dflt|control": {
+      "n": 124,
+      "dichotomy": {
+        "CORRECT": 4,
+        "COMPLIANCE": 1,
+        "COMPETENCE": 119
+      },
+      "completed_within_budget": {
+        "k": 121,
+        "n": 124,
+        "rate": 0.9758064516129032,
+        "wilson_lo": 0.9312798718154085,
+        "wilson_hi": 0.9917383813281402
+      },
+      "final_correct": {
+        "k": 4,
+        "n": 124,
+        "rate": 0.03225806451612903,
+        "wilson_lo": 0.012614619069790334,
+        "wilson_hi": 0.08001150495858558
+      },
+      "magnitude_correct": {
+        "k": 5,
+        "n": 124,
+        "rate": 0.04032258064516129,
+        "wilson_lo": 0.017344338581753,
+        "wilson_hi": 0.09092616261854744
+      },
+      "sign_compliant_given_mag": {
+        "k": 4,
+        "n": 5,
+        "rate": 0.8,
+        "wilson_lo": 0.3755346297625253,
+        "wilson_hi": 0.9637758913675698
+      },
+      "extraction_issues": 12
+    },
+    "qwen25-72b-api|dflt|trap": {
+      "n": 126,
+      "dichotomy": {
+        "CORRECT": 4,
+        "COMPLIANCE": 1,
+        "COMPETENCE": 121
+      },
+      "completed_within_budget": {
+        "k": 125,
+        "n": 126,
+        "rate": 0.9920634920634921,
+        "wilson_lo": 0.9564132000148392,
+        "wilson_hi": 0.9985976349391875
+      },
+      "final_correct": {
+        "k": 4,
+        "n": 126,
+        "rate": 0.031746031746031744,
+        "wilson_lo": 0.012413278972689408,
+        "wilson_hi": 0.07878608776460755
+      },
+      "magnitude_correct": {
+        "k": 5,
+        "n": 126,
+        "rate": 0.03968253968253968,
+        "wilson_lo": 0.017067113080169637,
+        "wilson_hi": 0.08953565422090193
+      },
+      "sign_compliant_given_mag": {
+        "k": 4,
+        "n": 5,
+        "rate": 0.8,
+        "wilson_lo": 0.3755346297625253,
+        "wilson_hi": 0.9637758913675698
+      },
+      "extraction_issues": 12
+    },
+    "qwen25-72b-api|top|all": {
+      "n": 250,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 250
+      },
+      "completed_within_budget": {
+        "k": 248,
+        "n": 250,
+        "rate": 0.992,
+        "wilson_lo": 0.9713054704167919,
+        "wilson_hi": 0.9978033628796906
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 250,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.015133299495444574
+      },
+      "magnitude_correct": {
+        "k": 0,
+        "n": 250,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.015133299495444574
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      },
+      "extraction_issues": 29
+    },
+    "qwen25-72b-api|top|control": {
+      "n": 124,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 124
+      },
+      "completed_within_budget": {
+        "k": 123,
+        "n": 124,
+        "rate": 0.9919354838709677,
+        "wilson_lo": 0.9557320139455229,
+        "wilson_hi": 0.9985749935418747
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 124,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.030048615340677695
+      },
+      "magnitude_correct": {
+        "k": 0,
+        "n": 124,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.030048615340677695
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      },
+      "extraction_issues": 13
+    },
+    "qwen25-72b-api|top|trap": {
+      "n": 126,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 126
+      },
+      "completed_within_budget": {
+        "k": 125,
+        "n": 126,
+        "rate": 0.9920634920634921,
+        "wilson_lo": 0.9564132000148392,
+        "wilson_hi": 0.9985976349391875
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 126,
+        "rate": 0.0,
+        "wilson_lo": 1.734723475976807e-18,
+        "wilson_hi": 0.02958576448219845
+      },
+      "magnitude_correct": {
+        "k": 0,
+        "n": 126,
+        "rate": 0.0,
+        "wilson_lo": 1.734723475976807e-18,
+        "wilson_hi": 0.02958576448219845
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      },
+      "extraction_issues": 16
     },
     "qwen25-7b-instruct|act|all": {
       "n": 250,
@@ -2459,6 +4240,450 @@
         "wilson_hi": NaN
       },
       "extraction_issues": 4
+    },
+    "qwen3-1.7b-think|act|all": {
+      "n": 129,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 1,
+        "COMPETENCE": 128
+      },
+      "completed_within_budget": {
+        "k": 115,
+        "n": 129,
+        "rate": 0.8914728682170543,
+        "wilson_lo": 0.8260607830534078,
+        "wilson_hi": 0.9342440261276411
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 129,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.028917619956878256
+      },
+      "magnitude_correct": {
+        "k": 1,
+        "n": 129,
+        "rate": 0.007751937984496124,
+        "wilson_lo": 0.0013697205909803702,
+        "wilson_hi": 0.042603440141760235
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 1,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.7934506856227626
+      },
+      "extraction_issues": 16
+    },
+    "qwen3-1.7b-think|act|control": {
+      "n": 61,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 1,
+        "COMPETENCE": 60
+      },
+      "completed_within_budget": {
+        "k": 55,
+        "n": 61,
+        "rate": 0.9016393442622951,
+        "wilson_lo": 0.8015539278317405,
+        "wilson_hi": 0.9541354241845295
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 61,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.059243867898112826
+      },
+      "magnitude_correct": {
+        "k": 1,
+        "n": 61,
+        "rate": 0.01639344262295082,
+        "wilson_lo": 0.002899730799299824,
+        "wilson_hi": 0.08718860044641587
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 1,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.7934506856227626
+      },
+      "extraction_issues": 8
+    },
+    "qwen3-1.7b-think|act|trap": {
+      "n": 68,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 68
+      },
+      "completed_within_budget": {
+        "k": 60,
+        "n": 68,
+        "rate": 0.8823529411764706,
+        "wilson_lo": 0.784650962802083,
+        "wilson_hi": 0.9391650739766866
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 68,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.053471336520070537
+      },
+      "magnitude_correct": {
+        "k": 0,
+        "n": 68,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.053471336520070537
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      },
+      "extraction_issues": 8
+    },
+    "qwen3-1.7b-think|ccw|all": {
+      "n": 134,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 11,
+        "COMPETENCE": 123
+      },
+      "completed_within_budget": {
+        "k": 113,
+        "n": 134,
+        "rate": 0.8432835820895522,
+        "wilson_lo": 0.7722793728643128,
+        "wilson_hi": 0.895154074134204
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 134,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.027868675023899322
+      },
+      "magnitude_correct": {
+        "k": 11,
+        "n": 134,
+        "rate": 0.08208955223880597,
+        "wilson_lo": 0.046454325805087834,
+        "wilson_hi": 0.14101799958802208
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 11,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.2588329669680317
+      },
+      "extraction_issues": 24
+    },
+    "qwen3-1.7b-think|ccw|control": {
+      "n": 62,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 5,
+        "COMPETENCE": 57
+      },
+      "completed_within_budget": {
+        "k": 54,
+        "n": 62,
+        "rate": 0.8709677419354839,
+        "wilson_lo": 0.7655067270982637,
+        "wilson_hi": 0.9331412194071697
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 62,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.058344072101372484
+      },
+      "magnitude_correct": {
+        "k": 5,
+        "n": 62,
+        "rate": 0.08064516129032258,
+        "wilson_lo": 0.03493834698599271,
+        "wilson_hi": 0.17528571348612612
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 5,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.43448246478317476
+      },
+      "extraction_issues": 9
+    },
+    "qwen3-1.7b-think|ccw|trap": {
+      "n": 72,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 6,
+        "COMPETENCE": 66
+      },
+      "completed_within_budget": {
+        "k": 59,
+        "n": 72,
+        "rate": 0.8194444444444444,
+        "wilson_lo": 0.7151965826080176,
+        "wilson_hi": 0.891331834899801
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 72,
+        "rate": 0.0,
+        "wilson_lo": 3.469446951953614e-18,
+        "wilson_hi": 0.05065117259645781
+      },
+      "magnitude_correct": {
+        "k": 6,
+        "n": 72,
+        "rate": 0.08333333333333333,
+        "wilson_lo": 0.03875242495694968,
+        "wilson_hi": 0.17012355220676517
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 6,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.39033428790216534
+      },
+      "extraction_issues": 15
+    },
+    "qwen3-1.7b-think|dflt|all": {
+      "n": 134,
+      "dichotomy": {
+        "CORRECT": 2,
+        "COMPLIANCE": 1,
+        "COMPETENCE": 131
+      },
+      "completed_within_budget": {
+        "k": 115,
+        "n": 134,
+        "rate": 0.8582089552238806,
+        "wilson_lo": 0.7891423611607533,
+        "wilson_hi": 0.9073099313594384
+      },
+      "final_correct": {
+        "k": 2,
+        "n": 134,
+        "rate": 0.014925373134328358,
+        "wilson_lo": 0.0041026643692217285,
+        "wilson_hi": 0.05278485617635224
+      },
+      "magnitude_correct": {
+        "k": 3,
+        "n": 134,
+        "rate": 0.022388059701492536,
+        "wilson_lo": 0.007642738836738421,
+        "wilson_hi": 0.06375420446967286
+      },
+      "sign_compliant_given_mag": {
+        "k": 2,
+        "n": 3,
+        "rate": 0.6666666666666666,
+        "wilson_lo": 0.20765960080204765,
+        "wilson_hi": 0.9385080552796037
+      },
+      "extraction_issues": 20
+    },
+    "qwen3-1.7b-think|dflt|control": {
+      "n": 64,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 1,
+        "COMPETENCE": 63
+      },
+      "completed_within_budget": {
+        "k": 53,
+        "n": 64,
+        "rate": 0.828125,
+        "wilson_lo": 0.7178678837734179,
+        "wilson_hi": 0.9012225769875536
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 64,
+        "rate": 0.0,
+        "wilson_lo": 3.469446951953614e-18,
+        "wilson_hi": 0.05662405979280534
+      },
+      "magnitude_correct": {
+        "k": 1,
+        "n": 64,
+        "rate": 0.015625,
+        "wilson_lo": 0.002763541923337505,
+        "wilson_hi": 0.08334101600094265
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 1,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.7934506856227626
+      },
+      "extraction_issues": 11
+    },
+    "qwen3-1.7b-think|dflt|trap": {
+      "n": 70,
+      "dichotomy": {
+        "CORRECT": 2,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 68
+      },
+      "completed_within_budget": {
+        "k": 62,
+        "n": 70,
+        "rate": 0.8857142857142857,
+        "wilson_lo": 0.7903577841784561,
+        "wilson_hi": 0.9409387105336235
+      },
+      "final_correct": {
+        "k": 2,
+        "n": 70,
+        "rate": 0.02857142857142857,
+        "wilson_lo": 0.007870611945441225,
+        "wilson_hi": 0.09832256118423902
+      },
+      "magnitude_correct": {
+        "k": 2,
+        "n": 70,
+        "rate": 0.02857142857142857,
+        "wilson_lo": 0.007870611945441225,
+        "wilson_hi": 0.09832256118423902
+      },
+      "sign_compliant_given_mag": {
+        "k": 2,
+        "n": 2,
+        "rate": 1.0,
+        "wilson_lo": 0.34238022750665303,
+        "wilson_hi": 1.0
+      },
+      "extraction_issues": 9
+    },
+    "qwen3-1.7b-think|top|all": {
+      "n": 138,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 138
+      },
+      "completed_within_budget": {
+        "k": 116,
+        "n": 138,
+        "rate": 0.8405797101449275,
+        "wilson_lo": 0.7704106687523921,
+        "wilson_hi": 0.8923010713942466
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 138,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.02708276446557296
+      },
+      "magnitude_correct": {
+        "k": 0,
+        "n": 138,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.02708276446557296
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      },
+      "extraction_issues": 25
+    },
+    "qwen3-1.7b-think|top|control": {
+      "n": 67,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 67
+      },
+      "completed_within_budget": {
+        "k": 57,
+        "n": 67,
+        "rate": 0.8507462686567164,
+        "wilson_lo": 0.7465960395409149,
+        "wilson_hi": 0.9168572656622017
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 67,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.05422613939130179
+      },
+      "magnitude_correct": {
+        "k": 0,
+        "n": 67,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.05422613939130179
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      },
+      "extraction_issues": 10
+    },
+    "qwen3-1.7b-think|top|trap": {
+      "n": 71,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 71
+      },
+      "completed_within_budget": {
+        "k": 59,
+        "n": 71,
+        "rate": 0.8309859154929577,
+        "wilson_lo": 0.7274087200136651,
+        "wilson_hi": 0.9005854524757174
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 71,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.05132795219689035
+      },
+      "magnitude_correct": {
+        "k": 0,
+        "n": 71,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.05132795219689035
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      },
+      "extraction_issues": 15
     },
     "qwen3-14b-nothink|act|all": {
       "n": 250,
@@ -6458,6 +8683,168 @@
     }
   },
   "factor_pairs": {
+    "deepseek-v3-api|ccw|final_correct": {
+      "n_pairs": 250,
+      "both_ok": 0,
+      "b": 36,
+      "c": 0,
+      "both_bad": 214,
+      "mcnemar": {
+        "b": 36,
+        "c": 0,
+        "odds_ratio": Infinity,
+        "p": 2.9103830456733704e-11
+      },
+      "rate_default": {
+        "k": 36,
+        "n": 250,
+        "rate": 0.144,
+        "wilson_lo": 0.10586256867804505,
+        "wilson_hi": 0.19291234056271145
+      },
+      "rate_flipped": {
+        "k": 0,
+        "n": 250,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.015133299495444574
+      }
+    },
+    "deepseek-v3-api|ccw|sign_given_mag": {
+      "n_pairs": 17,
+      "both_ok": 0,
+      "b": 10,
+      "c": 0,
+      "both_bad": 7,
+      "mcnemar": {
+        "b": 10,
+        "c": 0,
+        "odds_ratio": Infinity,
+        "p": 0.001953125
+      },
+      "rate_default": {
+        "k": 10,
+        "n": 17,
+        "rate": 0.5882352941176471,
+        "wilson_lo": 0.36005442642999785,
+        "wilson_hi": 0.7838894320978518
+      },
+      "rate_flipped": {
+        "k": 0,
+        "n": 17,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.1843181350088518
+      }
+    },
+    "deepseek-v3-api|act|final_correct": {
+      "n_pairs": 250,
+      "both_ok": 0,
+      "b": 36,
+      "c": 3,
+      "both_bad": 211,
+      "mcnemar": {
+        "b": 36,
+        "c": 3,
+        "odds_ratio": 12.0,
+        "p": 3.608874976634979e-08
+      },
+      "rate_default": {
+        "k": 36,
+        "n": 250,
+        "rate": 0.144,
+        "wilson_lo": 0.10586256867804505,
+        "wilson_hi": 0.19291234056271145
+      },
+      "rate_flipped": {
+        "k": 3,
+        "n": 250,
+        "rate": 0.012,
+        "wilson_lo": 0.004089319880534296,
+        "wilson_hi": 0.03468078042701961
+      }
+    },
+    "deepseek-v3-api|act|sign_given_mag": {
+      "n_pairs": 17,
+      "both_ok": 0,
+      "b": 9,
+      "c": 1,
+      "both_bad": 7,
+      "mcnemar": {
+        "b": 9,
+        "c": 1,
+        "odds_ratio": 9.0,
+        "p": 0.021484375
+      },
+      "rate_default": {
+        "k": 9,
+        "n": 17,
+        "rate": 0.5294117647058824,
+        "wilson_lo": 0.3096323506000443,
+        "wilson_hi": 0.7383489355759056
+      },
+      "rate_flipped": {
+        "k": 1,
+        "n": 17,
+        "rate": 0.058823529411764705,
+        "wilson_lo": 0.01046040098499762,
+        "wilson_hi": 0.269820306375754
+      }
+    },
+    "deepseek-v3-api|top|final_correct": {
+      "n_pairs": 250,
+      "both_ok": 1,
+      "b": 35,
+      "c": 4,
+      "both_bad": 210,
+      "mcnemar": {
+        "b": 35,
+        "c": 4,
+        "odds_ratio": 8.75,
+        "p": 3.353161446284503e-07
+      },
+      "rate_default": {
+        "k": 36,
+        "n": 250,
+        "rate": 0.144,
+        "wilson_lo": 0.10586256867804505,
+        "wilson_hi": 0.19291234056271145
+      },
+      "rate_flipped": {
+        "k": 5,
+        "n": 250,
+        "rate": 0.02,
+        "wilson_lo": 0.008572324384058198,
+        "wilson_hi": 0.045955643131568594
+      }
+    },
+    "deepseek-v3-api|top|sign_given_mag": {
+      "n_pairs": 1,
+      "both_ok": 1,
+      "b": 0,
+      "c": 0,
+      "both_bad": 0,
+      "mcnemar": {
+        "b": 0,
+        "c": 0,
+        "odds_ratio": NaN,
+        "p": 1.0
+      },
+      "rate_default": {
+        "k": 1,
+        "n": 1,
+        "rate": 1.0,
+        "wilson_lo": 0.20654931437723745,
+        "wilson_hi": 1.0
+      },
+      "rate_flipped": {
+        "k": 1,
+        "n": 1,
+        "rate": 1.0,
+        "wilson_lo": 0.20654931437723745,
+        "wilson_hi": 1.0
+      }
+    },
     "gemma4-31b|ccw|final_correct": {
       "n_pairs": 1,
       "both_ok": 0,
@@ -6944,6 +9331,330 @@
         "wilson_hi": 0.6172631197494989
       }
     },
+    "gpt5-api|ccw|final_correct": {
+      "n_pairs": 62,
+      "both_ok": 1,
+      "b": 10,
+      "c": 0,
+      "both_bad": 51,
+      "mcnemar": {
+        "b": 10,
+        "c": 0,
+        "odds_ratio": Infinity,
+        "p": 0.001953125
+      },
+      "rate_default": {
+        "k": 11,
+        "n": 62,
+        "rate": 0.1774193548387097,
+        "wilson_lo": 0.10206437766005086,
+        "wilson_hi": 0.2904156688569637
+      },
+      "rate_flipped": {
+        "k": 1,
+        "n": 62,
+        "rate": 0.016129032258064516,
+        "wilson_lo": 0.002852867168621827,
+        "wilson_hi": 0.08586720260689992
+      }
+    },
+    "gpt5-api|ccw|sign_given_mag": {
+      "n_pairs": 13,
+      "both_ok": 1,
+      "b": 8,
+      "c": 0,
+      "both_bad": 4,
+      "mcnemar": {
+        "b": 8,
+        "c": 0,
+        "odds_ratio": Infinity,
+        "p": 0.0078125
+      },
+      "rate_default": {
+        "k": 9,
+        "n": 13,
+        "rate": 0.6923076923076923,
+        "wilson_lo": 0.42369343180549035,
+        "wilson_hi": 0.8731929634428948
+      },
+      "rate_flipped": {
+        "k": 1,
+        "n": 13,
+        "rate": 0.07692307692307693,
+        "wilson_lo": 0.013710421242556559,
+        "wilson_hi": 0.3331395092109959
+      }
+    },
+    "gpt5-api|act|final_correct": {
+      "n_pairs": 62,
+      "both_ok": 4,
+      "b": 7,
+      "c": 9,
+      "both_bad": 42,
+      "mcnemar": {
+        "b": 7,
+        "c": 9,
+        "odds_ratio": 0.7777777777777778,
+        "p": 0.803619384765625
+      },
+      "rate_default": {
+        "k": 11,
+        "n": 62,
+        "rate": 0.1774193548387097,
+        "wilson_lo": 0.10206437766005086,
+        "wilson_hi": 0.2904156688569637
+      },
+      "rate_flipped": {
+        "k": 13,
+        "n": 62,
+        "rate": 0.20967741935483872,
+        "wilson_lo": 0.1268398928951199,
+        "wilson_hi": 0.3263921489701932
+      }
+    },
+    "gpt5-api|act|sign_given_mag": {
+      "n_pairs": 11,
+      "both_ok": 4,
+      "b": 3,
+      "c": 1,
+      "both_bad": 3,
+      "mcnemar": {
+        "b": 3,
+        "c": 1,
+        "odds_ratio": 3.0,
+        "p": 0.625
+      },
+      "rate_default": {
+        "k": 7,
+        "n": 11,
+        "rate": 0.6363636363636364,
+        "wilson_lo": 0.35380117450784887,
+        "wilson_hi": 0.8483352890463243
+      },
+      "rate_flipped": {
+        "k": 5,
+        "n": 11,
+        "rate": 0.45454545454545453,
+        "wilson_lo": 0.21271271622459764,
+        "wilson_hi": 0.719908462590678
+      }
+    },
+    "gpt5-api|top|final_correct": {
+      "n_pairs": 62,
+      "both_ok": 5,
+      "b": 6,
+      "c": 10,
+      "both_bad": 41,
+      "mcnemar": {
+        "b": 6,
+        "c": 10,
+        "odds_ratio": 0.6,
+        "p": 0.454498291015625
+      },
+      "rate_default": {
+        "k": 11,
+        "n": 62,
+        "rate": 0.1774193548387097,
+        "wilson_lo": 0.10206437766005086,
+        "wilson_hi": 0.2904156688569637
+      },
+      "rate_flipped": {
+        "k": 15,
+        "n": 62,
+        "rate": 0.24193548387096775,
+        "wilson_lo": 0.15245896205333753,
+        "wilson_hi": 0.3615250751602741
+      }
+    },
+    "gpt5-api|top|sign_given_mag": {
+      "n_pairs": 11,
+      "both_ok": 5,
+      "b": 1,
+      "c": 4,
+      "both_bad": 1,
+      "mcnemar": {
+        "b": 1,
+        "c": 4,
+        "odds_ratio": 0.25,
+        "p": 0.375
+      },
+      "rate_default": {
+        "k": 6,
+        "n": 11,
+        "rate": 0.5454545454545454,
+        "wilson_lo": 0.280091537409322,
+        "wilson_hi": 0.7872872837754024
+      },
+      "rate_flipped": {
+        "k": 9,
+        "n": 11,
+        "rate": 0.8181818181818182,
+        "wilson_lo": 0.523019438039156,
+        "wilson_hi": 0.9486323102539149
+      }
+    },
+    "llama33-70b-api|ccw|final_correct": {
+      "n_pairs": 250,
+      "both_ok": 0,
+      "b": 10,
+      "c": 0,
+      "both_bad": 240,
+      "mcnemar": {
+        "b": 10,
+        "c": 0,
+        "odds_ratio": Infinity,
+        "p": 0.001953125
+      },
+      "rate_default": {
+        "k": 10,
+        "n": 250,
+        "rate": 0.04,
+        "wilson_lo": 0.021869911954542545,
+        "wilson_hi": 0.07205272358126646
+      },
+      "rate_flipped": {
+        "k": 0,
+        "n": 250,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.015133299495444574
+      }
+    },
+    "llama33-70b-api|ccw|sign_given_mag": {
+      "n_pairs": 4,
+      "both_ok": 0,
+      "b": 3,
+      "c": 0,
+      "both_bad": 1,
+      "mcnemar": {
+        "b": 3,
+        "c": 0,
+        "odds_ratio": Infinity,
+        "p": 0.25
+      },
+      "rate_default": {
+        "k": 3,
+        "n": 4,
+        "rate": 0.75,
+        "wilson_lo": 0.30064184258240184,
+        "wilson_hi": 0.9544127391902995
+      },
+      "rate_flipped": {
+        "k": 0,
+        "n": 4,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.4898908364545973
+      }
+    },
+    "llama33-70b-api|act|final_correct": {
+      "n_pairs": 250,
+      "both_ok": 0,
+      "b": 10,
+      "c": 1,
+      "both_bad": 239,
+      "mcnemar": {
+        "b": 10,
+        "c": 1,
+        "odds_ratio": 10.0,
+        "p": 0.01171875
+      },
+      "rate_default": {
+        "k": 10,
+        "n": 250,
+        "rate": 0.04,
+        "wilson_lo": 0.021869911954542545,
+        "wilson_hi": 0.07205272358126646
+      },
+      "rate_flipped": {
+        "k": 1,
+        "n": 250,
+        "rate": 0.004,
+        "wilson_lo": 0.0007064475340650966,
+        "wilson_hi": 0.02230578556541592
+      }
+    },
+    "llama33-70b-api|act|sign_given_mag": {
+      "n_pairs": 3,
+      "both_ok": 0,
+      "b": 2,
+      "c": 0,
+      "both_bad": 1,
+      "mcnemar": {
+        "b": 2,
+        "c": 0,
+        "odds_ratio": Infinity,
+        "p": 0.5
+      },
+      "rate_default": {
+        "k": 2,
+        "n": 3,
+        "rate": 0.6666666666666666,
+        "wilson_lo": 0.20765960080204765,
+        "wilson_hi": 0.9385080552796037
+      },
+      "rate_flipped": {
+        "k": 0,
+        "n": 3,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.5614970317550455
+      }
+    },
+    "llama33-70b-api|top|final_correct": {
+      "n_pairs": 250,
+      "both_ok": 0,
+      "b": 10,
+      "c": 0,
+      "both_bad": 240,
+      "mcnemar": {
+        "b": 10,
+        "c": 0,
+        "odds_ratio": Infinity,
+        "p": 0.001953125
+      },
+      "rate_default": {
+        "k": 10,
+        "n": 250,
+        "rate": 0.04,
+        "wilson_lo": 0.021869911954542545,
+        "wilson_hi": 0.07205272358126646
+      },
+      "rate_flipped": {
+        "k": 0,
+        "n": 250,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.015133299495444574
+      }
+    },
+    "llama33-70b-api|top|sign_given_mag": {
+      "n_pairs": 0,
+      "both_ok": 0,
+      "b": 0,
+      "c": 0,
+      "both_bad": 0,
+      "mcnemar": {
+        "b": 0,
+        "c": 0,
+        "odds_ratio": NaN,
+        "p": 1.0
+      },
+      "rate_default": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      },
+      "rate_flipped": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      }
+    },
     "qwen25-32b|ccw|final_correct": {
       "n_pairs": 250,
       "both_ok": 0,
@@ -7080,6 +9791,168 @@
       }
     },
     "qwen25-32b|top|sign_given_mag": {
+      "n_pairs": 0,
+      "both_ok": 0,
+      "b": 0,
+      "c": 0,
+      "both_bad": 0,
+      "mcnemar": {
+        "b": 0,
+        "c": 0,
+        "odds_ratio": NaN,
+        "p": 1.0
+      },
+      "rate_default": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      },
+      "rate_flipped": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      }
+    },
+    "qwen25-72b-api|ccw|final_correct": {
+      "n_pairs": 250,
+      "both_ok": 0,
+      "b": 8,
+      "c": 0,
+      "both_bad": 242,
+      "mcnemar": {
+        "b": 8,
+        "c": 0,
+        "odds_ratio": Infinity,
+        "p": 0.0078125
+      },
+      "rate_default": {
+        "k": 8,
+        "n": 250,
+        "rate": 0.032,
+        "wilson_lo": 0.01630236549364963,
+        "wilson_hi": 0.06186240283408649
+      },
+      "rate_flipped": {
+        "k": 0,
+        "n": 250,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.015133299495444574
+      }
+    },
+    "qwen25-72b-api|ccw|sign_given_mag": {
+      "n_pairs": 1,
+      "both_ok": 0,
+      "b": 0,
+      "c": 0,
+      "both_bad": 1,
+      "mcnemar": {
+        "b": 0,
+        "c": 0,
+        "odds_ratio": NaN,
+        "p": 1.0
+      },
+      "rate_default": {
+        "k": 0,
+        "n": 1,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.7934506856227626
+      },
+      "rate_flipped": {
+        "k": 0,
+        "n": 1,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.7934506856227626
+      }
+    },
+    "qwen25-72b-api|act|final_correct": {
+      "n_pairs": 250,
+      "both_ok": 0,
+      "b": 8,
+      "c": 0,
+      "both_bad": 242,
+      "mcnemar": {
+        "b": 8,
+        "c": 0,
+        "odds_ratio": Infinity,
+        "p": 0.0078125
+      },
+      "rate_default": {
+        "k": 8,
+        "n": 250,
+        "rate": 0.032,
+        "wilson_lo": 0.01630236549364963,
+        "wilson_hi": 0.06186240283408649
+      },
+      "rate_flipped": {
+        "k": 0,
+        "n": 250,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.015133299495444574
+      }
+    },
+    "qwen25-72b-api|act|sign_given_mag": {
+      "n_pairs": 2,
+      "both_ok": 0,
+      "b": 2,
+      "c": 0,
+      "both_bad": 0,
+      "mcnemar": {
+        "b": 2,
+        "c": 0,
+        "odds_ratio": Infinity,
+        "p": 0.5
+      },
+      "rate_default": {
+        "k": 2,
+        "n": 2,
+        "rate": 1.0,
+        "wilson_lo": 0.34238022750665303,
+        "wilson_hi": 1.0
+      },
+      "rate_flipped": {
+        "k": 0,
+        "n": 2,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.6576197724933469
+      }
+    },
+    "qwen25-72b-api|top|final_correct": {
+      "n_pairs": 250,
+      "both_ok": 0,
+      "b": 8,
+      "c": 0,
+      "both_bad": 242,
+      "mcnemar": {
+        "b": 8,
+        "c": 0,
+        "odds_ratio": Infinity,
+        "p": 0.0078125
+      },
+      "rate_default": {
+        "k": 8,
+        "n": 250,
+        "rate": 0.032,
+        "wilson_lo": 0.01630236549364963,
+        "wilson_hi": 0.06186240283408649
+      },
+      "rate_flipped": {
+        "k": 0,
+        "n": 250,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.015133299495444574
+      }
+    },
+    "qwen25-72b-api|top|sign_given_mag": {
       "n_pairs": 0,
       "both_ok": 0,
       "b": 0,
@@ -7404,6 +10277,168 @@
       }
     },
     "qwen3-1.7b-nothink|top|sign_given_mag": {
+      "n_pairs": 0,
+      "both_ok": 0,
+      "b": 0,
+      "c": 0,
+      "both_bad": 0,
+      "mcnemar": {
+        "b": 0,
+        "c": 0,
+        "odds_ratio": NaN,
+        "p": 1.0
+      },
+      "rate_default": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      },
+      "rate_flipped": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      }
+    },
+    "qwen3-1.7b-think|ccw|final_correct": {
+      "n_pairs": 132,
+      "both_ok": 0,
+      "b": 2,
+      "c": 0,
+      "both_bad": 130,
+      "mcnemar": {
+        "b": 2,
+        "c": 0,
+        "odds_ratio": Infinity,
+        "p": 0.5
+      },
+      "rate_default": {
+        "k": 2,
+        "n": 132,
+        "rate": 0.015151515151515152,
+        "wilson_lo": 0.004164974167335873,
+        "wilson_hi": 0.05356010394040567
+      },
+      "rate_flipped": {
+        "k": 0,
+        "n": 132,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.02827898679860847
+      }
+    },
+    "qwen3-1.7b-think|ccw|sign_given_mag": {
+      "n_pairs": 1,
+      "both_ok": 0,
+      "b": 1,
+      "c": 0,
+      "both_bad": 0,
+      "mcnemar": {
+        "b": 1,
+        "c": 0,
+        "odds_ratio": Infinity,
+        "p": 1.0
+      },
+      "rate_default": {
+        "k": 1,
+        "n": 1,
+        "rate": 1.0,
+        "wilson_lo": 0.20654931437723745,
+        "wilson_hi": 1.0
+      },
+      "rate_flipped": {
+        "k": 0,
+        "n": 1,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.7934506856227626
+      }
+    },
+    "qwen3-1.7b-think|act|final_correct": {
+      "n_pairs": 120,
+      "both_ok": 0,
+      "b": 2,
+      "c": 0,
+      "both_bad": 118,
+      "mcnemar": {
+        "b": 2,
+        "c": 0,
+        "odds_ratio": Infinity,
+        "p": 0.5
+      },
+      "rate_default": {
+        "k": 2,
+        "n": 120,
+        "rate": 0.016666666666666666,
+        "wilson_lo": 0.004582564565921141,
+        "wilson_hi": 0.0587359629721589
+      },
+      "rate_flipped": {
+        "k": 0,
+        "n": 120,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.031019166418703486
+      }
+    },
+    "qwen3-1.7b-think|act|sign_given_mag": {
+      "n_pairs": 0,
+      "both_ok": 0,
+      "b": 0,
+      "c": 0,
+      "both_bad": 0,
+      "mcnemar": {
+        "b": 0,
+        "c": 0,
+        "odds_ratio": NaN,
+        "p": 1.0
+      },
+      "rate_default": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      },
+      "rate_flipped": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      }
+    },
+    "qwen3-1.7b-think|top|final_correct": {
+      "n_pairs": 116,
+      "both_ok": 0,
+      "b": 2,
+      "c": 0,
+      "both_bad": 114,
+      "mcnemar": {
+        "b": 2,
+        "c": 0,
+        "odds_ratio": Infinity,
+        "p": 0.5
+      },
+      "rate_default": {
+        "k": 2,
+        "n": 116,
+        "rate": 0.017241379310344827,
+        "wilson_lo": 0.004741013203170524,
+        "wilson_hi": 0.06069092410682547
+      },
+      "rate_flipped": {
+        "k": 0,
+        "n": 116,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.032054506499638716
+      }
+    },
+    "qwen3-1.7b-think|top|sign_given_mag": {
       "n_pairs": 0,
       "both_ok": 0,
       "b": 0,
@@ -8890,6 +11925,126 @@
     }
   },
   "var_level": {
+    "deepseek-v3-api|act": {
+      "n_vars": 1606,
+      "labels": {
+        "ERR_VAL": 1118,
+        "PASS": 343,
+        "ERR_SIGN_CONVENTION": 139,
+        "ERR_MISSING": 6
+      },
+      "var_mag_correct": {
+        "k": 482,
+        "n": 1606,
+        "rate": 0.3001245330012453,
+        "wilson_lo": 0.2782082805530181,
+        "wilson_hi": 0.32299468481830257
+      },
+      "convention_blind_given_mag": {
+        "k": 139,
+        "n": 482,
+        "rate": 0.2883817427385892,
+        "wilson_lo": 0.24973849248131105,
+        "wilson_hi": 0.33037144606699875
+      },
+      "sign_wrong_given_mag": {
+        "k": 139,
+        "n": 482,
+        "rate": 0.2883817427385892,
+        "wilson_lo": 0.24973849248131105,
+        "wilson_hi": 0.33037144606699875
+      }
+    },
+    "deepseek-v3-api|ccw": {
+      "n_vars": 1606,
+      "labels": {
+        "PASS": 292,
+        "ERR_SIGN_CONVENTION": 164,
+        "ERR_VAL": 1148,
+        "ERR_MISSING": 2
+      },
+      "var_mag_correct": {
+        "k": 456,
+        "n": 1606,
+        "rate": 0.28393524283935245,
+        "wilson_lo": 0.26241845061291996,
+        "wilson_hi": 0.3064831973118411
+      },
+      "convention_blind_given_mag": {
+        "k": 164,
+        "n": 456,
+        "rate": 0.35964912280701755,
+        "wilson_lo": 0.3169435143500132,
+        "wilson_hi": 0.40469967909264015
+      },
+      "sign_wrong_given_mag": {
+        "k": 164,
+        "n": 456,
+        "rate": 0.35964912280701755,
+        "wilson_lo": 0.3169435143500132,
+        "wilson_hi": 0.40469967909264015
+      }
+    },
+    "deepseek-v3-api|dflt": {
+      "n_vars": 1606,
+      "labels": {
+        "ERR_VAL": 1107,
+        "PASS": 470,
+        "ERR_SIGN_CONVENTION": 29
+      },
+      "var_mag_correct": {
+        "k": 499,
+        "n": 1606,
+        "rate": 0.3107098381070984,
+        "wilson_lo": 0.28855042560179367,
+        "wilson_hi": 0.33377263194612383
+      },
+      "convention_blind_given_mag": {
+        "k": 29,
+        "n": 499,
+        "rate": 0.05811623246492986,
+        "wilson_lo": 0.04076587215181572,
+        "wilson_hi": 0.08221813749156152
+      },
+      "sign_wrong_given_mag": {
+        "k": 29,
+        "n": 499,
+        "rate": 0.05811623246492986,
+        "wilson_lo": 0.04076587215181572,
+        "wilson_hi": 0.08221813749156152
+      }
+    },
+    "deepseek-v3-api|top": {
+      "n_vars": 1606,
+      "labels": {
+        "ERR_VAL": 1234,
+        "PASS": 321,
+        "ERR_SIGN_CONVENTION": 28,
+        "ERR_SIGN_INCOHERENT": 16,
+        "ERR_MISSING": 7
+      },
+      "var_mag_correct": {
+        "k": 365,
+        "n": 1606,
+        "rate": 0.22727272727272727,
+        "wilson_lo": 0.20744197568854206,
+        "wilson_hi": 0.24840506117325994
+      },
+      "convention_blind_given_mag": {
+        "k": 28,
+        "n": 365,
+        "rate": 0.07671232876712329,
+        "wilson_lo": 0.05360540749077254,
+        "wilson_hi": 0.10863627491669513
+      },
+      "sign_wrong_given_mag": {
+        "k": 44,
+        "n": 365,
+        "rate": 0.12054794520547946,
+        "wilson_lo": 0.09103696379196116,
+        "wilson_hi": 0.1579628615377105
+      }
+    },
     "gemma4-31b|act": {
       "n_vars": 7,
       "labels": {
@@ -9214,6 +12369,247 @@
         "wilson_hi": 0.1550614383097549
       }
     },
+    "gpt5-api|act": {
+      "n_vars": 398,
+      "labels": {
+        "PASS": 131,
+        "ERR_MISSING": 236,
+        "ERR_SIGN_CONVENTION": 10,
+        "ERR_VAL": 21
+      },
+      "var_mag_correct": {
+        "k": 141,
+        "n": 398,
+        "rate": 0.3542713567839196,
+        "wilson_lo": 0.30887949626668476,
+        "wilson_hi": 0.40244944340909816
+      },
+      "convention_blind_given_mag": {
+        "k": 10,
+        "n": 141,
+        "rate": 0.07092198581560284,
+        "wilson_lo": 0.038976634088444574,
+        "wilson_hi": 0.12562719560791719
+      },
+      "sign_wrong_given_mag": {
+        "k": 10,
+        "n": 141,
+        "rate": 0.07092198581560284,
+        "wilson_lo": 0.038976634088444574,
+        "wilson_hi": 0.12562719560791719
+      }
+    },
+    "gpt5-api|ccw": {
+      "n_vars": 398,
+      "labels": {
+        "ERR_SIGN_CONVENTION": 36,
+        "PASS": 97,
+        "ERR_MISSING": 264,
+        "ERR_VAL": 1
+      },
+      "var_mag_correct": {
+        "k": 133,
+        "n": 398,
+        "rate": 0.3341708542713568,
+        "wilson_lo": 0.28960919103974714,
+        "wilson_hi": 0.38190305066028174
+      },
+      "convention_blind_given_mag": {
+        "k": 36,
+        "n": 133,
+        "rate": 0.2706766917293233,
+        "wilson_lo": 0.2023933491461254,
+        "wilson_hi": 0.35183531425968184
+      },
+      "sign_wrong_given_mag": {
+        "k": 36,
+        "n": 133,
+        "rate": 0.2706766917293233,
+        "wilson_lo": 0.2023933491461254,
+        "wilson_hi": 0.35183531425968184
+      }
+    },
+    "gpt5-api|dflt": {
+      "n_vars": 398,
+      "labels": {
+        "PASS": 114,
+        "ERR_SIGN_CONVENTION": 8,
+        "ERR_MISSING": 251,
+        "ERR_VAL": 25
+      },
+      "var_mag_correct": {
+        "k": 122,
+        "n": 398,
+        "rate": 0.3065326633165829,
+        "wilson_lo": 0.2632654421885481,
+        "wilson_hi": 0.3534988397948189
+      },
+      "convention_blind_given_mag": {
+        "k": 8,
+        "n": 122,
+        "rate": 0.06557377049180328,
+        "wilson_lo": 0.03359886877221732,
+        "wilson_hi": 0.12407141736905616
+      },
+      "sign_wrong_given_mag": {
+        "k": 8,
+        "n": 122,
+        "rate": 0.06557377049180328,
+        "wilson_lo": 0.03359886877221732,
+        "wilson_hi": 0.12407141736905616
+      }
+    },
+    "gpt5-api|top": {
+      "n_vars": 398,
+      "labels": {
+        "PASS": 106,
+        "ERR_MISSING": 241,
+        "ERR_VAL": 48,
+        "ERR_SIGN_CONVENTION": 3
+      },
+      "var_mag_correct": {
+        "k": 109,
+        "n": 398,
+        "rate": 0.27386934673366836,
+        "wilson_lo": 0.2323761800675332,
+        "wilson_hi": 0.31968596770523344
+      },
+      "convention_blind_given_mag": {
+        "k": 3,
+        "n": 109,
+        "rate": 0.027522935779816515,
+        "wilson_lo": 0.00940385586167223,
+        "wilson_hi": 0.07781106428866252
+      },
+      "sign_wrong_given_mag": {
+        "k": 3,
+        "n": 109,
+        "rate": 0.027522935779816515,
+        "wilson_lo": 0.00940385586167223,
+        "wilson_hi": 0.07781106428866252
+      }
+    },
+    "llama33-70b-api|act": {
+      "n_vars": 1606,
+      "labels": {
+        "ERR_VAL": 1285,
+        "ERR_SIGN_CONVENTION": 91,
+        "PASS": 226,
+        "ERR_MISSING": 4
+      },
+      "var_mag_correct": {
+        "k": 317,
+        "n": 1606,
+        "rate": 0.19738480697384808,
+        "wilson_lo": 0.17865034233231192,
+        "wilson_hi": 0.2175634930896876
+      },
+      "convention_blind_given_mag": {
+        "k": 91,
+        "n": 317,
+        "rate": 0.2870662460567823,
+        "wilson_lo": 0.24004859228896602,
+        "wilson_hi": 0.3391828433982583
+      },
+      "sign_wrong_given_mag": {
+        "k": 91,
+        "n": 317,
+        "rate": 0.2870662460567823,
+        "wilson_lo": 0.24004859228896602,
+        "wilson_hi": 0.3391828433982583
+      }
+    },
+    "llama33-70b-api|ccw": {
+      "n_vars": 1606,
+      "labels": {
+        "ERR_VAL": 1357,
+        "PASS": 139,
+        "ERR_SIGN_CONVENTION": 108,
+        "ERR_MISSING": 2
+      },
+      "var_mag_correct": {
+        "k": 247,
+        "n": 1606,
+        "rate": 0.15379825653798257,
+        "wilson_lo": 0.13698245380037602,
+        "wilson_hi": 0.17226629618857817
+      },
+      "convention_blind_given_mag": {
+        "k": 108,
+        "n": 247,
+        "rate": 0.43724696356275305,
+        "wilson_lo": 0.3768142587642557,
+        "wilson_hi": 0.4996017047461489
+      },
+      "sign_wrong_given_mag": {
+        "k": 108,
+        "n": 247,
+        "rate": 0.43724696356275305,
+        "wilson_lo": 0.3768142587642557,
+        "wilson_hi": 0.4996017047461489
+      }
+    },
+    "llama33-70b-api|dflt": {
+      "n_vars": 1606,
+      "labels": {
+        "ERR_VAL": 1339,
+        "ERR_SIGN_CONVENTION": 21,
+        "PASS": 245,
+        "ERR_MISSING": 1
+      },
+      "var_mag_correct": {
+        "k": 266,
+        "n": 1606,
+        "rate": 0.1656288916562889,
+        "wilson_lo": 0.14824974553047926,
+        "wilson_hi": 0.18460381336173004
+      },
+      "convention_blind_given_mag": {
+        "k": 21,
+        "n": 266,
+        "rate": 0.07894736842105263,
+        "wilson_lo": 0.05221389015115691,
+        "wilson_hi": 0.11766904415048104
+      },
+      "sign_wrong_given_mag": {
+        "k": 21,
+        "n": 266,
+        "rate": 0.07894736842105263,
+        "wilson_lo": 0.05221389015115691,
+        "wilson_hi": 0.11766904415048104
+      }
+    },
+    "llama33-70b-api|top": {
+      "n_vars": 1606,
+      "labels": {
+        "ERR_VAL": 1406,
+        "PASS": 150,
+        "ERR_SIGN_CONVENTION": 38,
+        "ERR_SIGN_INCOHERENT": 7,
+        "ERR_MISSING": 5
+      },
+      "var_mag_correct": {
+        "k": 195,
+        "n": 1606,
+        "rate": 0.12141967621419676,
+        "wilson_lo": 0.10634268641107034,
+        "wilson_hi": 0.13830342868476445
+      },
+      "convention_blind_given_mag": {
+        "k": 38,
+        "n": 195,
+        "rate": 0.19487179487179487,
+        "wilson_lo": 0.1453963299196127,
+        "wilson_hi": 0.25613692825614526
+      },
+      "sign_wrong_given_mag": {
+        "k": 45,
+        "n": 195,
+        "rate": 0.23076923076923078,
+        "wilson_lo": 0.17717856265131265,
+        "wilson_hi": 0.29476254750376796
+      }
+    },
     "qwen25-32b|act": {
       "n_vars": 1606,
       "labels": {
@@ -9333,6 +12729,126 @@
         "rate": 0.31007751937984496,
         "wilson_lo": 0.23672488057595462,
         "wilson_hi": 0.3944143704154177
+      }
+    },
+    "qwen25-72b-api|act": {
+      "n_vars": 1606,
+      "labels": {
+        "ERR_VAL": 1353,
+        "PASS": 174,
+        "ERR_SIGN_CONVENTION": 79
+      },
+      "var_mag_correct": {
+        "k": 253,
+        "n": 1606,
+        "rate": 0.15753424657534246,
+        "wilson_lo": 0.14053678848841544,
+        "wilson_hi": 0.176166111680514
+      },
+      "convention_blind_given_mag": {
+        "k": 79,
+        "n": 253,
+        "rate": 0.31225296442687744,
+        "wilson_lo": 0.25831757695761476,
+        "wilson_hi": 0.3718044429211101
+      },
+      "sign_wrong_given_mag": {
+        "k": 79,
+        "n": 253,
+        "rate": 0.31225296442687744,
+        "wilson_lo": 0.25831757695761476,
+        "wilson_hi": 0.3718044429211101
+      }
+    },
+    "qwen25-72b-api|ccw": {
+      "n_vars": 1606,
+      "labels": {
+        "ERR_VAL": 1378,
+        "PASS": 121,
+        "ERR_SIGN_CONVENTION": 92,
+        "ERR_MISSING": 15
+      },
+      "var_mag_correct": {
+        "k": 213,
+        "n": 1606,
+        "rate": 0.13262764632627647,
+        "wilson_lo": 0.11691286811144626,
+        "wilson_hi": 0.15009569752431445
+      },
+      "convention_blind_given_mag": {
+        "k": 92,
+        "n": 213,
+        "rate": 0.431924882629108,
+        "wilson_lo": 0.36718971054913685,
+        "wilson_hi": 0.4990720266771377
+      },
+      "sign_wrong_given_mag": {
+        "k": 92,
+        "n": 213,
+        "rate": 0.431924882629108,
+        "wilson_lo": 0.36718971054913685,
+        "wilson_hi": 0.4990720266771377
+      }
+    },
+    "qwen25-72b-api|dflt": {
+      "n_vars": 1606,
+      "labels": {
+        "ERR_VAL": 1351,
+        "ERR_SIGN_CONVENTION": 31,
+        "PASS": 199,
+        "ERR_MISSING": 25
+      },
+      "var_mag_correct": {
+        "k": 230,
+        "n": 1606,
+        "rate": 0.1432129514321295,
+        "wilson_lo": 0.12693181744173201,
+        "wilson_hi": 0.1611968403706254
+      },
+      "convention_blind_given_mag": {
+        "k": 31,
+        "n": 230,
+        "rate": 0.13478260869565217,
+        "wilson_lo": 0.0966039468354608,
+        "wilson_hi": 0.18496057620824935
+      },
+      "sign_wrong_given_mag": {
+        "k": 31,
+        "n": 230,
+        "rate": 0.13478260869565217,
+        "wilson_lo": 0.0966039468354608,
+        "wilson_hi": 0.18496057620824935
+      }
+    },
+    "qwen25-72b-api|top": {
+      "n_vars": 1606,
+      "labels": {
+        "ERR_VAL": 1388,
+        "ERR_SIGN_INCOHERENT": 25,
+        "PASS": 142,
+        "ERR_SIGN_CONVENTION": 38,
+        "ERR_MISSING": 13
+      },
+      "var_mag_correct": {
+        "k": 205,
+        "n": 1606,
+        "rate": 0.12764632627646327,
+        "wilson_lo": 0.11220992367116284,
+        "wilson_hi": 0.14485977505796416
+      },
+      "convention_blind_given_mag": {
+        "k": 38,
+        "n": 205,
+        "rate": 0.18536585365853658,
+        "wilson_lo": 0.1381333971895585,
+        "wilson_hi": 0.2441731585659437
+      },
+      "sign_wrong_given_mag": {
+        "k": 63,
+        "n": 205,
+        "rate": 0.3073170731707317,
+        "wilson_lo": 0.24818609538003295,
+        "wilson_hi": 0.3735365240361273
       }
     },
     "qwen25-7b-instruct|act": {
@@ -9575,6 +13091,127 @@
         "rate": 0.5121951219512195,
         "wilson_lo": 0.3648450865154381,
         "wilson_hi": 0.6574557044556734
+      }
+    },
+    "qwen3-1.7b-think|act": {
+      "n_vars": 830,
+      "labels": {
+        "ERR_VAL": 660,
+        "PASS": 54,
+        "ERR_SIGN_CONVENTION": 22,
+        "ERR_MISSING": 94
+      },
+      "var_mag_correct": {
+        "k": 76,
+        "n": 830,
+        "rate": 0.09156626506024096,
+        "wilson_lo": 0.07378181781744111,
+        "wilson_hi": 0.11311397294966874
+      },
+      "convention_blind_given_mag": {
+        "k": 22,
+        "n": 76,
+        "rate": 0.2894736842105263,
+        "wilson_lo": 0.19961016825622824,
+        "wilson_hi": 0.3995955517711981
+      },
+      "sign_wrong_given_mag": {
+        "k": 22,
+        "n": 76,
+        "rate": 0.2894736842105263,
+        "wilson_lo": 0.19961016825622824,
+        "wilson_hi": 0.3995955517711981
+      }
+    },
+    "qwen3-1.7b-think|ccw": {
+      "n_vars": 866,
+      "labels": {
+        "ERR_VAL": 609,
+        "PASS": 68,
+        "ERR_SIGN_CONVENTION": 31,
+        "ERR_MISSING": 158
+      },
+      "var_mag_correct": {
+        "k": 99,
+        "n": 866,
+        "rate": 0.11431870669745958,
+        "wilson_lo": 0.09480763015287436,
+        "wilson_hi": 0.13723633231167054
+      },
+      "convention_blind_given_mag": {
+        "k": 31,
+        "n": 99,
+        "rate": 0.31313131313131315,
+        "wilson_lo": 0.23020787273174337,
+        "wilson_hi": 0.41001504490976803
+      },
+      "sign_wrong_given_mag": {
+        "k": 31,
+        "n": 99,
+        "rate": 0.31313131313131315,
+        "wilson_lo": 0.23020787273174337,
+        "wilson_hi": 0.41001504490976803
+      }
+    },
+    "qwen3-1.7b-think|dflt": {
+      "n_vars": 863,
+      "labels": {
+        "ERR_VAL": 648,
+        "PASS": 60,
+        "ERR_SIGN_CONVENTION": 17,
+        "ERR_MISSING": 138
+      },
+      "var_mag_correct": {
+        "k": 77,
+        "n": 863,
+        "rate": 0.08922363847045191,
+        "wilson_lo": 0.07198005815793805,
+        "wilson_hi": 0.11010797791203907
+      },
+      "convention_blind_given_mag": {
+        "k": 17,
+        "n": 77,
+        "rate": 0.22077922077922077,
+        "wilson_lo": 0.14266403041098702,
+        "wilson_hi": 0.32543067461686576
+      },
+      "sign_wrong_given_mag": {
+        "k": 17,
+        "n": 77,
+        "rate": 0.22077922077922077,
+        "wilson_lo": 0.14266403041098702,
+        "wilson_hi": 0.32543067461686576
+      }
+    },
+    "qwen3-1.7b-think|top": {
+      "n_vars": 888,
+      "labels": {
+        "ERR_VAL": 661,
+        "ERR_MISSING": 167,
+        "PASS": 45,
+        "ERR_SIGN_CONVENTION": 10,
+        "ERR_SIGN_INCOHERENT": 5
+      },
+      "var_mag_correct": {
+        "k": 60,
+        "n": 888,
+        "rate": 0.06756756756756757,
+        "wilson_lo": 0.05285187339956858,
+        "wilson_hi": 0.08600852336248933
+      },
+      "convention_blind_given_mag": {
+        "k": 10,
+        "n": 60,
+        "rate": 0.16666666666666666,
+        "wilson_lo": 0.0931317697919145,
+        "wilson_hi": 0.2803161316361453
+      },
+      "sign_wrong_given_mag": {
+        "k": 15,
+        "n": 60,
+        "rate": 0.25,
+        "wilson_lo": 0.15776522530056675,
+        "wilson_hi": 0.37232070077047824
       }
     },
     "qwen3-14b-nothink|act": {
@@ -10654,6 +14291,96 @@
     }
   },
   "var_level_diagnostic": {
+    "deepseek-v3-api|act": {
+      "n_vars": 500,
+      "labels": {
+        "ERR_VAL": 344,
+        "ERR_SIGN_CONVENTION": 93,
+        "PASS": 57,
+        "ERR_MISSING": 6
+      },
+      "var_mag_correct": {
+        "k": 150,
+        "n": 500,
+        "rate": 0.3,
+        "wilson_lo": 0.2614819321406983,
+        "wilson_hi": 0.3415678040439227
+      },
+      "convention_blind_given_mag": {
+        "k": 93,
+        "n": 150,
+        "rate": 0.62,
+        "wilson_lo": 0.5402444138161206,
+        "wilson_hi": 0.6937627275355409
+      },
+      "sign_wrong_given_mag": {
+        "k": 93,
+        "n": 150,
+        "rate": 0.62,
+        "wilson_lo": 0.5402444138161206,
+        "wilson_hi": 0.6937627275355409
+      }
+    },
+    "deepseek-v3-api|ccw": {
+      "n_vars": 642,
+      "labels": {
+        "PASS": 38,
+        "ERR_SIGN_CONVENTION": 147,
+        "ERR_VAL": 457
+      },
+      "var_mag_correct": {
+        "k": 185,
+        "n": 642,
+        "rate": 0.2881619937694704,
+        "wilson_lo": 0.25446964896137136,
+        "wilson_hi": 0.3243743594479498
+      },
+      "convention_blind_given_mag": {
+        "k": 147,
+        "n": 185,
+        "rate": 0.7945945945945946,
+        "wilson_lo": 0.7306704378644486,
+        "wilson_hi": 0.8465333217373876
+      },
+      "sign_wrong_given_mag": {
+        "k": 147,
+        "n": 185,
+        "rate": 0.7945945945945946,
+        "wilson_lo": 0.7306704378644486,
+        "wilson_hi": 0.8465333217373876
+      }
+    },
+    "deepseek-v3-api|top": {
+      "n_vars": 328,
+      "labels": {
+        "ERR_VAL": 297,
+        "PASS": 12,
+        "ERR_SIGN_INCOHERENT": 16,
+        "ERR_SIGN_CONVENTION": 2,
+        "ERR_MISSING": 1
+      },
+      "var_mag_correct": {
+        "k": 30,
+        "n": 328,
+        "rate": 0.09146341463414634,
+        "wilson_lo": 0.06481879469932825,
+        "wilson_hi": 0.12756662648214612
+      },
+      "convention_blind_given_mag": {
+        "k": 2,
+        "n": 30,
+        "rate": 0.06666666666666667,
+        "wilson_lo": 0.018477023791270378,
+        "wilson_hi": 0.2132345836261692
+      },
+      "sign_wrong_given_mag": {
+        "k": 18,
+        "n": 30,
+        "rate": 0.6,
+        "wilson_lo": 0.42320360253322475,
+        "wilson_hi": 0.7540937188319815
+      }
+    },
     "gemma4-31b|act": {
       "n_vars": 2,
       "labels": {
@@ -10890,6 +14617,184 @@
         "wilson_hi": 0.125007182561301
       }
     },
+    "gpt5-api|act": {
+      "n_vars": 124,
+      "labels": {
+        "PASS": 50,
+        "ERR_MISSING": 68,
+        "ERR_VAL": 6
+      },
+      "var_mag_correct": {
+        "k": 50,
+        "n": 124,
+        "rate": 0.4032258064516129,
+        "wilson_lo": 0.32105026463452474,
+        "wilson_hi": 0.4912172093023806
+      },
+      "convention_blind_given_mag": {
+        "k": 0,
+        "n": 50,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.07134759913335872
+      },
+      "sign_wrong_given_mag": {
+        "k": 0,
+        "n": 50,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.07134759913335872
+      }
+    },
+    "gpt5-api|ccw": {
+      "n_vars": 160,
+      "labels": {
+        "ERR_SIGN_CONVENTION": 36,
+        "ERR_MISSING": 108,
+        "PASS": 15,
+        "ERR_VAL": 1
+      },
+      "var_mag_correct": {
+        "k": 51,
+        "n": 160,
+        "rate": 0.31875,
+        "wilson_lo": 0.2515198079520845,
+        "wilson_hi": 0.3944794377975862
+      },
+      "convention_blind_given_mag": {
+        "k": 36,
+        "n": 51,
+        "rate": 0.7058823529411765,
+        "wilson_lo": 0.5700092442431359,
+        "wilson_hi": 0.8129127357986454
+      },
+      "sign_wrong_given_mag": {
+        "k": 36,
+        "n": 51,
+        "rate": 0.7058823529411765,
+        "wilson_lo": 0.5700092442431359,
+        "wilson_hi": 0.8129127357986454
+      }
+    },
+    "gpt5-api|top": {
+      "n_vars": 80,
+      "labels": {
+        "ERR_MISSING": 56,
+        "ERR_VAL": 9,
+        "PASS": 15
+      },
+      "var_mag_correct": {
+        "k": 15,
+        "n": 80,
+        "rate": 0.1875,
+        "wilson_lo": 0.11705310466977323,
+        "wilson_hi": 0.28658322628993116
+      },
+      "convention_blind_given_mag": {
+        "k": 0,
+        "n": 15,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.20388330103584862
+      },
+      "sign_wrong_given_mag": {
+        "k": 0,
+        "n": 15,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.20388330103584862
+      }
+    },
+    "llama33-70b-api|act": {
+      "n_vars": 500,
+      "labels": {
+        "ERR_SIGN_CONVENTION": 71,
+        "ERR_VAL": 401,
+        "PASS": 26,
+        "ERR_MISSING": 2
+      },
+      "var_mag_correct": {
+        "k": 97,
+        "n": 500,
+        "rate": 0.194,
+        "wilson_lo": 0.1617264666432368,
+        "wilson_hi": 0.2309396297192332
+      },
+      "convention_blind_given_mag": {
+        "k": 71,
+        "n": 97,
+        "rate": 0.7319587628865979,
+        "wilson_lo": 0.6362205885733584,
+        "wilson_hi": 0.8100244432445008
+      },
+      "sign_wrong_given_mag": {
+        "k": 71,
+        "n": 97,
+        "rate": 0.7319587628865979,
+        "wilson_lo": 0.6362205885733584,
+        "wilson_hi": 0.8100244432445008
+      }
+    },
+    "llama33-70b-api|ccw": {
+      "n_vars": 642,
+      "labels": {
+        "ERR_VAL": 532,
+        "PASS": 23,
+        "ERR_SIGN_CONVENTION": 85,
+        "ERR_MISSING": 2
+      },
+      "var_mag_correct": {
+        "k": 108,
+        "n": 642,
+        "rate": 0.16822429906542055,
+        "wilson_lo": 0.14128115965795457,
+        "wilson_hi": 0.19911423586546756
+      },
+      "convention_blind_given_mag": {
+        "k": 85,
+        "n": 108,
+        "rate": 0.7870370370370371,
+        "wilson_lo": 0.7006656475723132,
+        "wilson_hi": 0.853690497758367
+      },
+      "sign_wrong_given_mag": {
+        "k": 85,
+        "n": 108,
+        "rate": 0.7870370370370371,
+        "wilson_lo": 0.7006656475723132,
+        "wilson_hi": 0.853690497758367
+      }
+    },
+    "llama33-70b-api|top": {
+      "n_vars": 328,
+      "labels": {
+        "ERR_SIGN_INCOHERENT": 7,
+        "ERR_VAL": 319,
+        "ERR_MISSING": 1,
+        "ERR_SIGN_CONVENTION": 1
+      },
+      "var_mag_correct": {
+        "k": 8,
+        "n": 328,
+        "rate": 0.024390243902439025,
+        "wilson_lo": 0.012409631187485348,
+        "wilson_hi": 0.04738235168049974
+      },
+      "convention_blind_given_mag": {
+        "k": 1,
+        "n": 8,
+        "rate": 0.125,
+        "wilson_lo": 0.02241749145005667,
+        "wilson_hi": 0.4708881822128535
+      },
+      "sign_wrong_given_mag": {
+        "k": 8,
+        "n": 8,
+        "rate": 1.0,
+        "wilson_lo": 0.6755924351161198,
+        "wilson_hi": 1.0
+      }
+    },
     "qwen25-32b|act": {
       "n_vars": 500,
       "labels": {
@@ -10977,6 +14882,96 @@
         "rate": 0.8461538461538461,
         "wilson_lo": 0.5776536898051745,
         "wilson_hi": 0.9567418216419186
+      }
+    },
+    "qwen25-72b-api|act": {
+      "n_vars": 500,
+      "labels": {
+        "ERR_SIGN_CONVENTION": 44,
+        "ERR_VAL": 422,
+        "PASS": 34
+      },
+      "var_mag_correct": {
+        "k": 78,
+        "n": 500,
+        "rate": 0.156,
+        "wilson_lo": 0.126830791403845,
+        "wilson_hi": 0.19041475483370296
+      },
+      "convention_blind_given_mag": {
+        "k": 44,
+        "n": 78,
+        "rate": 0.5641025641025641,
+        "wilson_lo": 0.45361986570375756,
+        "wilson_hi": 0.6685675945895508
+      },
+      "sign_wrong_given_mag": {
+        "k": 44,
+        "n": 78,
+        "rate": 0.5641025641025641,
+        "wilson_lo": 0.45361986570375756,
+        "wilson_hi": 0.6685675945895508
+      }
+    },
+    "qwen25-72b-api|ccw": {
+      "n_vars": 642,
+      "labels": {
+        "ERR_VAL": 548,
+        "PASS": 21,
+        "ERR_SIGN_CONVENTION": 67,
+        "ERR_MISSING": 6
+      },
+      "var_mag_correct": {
+        "k": 88,
+        "n": 642,
+        "rate": 0.13707165109034267,
+        "wilson_lo": 0.11261820169289183,
+        "wilson_hi": 0.16584248918484223
+      },
+      "convention_blind_given_mag": {
+        "k": 67,
+        "n": 88,
+        "rate": 0.7613636363636364,
+        "wilson_lo": 0.662573550326628,
+        "wilson_hi": 0.8382895739167237
+      },
+      "sign_wrong_given_mag": {
+        "k": 67,
+        "n": 88,
+        "rate": 0.7613636363636364,
+        "wilson_lo": 0.662573550326628,
+        "wilson_hi": 0.8382895739167237
+      }
+    },
+    "qwen25-72b-api|top": {
+      "n_vars": 328,
+      "labels": {
+        "ERR_VAL": 296,
+        "ERR_SIGN_INCOHERENT": 25,
+        "ERR_MISSING": 4,
+        "ERR_SIGN_CONVENTION": 2,
+        "PASS": 1
+      },
+      "var_mag_correct": {
+        "k": 28,
+        "n": 328,
+        "rate": 0.08536585365853659,
+        "wilson_lo": 0.05972085997971935,
+        "wilson_hi": 0.12061061226416511
+      },
+      "convention_blind_given_mag": {
+        "k": 2,
+        "n": 28,
+        "rate": 0.07142857142857142,
+        "wilson_lo": 0.01981206411530574,
+        "wilson_hi": 0.22645362568399052
+      },
+      "sign_wrong_given_mag": {
+        "k": 27,
+        "n": 28,
+        "rate": 0.9642857142857143,
+        "wilson_lo": 0.8228780225664668,
+        "wilson_hi": 0.9936674801509623
       }
     },
     "qwen25-7b-instruct|act": {
@@ -11158,6 +15153,95 @@
         "rate": 0.9285714285714286,
         "wilson_lo": 0.6853129557584889,
         "wilson_hi": 0.9872777847521093
+      }
+    },
+    "qwen3-1.7b-think|act": {
+      "n_vars": 258,
+      "labels": {
+        "ERR_VAL": 207,
+        "ERR_SIGN_CONVENTION": 12,
+        "PASS": 8,
+        "ERR_MISSING": 31
+      },
+      "var_mag_correct": {
+        "k": 20,
+        "n": 258,
+        "rate": 0.07751937984496124,
+        "wilson_lo": 0.050739726443891554,
+        "wilson_hi": 0.11669540402838491
+      },
+      "convention_blind_given_mag": {
+        "k": 12,
+        "n": 20,
+        "rate": 0.6,
+        "wilson_lo": 0.38658150076225317,
+        "wilson_hi": 0.7811934676271829
+      },
+      "sign_wrong_given_mag": {
+        "k": 12,
+        "n": 20,
+        "rate": 0.6,
+        "wilson_lo": 0.38658150076225317,
+        "wilson_hi": 0.7811934676271829
+      }
+    },
+    "qwen3-1.7b-think|ccw": {
+      "n_vars": 346,
+      "labels": {
+        "ERR_VAL": 242,
+        "ERR_SIGN_CONVENTION": 29,
+        "PASS": 11,
+        "ERR_MISSING": 64
+      },
+      "var_mag_correct": {
+        "k": 40,
+        "n": 346,
+        "rate": 0.11560693641618497,
+        "wilson_lo": 0.0860566380143063,
+        "wilson_hi": 0.153598945127044
+      },
+      "convention_blind_given_mag": {
+        "k": 29,
+        "n": 40,
+        "rate": 0.725,
+        "wilson_lo": 0.5716504419378943,
+        "wilson_hi": 0.8389198375233267
+      },
+      "sign_wrong_given_mag": {
+        "k": 29,
+        "n": 40,
+        "rate": 0.725,
+        "wilson_lo": 0.5716504419378943,
+        "wilson_hi": 0.8389198375233267
+      }
+    },
+    "qwen3-1.7b-think|top": {
+      "n_vars": 170,
+      "labels": {
+        "ERR_VAL": 130,
+        "ERR_SIGN_INCOHERENT": 5,
+        "ERR_MISSING": 35
+      },
+      "var_mag_correct": {
+        "k": 5,
+        "n": 170,
+        "rate": 0.029411764705882353,
+        "wilson_lo": 0.01262702131586935,
+        "wilson_hi": 0.06699413991110048
+      },
+      "convention_blind_given_mag": {
+        "k": 0,
+        "n": 5,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.43448246478317476
+      },
+      "sign_wrong_given_mag": {
+        "k": 5,
+        "n": 5,
+        "rate": 1.0,
+        "wilson_lo": 0.5655175352168251,
+        "wilson_hi": 1.0
       }
     },
     "qwen3-14b-nothink|act": {
