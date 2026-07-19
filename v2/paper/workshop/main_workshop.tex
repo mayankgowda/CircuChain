@@ -1,28 +1,32 @@
 % ============================================================================
-% COLM 2026 Workshop on Efficient Reasoning submission
+% COLM 2026 Workshop on Efficient Reasoning — DOUBLE-BLIND submission
 % "Reasoning Tokens Buy Competence, Not Compliance"
-%
-% SUBMISSION NOTE: swap this preamble for the official COLM 2026 style
-% (\usepackage{colm2026_conference}) before OpenReview upload — body is
-% template-agnostic. 4-10 pages main text allowed; this draft ~6-7.
+% Official COLM 2026 template ([submission] mode anonymizes the author block).
 % Numbers auto-generated: scripts/make_workshop_assets.py + make_paper_macros.py.
 % ============================================================================
-\documentclass[11pt]{article}
-\usepackage[margin=1in]{geometry}
-\usepackage{amsmath,amssymb}
-\usepackage{booktabs}
-\usepackage{graphicx}
-\usepackage[hidelinks]{hyperref}
+\documentclass{article}
+\usepackage[submission]{colm2026_conference}
+
 \usepackage{microtype}
+\usepackage{hyperref}
+\usepackage{url}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{lineno}
+
+\definecolor{darkblue}{rgb}{0, 0, 0.5}
+\hypersetup{colorlinks=true, citecolor=darkblue, linkcolor=darkblue, urlcolor=darkblue}
+
 \graphicspath{{generated/}}
 \input{generated/wmacros.tex}
 \input{generated/macros.tex}
 
-\title{\textbf{Reasoning Tokens Buy Competence, Not Compliance}\\[3pt]
-\large What test-time compute does --- and does not --- purchase,\\
-measured with a sign-exact oracle}
-\author{Mayank Ravishankara}
-\date{}
+\title{Reasoning Tokens Buy Competence, Not Compliance:\\
+What Test-Time Compute Does---and Does Not---Purchase,\\
+Measured with a Sign-Exact Oracle}
+% Anonymized for double-blind review ([submission] mode suppresses this block).
+\author{Anonymous Authors}
 
 \begin{document}
 \maketitle
@@ -53,19 +57,22 @@ without converging. Across all models, flipping one convention instruction
 breaks \WAggB{} previously-solved problems and fixes \WAggC{}. Efficiency
 evaluations that report accuracy-per-token implicitly assume compute
 purchases controllability; our oracle-verified evidence says it does not.
-We release the generator, oracle, and harness; total study cost was under
-\$100.
+The generator, oracle, and harness will be released; total study cost was
+under \$100.
 \end{abstract}
 
 % ----------------------------------------------------------------------------
 \section{Introduction}
 
 The efficient-reasoning agenda optimizes a ratio: capability delivered per
-unit of test-time compute. Its numerator is almost always \emph{accuracy}.
+unit of test-time compute \citep{snell2024scaling}. Its numerator is almost always \emph{accuracy}.
 This paper measures a second numerator that practitioners implicitly assume
 comes bundled with the first: \emph{compliance} --- whether the model does the
 task \emph{the way it was told to}, when the instruction opposes a strong
-prior from training.
+prior from training. Instruction-following suites score constraints that do
+not oppose such priors \citep{zhou2023ifeval}; recent work names the opposed
+case \citep{zhang2025inverseifeval,wu2024reasoning} but scores it with
+rubrics or judges rather than an exact oracle.
 
 The distinction matters exactly when models are deployed against
 specifications: house styles, legacy code conventions, discipline-specific
@@ -96,15 +103,16 @@ effort, reduces reversion to the trained convention
 (\WBandMin--\WBandMax\% everywhere). (3)~An efficiency pathology inventory
 measured with an exact oracle: prior-driven fast-wrong answers at low effort,
 budget-consuming rumination at high effort, and 100\%-truncation regimes
-where the most expensive configuration returns nothing. (4)~A released,
-seeded, LLM-free instrument cheap enough for budget-sweep studies
+where the most expensive configuration returns nothing. (4)~A seeded, LLM-free
+instrument (to be released) cheap enough for budget-sweep studies
 (full panel $<\$100$).
 
 % ----------------------------------------------------------------------------
 \section{Instrument in brief}
 \label{sec:instrument}
 
-CircuChain v2 extends our published probe \cite{ravishankara2026circuchain}.
+CircuChain v2 extends the published CircuChain probe
+\citep{ravishankara2026circuchain}.
 \NPhysics{} physics configurations across seven linear-DC topologies are
 accepted only when two independent hand-derived solvers, an exact
 rational-arithmetic MNA solver, and NGSPICE agree on every quantity; sign
@@ -135,14 +143,7 @@ Reasoning tokens purchase physics, not obedience.
 
 \begin{table}[t]
 \centering\small
-\begin{tabular}{lcccc}
-\toprule
- & \multicolumn{2}{c}{No-think} & \multicolumn{2}{c}{Think (16k budget)}\\
-Scale & Mag.\ correct & Reversion ($n$) & Mag.\ correct & Reversion ($n$)\\
-\midrule
-\input{generated/table_c1.tex}
-\bottomrule
-\end{tabular}
+\input{generated/table_c1_full.tex}
 \caption{The reasoning toggle at fixed weights (Qwen3 ladder). Reversion =
 share of magnitude-correct sign-diagnostic variables reported in the trained
 clockwise frame despite the counter-clockwise instruction.}
@@ -153,20 +154,14 @@ clockwise frame despite the counter-clockwise instruction.}
 Table~\ref{tab:trunc} shows what the reasoning budget buys at the small end:
 below the competence threshold, think modes ruminate to the full 16k budget
 on most problems (truncations: 727--769 of 1000 at 4B--32B) --- genuine
-self-correction spirals that never converge. This is paid-for compute
+self-correction spirals that never converge, the overthinking phenomenology
+\citep{chen2024overthinking} measured here with an exact oracle. This is paid-for compute
 delivering neither competence nor compliance; larger budgets shift the wall
 rather than remove it.
 
 \begin{table}[t]
 \centering\small
-\begin{tabular}{lcccc}
-\toprule
- & \multicolumn{2}{c}{No-think} & \multicolumn{2}{c}{Think}\\
-Scale & Mag.\ correct & Truncated & Mag.\ correct & Truncated\\
-\midrule
-\input{generated/table_trunc.tex}
-\bottomrule
-\end{tabular}
+\input{generated/table_trunc_full.tex}
 \caption{Rumination economics on the Qwen3 ladder (of 1000 instances).
 Reasoning modes burn the full completion budget on most instances while
 magnitude competence stays under 10\%.}
@@ -256,7 +251,7 @@ with an exact oracle, it is not: the compliance curve is flat in compute.
 Efficiency evaluations --- especially of effort controls, early-stopping, and
 distillation --- should report \emph{constraint adherence per token}
 alongside accuracy per token, using probes whose compliance is mechanically
-decidable (ours is released and costs cents per thousand instances).
+decidable (ours will be released; it costs cents per thousand instances).
 
 \textbf{2. Budget-aware evaluation is not optional.} The most expensive
 GPT-5 configuration returned zero answers; small reasoning models burn full
@@ -290,33 +285,33 @@ mitigated by the resampling study and the cross-column invariance.
 Seeded byte-reproducible generator (\NPhysics{} physics), four-way oracle,
 independent transform validation (\TvPass), deterministic grading, full
 serving provenance per response, canary-stamped evaluation subset; code and
-harness released. Total API cost $<\$100$; local runs on one Apple M5 Max.
+harness to be released upon publication. Total API cost $<\$100$; local runs on one Apple M5 Max.
 
 \begin{thebibliography}{9}\small
-\bibitem{ravishankara2026circuchain}
+\bibitem[Ravishankara(2026)]{ravishankara2026circuchain}
 M.~Ravishankara. CircuChain: Disentangling competence and compliance in LLM
 circuit analysis. In \emph{Proc.\ IEEE SoutheastCon}, 2026. arXiv:2602.15037.
 
-\bibitem{zhang2025inverseifeval}
+\bibitem[Zhang et al.(2025)]{zhang2025inverseifeval}
 Q.~Zhang, X.~Lei, R.~Miao, et al.
 Inverse IFEval: Can LLMs unlearn stubborn training conventions to follow real
 instructions? arXiv:2509.04292, 2025.
 
-\bibitem{wu2024reasoning}
+\bibitem[Wu et al.(2024)]{wu2024reasoning}
 Z.~Wu, L.~Qiu, A.~Ross, E.~Aky\"urek, B.~Chen, B.~Wang, N.~Kim, J.~Andreas,
 Y.~Kim. Reasoning or reciting? Exploring the capabilities and limitations of
 language models through counterfactual tasks. In \emph{NAACL}, 2024.
 
-\bibitem{zhou2023ifeval}
+\bibitem[Zhou et al.(2023)]{zhou2023ifeval}
 J.~Zhou, T.~Lu, S.~Mishra, S.~Brahma, S.~Basu, Y.~Luan, D.~Zhou, L.~Hou.
 Instruction-following evaluation for large language models.
 arXiv:2311.07911, 2023.
 
-\bibitem{snell2024scaling}
+\bibitem[Snell et al.(2024)]{snell2024scaling}
 C.~Snell, J.~Lee, K.~Xu, A.~Kumar. Scaling LLM test-time compute optimally
 can be more effective than scaling model parameters. arXiv:2408.03314, 2024.
 
-\bibitem{chen2024overthinking}
+\bibitem[Chen et al.(2024)]{chen2024overthinking}
 X.~Chen et al. Do NOT think that much for 2+3=? On the overthinking of
 o1-like LLMs. arXiv:2412.21187, 2024.
 \end{thebibliography}

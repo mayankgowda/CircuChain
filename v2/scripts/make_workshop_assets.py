@@ -164,3 +164,23 @@ with open(os.path.join(OUT, "wmacros.tex"), "w") as f:
 
 print(f"wrote wmacros ({len(mac)}), table_trunc, fig_invariance, fig_gpt5_effort -> {OUT}")
 print(f"band: {min(rates):.1f}-{max(rates):.1f}, mean {mean_rate:.1f}, cols {len(pts)}")
+
+# ---------------- FULL tabular emissions (avoid \input-inside-tabular) ----------------
+c1_rows = open(os.path.join(V2, "paper", "generated", "table_c1.tex")).read().splitlines()
+c1_rows = [l for l in c1_rows if not l.startswith("%")]
+full = ["\\begin{tabular}{lcccc}", "\\toprule",
+        " & \\multicolumn{2}{c}{No-think} & \\multicolumn{2}{c}{Think (16k budget)}\\\\",
+        "Scale & Mag.\\ correct & Reversion ($n$) & Mag.\\ correct & Reversion ($n$)\\\\",
+        "\\midrule"] + c1_rows + ["\\bottomrule", "\\end{tabular}"]
+with open(os.path.join(OUT, "table_c1_full.tex"), "w") as f:
+    f.write("\n".join(full) + "\n")
+
+tr_rows = [l for l in open(os.path.join(OUT, "table_trunc.tex")).read().splitlines()
+           if not l.startswith("%")]
+full = ["\\begin{tabular}{lcccc}", "\\toprule",
+        " & \\multicolumn{2}{c}{No-think} & \\multicolumn{2}{c}{Think}\\\\",
+        "Scale & Mag.\\ correct & Truncated & Mag.\\ correct & Truncated\\\\",
+        "\\midrule"] + tr_rows + ["\\bottomrule", "\\end{tabular}"]
+with open(os.path.join(OUT, "table_trunc_full.tex"), "w") as f:
+    f.write("\n".join(full) + "\n")
+print("wrote full tabulars")
