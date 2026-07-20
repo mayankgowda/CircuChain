@@ -1,0 +1,36 @@
+{
+  "model_key": "qwen3-4b-think",
+  "model_id": "qwen/qwen3-4b",
+  "n": 20,
+  "policy": {
+    "temperature": 0.6,
+    "top_p": 0.95,
+    "top_k": 20,
+    "max_tokens": 16384,
+    "num_ctx": 32768
+  },
+  "truncated": 14,
+  "answer_line": 6,
+  "reasoning_tokens": {
+    "p50": 16382,
+    "p90": 16382,
+    "p95": 16382,
+    "max": 16382
+  },
+  "completion_tokens": {
+    "p50": 16383,
+    "p90": 16383,
+    "p95": 16383,
+    "max": 16383
+  },
+  "wall_s": 1601.6,
+  "counters": {
+    "planned": 24,
+    "resumed": 10,
+    "run": 10,
+    "cache_hits": 0,
+    "failed": 4
+  },
+  "recommended_max_tokens": 20480,
+  "verdict": "EXCLUDE (ruminator)"
+}
