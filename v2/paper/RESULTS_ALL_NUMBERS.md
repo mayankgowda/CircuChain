@@ -252,3 +252,12 @@ Same default-frame circuits (numerics unchanged) + one unusual FORMATTING instru
 | qwen25-72b-api | 1000 | 0.85 | 0.00085 |
 | **on-disk API total** | | **21.72** | |
 (Plus a ~$9.83 archived GPT-5 default-effort lesson run and earlier Together spend; full study well under $100.)
+
+## 12. GPT-5 reasoning-effort ladder (raw artifacts in results/archive/)
+- **minimal** (single archived probe, `gpt5_minimal_effort_probe.json`): reasoning_tokens=0, completion_tokens=1580, cost=$0.0164, finish=stop; answer does NOT match canonical i1=-0.001338 (prior-driven wrong).
+- **low** (248-instance run, `responses/gpt5-api.jsonl`): n=248, truncated=144, total=$18.43, per-instance=$0.0743.
+- **default** (archived run, `gpt5_default_effort_run.jsonl`): n=121, truncated=121 (100%), total=$9.99, per-instance=$0.0826.
+
+## 13. Decoding policy & grading constants (from configs/models.yaml + grade code)
+- defaults: temperature=0.6, top_p=0.95, top_k=20, max_tokens(think)=16384, num_ctx=32768; nothink/instruct columns use max_tokens=4096 (per-model overrides in models.yaml).
+- grading: magnitude at 2% relative tolerance (grade/compliance.py); sign compliance evaluated in the instructed frame; truncation recorded per response (finish_reason).

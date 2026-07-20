@@ -251,3 +251,35 @@ w()
 
 open(os.path.join(V2, "paper", "RESULTS_ALL_NUMBERS.md"), "w").write("\n".join(out))
 print(f"wrote RESULTS_ALL_NUMBERS.md ({len(out)} lines)")
+
+# ---------------- 12. GPT-5 effort ladder + decoding policy (auditability addendum) ----------------
+extra = []
+extra.append("\n## 12. GPT-5 reasoning-effort ladder (raw artifacts in results/archive/)")
+probe = json.load(open(os.path.join(V2, "results", "archive", "gpt5_minimal_effort_probe.json")))
+pu = probe.get("usage", {})
+extra.append(f"- **minimal** (single archived probe, `gpt5_minimal_effort_probe.json`): "
+             f"reasoning_tokens={ (pu.get('completion_tokens_details') or {}).get('reasoning_tokens') }, "
+             f"completion_tokens={pu.get('completion_tokens')}, cost=${pu.get('cost'):.4f}, "
+             f"finish={probe['choices'][0].get('finish_reason')}; answer does NOT match canonical i1=-0.001338 (prior-driven wrong).")
+lr = [json.loads(l) for l in open(os.path.join(V2, "results", "responses", "gpt5-api.jsonl"))]
+lc = sum(r.get("usage", {}).get("cost") or 0 for r in lr)
+lt = sum(bool(r.get("truncated")) for r in lr)
+extra.append(f"- **low** (248-instance run, `responses/gpt5-api.jsonl`): n={len(lr)}, truncated={lt}, "
+             f"total=${lc:.2f}, per-instance=${lc/len(lr):.4f}.")
+dr = [json.loads(l) for l in open(os.path.join(V2, "results", "archive", "gpt5_default_effort_run.jsonl"))]
+dc = sum(r.get("usage", {}).get("cost") or 0 for r in dr)
+dt = sum(bool(r.get("truncated")) for r in dr)
+extra.append(f"- **default** (archived run, `gpt5_default_effort_run.jsonl`): n={len(dr)}, "
+             f"truncated={dt} (100%), total=${dc:.2f}, per-instance=${dc/len(dr):.4f}.")
+extra.append("\n## 13. Decoding policy & grading constants (from configs/models.yaml + grade code)")
+import yaml
+cfg = yaml.safe_load(open(os.path.join(V2, "configs", "models.yaml")))
+d = cfg.get("defaults", {})
+extra.append(f"- defaults: temperature={d.get('temperature')}, top_p={d.get('top_p')}, "
+             f"top_k={d.get('top_k')}, max_tokens(think)={d.get('max_tokens')}, num_ctx={d.get('num_ctx')}; "
+             f"nothink/instruct columns use max_tokens=4096 (per-model overrides in models.yaml).")
+extra.append("- grading: magnitude at 2% relative tolerance (grade/compliance.py); sign compliance "
+             "evaluated in the instructed frame; truncation recorded per response (finish_reason).")
+with open(os.path.join(V2, "paper", "RESULTS_ALL_NUMBERS.md"), "a") as f:
+    f.write("\n".join(extra) + "\n")
+print("appended sections 12-13 (effort ladder + decoding policy)")

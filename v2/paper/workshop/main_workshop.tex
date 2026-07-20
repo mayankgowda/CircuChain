@@ -23,7 +23,7 @@
 \input{generated/macros.tex}
 
 \title{Reasoning Tokens Buy Competence, Not Compliance:\\
-What Test-Time Compute Does---and Does Not---Purchase,\\
+What Test-Time Compute Does and Does Not Purchase,\\
 Measured with a Sign-Exact Oracle}
 % Anonymized for double-blind review ([submission] mode suppresses this block).
 \author{Anonymous Authors}
@@ -33,30 +33,33 @@ Measured with a Sign-Exact Oracle}
 
 \begin{abstract}
 Test-time reasoning is usually evaluated on one axis: does more thinking buy
-more accuracy per token? We add the axis that efficiency work has ignored ---
-\emph{compliance}: when an explicit instruction opposes a convention the model
+more accuracy per token? We add a second axis that efficiency work has ignored, \emph{compliance}: when an explicit instruction opposes a convention the model
 absorbed in training, do reasoning tokens help the instruction win? Using
 CircuChain~v2, a circuit-analysis probe whose answers are verifiable to the
 sign by four independent solvers, we measure both axes across
 \WNCols{} model configurations from \NFamilies{} families. Three findings.
 (1)~\textbf{Reasoning buys competence only}: toggling the same weights between
 reasoning and non-reasoning modes at five scales (Qwen3 1.7B--32B) raises
-magnitude accuracy up to $3\times$ while reversion to the trained convention
-stays flat --- \WBandMin--\WBandMax\% (mean \WMeanRev\%) everywhere, a band
-that also contains GPT-5, Gemma-4, GPT-OSS-120B, and DeepSeek-V3 across a
-\CompetenceSpanX$\times$ competence range.
+magnitude accuracy at every scale (from $1.7\times$ at 32B to $12\times$ at
+1.7B) while reversion to the trained convention stays within a narrow band:
+\WBandMin--\WBandMax\% (configuration mean \WMeanRev\%; pooled over
+variables \WPooledRev\%), a band that also contains GPT-5, Gemma-4,
+GPT-OSS-120B, and DeepSeek-V3 across a \CompetenceSpanX$\times$ competence
+range.
 (2)~\textbf{The GPT-5 reasoning-effort ladder dissociates the axes}: at
-\texttt{minimal} effort it answers from the prior --- cheaply and wrongly; at
+\texttt{minimal} effort it answers from the prior, cheaply and wrongly; at
 \texttt{low} effort it solves sign-trap circuits to nine decimals yet still
 reports the trained frame $\sim$71\% of the time; at \texttt{default} effort
-reasoning consumes the entire token budget and \emph{zero} of 119 requests
-return an answer at the highest cost per instance.
-(3)~\textbf{Unbounded rumination is a real cost}: below the competence
-threshold, reasoning modes burn the full 16k budget on 73--77\% of problems
-without converging. Across all models, flipping one convention instruction
+reasoning consumes the entire token budget and \emph{zero} of
+\WGptFiveDefaultN{} requests return an answer, at the highest cost per
+instance.
+(3)~\textbf{Unbounded rumination is a real cost}: at 4B--32B, reasoning
+modes burn the full 16k budget on 73--77\% of problems without converging
+(the 1.7B model instead fails fast, truncating on only 16\%). Across all models, flipping one convention instruction
 breaks \WAggB{} previously-solved problems and fixes \WAggC{}. Efficiency
-evaluations that report accuracy-per-token implicitly assume compute
-purchases controllability; our oracle-verified evidence says it does not.
+evaluations that report accuracy-per-token implicitly assume compute also
+purchases controllability; on this benchmark, at every budget we tested, it
+does not.
 The generator, oracle, and harness will be released; total study cost was
 under \$100.
 \end{abstract}
@@ -65,14 +68,16 @@ under \$100.
 \section{Introduction}
 
 The efficient-reasoning agenda optimizes a ratio: capability delivered per
-unit of test-time compute \citep{snell2024scaling}. Its numerator is almost always \emph{accuracy}.
+unit of test-time compute \citep{snell2024scaling,muennighoff2025s1}. Its
+numerator is almost always \emph{accuracy}.
 This paper measures a second numerator that practitioners implicitly assume
-comes bundled with the first: \emph{compliance} --- whether the model does the
-task \emph{the way it was told to}, when the instruction opposes a strong
+comes bundled with the first: \emph{compliance}, whether the model does the
+task \emph{the way it was told to} when the instruction opposes a strong
 prior from training. Instruction-following suites score constraints that do
 not oppose such priors \citep{zhou2023ifeval}; recent work names the opposed
 case \citep{zhang2025inverseifeval,wu2024reasoning} but scores it with
-rubrics or judges rather than an exact oracle.
+rubrics or judges rather than an exact oracle, and prior-following failures
+surface more broadly as sycophancy \citep{sharma2023sycophancy}.
 
 The distinction matters exactly when models are deployed against
 specifications: house styles, legacy code conventions, discipline-specific
@@ -88,19 +93,19 @@ decidable at the precision the instruction affects}. We use linear DC circuit
 analysis: the answer is exact; a sign convention (e.g.\ the direction mesh
 currents are defined) changes only the \emph{reporting frame}, never the
 physics; and the textbook prior is overwhelmingly one-sided (clockwise).
-CircuChain~v2 poses \NInstances{} instances --- \NPhysics{}
+CircuChain~v2 poses \NInstances{} instances (\NPhysics{}
 four-way-verified physics configurations $\times$ \{default contract, three
-single-factor convention flips\} $\times$ \{mesh, nodal\} --- and grades
+single-factor convention flips\} $\times$ \{mesh, nodal\}) and grades
 deterministically against an oracle validated independently of the transform
-code (\TvPass{} configurations). Within-physics matched pairs give exact
-McNemar tests: the causal effect of one changed sentence.
+code (\TvPass{} configurations). Within-physics matched pairs give exact McNemar tests
+\citep{mcnemar1947}: the causal effect of one changed sentence.
 
 \paragraph{Contributions for this workshop.}
 (1)~A compute-vs-compliance measurement: the reasoning toggle held at fixed
 weights across five scales, plus the GPT-5 effort ladder, with per-instance
-dollar costs. (2)~The negative result: no reasoning budget, at any scale or
-effort, reduces reversion to the trained convention
-(\WBandMin--\WBandMax\% everywhere). (3)~An efficiency pathology inventory
+dollar costs. (2)~The negative result: no reasoning budget we tested, at any scale or
+effort, measurably reduces reversion to the trained convention
+(\WBandMin--\WBandMax\% across all configurations). (3)~An efficiency pathology inventory
 measured with an exact oracle: prior-driven fast-wrong answers at low effort,
 budget-consuming rumination at high effort, and 100\%-truncation regimes
 where the most expensive configuration returns nothing. (4)~A seeded, LLM-free
@@ -112,14 +117,17 @@ instrument (to be released) cheap enough for budget-sweep studies
 \label{sec:instrument}
 
 CircuChain v2 extends the published CircuChain probe
-\citep{ravishankara2026circuchain}.
+\citep{ravishankara2026circuchain} and shares its deterministic,
+generator-anchored design philosophy with checkpointed engineering-plot
+evaluation \citep{ravishankara2026plotchain}; \citet{ravishankara2025survey}
+surveys this broader move toward reasoning-centric evaluation.
 \NPhysics{} physics configurations across seven linear-DC topologies are
 accepted only when two independent hand-derived solvers, an exact
 rational-arithmetic MNA solver, and NGSPICE agree on every quantity; sign
 traps and controls are balanced $\sim$1:1 by code predicates. Each physics is
-posed under the textbook-default contract and three single-factor flips ---
-mesh direction \texttt{cw}$\to$\texttt{ccw}, passive$\to$active sign,
-reference node bottom$\to$top --- in both mesh (KVL) and nodal (KCL) methods.
+posed under the textbook-default contract and three single-factor flips
+(mesh direction \texttt{cw}$\to$\texttt{ccw}, passive$\to$active sign,
+reference node bottom$\to$top), in both mesh (KVL) and nodal (KCL) methods.
 Expected answers in every frame are validated independently of the transform
 code, including a \emph{physically re-grounded} SPICE realization of the
 reference-node flip. Grading is deterministic (structured answer-line parser;
@@ -127,18 +135,25 @@ magnitude at 2\%; sign compliance in the \emph{instructed} frame; truncation
 recorded as an outcome). Decoding: temperature 0.6, top-$p$ 0.95, 16{,}384
 completion budget for reasoning modes, 4{,}096 otherwise. Variables whose
 sign differs between instructed and default frames are \emph{diagnostic};
-reversion is measured on those, given correct magnitude.
+reversion is measured on those, given correct magnitude. Whole-problem
+correctness and variable-level frame choice are distinct estimands: the
+former measures end-to-end controllability but is informative only where a
+model can solve the circuit; the latter conditions on local magnitude success
+and is measurable across the entire panel. We keep the two separate
+throughout.
 
 % ----------------------------------------------------------------------------
 \section{Reasoning raises competence, never compliance}
 \label{sec:toggle}
 
-Qwen3's native \texttt{/think} toggle switches reasoning on/off with weights,
-prompt, serving stack, and decoding policy fixed --- the cleanest possible
-compute contrast. Table~\ref{tab:c1} shows the five-scale result: magnitude
-competence rises with reasoning at every scale (e.g.\ 14B: $2.8\%\to9.3\%$),
+Qwen3's native \texttt{/think} toggle switches reasoning on/off with
+weights, prompt, serving stack, and decoding policy fixed: the cleanest
+available compute contrast. Table~\ref{tab:c1} shows the five-scale result:
+magnitude competence rises with reasoning at every scale, from $1.7\times$ at
+32B to $12\times$ at 1.7B (14B: $2.8\%\to9.3\%$, a $3.3\times$ gain),
 while reversion to the clockwise frame among magnitude-correct diagnostic
-variables never moves outside the band (68--81\%, all CIs overlapping).
+variables stays within 68--81\%, with overlapping Wilson intervals
+\citep{wilson1927} at every scale.
 Reasoning tokens purchase physics, not obedience.
 
 \begin{table}[t]
@@ -152,10 +167,13 @@ clockwise frame despite the counter-clockwise instruction.}
 
 \paragraph{The cost side.}
 Table~\ref{tab:trunc} shows what the reasoning budget buys at the small end:
-below the competence threshold, think modes ruminate to the full 16k budget
-on most problems (truncations: 727--769 of 1000 at 4B--32B) --- genuine
-self-correction spirals that never converge, the overthinking phenomenology
-\citep{chen2024overthinking} measured here with an exact oracle. This is paid-for compute
+below the competence threshold, think modes at 4B--32B ruminate to the full
+16k budget on most problems (truncations: 727--769 of 1000); these are
+genuine self-correction spirals that never converge, the overthinking
+phenomenology of R1-style reasoning models
+\citep{deepseek2025r1,chen2024overthinking} measured here with an exact
+oracle. The 1.7B model is the exception: it truncates on only 164 of 1000,
+failing quickly rather than ruminating. This is paid-for compute
 delivering neither competence nor compliance; larger budgets shift the wall
 rather than remove it.
 
@@ -163,8 +181,9 @@ rather than remove it.
 \centering\small
 \input{generated/table_trunc_full.tex}
 \caption{Rumination economics on the Qwen3 ladder (of 1000 instances).
-Reasoning modes burn the full completion budget on most instances while
-magnitude competence stays under 10\%.}
+At 4B and above, reasoning modes burn the full completion budget on most
+instances while magnitude competence stays under 10\%; the 1.7B model instead
+fails fast.}
 \label{tab:trunc}
 \end{table}
 
@@ -176,18 +195,18 @@ GPT-5's reasoning-effort control exposes the compute--behavior trade
 directly on one frontier model (Figure~\ref{fig:gpt5}):
 
 \textbf{\texttt{minimal}} ($\approx$\WGptFiveMinCost¢/instance): reasoning
-tokens $=0$; the model answers instantly --- \emph{from the prior} --- and
-gets the physics wrong on our probe.
-\textbf{\texttt{low}} ($\approx$\WGptFiveLowCost¢): on a 248-instance run it
-solves sign-trap circuits exactly when it completes (magnitude-correct 32.7\%
-overall, best of any reasoning configuration we ran under this budget) ---
-and still reports the trained frame on 70.6\% of magnitude-correct
-diagnostic variables; the paired ccw flip breaks \WGptFiveB{} problems and
-fixes \WGptFiveC.
+tokens $=0$; the model answers instantly, \emph{from the prior}, and gets the
+physics wrong on our probe (archived with the artifacts).
+\textbf{\texttt{low}} ($\approx$\WGptFiveLowCost¢): on a
+\WGptFiveLowN-instance run it solves sign-trap circuits exactly when it
+completes (magnitude-correct 32.7\% overall), and still reports the trained
+frame on 70.6\% of magnitude-correct diagnostic variables; the paired ccw
+flip breaks \WGptFiveB{} problems and fixes \WGptFiveC.
 \textbf{\texttt{default}} ($\approx$\WGptFiveDefaultCost¢, the most
 expensive): hidden reasoning consumed the \emph{entire} 8{,}192-token budget
-on 119 of 119 requests --- zero answers returned, at the highest per-instance
-cost.
+on \WGptFiveDefaultTrunc{} of \WGptFiveDefaultN{} requests; zero answers
+returned, at the highest per-instance cost (the raw run is archived with the
+artifacts).
 
 The ladder dissociates the axes cleanly: compliance is not purchasable at any
 of the three budgets, competence is purchasable at exactly one of them, and
@@ -202,40 +221,52 @@ a deployment can pay maximum cost for a 0\% answer rate.
 budget rate (left axis) and measured cost per instance (right axis).
 \texttt{minimal} completes always but answers from the prior (wrong);
 \texttt{low} is the only configuration that buys competence; \texttt{default}
-spends the most and returns nothing. Compliance with the counter-normative
-convention is $\sim$29\% regardless.}
+spends the most and returns nothing. At the \texttt{low} setting, the only
+one that both reasons and answers, compliance with the counter-normative
+convention is $\sim$29\%.}
 \label{fig:gpt5}
 \end{figure}
 
 % ----------------------------------------------------------------------------
-\section{The invariant that compute never moves}
+\section{A stable rate that compute does not move}
 \label{sec:invariant}
 
 Figure~\ref{fig:inv} is the study's central object: reversion to the trained
 clockwise frame among magnitude-correct diagnostic variables, for every panel
-configuration with $n\ge20$, against task competence on a log axis. The band
-is \WBandMin--\WBandMax\% (mean \WMeanRev\%) across \WNCols{} configurations
-spanning \NFamilies{} families, $\sim$\CompetenceSpanX$\times$ in
-competence, two serving stacks, and both reasoning modes. Aggregated over all
-models, the within-physics paired flip breaks \WAggB{} solved problems and
-fixes \WAggC{} (\AggRatio:1) --- reversion, not noise.
+configuration with $n\ge20$, against task competence on a log axis. The band is
+\WBandMin--\WBandMax\% (configuration mean \WMeanRev\%; pooled over
+variables \WPooledRev\%) across \WNCols{} configurations spanning
+\NFamilies{} families, $\sim$\CompetenceSpanX$\times$ in competence, two
+serving stacks, and both reasoning modes. A weighted logistic regression of
+reversion on log competence finds no significant trend ($z=\WTrendZ$,
+$p=\WTrendP$): the data are consistent with a stable rate across the
+measured range, though several configurations contribute small diagnostic
+denominators, so we describe the band as broadly stable rather than proven
+invariant. Aggregated over all models, the within-physics paired flip breaks
+\WAggB{} solved problems and fixes \WAggC{} (\AggRatio:1). This asymmetry
+alone establishes that the flip causally breaks otherwise-solved problems;
+the \emph{reversion-to-prior} reading follows from its conjunction with the
+controls below.
 
 Three controls establish that this is convention-specific reversion rather
 than generic instruction decay: the same models follow matched
 \emph{non-convention} unusual instructions (reversed answer order,
 scientific notation) at \CtlGemmaRev--\CtlDsRev\%; GPT-5 and Gemma obey the
 \emph{other two} convention factors while disobeying mesh direction; and the
-effect is equal on trap and control physics. The reversion also persists
-under nodal solving, where loop orientation never enters the derivation ---
-it is a property of the \emph{reporting frame}, not the procedure. Resampling
-(k=\RetestK) shows a stable rate (SD \RetestSD{}pp) over stochastic items:
-a biased coin, $\sim$4:1 toward the trained frame, at every budget.
+collapse is similarly large on trap and control physics (Gemma:
+$0.77\to0.10$ vs.\ $0.87\to0.13$). The reversion also persists under nodal
+solving, where loop orientation never enters the derivation; it is a property
+of the \emph{reporting frame}, not the procedure. Resampling (k=\RetestK) of
+the most competent model shows a stable rate (SD \RetestSD{}pp) over
+stochastic items: frame choice behaves like a biased coin, roughly 3:1 toward
+the trained frame study-wide (6:1 in the resampled Gemma subset), rather than
+a fixed property of particular items.
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=\linewidth]{fig_invariance.pdf}
-\caption{Reversion to the clockwise prior is invariant to competence, scale,
-family, serving stack, and reasoning mode. Each point is one panel
+\caption{Reversion to the clockwise prior is broadly stable across
+competence, scale, family, serving stack, and reasoning mode. Each point is one panel
 configuration (Wilson 95\% CIs; $n\ge20$ diagnostic variables); shaded band
 = observed range \WBandMin--\WBandMax\%.}
 \label{fig:inv}
@@ -247,27 +278,29 @@ configuration (Wilson 95\% CIs; $n\ge20$ diagnostic variables); shaded band
 
 \textbf{1. Put compliance in the efficiency numerator.} Accuracy-per-token
 frontiers implicitly assume behavior is purchasable with compute. Measured
-with an exact oracle, it is not: the compliance curve is flat in compute.
-Efficiency evaluations --- especially of effort controls, early-stopping, and
-distillation --- should report \emph{constraint adherence per token}
+with an exact oracle, we find no such purchase: the compliance curve shows no
+measurable improvement with compute in our panel. Efficiency evaluations
+(especially of effort controls, early-stopping, and distillation) should
+report \emph{constraint adherence per token}
 alongside accuracy per token, using probes whose compliance is mechanically
 decidable (ours will be released; it costs cents per thousand instances).
 
 \textbf{2. Budget-aware evaluation is not optional.} The most expensive
-GPT-5 configuration returned zero answers; small reasoning models burn full
+GPT-5 configuration returned zero answers; small reasoning models at 4B--32B burn full
 budgets on 73--77\% of instances without converging. Truncation must be a
 first-class reported outcome, or efficiency comparisons silently reward
 configurations that never finish.
 
 \textbf{3. Effort controls are behavioral, not just economic.} Moving GPT-5
 from \texttt{minimal} to \texttt{low} switches it from prior-recitation to
-genuine derivation --- a qualitative regime change purchased with tokens; more
-tokens past that point purchase nothing measurable. Efficiency work that
+genuine derivation, a qualitative regime change purchased with tokens; past
+that point, additional tokens purchase nothing we can measure. Efficiency work that
 tunes effort levels is implicitly selecting \emph{which} failure mode ships.
 
 \textbf{4. Distillation and steering research have a concrete target.} The
 frame choice is made outside the reasoning trace (it survives nodal solving
-and every budget), and it is sampled ($\sim$4:1) rather than committed. A
+and every budget we ran), and it is sampled (roughly 3:1) rather than
+committed. A
 cheap deterministic frame-checking/repair layer recovers more reliability per
 dollar than any reasoning budget we measured.
 
@@ -288,9 +321,19 @@ serving provenance per response, canary-stamped evaluation subset; code and
 harness to be released upon publication. Total API cost $<\$100$; local runs on one Apple M5 Max.
 
 \begin{thebibliography}{9}\small
-\bibitem[Ravishankara(2026)]{ravishankara2026circuchain}
+\bibitem[Ravishankara(2026a)]{ravishankara2026circuchain}
 M.~Ravishankara. CircuChain: Disentangling competence and compliance in LLM
-circuit analysis. In \emph{Proc.\ IEEE SoutheastCon}, 2026. arXiv:2602.15037.
+circuit analysis. In \emph{Proc.\ IEEE SoutheastCon}, 2026a. arXiv:2602.15037.
+
+\bibitem[Ravishankara(2026b)]{ravishankara2026plotchain}
+M.~Ravishankara. PlotChain: Deterministic checkpointed evaluation of
+multimodal LLMs on engineering plot reading. In \emph{Proc.\ IEEE
+SoutheastCon}, 2026b. arXiv:2602.13232.
+
+\bibitem[Ravishankara and Persad Maharaj(2025)]{ravishankara2025survey}
+M.~Ravishankara and V.~V.~Persad Maharaj. The artificial intelligence
+cognitive examination: A survey on the evolution of multimodal evaluation
+from recognition to reasoning. \emph{IEEE Access}, 2025. arXiv:2510.04141.
 
 \bibitem[Zhang et al.(2025)]{zhang2025inverseifeval}
 Q.~Zhang, X.~Lei, R.~Miao, et al.
@@ -314,6 +357,26 @@ can be more effective than scaling model parameters. arXiv:2408.03314, 2024.
 \bibitem[Chen et al.(2024)]{chen2024overthinking}
 X.~Chen et al. Do NOT think that much for 2+3=? On the overthinking of
 o1-like LLMs. arXiv:2412.21187, 2024.
+
+\bibitem[Muennighoff et al.(2025)]{muennighoff2025s1}
+N.~Muennighoff, Z.~Yang, W.~Shi, et al. s1: Simple test-time scaling.
+arXiv:2501.19393, 2025.
+
+\bibitem[DeepSeek-AI(2025)]{deepseek2025r1}
+DeepSeek-AI. DeepSeek-R1: Incentivizing reasoning capability in LLMs via
+reinforcement learning. arXiv:2501.12948, 2025.
+
+\bibitem[Sharma et al.(2023)]{sharma2023sycophancy}
+M.~Sharma, M.~Tong, T.~Korbak, et al. Towards understanding sycophancy in
+language models. arXiv:2310.13548, 2023.
+
+\bibitem[McNemar(1947)]{mcnemar1947}
+Q.~McNemar. Note on the sampling error of the difference between correlated
+proportions or percentages. \emph{Psychometrika}, 12(2):153--157, 1947.
+
+\bibitem[Wilson(1927)]{wilson1927}
+E.~B.~Wilson. Probable inference, the law of succession, and statistical
+inference. \emph{J.\ Amer.\ Statist.\ Assoc.}, 22(158):209--212, 1927.
 \end{thebibliography}
 
 \end{document}
