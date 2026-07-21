@@ -1,0 +1,175 @@
+{
+  "description": "Load-vs-entrenchment: easy vs hard tier, cw (orientation) vs wrk (matched transform)",
+  "tiers": {
+    "gpt5-api": {
+      "easy": {
+        "n_rows": 1000,
+        "cw": {
+          "n": 1344,
+          "comply": 1331,
+          "revert": 13,
+          "incoherent": 0,
+          "revert_rate": 0.0097
+        },
+        "wrk": {
+          "n": 1342,
+          "comply": 1342,
+          "revert": 0,
+          "incoherent": 0,
+          "revert_rate": 0.0
+        },
+        "inw": {
+          "n": 245,
+          "comply": 244,
+          "revert": 1,
+          "incoherent": 0,
+          "revert_rate": 0.0041
+        },
+        "mag_correct_dflt": {
+          "k": 248,
+          "n": 250
+        }
+      },
+      "hard": {
+        "n_rows": 748,
+        "cw": {
+          "n": 1336,
+          "comply": 1153,
+          "revert": 183,
+          "incoherent": 0,
+          "revert_rate": 0.137
+        },
+        "wrk": {
+          "n": 1548,
+          "comply": 1547,
+          "revert": 1,
+          "incoherent": 0,
+          "revert_rate": 0.0006
+        },
+        "mag_correct_dflt": {
+          "k": 189,
+          "n": 249
+        }
+      }
+    },
+    "gpt-oss-120b-api": {
+      "easy": {
+        "n_rows": 994,
+        "cw": {
+          "n": 1344,
+          "comply": 1331,
+          "revert": 13,
+          "incoherent": 0,
+          "revert_rate": 0.0097
+        },
+        "wrk": {
+          "n": 1343,
+          "comply": 1342,
+          "revert": 1,
+          "incoherent": 0,
+          "revert_rate": 0.0007
+        },
+        "inw": {
+          "n": 245,
+          "comply": 245,
+          "revert": 0,
+          "incoherent": 0,
+          "revert_rate": 0.0
+        },
+        "mag_correct_dflt": {
+          "k": 246,
+          "n": 248
+        }
+      },
+      "hard": {
+        "n_rows": 510,
+        "cw": {
+          "n": 1121,
+          "comply": 1067,
+          "revert": 54,
+          "incoherent": 0,
+          "revert_rate": 0.0482
+        },
+        "wrk": {
+          "n": 1223,
+          "comply": 1217,
+          "revert": 6,
+          "incoherent": 0,
+          "revert_rate": 0.0049
+        },
+        "mag_correct_dflt": {
+          "k": 173,
+          "n": 186
+        }
+      }
+    },
+    "gemma4-31b-api": {
+      "easy": {
+        "n_rows": 892,
+        "cw": {
+          "n": 1111,
+          "comply": 1054,
+          "revert": 57,
+          "incoherent": 0,
+          "revert_rate": 0.0513
+        },
+        "wrk": {
+          "n": 1163,
+          "comply": 1163,
+          "revert": 0,
+          "incoherent": 0,
+          "revert_rate": 0.0
+        },
+        "inw": {
+          "n": 229,
+          "comply": 229,
+          "revert": 0,
+          "incoherent": 0,
+          "revert_rate": 0.0
+        },
+        "mag_correct_dflt": {
+          "k": 220,
+          "n": 223
+        }
+      },
+      "hard": null
+    },
+    "deepseek-v3-api": {
+      "easy": {
+        "n_rows": 1000,
+        "cw": {
+          "n": 872,
+          "comply": 66,
+          "revert": 806,
+          "incoherent": 0,
+          "revert_rate": 0.9243
+        },
+        "wrk": {
+          "n": 829,
+          "comply": 539,
+          "revert": 290,
+          "incoherent": 0,
+          "revert_rate": 0.3498
+        },
+        "inw": {
+          "n": 94,
+          "comply": 35,
+          "revert": 59,
+          "incoherent": 0,
+          "revert_rate": 0.6277
+        },
+        "mag_correct_dflt": {
+          "k": 70,
+          "n": 250
+        }
+      },
+      "hard": null
+    }
+  },
+  "notes": [
+    "gpt-oss hard is survivor-biased: 218/750 batch rows empty (reasoning ate 16384; finish=length)",
+    "gpt5 hard: 96 truncated, 129 extract fallback/none of 748",
+    "gemma hard batch pending at freeze time",
+    "zero incoherent signs anywhere: every reversion lands exactly on the CCW default"
+  ]
+}
