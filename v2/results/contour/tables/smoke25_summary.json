@@ -1,0 +1,125 @@
+{
+  "subset": "smoke25 (first 25 physics, dflt+cw cells, both methods)",
+  "models": {
+    "deepseek-v3-api": {
+      "n": 100,
+      "dflt": {
+        "n": 50,
+        "CORRECT": 13,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 37,
+        "mag_correct": 13
+      },
+      "cw": {
+        "n": 50,
+        "CORRECT": 0,
+        "COMPLIANCE": 14,
+        "COMPETENCE": 36,
+        "mag_correct": 14
+      },
+      "paired_dflt_vs_cw": {
+        "both_ok": 0,
+        "b": 13,
+        "c": 0,
+        "both_bad": 37
+      },
+      "cw_diag_given_mag": {
+        "n": 161,
+        "comply": 11,
+        "revert_to_ccw": 150,
+        "incoherent": 0,
+        "revert_rate": 0.9317
+      }
+    },
+    "gemma4-31b-api": {
+      "n": 100,
+      "dflt": {
+        "n": 50,
+        "CORRECT": 49,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 1,
+        "mag_correct": 49
+      },
+      "cw": {
+        "n": 50,
+        "CORRECT": 41,
+        "COMPLIANCE": 2,
+        "COMPETENCE": 7,
+        "mag_correct": 43
+      },
+      "paired_dflt_vs_cw": {
+        "both_ok": 40,
+        "b": 9,
+        "c": 1,
+        "both_bad": 0
+      },
+      "cw_diag_given_mag": {
+        "n": 238,
+        "comply": 224,
+        "revert_to_ccw": 14,
+        "incoherent": 0,
+        "revert_rate": 0.0588
+      }
+    },
+    "llama33-70b-api": {
+      "n": 100,
+      "dflt": {
+        "n": 50,
+        "CORRECT": 3,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 47,
+        "mag_correct": 3
+      },
+      "cw": {
+        "n": 50,
+        "CORRECT": 0,
+        "COMPLIANCE": 3,
+        "COMPETENCE": 47,
+        "mag_correct": 3
+      },
+      "paired_dflt_vs_cw": {
+        "both_ok": 0,
+        "b": 3,
+        "c": 0,
+        "both_bad": 47
+      },
+      "cw_diag_given_mag": {
+        "n": 110,
+        "comply": 4,
+        "revert_to_ccw": 106,
+        "incoherent": 0,
+        "revert_rate": 0.9636
+      }
+    },
+    "qwen25-72b-api": {
+      "n": 100,
+      "dflt": {
+        "n": 50,
+        "CORRECT": 4,
+        "COMPLIANCE": 1,
+        "COMPETENCE": 45,
+        "mag_correct": 5
+      },
+      "cw": {
+        "n": 50,
+        "CORRECT": 0,
+        "COMPLIANCE": 4,
+        "COMPETENCE": 46,
+        "mag_correct": 4
+      },
+      "paired_dflt_vs_cw": {
+        "both_ok": 0,
+        "b": 4,
+        "c": 0,
+        "both_bad": 46
+      },
+      "cw_diag_given_mag": {
+        "n": 114,
+        "comply": 5,
+        "revert_to_ccw": 109,
+        "incoherent": 0,
+        "revert_rate": 0.9561
+      }
+    }
+  }
+}
