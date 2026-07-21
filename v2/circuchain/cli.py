@@ -187,6 +187,50 @@ def validate_transforms(
         raise typer.Exit(1)
 
 
+@app.command("gen-contour")
+def gen_contour(
+    config: str = typer.Option("configs/contour.yaml", help="contour generator config"),
+    seed: int = typer.Option(0, help="override the config seed (0 = use config)"),
+    out: str = typer.Option("", help="output dir (default results/contour/datasets/v3contour_seed<SEED>)"),
+):
+    """V3 second domain: generate contract-varied polygon line-integral instances
+    (inline FOUR-WAY exact oracle: sympy-param == sympy-green == fraction == numeric)."""
+    import yaml
+    from .contour.generate import generate_contour
+
+    cfg = yaml.safe_load(open(_v2path(config)))
+    the_seed = seed or int(cfg.get("seed", 20260720))
+    out_dir = _v2path(out or f"results/contour/datasets/v3contour_seed{the_seed}")
+    manifest = generate_contour(cfg, the_seed, out_dir, REPO)
+    typer.echo(json.dumps({k: manifest[k] for k in
+                           ("seed", "n_physics", "n_instances", "regime_counts", "rejects",
+                            "canary_guid")}, indent=2))
+    typer.echo(f"Wrote {out_dir}/instances.jsonl (+ manifest.json)")
+
+
+@app.command("validate-contour")
+def validate_contour(
+    dataset: str = typer.Option("results/contour/datasets/v3contour_seed20260720",
+                                help="contour dataset dir"),
+    out: str = typer.Option("results/contour/tables/transform_validation.json",
+                            help="summary path"),
+):
+    """Independent validation of the contour convention transforms: reversed-traversal,
+    negated-field, and left-normal re-integration + Green re-verify + mask recompute."""
+    from .contour.validate import validate_dataset
+
+    s = validate_dataset(_v2path(dataset), _v2path(out))
+    typer.echo(f"contour transform validation: {s['n_pass']}/{s['n_physics']} physics PASS "
+               f"(checks: {', '.join(s['checks'])})")
+    for r in s["results"]:
+        if r["status"] == "FAIL":
+            typer.echo(f"  FAIL {r['physics_id']}:")
+            for e in r["errors"][:6]:
+                typer.echo(f"    {e}")
+    if s["n_fail"]:
+        raise typer.Exit(1)
+
+
 @app.command()
 def run(
     models: str = typer.Option("configs/models.yaml", help="panel config"),
@@ -232,11 +276,14 @@ def analyze(
     out: str = typer.Option("results/tables", help="tables output dir"),
     dataset: str = typer.Option("results/datasets/v2_seed20260709",
                                 help="dataset dir (for the diagnostic-vars-restricted table)"),
+    factors: str = typer.Option("ccw,act,top",
+                                help="flip cells to pair against dflt (contour: cw,wrk,inw)"),
 ):
     """Within-physics McNemar paired tests per factor, Wilson CIs, rate tables."""
     from .analyze.tables import analyze_graded, format_factor_table
 
-    summary = analyze_graded(_v2path(graded), _v2path(out), _v2path(dataset))
+    summary = analyze_graded(_v2path(graded), _v2path(out), _v2path(dataset),
+                             factors=tuple(f.strip() for f in factors.split(",") if f.strip()))
 
     # V2-3 stats hygiene: bootstrap ORs, BH q-values, both var-level denominators.
     from .analyze.stats_extra import augment_analysis, write_outputs

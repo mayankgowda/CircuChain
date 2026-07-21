@@ -1,0 +1,29 @@
+# CircuChain V3 — contour domain (oriented line integrals / Green's theorem).
+#
+# The polarity mirror of the circuits domain: calculus textbooks are near-unanimous that
+# positive orientation = COUNTERCLOCKWISE (Stewart, Thomas, OpenStax), while circuits
+# textbooks default to CLOCKWISE mesh currents. The flip cell here is therefore `cw`.
+# Cells: dflt | cw (orientation) | wrk (work-against, IDENTICAL output transform to cw —
+# the matched-transform internal control) | inw (inward flux normal).
+#
+# All answers are exact rationals (polygon curves, integer-coefficient polynomial fields);
+# the four-way oracle (sympy-param == sympy-green == pure-fraction == mpmath) gates every
+# accepted physics at generation time.
+seed: 20260720
+n_physics: 125
+methods: [PARAM, GREEN]
+target_trap_fraction: 0.5
+families:                       # 125 / 5 = 25 physics each
+  - {name: rectangle, weight: 1}
+  - {name: triangle, weight: 1}
+  - {name: quadrilateral, weight: 1}
+  - {name: lshape, weight: 1}          # non-convex — Green's still applies (simple polygon)
+  - {name: pentagon, weight: 1}
+field:
+  degree2_prob: 0.7             # else degree 1
+  n_terms: [2, 4]               # nonzero monomials per component polynomial
+  coeff_range: [-9, 9]          # integer, zero excluded
+reject:
+  min_edge_mag: 0.25            # sign robustness: every |e_i| >= 1/4
+  min_total_mag: 0.5            # |wtot|, |phi| >= 1/2
+  max_mag: 5000

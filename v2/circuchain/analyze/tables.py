@@ -54,7 +54,8 @@ def _load_diagnostic_map(dataset_dir: str) -> dict:
     return out
 
 
-def analyze_graded(graded_dir: str, out_dir: str, dataset_dir: str = "") -> dict:
+def analyze_graded(graded_dir: str, out_dir: str, dataset_dir: str = "",
+                   factors=FLIP_CELLS) -> dict:
     rows = _load_graded(graded_dir)
     os.makedirs(out_dir, exist_ok=True)
     diag_map = _load_diagnostic_map(dataset_dir) if dataset_dir else {}
@@ -91,7 +92,7 @@ def analyze_graded(graded_dir: str, out_dir: str, dataset_dir: str = "") -> dict
     factor_stats: dict = {}
     models = sorted({r["model"] for r in rows})
     for model in models:
-        for flip in FLIP_CELLS:
+        for flip in factors:
             pairs_fc, pairs_sgm = [], []
             for (m, _pid, _meth), cells in idx.items():
                 if m != model or "dflt" not in cells or flip not in cells:

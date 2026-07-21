@@ -13,3 +13,7 @@ pilot/*
 !tables/**
 !figures/
 !figures/**
+!contour/
+contour/*
+!contour/tables/
+!contour/tables/**

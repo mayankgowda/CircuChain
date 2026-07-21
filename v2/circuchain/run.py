@@ -47,6 +47,9 @@ async def run_model(model_cfg: dict, defaults: dict, instances: List[dict],
                     cache_dir: str | None = None) -> Dict[str, int]:
     """Run one model over the instance plan. Returns counters."""
     cfg = {**defaults, **model_cfg}
+    # Domain-appropriate system prompt: configs may override (the contour panel does);
+    # absent, the original circuits prompt applies, so v2 cache keys are untouched.
+    sys_prompt = cfg.get("system_prompt") or SYSTEM_PROMPT
     # Loaded-ness is asserted ONCE below. The per-request assert reads /api/v0/models state,
     # which flaps to "not-loaded" under parallel generation and killed real requests.
     cfg["require_loaded"] = False
@@ -153,7 +156,7 @@ async def run_model(model_cfg: dict, defaults: dict, instances: List[dict],
             health["last_reload_at"] = asyncio.get_event_loop().time()
 
     async def one(inst: dict) -> None:
-        key = cache_key(model_key, fingerprint, SYSTEM_PROMPT, inst["prompt"], gp)
+        key = cache_key(model_key, fingerprint, sys_prompt, inst["prompt"], gp)
         comp = cache.get(model_key, key)
         if comp is None:
             last_err = None
@@ -165,7 +168,7 @@ async def run_model(model_cfg: dict, defaults: dict, instances: List[dict],
                         if counters.get("failed", 0) > max(20, 0.3 * len(instances)):
                             raise RuntimeError(
                                 f"[{model_key}] aborting: failure rate exceeded 30% of plan")
-                        comp = await provider.generate(SYSTEM_PROMPT, inst["prompt"], gp)
+                        comp = await provider.generate(sys_prompt, inst["prompt"], gp)
                     health["consecutive_failures"] = 0
                     break
                 except RuntimeError as e:
