@@ -1,0 +1,26 @@
+# CircuChain V3 — contour HARD TIER: disentangles cognitive-load from convention
+# entrenchment. Same conventions, same oracle, same grading — only difficulty moves:
+#   fields degree 3-4 (vs <=2), 5-8 edges (pentagon/hexagon/lshape/staircase vs 3-6),
+#   3-6 monomials per component (vs 2-4).
+# If competent models keep complying here at circuits-level strain, entrenchment wins;
+# if reversion climbs (extrapolating gemma's 1.9%->9.3% easy->hard family gradient),
+# load is a co-factor.
+# Cells: dflt/cw/wrk only (750 instances) — inw is not load-bearing for this question.
+seed: 20260721
+n_physics: 125
+methods: [PARAM, GREEN]
+cells: [dflt, cw, wrk]
+target_trap_fraction: 0.5
+families:                       # ~31 physics each; 5-8 edges
+  - {name: pentagon, weight: 1}
+  - {name: hexagon, weight: 1}
+  - {name: lshape, weight: 1}
+  - {name: staircase, weight: 1}         # 8 edges, two reflex corners
+field:
+  degree_dist: {3: 0.5, 4: 0.5}
+  n_terms: [3, 6]
+  coeff_range: [-9, 9]
+reject:
+  min_edge_mag: 0.5
+  min_total_mag: 1.0
+  max_mag: 200000               # degree-4 integrals run large; grading is relative-tol

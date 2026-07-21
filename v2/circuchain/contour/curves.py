@@ -18,7 +18,8 @@ from typing import Dict, List, Mapping, Sequence, Tuple
 
 from .fieldpoly import Point, Poly2, shoelace2
 
-FAMILIES = ("rectangle", "triangle", "quadrilateral", "lshape", "pentagon")
+FAMILIES = ("rectangle", "triangle", "quadrilateral", "lshape", "pentagon",
+            "hexagon", "staircase")   # hexagon/staircase: the hard-tier families
 
 
 # ---------------- exact geometry primitives ----------------
@@ -88,13 +89,26 @@ def sample_verts(family: str, rng) -> List[Point]:
             y2 = y1 + _lattice(rng, 1, 3)
             return [(F(x0), F(y0)), (F(x2), F(y0)), (F(x2), F(y1)),
                     (F(x1), F(y1)), (F(x1), F(y2)), (F(x0), F(y2))]
-        # convex quadrilateral / pentagon via exact convex-hull-of-k check
-        k = 4 if family == "quadrilateral" else 5
-        pts = {(_lattice(rng, -6, 6), _lattice(rng, -6, 6)) for _ in range(k)}
-        if len(pts) < k:
+        if family == "staircase":
+            # rectilinear octagon (two-notch staircase): 8 edges, two reflex corners
+            xs = [_lattice(rng, -8, -3)]
+            for _ in range(3):
+                xs.append(xs[-1] + _lattice(rng, 1, 3))
+            ys = [_lattice(rng, -8, -3)]
+            for _ in range(3):
+                ys.append(ys[-1] + _lattice(rng, 1, 3))
+            x0, x1, x2, x3 = xs
+            y0, y1, y2, y3 = ys
+            return [(F(x0), F(y0)), (F(x3), F(y0)), (F(x3), F(y1)), (F(x2), F(y1)),
+                    (F(x2), F(y2)), (F(x1), F(y2)), (F(x1), F(y3)), (F(x0), F(y3))]
+        # convex k-gon via exact convex-hull-of-k check
+        K = {"quadrilateral": 4, "pentagon": 5, "hexagon": 6}[family]
+        span = 8 if K == 6 else 6
+        pts = {(_lattice(rng, -span, span), _lattice(rng, -span, span)) for _ in range(K)}
+        if len(pts) < K:
             continue
         hull = _convex_hull([(F(x), F(y)) for x, y in pts])
-        if len(hull) != k or shoelace2(hull) < (4 if k == 4 else 6):
+        if len(hull) != K or shoelace2(hull) < {4: 4, 5: 6, 6: 8}[K]:
             continue
         return hull
     raise RuntimeError(f"could not sample a valid {family}")

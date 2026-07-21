@@ -17,3 +17,7 @@ pilot/*
 contour/*
 !contour/tables/
 !contour/tables/**
+!contour_hard/
+contour_hard/*
+!contour_hard/tables/
+!contour_hard/tables/**

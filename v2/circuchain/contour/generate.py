@@ -37,10 +37,23 @@ SYSTEM_PROMPT_CONTOUR = (
 
 _DEG1 = [(0, 0), (1, 0), (0, 1)]
 _DEG2 = _DEG1 + [(2, 0), (1, 1), (0, 2)]
+_DEG3 = _DEG2 + [(3, 0), (2, 1), (1, 2), (0, 3)]
+_DEG4 = _DEG3 + [(4, 0), (3, 1), (2, 2), (1, 3), (0, 4)]
+_MONOS = {1: _DEG1, 2: _DEG2, 3: _DEG3, 4: _DEG4}
 
 
 def _sample_poly(rng, field_cfg: dict) -> Poly2:
-    monos = _DEG2 if rng.random() < float(field_cfg.get("degree2_prob", 0.7)) else _DEG1
+    dd = field_cfg.get("degree_dist")            # e.g. {3: 0.5, 4: 0.5} — the hard tier
+    if dd:
+        r, acc, deg = rng.random(), 0.0, max(int(k) for k in dd)
+        for k in sorted(dd, key=int):
+            acc += float(dd[k])
+            if r < acc:
+                deg = int(k)
+                break
+        monos = _MONOS[deg]
+    else:                                        # original path: byte-identical rng use
+        monos = _DEG2 if rng.random() < float(field_cfg.get("degree2_prob", 0.7)) else _DEG1
     lo, hi = field_cfg.get("n_terms", [2, 4])
     n = int(rng.integers(int(lo), int(hi) + 1))
     picks = rng.choice(len(monos), size=min(n, len(monos)), replace=False)
@@ -140,6 +153,7 @@ Every value must be a plain or scientific-notation number given to at least 4 si
 def generate_contour(cfg: dict, seed: int, out_dir: str, repo_root: str) -> dict:
     n_physics = int(cfg["n_physics"])
     methods = [str(m) for m in cfg.get("methods", ["PARAM", "GREEN"])]
+    cells = {k: v for k, v in CELLS.items() if k in cfg.get("cells", list(CELLS))}
     trap_target = float(cfg.get("target_trap_fraction", 0.5))
     fam_names = [f["name"] for f in cfg["families"] for _ in range(int(f.get("weight", 1)))]
     field_cfg = cfg.get("field", {})
@@ -204,7 +218,7 @@ def generate_contour(cfg: dict, seed: int, out_dir: str, repo_root: str) -> dict
             roles = {k: (ROLE_FLUX if k == "phi" else ROLE_WORK) for k in canonical}
             requested = list(canonical.keys())
 
-            for cell_code, cell in CELLS.items():
+            for cell_code, cell in cells.items():
                 exp = apply(cell, canonical, roles)
                 dflt = apply(DEFAULT, canonical, roles)
                 diag = diagnostic_vars(cell, canonical, roles)
@@ -250,7 +264,7 @@ def generate_contour(cfg: dict, seed: int, out_dir: str, repo_root: str) -> dict
         "git_sha": _git_sha(repo_root),
         "n_physics": n_physics,
         "n_instances": len(instances),
-        "cells": list(CELLS.keys()),
+        "cells": list(cells.keys()),
         "methods": methods,
         "regime_counts": counts,
         "rejects": rejects,

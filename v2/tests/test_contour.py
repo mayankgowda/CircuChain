@@ -156,3 +156,44 @@ def test_generator_small_run_deterministic(tmp_path):
     assert all(not x["diagnostic_vars"]["phi"] for x in cw_rows)
     assert all(x["diagnostic_vars"]["phi"] and not x["diagnostic_vars"]["wtot"]
                for x in rows if x["id"].rsplit("-", 2)[-2] == "inw")
+
+
+# ---------------- hard-tier families + degree-3/4 fields ----------------
+@pytest.mark.parametrize("family", ["hexagon", "staircase"])
+def test_hard_families_four_way(family):
+    rng = np.random.default_rng([99, hash(family) % 2**31])
+    for _ in range(2):
+        verts = sample_verts(family, rng)
+        assert shoelace2(verts) > 0
+        p = poly2_from_ints({(3, 0): 2, (1, 2): -3, (0, 1): 5})     # degree 3
+        q = poly2_from_ints({(2, 2): 1, (4, 0): -2, (1, 0): 7})     # degree 4
+        solve_polygon(verts, p, q, full_gate=True)
+
+
+def test_staircase_geometry_and_rotation_golden():
+    rng = np.random.default_rng(7)
+    verts = sample_verts("staircase", rng)
+    assert len(verts) == 8
+    tris = ear_clip(verts)
+    assert sum(shoelace2(list(t)) for t in tris) == shoelace2(verts)
+    rot = poly2_from_ints({(0, 1): -1}), poly2_from_ints({(1, 0): 1})   # F=(-y,x)
+    out = solve_polygon(verts, *rot, full_gate=True)
+    assert out["wtot"] == 2 * (shoelace2(verts) / 2) and out["phi"] == 0
+
+
+def test_generator_cells_filter_and_degree_dist(tmp_path):
+    cfg = {"n_physics": 2, "methods": ["PARAM"], "cells": ["dflt", "cw", "wrk"],
+           "target_trap_fraction": 0.5,
+           "families": [{"name": "hexagon"}, {"name": "staircase"}],
+           "field": {"degree_dist": {3: 0.5, 4: 0.5}, "n_terms": [3, 6],
+                     "coeff_range": [-9, 9]},
+           "reject": {"min_edge_mag": 0.5, "min_total_mag": 1.0, "max_mag": 200000}}
+    m = generate_contour(cfg, 4242, str(tmp_path / "h"), str(tmp_path))
+    assert m["n_instances"] == 2 * 3 * 1
+    assert m["cells"] == ["dflt", "cw", "wrk"]
+    import json
+    rows = [json.loads(l) for l in (tmp_path / "h" / "instances.jsonl").read_text().splitlines()]
+    assert {r["id"].rsplit("-", 2)[-2] for r in rows} == {"dflt", "cw", "wrk"}
+    deg = max(int(k.split("_")[1][0]) + int(k.split("_")[1][1])
+              for r in rows for k in r["values"] if k[0] in "pq" and "_" in k)
+    assert deg >= 3

@@ -60,33 +60,36 @@ def validate_dataset(dataset_dir: str, out_path: str) -> dict:
         if not _close(float(wtot), canonical["wtot"]) or not _close(float(phi), canonical["phi"]):
             errs.append("values_roundtrip: totals mismatch")
 
-        # cw: reversed traversal actually integrated
-        rev = reversed_traversal_works(p, q, verts)
-        exp_cw = cells["cw"]["expected_under_contract"]
-        for i, w in enumerate(rev):
-            if not _close(float(w), exp_cw[f"e{i+1}"]):
-                errs.append(f"cw_reversed_traversal: e{i+1} {float(w)} != {exp_cw[f'e{i+1}']}")
-        if not _close(float(sum(rev)), exp_cw["wtot"]):
-            errs.append("cw_reversed_traversal: wtot mismatch")
-        if not _close(cells["cw"]["expected_under_contract"]["phi"], canonical["phi"]):
-            errs.append("cw_reversed_traversal: phi must be orientation-invariant")
+        # cw: reversed traversal actually integrated  (skipped if the dataset omits the cell)
+        if "cw" in cells:
+            rev = reversed_traversal_works(p, q, verts)
+            exp_cw = cells["cw"]["expected_under_contract"]
+            for i, w in enumerate(rev):
+                if not _close(float(w), exp_cw[f"e{i+1}"]):
+                    errs.append(f"cw_reversed_traversal: e{i+1} {float(w)} != {exp_cw[f'e{i+1}']}")
+            if not _close(float(sum(rev)), exp_cw["wtot"]):
+                errs.append("cw_reversed_traversal: wtot mismatch")
+            if not _close(exp_cw["phi"], canonical["phi"]):
+                errs.append("cw_reversed_traversal: phi must be orientation-invariant")
 
         # wrk: negated field actually integrated
-        neg = negated_field_works(p, q, verts)
-        exp_wrk = cells["wrk"]["expected_under_contract"]
-        for i, w in enumerate(neg):
-            if not _close(float(w), exp_wrk[f"e{i+1}"]):
-                errs.append(f"wrk_negated_field: e{i+1} {float(w)} != {exp_wrk[f'e{i+1}']}")
-        if not _close(float(sum(neg)), exp_wrk["wtot"]):
-            errs.append("wrk_negated_field: wtot mismatch")
+        if "wrk" in cells:
+            neg = negated_field_works(p, q, verts)
+            exp_wrk = cells["wrk"]["expected_under_contract"]
+            for i, w in enumerate(neg):
+                if not _close(float(w), exp_wrk[f"e{i+1}"]):
+                    errs.append(f"wrk_negated_field: e{i+1} {float(w)} != {exp_wrk[f'e{i+1}']}")
+            if not _close(float(sum(neg)), exp_wrk["wtot"]):
+                errs.append("wrk_negated_field: wtot mismatch")
 
         # inw: left-normal flux actually integrated
-        exp_inw = cells["inw"]["expected_under_contract"]
-        if not _close(float(inward_normal_flux(p, q, verts)), exp_inw["phi"]):
-            errs.append("inw_left_normal: phi mismatch")
-        for i in range(n):
-            if not _close(exp_inw[f"e{i+1}"], canonical[f"e{i+1}"]):
-                errs.append(f"inw_left_normal: e{i+1} must be normal-invariant")
+        if "inw" in cells:
+            exp_inw = cells["inw"]["expected_under_contract"]
+            if not _close(float(inward_normal_flux(p, q, verts)), exp_inw["phi"]):
+                errs.append("inw_left_normal: phi mismatch")
+            for i in range(n):
+                if not _close(exp_inw[f"e{i+1}"], canonical[f"e{i+1}"]):
+                    errs.append(f"inw_left_normal: e{i+1} must be normal-invariant")
 
         # green_reverify: independent re-run of the Green totals
         g = sympy_green(p, q, verts)
