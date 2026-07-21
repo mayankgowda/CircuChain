@@ -17,7 +17,7 @@ defaults:
   top_k: 20
   seed: 20260720            # provenance; MLX ignores it (v2 policy note applies)
   max_tokens: 16384
-  num_ctx: 32768
+  num_ctx: 24576            # matches the explicit per-size load; think crash-guard, ample for nothink
   concurrency: 4
   system_prompt: "You are a careful multivariable-calculus assistant. Solve vector-field line-integral problems exactly as specified: follow the stated orientation, sign, and normal conventions and the required method, and end with the mandatory ANSWER line in the requested format."
 
