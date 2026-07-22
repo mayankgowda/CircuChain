@@ -158,6 +158,7 @@ def cmd_fetch(a) -> None:
                 continue
             content = c.get(f"/files/{outf}/content")
             content.raise_for_status()
+            os.makedirs(os.path.join(out_dir, "responses"), exist_ok=True)
             rp = os.path.join(out_dir, "responses", f"{mkey}.jsonl")
             fp = os.path.join(out_dir, "responses", f"{mkey}.failures.jsonl")
             existing = ({json.loads(l)["instance_id"] for l in open(rp)}

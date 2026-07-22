@@ -1,0 +1,23 @@
+# RHR HARD calibration round: the 2026-07-22 smoke showed gpt-oss at 100% mag-correct /
+# 0 truncation on the base config (out of measurement band). Param-crank only (no
+# structural change): more terms, wider components. Target: gemma/GPT-5 mag-correct
+# 40-75%; gpt-oss may sit higher (its own strain point on the dose-response).
+seed: 20260723
+n_physics: 125
+cells: [dflt, lh, rxn]
+target_trap_fraction: 0.5
+families:
+  - {name: torque_rigid, weight: 1}
+  - {name: angmom_system, weight: 1}
+  - {name: lorentz_set, weight: 1}
+parameters:
+  n_forces_min: 8
+  n_forces_max: 10
+  n_particles_min: 6
+  n_particles_max: 7
+  pt_range: 9
+  f_range: 12
+  v_range: 8
+reject:
+  min_diag_mag: 1
+  max_mag: 20000

@@ -85,12 +85,13 @@ class TorqueRigid:
         out: Dict[str, float] = {"n": float(n)}
         pv = _sample_vec(rng, -4, 4)
         out["pvx"], out["pvy"], out["pvz"] = map(float, pv)
+        pr = int(p.get("pt_range", 7)); fr_ = int(p.get("f_range", 9))
         for i in range(1, n + 1):
             while True:
-                pt = _sample_vec(rng, -7, 7)
+                pt = _sample_vec(rng, -pr, pr)
                 if pt != pv:
                     break
-            fr = _sample_vec(rng, -9, 9)
+            fr = _sample_vec(rng, -fr_, fr_)
             out[f"px{i}"], out[f"py{i}"], out[f"pz{i}"] = map(float, pt)
             out[f"fx{i}"], out[f"fy{i}"], out[f"fz{i}"] = map(float, fr)
         d = _sample_vec(rng, -5, 5)
@@ -169,10 +170,11 @@ class AngmomSystem:
         out: Dict[str, float] = {"n": float(n)}
         pv = _sample_vec(rng, -4, 4)
         out["pvx"], out["pvy"], out["pvz"] = map(float, pv)
+        pr = int(p.get("pt_range", 7)); vr = int(p.get("v_range", 6)); gr = int(p.get("f_range", 9))
         for i in range(1, n + 1):
-            r = _sample_vec(rng, -7, 7)
-            vl = _sample_vec(rng, -6, 6)
-            g = _sample_vec(rng, -9, 9)
+            r = _sample_vec(rng, -pr, pr)
+            vl = _sample_vec(rng, -vr, vr)
+            g = _sample_vec(rng, -gr, gr)
             out[f"rx{i}"], out[f"ry{i}"], out[f"rz{i}"] = map(float, r)
             out[f"vx{i}"], out[f"vy{i}"], out[f"vz{i}"] = map(float, vl)
             out[f"gx{i}"], out[f"gy{i}"], out[f"gz{i}"] = map(float, g)
@@ -269,8 +271,9 @@ class LorentzSet:
             while q == 0:
                 q = int(rng.integers(-5, 6))
             out[f"q{i}"] = float(q)
-            vl = _sample_vec(rng, -7, 7)
-            b = _sample_vec(rng, -7, 7)
+            vr = int(p.get("v_range", 7))
+            vl = _sample_vec(rng, -vr, vr)
+            b = _sample_vec(rng, -vr, vr)
             out[f"vx{i}"], out[f"vy{i}"], out[f"vz{i}"] = map(float, vl)
             out[f"bx{i}"], out[f"by{i}"], out[f"bz{i}"] = map(float, b)
         return out
