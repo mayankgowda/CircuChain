@@ -231,6 +231,48 @@ def validate_contour(
         raise typer.Exit(1)
 
 
+@app.command("gen-rhr")
+def gen_rhr(
+    config: str = typer.Option("configs/rhr.yaml", help="RHR generator config"),
+    seed: int = typer.Option(0, help="override the config seed (0 = use config)"),
+    out: str = typer.Option("", help="output dir (default results/rhr/datasets/v3rhr_seed<SEED>)"),
+):
+    """V3 third domain (the pre-registered prediction): handedness / right-hand-rule.
+    Inline four-way cross-product oracle + exact transfer/orthogonality theorem checks."""
+    import yaml
+    from .rhr.generate import generate_rhr
+
+    cfg = yaml.safe_load(open(_v2path(config)))
+    the_seed = seed or int(cfg.get("seed", 20260722))
+    out_dir = _v2path(out or f"results/rhr/datasets/v3rhr_seed{the_seed}")
+    manifest = generate_rhr(cfg, the_seed, out_dir, REPO)
+    typer.echo(json.dumps({k: manifest[k] for k in
+                           ("seed", "n_physics", "n_instances", "regime_counts", "rejects",
+                            "canary_guid")}, indent=2))
+    typer.echo(f"Wrote {out_dir}/instances.jsonl (+ manifest.json)")
+
+
+@app.command("validate-rhr")
+def validate_rhr(
+    dataset: str = typer.Option("results/rhr/datasets/v3rhr_seed20260722", help="RHR dataset dir"),
+    out: str = typer.Option("results/rhr/tables/transform_validation.json", help="summary path"),
+):
+    """Independent validation: lh re-solved with the actual left-hand rule (epsilon -> -epsilon),
+    rxn re-solved with negated sources, masks recomputed, values round-trip."""
+    from .rhr.validate import validate_dataset
+
+    s = validate_dataset(_v2path(dataset), _v2path(out))
+    typer.echo(f"rhr transform validation: {s['n_pass']}/{s['n_physics']} physics PASS "
+               f"(checks: {', '.join(s['checks'])})")
+    for r in s["results"]:
+        if r["status"] == "FAIL":
+            typer.echo(f"  FAIL {r['physics_id']}:")
+            for e in r["errors"][:6]:
+                typer.echo(f"    {e}")
+    if s["n_fail"]:
+        raise typer.Exit(1)
+
+
 @app.command()
 def run(
     models: str = typer.Option("configs/models.yaml", help="panel config"),

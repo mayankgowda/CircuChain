@@ -1,0 +1,639 @@
+{
+  "n_physics": 125,
+  "n_pass": 125,
+  "n_fail": 0,
+  "checks": [
+    "lh_levi_civita_flip",
+    "rxn_negated_sources",
+    "diag_mask_recompute",
+    "values_roundtrip"
+  ],
+  "rel_tol": 1e-09,
+  "results": [
+    {
+      "physics_id": "angmom_system-0001",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "angmom_system-0004",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "angmom_system-0007",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "angmom_system-0010",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "angmom_system-0013",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "angmom_system-0016",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "angmom_system-0019",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "angmom_system-0022",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "angmom_system-0025",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "angmom_system-0028",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "angmom_system-0031",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "angmom_system-0034",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "angmom_system-0037",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "angmom_system-0040",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "angmom_system-0043",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "angmom_system-0046",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "angmom_system-0049",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "angmom_system-0052",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "angmom_system-0055",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "angmom_system-0058",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "angmom_system-0061",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "angmom_system-0064",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "angmom_system-0067",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "angmom_system-0070",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "angmom_system-0073",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "angmom_system-0076",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "angmom_system-0079",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "angmom_system-0082",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "angmom_system-0085",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "angmom_system-0088",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "angmom_system-0091",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "angmom_system-0094",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "angmom_system-0097",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "angmom_system-0100",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "angmom_system-0103",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "angmom_system-0106",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "angmom_system-0109",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "angmom_system-0112",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "angmom_system-0115",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "angmom_system-0118",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "angmom_system-0121",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "angmom_system-0124",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "lorentz_set-0002",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "lorentz_set-0005",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "lorentz_set-0008",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "lorentz_set-0011",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "lorentz_set-0014",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "lorentz_set-0017",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "lorentz_set-0020",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "lorentz_set-0023",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "lorentz_set-0026",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "lorentz_set-0029",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "lorentz_set-0032",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "lorentz_set-0035",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "lorentz_set-0038",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "lorentz_set-0041",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "lorentz_set-0044",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "lorentz_set-0047",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "lorentz_set-0050",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "lorentz_set-0053",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "lorentz_set-0056",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "lorentz_set-0059",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "lorentz_set-0062",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "lorentz_set-0065",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "lorentz_set-0068",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "lorentz_set-0071",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "lorentz_set-0074",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "lorentz_set-0077",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "lorentz_set-0080",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "lorentz_set-0083",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "lorentz_set-0086",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "lorentz_set-0089",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "lorentz_set-0092",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "lorentz_set-0095",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "lorentz_set-0098",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "lorentz_set-0101",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "lorentz_set-0104",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "lorentz_set-0107",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "lorentz_set-0110",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "lorentz_set-0113",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "lorentz_set-0116",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "lorentz_set-0119",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "lorentz_set-0122",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "torque_rigid-0000",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "torque_rigid-0003",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "torque_rigid-0006",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "torque_rigid-0009",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "torque_rigid-0012",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "torque_rigid-0015",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "torque_rigid-0018",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "torque_rigid-0021",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "torque_rigid-0024",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "torque_rigid-0027",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "torque_rigid-0030",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "torque_rigid-0033",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "torque_rigid-0036",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "torque_rigid-0039",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "torque_rigid-0042",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "torque_rigid-0045",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "torque_rigid-0048",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "torque_rigid-0051",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "torque_rigid-0054",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "torque_rigid-0057",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "torque_rigid-0060",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "torque_rigid-0063",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "torque_rigid-0066",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "torque_rigid-0069",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "torque_rigid-0072",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "torque_rigid-0075",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "torque_rigid-0078",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "torque_rigid-0081",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "torque_rigid-0084",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "torque_rigid-0087",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "torque_rigid-0090",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "torque_rigid-0093",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "torque_rigid-0096",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "torque_rigid-0099",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "torque_rigid-0102",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "torque_rigid-0105",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "torque_rigid-0108",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "torque_rigid-0111",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "torque_rigid-0114",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "torque_rigid-0117",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "torque_rigid-0120",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "physics_id": "torque_rigid-0123",
+      "status": "PASS",
+      "errors": []
+    }
+  ]
+}

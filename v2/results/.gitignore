@@ -21,3 +21,7 @@ contour/*
 contour_hard/*
 !contour_hard/tables/
 !contour_hard/tables/**
+!rhr/
+rhr/*
+!rhr/tables/
+!rhr/tables/**

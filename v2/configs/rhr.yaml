@@ -1,0 +1,26 @@
+# CircuChain V3 — RHR / handedness domain (the pre-registered prediction).
+#
+# PREDICTION (registered before any model run, 2026-07-21): left-handed cross-product
+# conventions are essentially absent from training text, so under the two-factor law
+# competent models revert toward RIGHT-HANDED results in the `lh` cell at rates far above
+# the transform-matched `rxn` (Newton's-third-law) control, which is heavily trained.
+#
+# Difficulty is tuned HIGH from the start (circuits-style multi-term systems, 5-6 forces /
+# 4-5 particles, 7 requested vars, transfer-theorem procedures) — the hard-contour lesson.
+# Smoke-calibrate before the full panel; crank n_* if competent models exceed ~85% mag.
+seed: 20260722
+n_physics: 125
+cells: [dflt, lh, rxn]
+target_trap_fraction: 0.5
+families:                     # ~42 each; methods per family (direct|transfer, lorentz: direct|det)
+  - {name: torque_rigid, weight: 1}
+  - {name: angmom_system, weight: 1}
+  - {name: lorentz_set, weight: 1}
+parameters:
+  n_forces_min: 5
+  n_forces_max: 6
+  n_particles_min: 4
+  n_particles_max: 5
+reject:
+  min_diag_mag: 1             # every cross/reactive var >= 1 (integers; sign robustness)
+  max_mag: 3000
