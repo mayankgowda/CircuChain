@@ -1,5 +1,5 @@
 {
-  "description": "Load-vs-entrenchment: easy vs hard tier, cw (orientation) vs wrk (matched transform)",
+  "description": "Two-factor law: reversion = entrenchment x strain; dose-response across 3 families",
   "tiers": {
     "gpt5-api": {
       "easy": {
@@ -132,7 +132,27 @@
           "n": 223
         }
       },
-      "hard": null
+      "hard": {
+        "n_rows": 350,
+        "cw": {
+          "n": 551,
+          "comply": 403,
+          "revert": 148,
+          "incoherent": 0,
+          "revert_rate": 0.2686
+        },
+        "wrk": {
+          "n": 633,
+          "comply": 632,
+          "revert": 1,
+          "incoherent": 0,
+          "revert_rate": 0.0016
+        },
+        "mag_correct_dflt": {
+          "k": 67,
+          "n": 121
+        }
+      }
     },
     "deepseek-v3-api": {
       "easy": {
@@ -164,12 +184,89 @@
         }
       },
       "hard": null
+    },
+    "llama33-70b-api": {
+      "easy": {
+        "n_rows": 1000,
+        "cw": {
+          "n": 518,
+          "comply": 36,
+          "revert": 482,
+          "incoherent": 0,
+          "revert_rate": 0.9305
+        },
+        "wrk": {
+          "n": 491,
+          "comply": 248,
+          "revert": 243,
+          "incoherent": 0,
+          "revert_rate": 0.4949
+        },
+        "inw": {
+          "n": 33,
+          "comply": 17,
+          "revert": 16,
+          "incoherent": 0,
+          "revert_rate": 0.4848
+        },
+        "mag_correct_dflt": {
+          "k": 7,
+          "n": 250
+        }
+      },
+      "hard": null
+    },
+    "qwen25-72b-api": {
+      "easy": {
+        "n_rows": 1000,
+        "cw": {
+          "n": 602,
+          "comply": 38,
+          "revert": 564,
+          "incoherent": 0,
+          "revert_rate": 0.9369
+        },
+        "wrk": {
+          "n": 572,
+          "comply": 479,
+          "revert": 93,
+          "incoherent": 0,
+          "revert_rate": 0.1626
+        },
+        "inw": {
+          "n": 50,
+          "comply": 21,
+          "revert": 29,
+          "incoherent": 0,
+          "revert_rate": 0.58
+        },
+        "mag_correct_dflt": {
+          "k": 17,
+          "n": 250
+        }
+      },
+      "hard": null
+    }
+  },
+  "dose_response_strain_vs_cw_revert": {
+    "gpt-oss-120b": {
+      "strain_pct": 7.0,
+      "revert_pct": 4.8
+    },
+    "gpt5": {
+      "strain_pct": 24.1,
+      "revert_pct": 13.7
+    },
+    "gemma4-31b": {
+      "strain_pct": 44.6,
+      "revert_pct": 26.9
     }
   },
   "notes": [
-    "gpt-oss hard is survivor-biased: 218/750 batch rows empty (reasoning ate 16384; finish=length)",
-    "gpt5 hard: 96 truncated, 129 extract fallback/none of 748",
-    "gemma hard batch pending at freeze time",
-    "zero incoherent signs anywhere: every reversion lands exactly on the CCW default"
+    "survivorship in hard batches is CONSERVATIVE: empty/truncated rows are the most-strained instances, so observed reversion is a lower bound",
+    "gemma hard: 350 rows fetched, 164 empty (length), ~236 unreturned \u2014 top-up possible via resume-safe resubmit",
+    "gpt-oss hard: 510 rows, 218 empty (reasoning ate 16384)",
+    "wrk (matched transform) flat <=0.5% for ALL competent models both tiers; weak trio shows cw>wrk gaps (llama 93/50, qwen72 94/16, deepseek 92/35)",
+    "zero incoherent signs anywhere in the study"
   ]
 }
