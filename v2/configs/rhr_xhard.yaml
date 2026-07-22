@@ -1,0 +1,25 @@
+# RHR XHARD: final strain escalation. Count-cranking failed to bite (hard smoke: gemma 98%,
+# gpt-oss 100% mag-correct, 0.0% lh reversion — 667 diag vars, zero reversions).
+# This round uses the lever that actually strained models in contour-hard: LONG EXACT
+# ARITHMETIC — 3-digit components (60 three-digit multiplications per problem).
+# If competent models STILL comply at the strain this induces, the registered prediction
+# is refuted at achievable strain and RHR is reported as a second trained-reversal pole.
+seed: 20260724
+n_physics: 125
+cells: [dflt, lh, rxn]
+target_trap_fraction: 0.5
+families:
+  - {name: torque_rigid, weight: 1}
+  - {name: angmom_system, weight: 1}
+  - {name: lorentz_set, weight: 1}
+parameters:
+  n_forces_min: 8
+  n_forces_max: 10
+  n_particles_min: 6
+  n_particles_max: 7
+  pt_range: 60
+  f_range: 400
+  v_range: 60
+reject:
+  min_diag_mag: 50
+  max_mag: 5000000
