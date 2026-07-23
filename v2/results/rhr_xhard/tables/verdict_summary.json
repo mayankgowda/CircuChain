@@ -1,0 +1,57 @@
+{
+  "c1_contour": {
+    "desc": "reasoning toggle on easy contour: competence up, reversion flat (v2 workshop headline replicates cross-domain)",
+    "qwen3-14b": {
+      "nothink": {
+        "mag": "38/250",
+        "cw_revert": "648/680 (95.3%)"
+      },
+      "think": {
+        "mag": "186/250",
+        "cw_revert": "709/776 (91.4%)"
+      }
+    },
+    "qwen3-32b": {
+      "nothink": {
+        "mag": "29/250",
+        "cw_revert": "633/654 (96.8%)"
+      },
+      "think": {
+        "mag": "219/250",
+        "cw_revert": "647/684 (94.6%)"
+      }
+    }
+  },
+  "rhr_xhard_at_scale": {
+    "desc": "pre-registered lh>>rxn REFUTED at scale",
+    "gpt5": {
+      "mag": "244/250",
+      "lh": "7/1236 (0.6%)",
+      "rxn": "3/1192 (0.3%)"
+    },
+    "gpt-oss": {
+      "mag": "204/213",
+      "lh": "0/1089 (0.0%)",
+      "rxn": "50/1062 (4.7%) \u2014 REVERSE of prediction"
+    },
+    "gemma": {
+      "mag": "41/43",
+      "lh": "0/219",
+      "rxn": "n=6 (credit wall)",
+      "note": "Together credits exhausted at 2.94% of its batch"
+    }
+  },
+  "retest_gemma_hard_cw": {
+    "k": 5,
+    "per_rep_pct": [
+      26.9,
+      31.7,
+      43.3,
+      38.2,
+      32.0
+    ],
+    "mean_pct": 34.4,
+    "sd_pp": 6.4,
+    "note": "original single-run 26.9% was the LOWEST rep; wrk control ~0.2% throughout"
+  }
+}

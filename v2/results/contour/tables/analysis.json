@@ -1,0 +1,5168 @@
+{
+  "n_rows": 3918,
+  "models": [
+    "deepseek-v3-api",
+    "gemma4-31b-api",
+    "gpt-oss-120b-api",
+    "gpt5-api",
+    "llama33-70b-api",
+    "qwen25-72b-api",
+    "qwen3-8b-nothink"
+  ],
+  "cell_rates": {
+    "deepseek-v3-api|cw|all": {
+      "n": 50,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 14,
+        "COMPETENCE": 36
+      },
+      "completed_within_budget": {
+        "k": 47,
+        "n": 50,
+        "rate": 0.94,
+        "wilson_lo": 0.8378290831116182,
+        "wilson_hi": 0.979385029651026
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 50,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.07134759913335872
+      },
+      "magnitude_correct": {
+        "k": 14,
+        "n": 50,
+        "rate": 0.28,
+        "wilson_lo": 0.17474170665911232,
+        "wilson_hi": 0.4166512369595657
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 14,
+        "rate": 0.0,
+        "wilson_lo": 1.3877787807814457e-17,
+        "wilson_hi": 0.2153108027376358
+      },
+      "extraction_issues": 5
+    },
+    "deepseek-v3-api|cw|control": {
+      "n": 24,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 5,
+        "COMPETENCE": 19
+      },
+      "completed_within_budget": {
+        "k": 22,
+        "n": 24,
+        "rate": 0.9166666666666666,
+        "wilson_lo": 0.7415119780678932,
+        "wilson_hi": 0.9768411847029566
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 24,
+        "rate": 0.0,
+        "wilson_lo": 1.3877787807814457e-17,
+        "wilson_hi": 0.13797620467498017
+      },
+      "magnitude_correct": {
+        "k": 5,
+        "n": 24,
+        "rate": 0.20833333333333334,
+        "wilson_lo": 0.09244825352851857,
+        "wilson_hi": 0.40470453253188665
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 5,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.43448246478317476
+      },
+      "extraction_issues": 1
+    },
+    "deepseek-v3-api|cw|trap": {
+      "n": 26,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 9,
+        "COMPETENCE": 17
+      },
+      "completed_within_budget": {
+        "k": 25,
+        "n": 26,
+        "rate": 0.9615384615384616,
+        "wilson_lo": 0.8110722109696524,
+        "wilson_hi": 0.9931780150064564
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 26,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.1287289218592153
+      },
+      "magnitude_correct": {
+        "k": 9,
+        "n": 26,
+        "rate": 0.34615384615384615,
+        "wilson_lo": 0.1941223032294052,
+        "wilson_hi": 0.5377942881118918
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 9,
+        "rate": 0.0,
+        "wilson_lo": 2.7755575615628914e-17,
+        "wilson_hi": 0.29914504841954404
+      },
+      "extraction_issues": 4
+    },
+    "deepseek-v3-api|dflt|all": {
+      "n": 50,
+      "dichotomy": {
+        "CORRECT": 13,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 37
+      },
+      "completed_within_budget": {
+        "k": 49,
+        "n": 50,
+        "rate": 0.98,
+        "wilson_lo": 0.8950455641036219,
+        "wilson_hi": 0.9964607407283539
+      },
+      "final_correct": {
+        "k": 13,
+        "n": 50,
+        "rate": 0.26,
+        "wilson_lo": 0.1587152749355239,
+        "wilson_hi": 0.3955315726484884
+      },
+      "magnitude_correct": {
+        "k": 13,
+        "n": 50,
+        "rate": 0.26,
+        "wilson_lo": 0.1587152749355239,
+        "wilson_hi": 0.3955315726484884
+      },
+      "sign_compliant_given_mag": {
+        "k": 13,
+        "n": 13,
+        "rate": 1.0,
+        "wilson_lo": 0.7719046276458016,
+        "wilson_hi": 0.9999999999999999
+      },
+      "extraction_issues": 4
+    },
+    "deepseek-v3-api|dflt|control": {
+      "n": 24,
+      "dichotomy": {
+        "CORRECT": 6,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 18
+      },
+      "completed_within_budget": {
+        "k": 23,
+        "n": 24,
+        "rate": 0.9583333333333334,
+        "wilson_lo": 0.7975819352134406,
+        "wilson_hi": 0.9926065438344942
+      },
+      "final_correct": {
+        "k": 6,
+        "n": 24,
+        "rate": 0.25,
+        "wilson_lo": 0.11999366228595004,
+        "wilson_hi": 0.44899444005154004
+      },
+      "magnitude_correct": {
+        "k": 6,
+        "n": 24,
+        "rate": 0.25,
+        "wilson_lo": 0.11999366228595004,
+        "wilson_hi": 0.44899444005154004
+      },
+      "sign_compliant_given_mag": {
+        "k": 6,
+        "n": 6,
+        "rate": 1.0,
+        "wilson_lo": 0.6096657120978346,
+        "wilson_hi": 1.0
+      },
+      "extraction_issues": 3
+    },
+    "deepseek-v3-api|dflt|trap": {
+      "n": 26,
+      "dichotomy": {
+        "CORRECT": 7,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 19
+      },
+      "completed_within_budget": {
+        "k": 26,
+        "n": 26,
+        "rate": 1.0,
+        "wilson_lo": 0.8712710781407846,
+        "wilson_hi": 1.0
+      },
+      "final_correct": {
+        "k": 7,
+        "n": 26,
+        "rate": 0.2692307692307692,
+        "wilson_lo": 0.13704448322018375,
+        "wilson_hi": 0.4608304037917617
+      },
+      "magnitude_correct": {
+        "k": 7,
+        "n": 26,
+        "rate": 0.2692307692307692,
+        "wilson_lo": 0.13704448322018375,
+        "wilson_hi": 0.4608304037917617
+      },
+      "sign_compliant_given_mag": {
+        "k": 7,
+        "n": 7,
+        "rate": 1.0,
+        "wilson_lo": 0.6456695649333126,
+        "wilson_hi": 1.0
+      },
+      "extraction_issues": 1
+    },
+    "gemma4-31b-api|cw|all": {
+      "n": 223,
+      "dichotomy": {
+        "CORRECT": 196,
+        "COMPLIANCE": 9,
+        "COMPETENCE": 18
+      },
+      "completed_within_budget": {
+        "k": 209,
+        "n": 223,
+        "rate": 0.9372197309417041,
+        "wilson_lo": 0.8973929077366942,
+        "wilson_hi": 0.9622383122958702
+      },
+      "final_correct": {
+        "k": 196,
+        "n": 223,
+        "rate": 0.8789237668161435,
+        "wilson_lo": 0.8295732236444483,
+        "wilson_hi": 0.9154405003837741
+      },
+      "magnitude_correct": {
+        "k": 205,
+        "n": 223,
+        "rate": 0.9192825112107623,
+        "wilson_lo": 0.8760297514116078,
+        "wilson_hi": 0.9483345467734667
+      },
+      "sign_compliant_given_mag": {
+        "k": 196,
+        "n": 205,
+        "rate": 0.9560975609756097,
+        "wilson_lo": 0.9186825616861115,
+        "wilson_hi": 0.9767335164047494
+      },
+      "extraction_issues": 14
+    },
+    "gemma4-31b-api|cw|control": {
+      "n": 107,
+      "dichotomy": {
+        "CORRECT": 95,
+        "COMPLIANCE": 3,
+        "COMPETENCE": 9
+      },
+      "completed_within_budget": {
+        "k": 101,
+        "n": 107,
+        "rate": 0.9439252336448598,
+        "wilson_lo": 0.8830303848234273,
+        "wilson_hi": 0.9740496374963752
+      },
+      "final_correct": {
+        "k": 95,
+        "n": 107,
+        "rate": 0.8878504672897196,
+        "wilson_lo": 0.8141461014738314,
+        "wilson_hi": 0.9346711811845225
+      },
+      "magnitude_correct": {
+        "k": 98,
+        "n": 107,
+        "rate": 0.9158878504672897,
+        "wilson_lo": 0.8478305980132816,
+        "wilson_hi": 0.9551180544757967
+      },
+      "sign_compliant_given_mag": {
+        "k": 95,
+        "n": 98,
+        "rate": 0.9693877551020408,
+        "wilson_lo": 0.9138297983152016,
+        "wilson_hi": 0.9895351089175063
+      },
+      "extraction_issues": 6
+    },
+    "gemma4-31b-api|cw|trap": {
+      "n": 116,
+      "dichotomy": {
+        "CORRECT": 101,
+        "COMPLIANCE": 6,
+        "COMPETENCE": 9
+      },
+      "completed_within_budget": {
+        "k": 108,
+        "n": 116,
+        "rate": 0.9310344827586207,
+        "wilson_lo": 0.8697932609096686,
+        "wilson_hi": 0.9646425093492634
+      },
+      "final_correct": {
+        "k": 101,
+        "n": 116,
+        "rate": 0.8706896551724138,
+        "wilson_lo": 0.7975686759498692,
+        "wilson_hi": 0.9200460864728124
+      },
+      "magnitude_correct": {
+        "k": 107,
+        "n": 116,
+        "rate": 0.9224137931034483,
+        "wilson_lo": 0.8591003375006443,
+        "wilson_hi": 0.9586467173531092
+      },
+      "sign_compliant_given_mag": {
+        "k": 101,
+        "n": 107,
+        "rate": 0.9439252336448598,
+        "wilson_lo": 0.8830303848234273,
+        "wilson_hi": 0.9740496374963752
+      },
+      "extraction_issues": 8
+    },
+    "gemma4-31b-api|dflt|all": {
+      "n": 223,
+      "dichotomy": {
+        "CORRECT": 220,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 3
+      },
+      "completed_within_budget": {
+        "k": 221,
+        "n": 223,
+        "rate": 0.9910313901345291,
+        "wilson_lo": 0.96789495741479,
+        "wilson_hi": 0.9975370281602437
+      },
+      "final_correct": {
+        "k": 220,
+        "n": 223,
+        "rate": 0.9865470852017937,
+        "wilson_lo": 0.9612008178987123,
+        "wilson_hi": 0.995414437214449
+      },
+      "magnitude_correct": {
+        "k": 220,
+        "n": 223,
+        "rate": 0.9865470852017937,
+        "wilson_lo": 0.9612008178987123,
+        "wilson_hi": 0.995414437214449
+      },
+      "sign_compliant_given_mag": {
+        "k": 220,
+        "n": 220,
+        "rate": 1.0,
+        "wilson_lo": 0.9828384838048642,
+        "wilson_hi": 0.9999999999999999
+      },
+      "extraction_issues": 2
+    },
+    "gemma4-31b-api|dflt|control": {
+      "n": 112,
+      "dichotomy": {
+        "CORRECT": 111,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 1
+      },
+      "completed_within_budget": {
+        "k": 112,
+        "n": 112,
+        "rate": 1.0,
+        "wilson_lo": 0.9668386529330562,
+        "wilson_hi": 1.0
+      },
+      "final_correct": {
+        "k": 111,
+        "n": 112,
+        "rate": 0.9910714285714286,
+        "wilson_lo": 0.9511515316911152,
+        "wilson_hi": 0.9984221452967079
+      },
+      "magnitude_correct": {
+        "k": 111,
+        "n": 112,
+        "rate": 0.9910714285714286,
+        "wilson_lo": 0.9511515316911152,
+        "wilson_hi": 0.9984221452967079
+      },
+      "sign_compliant_given_mag": {
+        "k": 111,
+        "n": 111,
+        "rate": 1.0,
+        "wilson_lo": 0.9665498953066078,
+        "wilson_hi": 1.0
+      },
+      "extraction_issues": 0
+    },
+    "gemma4-31b-api|dflt|trap": {
+      "n": 111,
+      "dichotomy": {
+        "CORRECT": 109,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 2
+      },
+      "completed_within_budget": {
+        "k": 109,
+        "n": 111,
+        "rate": 0.9819819819819819,
+        "wilson_lo": 0.9366744471572399,
+        "wilson_hi": 0.995044821291472
+      },
+      "final_correct": {
+        "k": 109,
+        "n": 111,
+        "rate": 0.9819819819819819,
+        "wilson_lo": 0.9366744471572399,
+        "wilson_hi": 0.995044821291472
+      },
+      "magnitude_correct": {
+        "k": 109,
+        "n": 111,
+        "rate": 0.9819819819819819,
+        "wilson_lo": 0.9366744471572399,
+        "wilson_hi": 0.995044821291472
+      },
+      "sign_compliant_given_mag": {
+        "k": 109,
+        "n": 109,
+        "rate": 1.0,
+        "wilson_lo": 0.9659570262486751,
+        "wilson_hi": 1.0
+      },
+      "extraction_issues": 2
+    },
+    "gemma4-31b-api|inw|all": {
+      "n": 229,
+      "dichotomy": {
+        "CORRECT": 229,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 0
+      },
+      "completed_within_budget": {
+        "k": 229,
+        "n": 229,
+        "rate": 1.0,
+        "wilson_lo": 0.9835018263493515,
+        "wilson_hi": 0.9999999999999999
+      },
+      "final_correct": {
+        "k": 229,
+        "n": 229,
+        "rate": 1.0,
+        "wilson_lo": 0.9835018263493515,
+        "wilson_hi": 0.9999999999999999
+      },
+      "magnitude_correct": {
+        "k": 229,
+        "n": 229,
+        "rate": 1.0,
+        "wilson_lo": 0.9835018263493515,
+        "wilson_hi": 0.9999999999999999
+      },
+      "sign_compliant_given_mag": {
+        "k": 229,
+        "n": 229,
+        "rate": 1.0,
+        "wilson_lo": 0.9835018263493515,
+        "wilson_hi": 0.9999999999999999
+      },
+      "extraction_issues": 0
+    },
+    "gemma4-31b-api|inw|control": {
+      "n": 114,
+      "dichotomy": {
+        "CORRECT": 114,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 0
+      },
+      "completed_within_budget": {
+        "k": 114,
+        "n": 114,
+        "rate": 1.0,
+        "wilson_lo": 0.9674014658411584,
+        "wilson_hi": 1.0
+      },
+      "final_correct": {
+        "k": 114,
+        "n": 114,
+        "rate": 1.0,
+        "wilson_lo": 0.9674014658411584,
+        "wilson_hi": 1.0
+      },
+      "magnitude_correct": {
+        "k": 114,
+        "n": 114,
+        "rate": 1.0,
+        "wilson_lo": 0.9674014658411584,
+        "wilson_hi": 1.0
+      },
+      "sign_compliant_given_mag": {
+        "k": 114,
+        "n": 114,
+        "rate": 1.0,
+        "wilson_lo": 0.9674014658411584,
+        "wilson_hi": 1.0
+      },
+      "extraction_issues": 0
+    },
+    "gemma4-31b-api|inw|trap": {
+      "n": 115,
+      "dichotomy": {
+        "CORRECT": 115,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 0
+      },
+      "completed_within_budget": {
+        "k": 115,
+        "n": 115,
+        "rate": 1.0,
+        "wilson_lo": 0.9676757685506868,
+        "wilson_hi": 0.9999999999999999
+      },
+      "final_correct": {
+        "k": 115,
+        "n": 115,
+        "rate": 1.0,
+        "wilson_lo": 0.9676757685506868,
+        "wilson_hi": 0.9999999999999999
+      },
+      "magnitude_correct": {
+        "k": 115,
+        "n": 115,
+        "rate": 1.0,
+        "wilson_lo": 0.9676757685506868,
+        "wilson_hi": 0.9999999999999999
+      },
+      "sign_compliant_given_mag": {
+        "k": 115,
+        "n": 115,
+        "rate": 1.0,
+        "wilson_lo": 0.9676757685506868,
+        "wilson_hi": 0.9999999999999999
+      },
+      "extraction_issues": 0
+    },
+    "gemma4-31b-api|wrk|all": {
+      "n": 217,
+      "dichotomy": {
+        "CORRECT": 214,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 3
+      },
+      "completed_within_budget": {
+        "k": 217,
+        "n": 217,
+        "rate": 1.0,
+        "wilson_lo": 0.9826053548042667,
+        "wilson_hi": 1.0
+      },
+      "final_correct": {
+        "k": 214,
+        "n": 217,
+        "rate": 0.9861751152073732,
+        "wilson_lo": 0.9601491914611682,
+        "wilson_hi": 0.9952873516895242
+      },
+      "magnitude_correct": {
+        "k": 214,
+        "n": 217,
+        "rate": 0.9861751152073732,
+        "wilson_lo": 0.9601491914611682,
+        "wilson_hi": 0.9952873516895242
+      },
+      "sign_compliant_given_mag": {
+        "k": 214,
+        "n": 214,
+        "rate": 1.0,
+        "wilson_lo": 0.9823658047394183,
+        "wilson_hi": 1.0
+      },
+      "extraction_issues": 0
+    },
+    "gemma4-31b-api|wrk|control": {
+      "n": 107,
+      "dichotomy": {
+        "CORRECT": 105,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 2
+      },
+      "completed_within_budget": {
+        "k": 107,
+        "n": 107,
+        "rate": 1.0,
+        "wilson_lo": 0.9653427619812514,
+        "wilson_hi": 1.0
+      },
+      "final_correct": {
+        "k": 105,
+        "n": 107,
+        "rate": 0.9813084112149533,
+        "wilson_lo": 0.9343961469302772,
+        "wilson_hi": 0.9948590351638246
+      },
+      "magnitude_correct": {
+        "k": 105,
+        "n": 107,
+        "rate": 0.9813084112149533,
+        "wilson_lo": 0.9343961469302772,
+        "wilson_hi": 0.9948590351638246
+      },
+      "sign_compliant_given_mag": {
+        "k": 105,
+        "n": 105,
+        "rate": 1.0,
+        "wilson_lo": 0.9647059230708901,
+        "wilson_hi": 1.0
+      },
+      "extraction_issues": 0
+    },
+    "gemma4-31b-api|wrk|trap": {
+      "n": 110,
+      "dichotomy": {
+        "CORRECT": 109,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 1
+      },
+      "completed_within_budget": {
+        "k": 110,
+        "n": 110,
+        "rate": 1.0,
+        "wilson_lo": 0.9662560647018358,
+        "wilson_hi": 0.9999999999999999
+      },
+      "final_correct": {
+        "k": 109,
+        "n": 110,
+        "rate": 0.990909090909091,
+        "wilson_lo": 0.9502943479206695,
+        "wilson_hi": 0.9983934246956784
+      },
+      "magnitude_correct": {
+        "k": 109,
+        "n": 110,
+        "rate": 0.990909090909091,
+        "wilson_lo": 0.9502943479206695,
+        "wilson_hi": 0.9983934246956784
+      },
+      "sign_compliant_given_mag": {
+        "k": 109,
+        "n": 109,
+        "rate": 1.0,
+        "wilson_lo": 0.9659570262486751,
+        "wilson_hi": 1.0
+      },
+      "extraction_issues": 0
+    },
+    "gpt-oss-120b-api|cw|all": {
+      "n": 250,
+      "dichotomy": {
+        "CORRECT": 234,
+        "COMPLIANCE": 10,
+        "COMPETENCE": 6
+      },
+      "completed_within_budget": {
+        "k": 250,
+        "n": 250,
+        "rate": 1.0,
+        "wilson_lo": 0.9848667005045553,
+        "wilson_hi": 0.9999999999999998
+      },
+      "final_correct": {
+        "k": 234,
+        "n": 250,
+        "rate": 0.936,
+        "wilson_lo": 0.8985785081170682,
+        "wilson_hi": 0.9602252547229041
+      },
+      "magnitude_correct": {
+        "k": 244,
+        "n": 250,
+        "rate": 0.976,
+        "wilson_lo": 0.9486378761864735,
+        "wilson_hi": 0.9889552226938632
+      },
+      "sign_compliant_given_mag": {
+        "k": 234,
+        "n": 244,
+        "rate": 0.9590163934426229,
+        "wilson_lo": 0.9262149211658895,
+        "wilson_hi": 0.9775886678940718
+      },
+      "extraction_issues": 0
+    },
+    "gpt-oss-120b-api|cw|control": {
+      "n": 124,
+      "dichotomy": {
+        "CORRECT": 116,
+        "COMPLIANCE": 5,
+        "COMPETENCE": 3
+      },
+      "completed_within_budget": {
+        "k": 124,
+        "n": 124,
+        "rate": 1.0,
+        "wilson_lo": 0.9699513846593223,
+        "wilson_hi": 0.9999999999999999
+      },
+      "final_correct": {
+        "k": 116,
+        "n": 124,
+        "rate": 0.9354838709677419,
+        "wilson_lo": 0.877847277062481,
+        "wilson_hi": 0.9669490902214448
+      },
+      "magnitude_correct": {
+        "k": 121,
+        "n": 124,
+        "rate": 0.9758064516129032,
+        "wilson_lo": 0.9312798718154085,
+        "wilson_hi": 0.9917383813281402
+      },
+      "sign_compliant_given_mag": {
+        "k": 116,
+        "n": 121,
+        "rate": 0.9586776859504132,
+        "wilson_lo": 0.9069051929166947,
+        "wilson_hi": 0.9822225139248748
+      },
+      "extraction_issues": 0
+    },
+    "gpt-oss-120b-api|cw|trap": {
+      "n": 126,
+      "dichotomy": {
+        "CORRECT": 118,
+        "COMPLIANCE": 5,
+        "COMPETENCE": 3
+      },
+      "completed_within_budget": {
+        "k": 126,
+        "n": 126,
+        "rate": 1.0,
+        "wilson_lo": 0.9704142355178014,
+        "wilson_hi": 0.9999999999999998
+      },
+      "final_correct": {
+        "k": 118,
+        "n": 126,
+        "rate": 0.9365079365079365,
+        "wilson_lo": 0.8797075709803873,
+        "wilson_hi": 0.9674794600272171
+      },
+      "magnitude_correct": {
+        "k": 123,
+        "n": 126,
+        "rate": 0.9761904761904762,
+        "wilson_lo": 0.9323339858507348,
+        "wilson_hi": 0.9918700479757426
+      },
+      "sign_compliant_given_mag": {
+        "k": 118,
+        "n": 123,
+        "rate": 0.959349593495935,
+        "wilson_lo": 0.9083622660666856,
+        "wilson_hi": 0.9825136435185179
+      },
+      "extraction_issues": 0
+    },
+    "gpt-oss-120b-api|dflt|all": {
+      "n": 248,
+      "dichotomy": {
+        "CORRECT": 246,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 2
+      },
+      "completed_within_budget": {
+        "k": 248,
+        "n": 248,
+        "rate": 1.0,
+        "wilson_lo": 0.9847465193432304,
+        "wilson_hi": 1.0
+      },
+      "final_correct": {
+        "k": 246,
+        "n": 248,
+        "rate": 0.9919354838709677,
+        "wilson_lo": 0.9710778853059633,
+        "wilson_hi": 0.9977856256607635
+      },
+      "magnitude_correct": {
+        "k": 246,
+        "n": 248,
+        "rate": 0.9919354838709677,
+        "wilson_lo": 0.9710778853059633,
+        "wilson_hi": 0.9977856256607635
+      },
+      "sign_compliant_given_mag": {
+        "k": 246,
+        "n": 246,
+        "rate": 1.0,
+        "wilson_lo": 0.9846244140631157,
+        "wilson_hi": 1.0
+      },
+      "extraction_issues": 0
+    },
+    "gpt-oss-120b-api|dflt|control": {
+      "n": 122,
+      "dichotomy": {
+        "CORRECT": 121,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 1
+      },
+      "completed_within_budget": {
+        "k": 122,
+        "n": 122,
+        "rate": 1.0,
+        "wilson_lo": 0.969473821610987,
+        "wilson_hi": 1.0
+      },
+      "final_correct": {
+        "k": 121,
+        "n": 122,
+        "rate": 0.9918032786885246,
+        "wilson_lo": 0.9550291990931754,
+        "wilson_hi": 0.9985516090487794
+      },
+      "magnitude_correct": {
+        "k": 121,
+        "n": 122,
+        "rate": 0.9918032786885246,
+        "wilson_lo": 0.9550291990931754,
+        "wilson_hi": 0.9985516090487794
+      },
+      "sign_compliant_given_mag": {
+        "k": 121,
+        "n": 121,
+        "rate": 1.0,
+        "wilson_lo": 0.9692293020525218,
+        "wilson_hi": 1.0
+      },
+      "extraction_issues": 0
+    },
+    "gpt-oss-120b-api|dflt|trap": {
+      "n": 126,
+      "dichotomy": {
+        "CORRECT": 125,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 1
+      },
+      "completed_within_budget": {
+        "k": 126,
+        "n": 126,
+        "rate": 1.0,
+        "wilson_lo": 0.9704142355178014,
+        "wilson_hi": 0.9999999999999998
+      },
+      "final_correct": {
+        "k": 125,
+        "n": 126,
+        "rate": 0.9920634920634921,
+        "wilson_lo": 0.9564132000148392,
+        "wilson_hi": 0.9985976349391875
+      },
+      "magnitude_correct": {
+        "k": 125,
+        "n": 126,
+        "rate": 0.9920634920634921,
+        "wilson_lo": 0.9564132000148392,
+        "wilson_hi": 0.9985976349391875
+      },
+      "sign_compliant_given_mag": {
+        "k": 125,
+        "n": 125,
+        "rate": 1.0,
+        "wilson_lo": 0.9701846062916737,
+        "wilson_hi": 1.0
+      },
+      "extraction_issues": 0
+    },
+    "gpt-oss-120b-api|inw|all": {
+      "n": 247,
+      "dichotomy": {
+        "CORRECT": 245,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 2
+      },
+      "completed_within_budget": {
+        "k": 247,
+        "n": 247,
+        "rate": 1.0,
+        "wilson_lo": 0.984685710094518,
+        "wilson_hi": 0.9999999999999999
+      },
+      "final_correct": {
+        "k": 245,
+        "n": 247,
+        "rate": 0.9919028340080972,
+        "wilson_lo": 0.970962733607108,
+        "wilson_hi": 0.9977766491984299
+      },
+      "magnitude_correct": {
+        "k": 245,
+        "n": 247,
+        "rate": 0.9919028340080972,
+        "wilson_lo": 0.970962733607108,
+        "wilson_hi": 0.9977766491984299
+      },
+      "sign_compliant_given_mag": {
+        "k": 245,
+        "n": 245,
+        "rate": 1.0,
+        "wilson_lo": 0.984562625380435,
+        "wilson_hi": 1.0
+      },
+      "extraction_issues": 1
+    },
+    "gpt-oss-120b-api|inw|control": {
+      "n": 122,
+      "dichotomy": {
+        "CORRECT": 121,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 1
+      },
+      "completed_within_budget": {
+        "k": 122,
+        "n": 122,
+        "rate": 1.0,
+        "wilson_lo": 0.969473821610987,
+        "wilson_hi": 1.0
+      },
+      "final_correct": {
+        "k": 121,
+        "n": 122,
+        "rate": 0.9918032786885246,
+        "wilson_lo": 0.9550291990931754,
+        "wilson_hi": 0.9985516090487794
+      },
+      "magnitude_correct": {
+        "k": 121,
+        "n": 122,
+        "rate": 0.9918032786885246,
+        "wilson_lo": 0.9550291990931754,
+        "wilson_hi": 0.9985516090487794
+      },
+      "sign_compliant_given_mag": {
+        "k": 121,
+        "n": 121,
+        "rate": 1.0,
+        "wilson_lo": 0.9692293020525218,
+        "wilson_hi": 1.0
+      },
+      "extraction_issues": 0
+    },
+    "gpt-oss-120b-api|inw|trap": {
+      "n": 125,
+      "dichotomy": {
+        "CORRECT": 124,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 1
+      },
+      "completed_within_budget": {
+        "k": 125,
+        "n": 125,
+        "rate": 1.0,
+        "wilson_lo": 0.9701846062916737,
+        "wilson_hi": 1.0
+      },
+      "final_correct": {
+        "k": 124,
+        "n": 125,
+        "rate": 0.992,
+        "wilson_lo": 0.9560752476950048,
+        "wilson_hi": 0.9985864048960021
+      },
+      "magnitude_correct": {
+        "k": 124,
+        "n": 125,
+        "rate": 0.992,
+        "wilson_lo": 0.9560752476950048,
+        "wilson_hi": 0.9985864048960021
+      },
+      "sign_compliant_given_mag": {
+        "k": 124,
+        "n": 124,
+        "rate": 1.0,
+        "wilson_lo": 0.9699513846593223,
+        "wilson_hi": 0.9999999999999999
+      },
+      "extraction_issues": 1
+    },
+    "gpt-oss-120b-api|wrk|all": {
+      "n": 249,
+      "dichotomy": {
+        "CORRECT": 247,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 2
+      },
+      "completed_within_budget": {
+        "k": 249,
+        "n": 249,
+        "rate": 1.0,
+        "wilson_lo": 0.9848068475849985,
+        "wilson_hi": 1.0
+      },
+      "final_correct": {
+        "k": 247,
+        "n": 249,
+        "rate": 0.9919678714859438,
+        "wilson_lo": 0.9711921273302918,
+        "wilson_hi": 0.9977945299320562
+      },
+      "magnitude_correct": {
+        "k": 247,
+        "n": 249,
+        "rate": 0.9919678714859438,
+        "wilson_lo": 0.9711921273302918,
+        "wilson_hi": 0.9977945299320562
+      },
+      "sign_compliant_given_mag": {
+        "k": 247,
+        "n": 247,
+        "rate": 1.0,
+        "wilson_lo": 0.984685710094518,
+        "wilson_hi": 0.9999999999999999
+      },
+      "extraction_issues": 0
+    },
+    "gpt-oss-120b-api|wrk|control": {
+      "n": 123,
+      "dichotomy": {
+        "CORRECT": 121,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 2
+      },
+      "completed_within_budget": {
+        "k": 123,
+        "n": 123,
+        "rate": 1.0,
+        "wilson_lo": 0.9697144856546903,
+        "wilson_hi": 0.9999999999999999
+      },
+      "final_correct": {
+        "k": 121,
+        "n": 123,
+        "rate": 0.983739837398374,
+        "wilson_lo": 0.9426495637343935,
+        "wilson_hi": 0.9955294914925021
+      },
+      "magnitude_correct": {
+        "k": 121,
+        "n": 123,
+        "rate": 0.983739837398374,
+        "wilson_lo": 0.9426495637343935,
+        "wilson_hi": 0.9955294914925021
+      },
+      "sign_compliant_given_mag": {
+        "k": 121,
+        "n": 121,
+        "rate": 1.0,
+        "wilson_lo": 0.9692293020525218,
+        "wilson_hi": 1.0
+      },
+      "extraction_issues": 0
+    },
+    "gpt-oss-120b-api|wrk|trap": {
+      "n": 126,
+      "dichotomy": {
+        "CORRECT": 126,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 0
+      },
+      "completed_within_budget": {
+        "k": 126,
+        "n": 126,
+        "rate": 1.0,
+        "wilson_lo": 0.9704142355178014,
+        "wilson_hi": 0.9999999999999998
+      },
+      "final_correct": {
+        "k": 126,
+        "n": 126,
+        "rate": 1.0,
+        "wilson_lo": 0.9704142355178014,
+        "wilson_hi": 0.9999999999999998
+      },
+      "magnitude_correct": {
+        "k": 126,
+        "n": 126,
+        "rate": 1.0,
+        "wilson_lo": 0.9704142355178014,
+        "wilson_hi": 0.9999999999999998
+      },
+      "sign_compliant_given_mag": {
+        "k": 126,
+        "n": 126,
+        "rate": 1.0,
+        "wilson_lo": 0.9704142355178014,
+        "wilson_hi": 0.9999999999999998
+      },
+      "extraction_issues": 0
+    },
+    "gpt5-api|cw|all": {
+      "n": 250,
+      "dichotomy": {
+        "CORRECT": 238,
+        "COMPLIANCE": 3,
+        "COMPETENCE": 9
+      },
+      "completed_within_budget": {
+        "k": 250,
+        "n": 250,
+        "rate": 1.0,
+        "wilson_lo": 0.9848667005045553,
+        "wilson_hi": 0.9999999999999998
+      },
+      "final_correct": {
+        "k": 238,
+        "n": 250,
+        "rate": 0.952,
+        "wilson_lo": 0.9179876987868126,
+        "wilson_hi": 0.9723317984693053
+      },
+      "magnitude_correct": {
+        "k": 241,
+        "n": 250,
+        "rate": 0.964,
+        "wilson_lo": 0.9330095775982306,
+        "wilson_hi": 0.9809467204699966
+      },
+      "sign_compliant_given_mag": {
+        "k": 238,
+        "n": 241,
+        "rate": 0.9875518672199171,
+        "wilson_lo": 0.9640471233049469,
+        "wilson_hi": 0.9957576464097225
+      },
+      "extraction_issues": 0
+    },
+    "gpt5-api|cw|control": {
+      "n": 124,
+      "dichotomy": {
+        "CORRECT": 120,
+        "COMPLIANCE": 1,
+        "COMPETENCE": 3
+      },
+      "completed_within_budget": {
+        "k": 124,
+        "n": 124,
+        "rate": 1.0,
+        "wilson_lo": 0.9699513846593223,
+        "wilson_hi": 0.9999999999999999
+      },
+      "final_correct": {
+        "k": 120,
+        "n": 124,
+        "rate": 0.967741935483871,
+        "wilson_lo": 0.9199884950414144,
+        "wilson_hi": 0.9873853809302097
+      },
+      "magnitude_correct": {
+        "k": 121,
+        "n": 124,
+        "rate": 0.9758064516129032,
+        "wilson_lo": 0.9312798718154085,
+        "wilson_hi": 0.9917383813281402
+      },
+      "sign_compliant_given_mag": {
+        "k": 120,
+        "n": 121,
+        "rate": 0.9917355371900827,
+        "wilson_lo": 0.9546693563957512,
+        "wilson_hi": 0.9985396266145802
+      },
+      "extraction_issues": 0
+    },
+    "gpt5-api|cw|trap": {
+      "n": 126,
+      "dichotomy": {
+        "CORRECT": 118,
+        "COMPLIANCE": 2,
+        "COMPETENCE": 6
+      },
+      "completed_within_budget": {
+        "k": 126,
+        "n": 126,
+        "rate": 1.0,
+        "wilson_lo": 0.9704142355178014,
+        "wilson_hi": 0.9999999999999998
+      },
+      "final_correct": {
+        "k": 118,
+        "n": 126,
+        "rate": 0.9365079365079365,
+        "wilson_lo": 0.8797075709803873,
+        "wilson_hi": 0.9674794600272171
+      },
+      "magnitude_correct": {
+        "k": 120,
+        "n": 126,
+        "rate": 0.9523809523809523,
+        "wilson_lo": 0.8999983205231048,
+        "wilson_hi": 0.9779955116120489
+      },
+      "sign_compliant_given_mag": {
+        "k": 118,
+        "n": 120,
+        "rate": 0.9833333333333333,
+        "wilson_lo": 0.941264037027841,
+        "wilson_hi": 0.9954174354340789
+      },
+      "extraction_issues": 0
+    },
+    "gpt5-api|dflt|all": {
+      "n": 250,
+      "dichotomy": {
+        "CORRECT": 248,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 2
+      },
+      "completed_within_budget": {
+        "k": 250,
+        "n": 250,
+        "rate": 1.0,
+        "wilson_lo": 0.9848667005045553,
+        "wilson_hi": 0.9999999999999998
+      },
+      "final_correct": {
+        "k": 248,
+        "n": 250,
+        "rate": 0.992,
+        "wilson_lo": 0.9713054704167919,
+        "wilson_hi": 0.9978033628796906
+      },
+      "magnitude_correct": {
+        "k": 248,
+        "n": 250,
+        "rate": 0.992,
+        "wilson_lo": 0.9713054704167919,
+        "wilson_hi": 0.9978033628796906
+      },
+      "sign_compliant_given_mag": {
+        "k": 248,
+        "n": 248,
+        "rate": 1.0,
+        "wilson_lo": 0.9847465193432304,
+        "wilson_hi": 1.0
+      },
+      "extraction_issues": 0
+    },
+    "gpt5-api|dflt|control": {
+      "n": 124,
+      "dichotomy": {
+        "CORRECT": 123,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 1
+      },
+      "completed_within_budget": {
+        "k": 124,
+        "n": 124,
+        "rate": 1.0,
+        "wilson_lo": 0.9699513846593223,
+        "wilson_hi": 0.9999999999999999
+      },
+      "final_correct": {
+        "k": 123,
+        "n": 124,
+        "rate": 0.9919354838709677,
+        "wilson_lo": 0.9557320139455229,
+        "wilson_hi": 0.9985749935418747
+      },
+      "magnitude_correct": {
+        "k": 123,
+        "n": 124,
+        "rate": 0.9919354838709677,
+        "wilson_lo": 0.9557320139455229,
+        "wilson_hi": 0.9985749935418747
+      },
+      "sign_compliant_given_mag": {
+        "k": 123,
+        "n": 123,
+        "rate": 1.0,
+        "wilson_lo": 0.9697144856546903,
+        "wilson_hi": 0.9999999999999999
+      },
+      "extraction_issues": 0
+    },
+    "gpt5-api|dflt|trap": {
+      "n": 126,
+      "dichotomy": {
+        "CORRECT": 125,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 1
+      },
+      "completed_within_budget": {
+        "k": 126,
+        "n": 126,
+        "rate": 1.0,
+        "wilson_lo": 0.9704142355178014,
+        "wilson_hi": 0.9999999999999998
+      },
+      "final_correct": {
+        "k": 125,
+        "n": 126,
+        "rate": 0.9920634920634921,
+        "wilson_lo": 0.9564132000148392,
+        "wilson_hi": 0.9985976349391875
+      },
+      "magnitude_correct": {
+        "k": 125,
+        "n": 126,
+        "rate": 0.9920634920634921,
+        "wilson_lo": 0.9564132000148392,
+        "wilson_hi": 0.9985976349391875
+      },
+      "sign_compliant_given_mag": {
+        "k": 125,
+        "n": 125,
+        "rate": 1.0,
+        "wilson_lo": 0.9701846062916737,
+        "wilson_hi": 1.0
+      },
+      "extraction_issues": 0
+    },
+    "gpt5-api|inw|all": {
+      "n": 250,
+      "dichotomy": {
+        "CORRECT": 244,
+        "COMPLIANCE": 1,
+        "COMPETENCE": 5
+      },
+      "completed_within_budget": {
+        "k": 250,
+        "n": 250,
+        "rate": 1.0,
+        "wilson_lo": 0.9848667005045553,
+        "wilson_hi": 0.9999999999999998
+      },
+      "final_correct": {
+        "k": 244,
+        "n": 250,
+        "rate": 0.976,
+        "wilson_lo": 0.9486378761864735,
+        "wilson_hi": 0.9889552226938632
+      },
+      "magnitude_correct": {
+        "k": 245,
+        "n": 250,
+        "rate": 0.98,
+        "wilson_lo": 0.9540443568684314,
+        "wilson_hi": 0.9914276756159417
+      },
+      "sign_compliant_given_mag": {
+        "k": 244,
+        "n": 245,
+        "rate": 0.9959183673469387,
+        "wilson_lo": 0.977246251571458,
+        "wilson_hi": 0.9992791278875042
+      },
+      "extraction_issues": 0
+    },
+    "gpt5-api|inw|control": {
+      "n": 124,
+      "dichotomy": {
+        "CORRECT": 121,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 3
+      },
+      "completed_within_budget": {
+        "k": 124,
+        "n": 124,
+        "rate": 1.0,
+        "wilson_lo": 0.9699513846593223,
+        "wilson_hi": 0.9999999999999999
+      },
+      "final_correct": {
+        "k": 121,
+        "n": 124,
+        "rate": 0.9758064516129032,
+        "wilson_lo": 0.9312798718154085,
+        "wilson_hi": 0.9917383813281402
+      },
+      "magnitude_correct": {
+        "k": 121,
+        "n": 124,
+        "rate": 0.9758064516129032,
+        "wilson_lo": 0.9312798718154085,
+        "wilson_hi": 0.9917383813281402
+      },
+      "sign_compliant_given_mag": {
+        "k": 121,
+        "n": 121,
+        "rate": 1.0,
+        "wilson_lo": 0.9692293020525218,
+        "wilson_hi": 1.0
+      },
+      "extraction_issues": 0
+    },
+    "gpt5-api|inw|trap": {
+      "n": 126,
+      "dichotomy": {
+        "CORRECT": 123,
+        "COMPLIANCE": 1,
+        "COMPETENCE": 2
+      },
+      "completed_within_budget": {
+        "k": 126,
+        "n": 126,
+        "rate": 1.0,
+        "wilson_lo": 0.9704142355178014,
+        "wilson_hi": 0.9999999999999998
+      },
+      "final_correct": {
+        "k": 123,
+        "n": 126,
+        "rate": 0.9761904761904762,
+        "wilson_lo": 0.9323339858507348,
+        "wilson_hi": 0.9918700479757426
+      },
+      "magnitude_correct": {
+        "k": 124,
+        "n": 126,
+        "rate": 0.9841269841269841,
+        "wilson_lo": 0.9439712362150748,
+        "wilson_hi": 0.9956361981751772
+      },
+      "sign_compliant_given_mag": {
+        "k": 123,
+        "n": 124,
+        "rate": 0.9919354838709677,
+        "wilson_lo": 0.9557320139455229,
+        "wilson_hi": 0.9985749935418747
+      },
+      "extraction_issues": 0
+    },
+    "gpt5-api|wrk|all": {
+      "n": 250,
+      "dichotomy": {
+        "CORRECT": 248,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 2
+      },
+      "completed_within_budget": {
+        "k": 249,
+        "n": 250,
+        "rate": 0.996,
+        "wilson_lo": 0.9776942144345839,
+        "wilson_hi": 0.9992935524659348
+      },
+      "final_correct": {
+        "k": 248,
+        "n": 250,
+        "rate": 0.992,
+        "wilson_lo": 0.9713054704167919,
+        "wilson_hi": 0.9978033628796906
+      },
+      "magnitude_correct": {
+        "k": 248,
+        "n": 250,
+        "rate": 0.992,
+        "wilson_lo": 0.9713054704167919,
+        "wilson_hi": 0.9978033628796906
+      },
+      "sign_compliant_given_mag": {
+        "k": 248,
+        "n": 248,
+        "rate": 1.0,
+        "wilson_lo": 0.9847465193432304,
+        "wilson_hi": 1.0
+      },
+      "extraction_issues": 1
+    },
+    "gpt5-api|wrk|control": {
+      "n": 124,
+      "dichotomy": {
+        "CORRECT": 122,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 2
+      },
+      "completed_within_budget": {
+        "k": 123,
+        "n": 124,
+        "rate": 0.9919354838709677,
+        "wilson_lo": 0.9557320139455229,
+        "wilson_hi": 0.9985749935418747
+      },
+      "final_correct": {
+        "k": 122,
+        "n": 124,
+        "rate": 0.9838709677419355,
+        "wilson_lo": 0.9430969947760157,
+        "wilson_hi": 0.9955656355394575
+      },
+      "magnitude_correct": {
+        "k": 122,
+        "n": 124,
+        "rate": 0.9838709677419355,
+        "wilson_lo": 0.9430969947760157,
+        "wilson_hi": 0.9955656355394575
+      },
+      "sign_compliant_given_mag": {
+        "k": 122,
+        "n": 122,
+        "rate": 1.0,
+        "wilson_lo": 0.969473821610987,
+        "wilson_hi": 1.0
+      },
+      "extraction_issues": 1
+    },
+    "gpt5-api|wrk|trap": {
+      "n": 126,
+      "dichotomy": {
+        "CORRECT": 126,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 0
+      },
+      "completed_within_budget": {
+        "k": 126,
+        "n": 126,
+        "rate": 1.0,
+        "wilson_lo": 0.9704142355178014,
+        "wilson_hi": 0.9999999999999998
+      },
+      "final_correct": {
+        "k": 126,
+        "n": 126,
+        "rate": 1.0,
+        "wilson_lo": 0.9704142355178014,
+        "wilson_hi": 0.9999999999999998
+      },
+      "magnitude_correct": {
+        "k": 126,
+        "n": 126,
+        "rate": 1.0,
+        "wilson_lo": 0.9704142355178014,
+        "wilson_hi": 0.9999999999999998
+      },
+      "sign_compliant_given_mag": {
+        "k": 126,
+        "n": 126,
+        "rate": 1.0,
+        "wilson_lo": 0.9704142355178014,
+        "wilson_hi": 0.9999999999999998
+      },
+      "extraction_issues": 0
+    },
+    "llama33-70b-api|cw|all": {
+      "n": 50,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 3,
+        "COMPETENCE": 47
+      },
+      "completed_within_budget": {
+        "k": 43,
+        "n": 50,
+        "rate": 0.86,
+        "wilson_lo": 0.7381380628941446,
+        "wilson_hi": 0.9304916657298371
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 50,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.07134759913335872
+      },
+      "magnitude_correct": {
+        "k": 3,
+        "n": 50,
+        "rate": 0.06,
+        "wilson_lo": 0.02061497034897397,
+        "wilson_hi": 0.16217091688838173
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 3,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.5614970317550455
+      },
+      "extraction_issues": 8
+    },
+    "llama33-70b-api|cw|control": {
+      "n": 24,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 24
+      },
+      "completed_within_budget": {
+        "k": 19,
+        "n": 24,
+        "rate": 0.7916666666666666,
+        "wilson_lo": 0.5952954674681133,
+        "wilson_hi": 0.9075517464714814
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 24,
+        "rate": 0.0,
+        "wilson_lo": 1.3877787807814457e-17,
+        "wilson_hi": 0.13797620467498017
+      },
+      "magnitude_correct": {
+        "k": 0,
+        "n": 24,
+        "rate": 0.0,
+        "wilson_lo": 1.3877787807814457e-17,
+        "wilson_hi": 0.13797620467498017
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      },
+      "extraction_issues": 5
+    },
+    "llama33-70b-api|cw|trap": {
+      "n": 26,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 3,
+        "COMPETENCE": 23
+      },
+      "completed_within_budget": {
+        "k": 24,
+        "n": 26,
+        "rate": 0.9230769230769231,
+        "wilson_lo": 0.7585844622837095,
+        "wilson_hi": 0.9786449115277238
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 26,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.1287289218592153
+      },
+      "magnitude_correct": {
+        "k": 3,
+        "n": 26,
+        "rate": 0.11538461538461539,
+        "wilson_lo": 0.04003244623610615,
+        "wilson_hi": 0.2897590321171364
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 3,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.5614970317550455
+      },
+      "extraction_issues": 3
+    },
+    "llama33-70b-api|dflt|all": {
+      "n": 50,
+      "dichotomy": {
+        "CORRECT": 3,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 47
+      },
+      "completed_within_budget": {
+        "k": 46,
+        "n": 50,
+        "rate": 0.92,
+        "wilson_lo": 0.8116175308165717,
+        "wilson_hi": 0.968450485911407
+      },
+      "final_correct": {
+        "k": 3,
+        "n": 50,
+        "rate": 0.06,
+        "wilson_lo": 0.02061497034897397,
+        "wilson_hi": 0.16217091688838173
+      },
+      "magnitude_correct": {
+        "k": 3,
+        "n": 50,
+        "rate": 0.06,
+        "wilson_lo": 0.02061497034897397,
+        "wilson_hi": 0.16217091688838173
+      },
+      "sign_compliant_given_mag": {
+        "k": 3,
+        "n": 3,
+        "rate": 1.0,
+        "wilson_lo": 0.43850296824495455,
+        "wilson_hi": 1.0
+      },
+      "extraction_issues": 4
+    },
+    "llama33-70b-api|dflt|control": {
+      "n": 24,
+      "dichotomy": {
+        "CORRECT": 1,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 23
+      },
+      "completed_within_budget": {
+        "k": 23,
+        "n": 24,
+        "rate": 0.9583333333333334,
+        "wilson_lo": 0.7975819352134406,
+        "wilson_hi": 0.9926065438344942
+      },
+      "final_correct": {
+        "k": 1,
+        "n": 24,
+        "rate": 0.041666666666666664,
+        "wilson_lo": 0.007393456165505782,
+        "wilson_hi": 0.20241806478655938
+      },
+      "magnitude_correct": {
+        "k": 1,
+        "n": 24,
+        "rate": 0.041666666666666664,
+        "wilson_lo": 0.007393456165505782,
+        "wilson_hi": 0.20241806478655938
+      },
+      "sign_compliant_given_mag": {
+        "k": 1,
+        "n": 1,
+        "rate": 1.0,
+        "wilson_lo": 0.20654931437723745,
+        "wilson_hi": 1.0
+      },
+      "extraction_issues": 1
+    },
+    "llama33-70b-api|dflt|trap": {
+      "n": 26,
+      "dichotomy": {
+        "CORRECT": 2,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 24
+      },
+      "completed_within_budget": {
+        "k": 23,
+        "n": 26,
+        "rate": 0.8846153846153846,
+        "wilson_lo": 0.7102409678828635,
+        "wilson_hi": 0.9599675537638938
+      },
+      "final_correct": {
+        "k": 2,
+        "n": 26,
+        "rate": 0.07692307692307693,
+        "wilson_lo": 0.0213550884722762,
+        "wilson_hi": 0.2414155377162906
+      },
+      "magnitude_correct": {
+        "k": 2,
+        "n": 26,
+        "rate": 0.07692307692307693,
+        "wilson_lo": 0.0213550884722762,
+        "wilson_hi": 0.2414155377162906
+      },
+      "sign_compliant_given_mag": {
+        "k": 2,
+        "n": 2,
+        "rate": 1.0,
+        "wilson_lo": 0.34238022750665303,
+        "wilson_hi": 1.0
+      },
+      "extraction_issues": 3
+    },
+    "qwen25-72b-api|cw|all": {
+      "n": 50,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 4,
+        "COMPETENCE": 46
+      },
+      "completed_within_budget": {
+        "k": 42,
+        "n": 50,
+        "rate": 0.84,
+        "wilson_lo": 0.7148578393696501,
+        "wilson_hi": 0.916625793219666
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 50,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.07134759913335872
+      },
+      "magnitude_correct": {
+        "k": 4,
+        "n": 50,
+        "rate": 0.08,
+        "wilson_lo": 0.03154951408859298,
+        "wilson_hi": 0.18838246918342838
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 4,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.4898908364545973
+      },
+      "extraction_issues": 30
+    },
+    "qwen25-72b-api|cw|control": {
+      "n": 24,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 1,
+        "COMPETENCE": 23
+      },
+      "completed_within_budget": {
+        "k": 21,
+        "n": 24,
+        "rate": 0.875,
+        "wilson_lo": 0.6899611872949993,
+        "wilson_hi": 0.9565566591987655
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 24,
+        "rate": 0.0,
+        "wilson_lo": 1.3877787807814457e-17,
+        "wilson_hi": 0.13797620467498017
+      },
+      "magnitude_correct": {
+        "k": 1,
+        "n": 24,
+        "rate": 0.041666666666666664,
+        "wilson_lo": 0.007393456165505782,
+        "wilson_hi": 0.20241806478655938
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 1,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.7934506856227626
+      },
+      "extraction_issues": 14
+    },
+    "qwen25-72b-api|cw|trap": {
+      "n": 26,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 3,
+        "COMPETENCE": 23
+      },
+      "completed_within_budget": {
+        "k": 21,
+        "n": 26,
+        "rate": 0.8076923076923077,
+        "wilson_lo": 0.6212374288068301,
+        "wilson_hi": 0.9149293885105758
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 26,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.1287289218592153
+      },
+      "magnitude_correct": {
+        "k": 3,
+        "n": 26,
+        "rate": 0.11538461538461539,
+        "wilson_lo": 0.04003244623610615,
+        "wilson_hi": 0.2897590321171364
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 3,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.5614970317550455
+      },
+      "extraction_issues": 16
+    },
+    "qwen25-72b-api|dflt|all": {
+      "n": 50,
+      "dichotomy": {
+        "CORRECT": 4,
+        "COMPLIANCE": 1,
+        "COMPETENCE": 45
+      },
+      "completed_within_budget": {
+        "k": 44,
+        "n": 50,
+        "rate": 0.88,
+        "wilson_lo": 0.7619518261679701,
+        "wilson_hi": 0.9438239984906773
+      },
+      "final_correct": {
+        "k": 4,
+        "n": 50,
+        "rate": 0.08,
+        "wilson_lo": 0.03154951408859298,
+        "wilson_hi": 0.18838246918342838
+      },
+      "magnitude_correct": {
+        "k": 5,
+        "n": 50,
+        "rate": 0.1,
+        "wilson_lo": 0.04347576493189041,
+        "wilson_hi": 0.21360231437479654
+      },
+      "sign_compliant_given_mag": {
+        "k": 4,
+        "n": 5,
+        "rate": 0.8,
+        "wilson_lo": 0.3755346297625253,
+        "wilson_hi": 0.9637758913675698
+      },
+      "extraction_issues": 22
+    },
+    "qwen25-72b-api|dflt|control": {
+      "n": 24,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 1,
+        "COMPETENCE": 23
+      },
+      "completed_within_budget": {
+        "k": 20,
+        "n": 24,
+        "rate": 0.8333333333333334,
+        "wilson_lo": 0.6414692935030095,
+        "wilson_hi": 0.9332132367136705
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 24,
+        "rate": 0.0,
+        "wilson_lo": 1.3877787807814457e-17,
+        "wilson_hi": 0.13797620467498017
+      },
+      "magnitude_correct": {
+        "k": 1,
+        "n": 24,
+        "rate": 0.041666666666666664,
+        "wilson_lo": 0.007393456165505782,
+        "wilson_hi": 0.20241806478655938
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 1,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.7934506856227626
+      },
+      "extraction_issues": 11
+    },
+    "qwen25-72b-api|dflt|trap": {
+      "n": 26,
+      "dichotomy": {
+        "CORRECT": 4,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 22
+      },
+      "completed_within_budget": {
+        "k": 24,
+        "n": 26,
+        "rate": 0.9230769230769231,
+        "wilson_lo": 0.7585844622837095,
+        "wilson_hi": 0.9786449115277238
+      },
+      "final_correct": {
+        "k": 4,
+        "n": 26,
+        "rate": 0.15384615384615385,
+        "wilson_lo": 0.061500337235783575,
+        "wilson_hi": 0.33531199328213473
+      },
+      "magnitude_correct": {
+        "k": 4,
+        "n": 26,
+        "rate": 0.15384615384615385,
+        "wilson_lo": 0.061500337235783575,
+        "wilson_hi": 0.33531199328213473
+      },
+      "sign_compliant_given_mag": {
+        "k": 4,
+        "n": 4,
+        "rate": 1.0,
+        "wilson_lo": 0.5101091635454027,
+        "wilson_hi": 1.0
+      },
+      "extraction_issues": 11
+    },
+    "qwen3-8b-nothink|cw|all": {
+      "n": 181,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 12,
+        "COMPETENCE": 169
+      },
+      "completed_within_budget": {
+        "k": 158,
+        "n": 181,
+        "rate": 0.8729281767955801,
+        "wilson_lo": 0.8165429217618353,
+        "wilson_hi": 0.9138127076587107
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 181,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.02078245240652716
+      },
+      "magnitude_correct": {
+        "k": 12,
+        "n": 181,
+        "rate": 0.06629834254143646,
+        "wilson_lo": 0.03832883068621982,
+        "wilson_hi": 0.11229462250618222
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 12,
+        "rate": 0.0,
+        "wilson_lo": 2.7755575615628914e-17,
+        "wilson_hi": 0.24249400665524085
+      },
+      "extraction_issues": 22
+    },
+    "qwen3-8b-nothink|cw|control": {
+      "n": 90,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 4,
+        "COMPETENCE": 86
+      },
+      "completed_within_budget": {
+        "k": 76,
+        "n": 90,
+        "rate": 0.8444444444444444,
+        "wilson_lo": 0.7556715472270163,
+        "wilson_hi": 0.9050172440508919
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 90,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.04093562556432678
+      },
+      "magnitude_correct": {
+        "k": 4,
+        "n": 90,
+        "rate": 0.044444444444444446,
+        "wilson_lo": 0.01741724185270873,
+        "wilson_hi": 0.10876855032812233
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 4,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.4898908364545973
+      },
+      "extraction_issues": 13
+    },
+    "qwen3-8b-nothink|cw|trap": {
+      "n": 91,
+      "dichotomy": {
+        "CORRECT": 0,
+        "COMPLIANCE": 8,
+        "COMPETENCE": 83
+      },
+      "completed_within_budget": {
+        "k": 82,
+        "n": 91,
+        "rate": 0.9010989010989011,
+        "wilson_lo": 0.8226142190849851,
+        "wilson_hi": 0.9470913601808583
+      },
+      "final_correct": {
+        "k": 0,
+        "n": 91,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.04050400392888021
+      },
+      "magnitude_correct": {
+        "k": 8,
+        "n": 91,
+        "rate": 0.08791208791208792,
+        "wilson_lo": 0.04522020780830408,
+        "wilson_hi": 0.16398638883637745
+      },
+      "sign_compliant_given_mag": {
+        "k": 0,
+        "n": 8,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.32440756488388023
+      },
+      "extraction_issues": 9
+    },
+    "qwen3-8b-nothink|dflt|all": {
+      "n": 182,
+      "dichotomy": {
+        "CORRECT": 6,
+        "COMPLIANCE": 1,
+        "COMPETENCE": 175
+      },
+      "completed_within_budget": {
+        "k": 159,
+        "n": 182,
+        "rate": 0.8736263736263736,
+        "wilson_lo": 0.8175116329614276,
+        "wilson_hi": 0.9142949341147446
+      },
+      "final_correct": {
+        "k": 6,
+        "n": 182,
+        "rate": 0.03296703296703297,
+        "wilson_lo": 0.015194980224332837,
+        "wilson_hi": 0.07004681093045184
+      },
+      "magnitude_correct": {
+        "k": 7,
+        "n": 182,
+        "rate": 0.038461538461538464,
+        "wilson_lo": 0.018753523279298877,
+        "wilson_hi": 0.07725012915601775
+      },
+      "sign_compliant_given_mag": {
+        "k": 6,
+        "n": 7,
+        "rate": 0.8571428571428571,
+        "wilson_lo": 0.4868721707256811,
+        "wilson_hi": 0.9743203756552565
+      },
+      "extraction_issues": 24
+    },
+    "qwen3-8b-nothink|dflt|control": {
+      "n": 86,
+      "dichotomy": {
+        "CORRECT": 2,
+        "COMPLIANCE": 0,
+        "COMPETENCE": 84
+      },
+      "completed_within_budget": {
+        "k": 75,
+        "n": 86,
+        "rate": 0.872093023255814,
+        "wilson_lo": 0.7853122106350142,
+        "wilson_hi": 0.9270537820825729
+      },
+      "final_correct": {
+        "k": 2,
+        "n": 86,
+        "rate": 0.023255813953488372,
+        "wilson_lo": 0.0064009262042708515,
+        "wilson_hi": 0.08088014562632057
+      },
+      "magnitude_correct": {
+        "k": 2,
+        "n": 86,
+        "rate": 0.023255813953488372,
+        "wilson_lo": 0.0064009262042708515,
+        "wilson_hi": 0.08088014562632057
+      },
+      "sign_compliant_given_mag": {
+        "k": 2,
+        "n": 2,
+        "rate": 1.0,
+        "wilson_lo": 0.34238022750665303,
+        "wilson_hi": 1.0
+      },
+      "extraction_issues": 11
+    },
+    "qwen3-8b-nothink|dflt|trap": {
+      "n": 96,
+      "dichotomy": {
+        "CORRECT": 4,
+        "COMPLIANCE": 1,
+        "COMPETENCE": 91
+      },
+      "completed_within_budget": {
+        "k": 84,
+        "n": 96,
+        "rate": 0.875,
+        "wilson_lo": 0.794115318705986,
+        "wilson_hi": 0.9270279904007575
+      },
+      "final_correct": {
+        "k": 4,
+        "n": 96,
+        "rate": 0.041666666666666664,
+        "wilson_lo": 0.01632070753628833,
+        "wilson_hi": 0.10228191466658104
+      },
+      "magnitude_correct": {
+        "k": 5,
+        "n": 96,
+        "rate": 0.052083333333333336,
+        "wilson_lo": 0.02244960047424143,
+        "wilson_hi": 0.11618478031492638
+      },
+      "sign_compliant_given_mag": {
+        "k": 4,
+        "n": 5,
+        "rate": 0.8,
+        "wilson_lo": 0.3755346297625253,
+        "wilson_hi": 0.9637758913675698
+      },
+      "extraction_issues": 13
+    },
+    "qwen3-8b-nothink|inw|all": {
+      "n": 184,
+      "dichotomy": {
+        "CORRECT": 8,
+        "COMPLIANCE": 3,
+        "COMPETENCE": 173
+      },
+      "completed_within_budget": {
+        "k": 151,
+        "n": 184,
+        "rate": 0.8206521739130435,
+        "wilson_lo": 0.7588411062459178,
+        "wilson_hi": 0.8693482228874233
+      },
+      "final_correct": {
+        "k": 8,
+        "n": 184,
+        "rate": 0.043478260869565216,
+        "wilson_lo": 0.02219317420124742,
+        "wilson_hi": 0.0834355775411141
+      },
+      "magnitude_correct": {
+        "k": 11,
+        "n": 184,
+        "rate": 0.059782608695652176,
+        "wilson_lo": 0.033706160931243706,
+        "wilson_hi": 0.10386442110603347
+      },
+      "sign_compliant_given_mag": {
+        "k": 8,
+        "n": 11,
+        "rate": 0.7272727272727273,
+        "wilson_lo": 0.43435469882387084,
+        "wilson_hi": 0.902539407099751
+      },
+      "extraction_issues": 33
+    },
+    "qwen3-8b-nothink|inw|control": {
+      "n": 94,
+      "dichotomy": {
+        "CORRECT": 3,
+        "COMPLIANCE": 1,
+        "COMPETENCE": 90
+      },
+      "completed_within_budget": {
+        "k": 76,
+        "n": 94,
+        "rate": 0.8085106382978723,
+        "wilson_lo": 0.7174971706384233,
+        "wilson_hi": 0.8752985695221128
+      },
+      "final_correct": {
+        "k": 3,
+        "n": 94,
+        "rate": 0.031914893617021274,
+        "wilson_lo": 0.010912627468307706,
+        "wilson_hi": 0.08967314608122352
+      },
+      "magnitude_correct": {
+        "k": 4,
+        "n": 94,
+        "rate": 0.0425531914893617,
+        "wilson_lo": 0.01667054815004272,
+        "wilson_hi": 0.10435645781881735
+      },
+      "sign_compliant_given_mag": {
+        "k": 3,
+        "n": 4,
+        "rate": 0.75,
+        "wilson_lo": 0.30064184258240184,
+        "wilson_hi": 0.9544127391902995
+      },
+      "extraction_issues": 19
+    },
+    "qwen3-8b-nothink|inw|trap": {
+      "n": 90,
+      "dichotomy": {
+        "CORRECT": 5,
+        "COMPLIANCE": 2,
+        "COMPETENCE": 83
+      },
+      "completed_within_budget": {
+        "k": 75,
+        "n": 90,
+        "rate": 0.8333333333333334,
+        "wilson_lo": 0.743061136966912,
+        "wilson_hi": 0.8963151126568702
+      },
+      "final_correct": {
+        "k": 5,
+        "n": 90,
+        "rate": 0.05555555555555555,
+        "wilson_lo": 0.023960971616961965,
+        "wilson_hi": 0.12353736221799518
+      },
+      "magnitude_correct": {
+        "k": 7,
+        "n": 90,
+        "rate": 0.07777777777777778,
+        "wilson_lo": 0.038184815317289005,
+        "wilson_hi": 0.15193860182592028
+      },
+      "sign_compliant_given_mag": {
+        "k": 5,
+        "n": 7,
+        "rate": 0.7142857142857143,
+        "wilson_lo": 0.35893445183261935,
+        "wilson_hi": 0.9177810759959433
+      },
+      "extraction_issues": 14
+    },
+    "qwen3-8b-nothink|wrk|all": {
+      "n": 185,
+      "dichotomy": {
+        "CORRECT": 8,
+        "COMPLIANCE": 4,
+        "COMPETENCE": 173
+      },
+      "completed_within_budget": {
+        "k": 154,
+        "n": 185,
+        "rate": 0.8324324324324325,
+        "wilson_lo": 0.7719741742045745,
+        "wilson_hi": 0.8793658480984152
+      },
+      "final_correct": {
+        "k": 8,
+        "n": 185,
+        "rate": 0.043243243243243246,
+        "wilson_lo": 0.022072326950170185,
+        "wilson_hi": 0.08299707330019375
+      },
+      "magnitude_correct": {
+        "k": 12,
+        "n": 185,
+        "rate": 0.06486486486486487,
+        "wilson_lo": 0.03749137236000596,
+        "wilson_hi": 0.10994160657673127
+      },
+      "sign_compliant_given_mag": {
+        "k": 8,
+        "n": 12,
+        "rate": 0.6666666666666666,
+        "wilson_lo": 0.39062208887279953,
+        "wilson_hi": 0.8618799089087867
+      },
+      "extraction_issues": 33
+    },
+    "qwen3-8b-nothink|wrk|control": {
+      "n": 92,
+      "dichotomy": {
+        "CORRECT": 3,
+        "COMPLIANCE": 2,
+        "COMPETENCE": 87
+      },
+      "completed_within_budget": {
+        "k": 77,
+        "n": 92,
+        "rate": 0.8369565217391305,
+        "wilson_lo": 0.7482715701531195,
+        "wilson_hi": 0.8986301022848311
+      },
+      "final_correct": {
+        "k": 3,
+        "n": 92,
+        "rate": 0.03260869565217391,
+        "wilson_lo": 0.01115117741097154,
+        "wilson_hi": 0.09153359952993573
+      },
+      "magnitude_correct": {
+        "k": 5,
+        "n": 92,
+        "rate": 0.05434782608695652,
+        "wilson_lo": 0.023435063948632373,
+        "wilson_hi": 0.12098530476246525
+      },
+      "sign_compliant_given_mag": {
+        "k": 3,
+        "n": 5,
+        "rate": 0.6,
+        "wilson_lo": 0.2307242812760128,
+        "wilson_hi": 0.882379225767352
+      },
+      "extraction_issues": 15
+    },
+    "qwen3-8b-nothink|wrk|trap": {
+      "n": 93,
+      "dichotomy": {
+        "CORRECT": 5,
+        "COMPLIANCE": 2,
+        "COMPETENCE": 86
+      },
+      "completed_within_budget": {
+        "k": 77,
+        "n": 93,
+        "rate": 0.8279569892473119,
+        "wilson_lo": 0.7386611476514643,
+        "wilson_hi": 0.8912343613881505
+      },
+      "final_correct": {
+        "k": 5,
+        "n": 93,
+        "rate": 0.053763440860215055,
+        "wilson_lo": 0.023180674253084205,
+        "wilson_hi": 0.11974838721760417
+      },
+      "magnitude_correct": {
+        "k": 7,
+        "n": 93,
+        "rate": 0.07526881720430108,
+        "wilson_lo": 0.03693668398168047,
+        "wilson_hi": 0.1472970010325892
+      },
+      "sign_compliant_given_mag": {
+        "k": 5,
+        "n": 7,
+        "rate": 0.7142857142857143,
+        "wilson_lo": 0.35893445183261935,
+        "wilson_hi": 0.9177810759959433
+      },
+      "extraction_issues": 18
+    }
+  },
+  "factor_pairs": {
+    "deepseek-v3-api|cw|final_correct": {
+      "n_pairs": 50,
+      "both_ok": 0,
+      "b": 13,
+      "c": 0,
+      "both_bad": 37,
+      "mcnemar": {
+        "b": 13,
+        "c": 0,
+        "odds_ratio": Infinity,
+        "p": 0.000244140625
+      },
+      "rate_default": {
+        "k": 13,
+        "n": 50,
+        "rate": 0.26,
+        "wilson_lo": 0.1587152749355239,
+        "wilson_hi": 0.3955315726484884
+      },
+      "rate_flipped": {
+        "k": 0,
+        "n": 50,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.07134759913335872
+      },
+      "or_haldane": 27.0,
+      "or_boot_ci": [
+        15.0,
+        39.0
+      ],
+      "q_bh": 0.0018310546875
+    },
+    "deepseek-v3-api|cw|sign_given_mag": {
+      "n_pairs": 5,
+      "both_ok": 0,
+      "b": 5,
+      "c": 0,
+      "both_bad": 0,
+      "mcnemar": {
+        "b": 5,
+        "c": 0,
+        "odds_ratio": Infinity,
+        "p": 0.0625
+      },
+      "rate_default": {
+        "k": 5,
+        "n": 5,
+        "rate": 1.0,
+        "wilson_lo": 0.5655175352168251,
+        "wilson_hi": 1.0
+      },
+      "rate_flipped": {
+        "k": 0,
+        "n": 5,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.43448246478317476
+      },
+      "or_haldane": 11.0,
+      "or_boot_ci": [
+        11.0,
+        11.0
+      ],
+      "q_bh": 0.3125
+    },
+    "deepseek-v3-api|wrk|final_correct": {
+      "n_pairs": 0,
+      "both_ok": 0,
+      "b": 0,
+      "c": 0,
+      "both_bad": 0,
+      "mcnemar": {
+        "b": 0,
+        "c": 0,
+        "odds_ratio": NaN,
+        "p": 1.0
+      },
+      "rate_default": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      },
+      "rate_flipped": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      }
+    },
+    "deepseek-v3-api|wrk|sign_given_mag": {
+      "n_pairs": 0,
+      "both_ok": 0,
+      "b": 0,
+      "c": 0,
+      "both_bad": 0,
+      "mcnemar": {
+        "b": 0,
+        "c": 0,
+        "odds_ratio": NaN,
+        "p": 1.0
+      },
+      "rate_default": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      },
+      "rate_flipped": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      }
+    },
+    "deepseek-v3-api|inw|final_correct": {
+      "n_pairs": 0,
+      "both_ok": 0,
+      "b": 0,
+      "c": 0,
+      "both_bad": 0,
+      "mcnemar": {
+        "b": 0,
+        "c": 0,
+        "odds_ratio": NaN,
+        "p": 1.0
+      },
+      "rate_default": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      },
+      "rate_flipped": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      }
+    },
+    "deepseek-v3-api|inw|sign_given_mag": {
+      "n_pairs": 0,
+      "both_ok": 0,
+      "b": 0,
+      "c": 0,
+      "both_bad": 0,
+      "mcnemar": {
+        "b": 0,
+        "c": 0,
+        "odds_ratio": NaN,
+        "p": 1.0
+      },
+      "rate_default": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      },
+      "rate_flipped": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      }
+    },
+    "gemma4-31b-api|cw|final_correct": {
+      "n_pairs": 203,
+      "both_ok": 177,
+      "b": 25,
+      "c": 1,
+      "both_bad": 0,
+      "mcnemar": {
+        "b": 25,
+        "c": 1,
+        "odds_ratio": 25.0,
+        "p": 8.046627044677734e-07
+      },
+      "rate_default": {
+        "k": 202,
+        "n": 203,
+        "rate": 0.9950738916256158,
+        "wilson_lo": 0.9726288712254864,
+        "wilson_hi": 0.9991298909975265
+      },
+      "rate_flipped": {
+        "k": 178,
+        "n": 203,
+        "rate": 0.8768472906403941,
+        "wilson_lo": 0.8245218792298354,
+        "wilson_hi": 0.915175089029473
+      },
+      "or_haldane": 17.0,
+      "or_boot_ci": [
+        5.888888888888889,
+        65.0
+      ],
+      "q_bh": 1.2069940567016602e-05
+    },
+    "gemma4-31b-api|cw|sign_given_mag": {
+      "n_pairs": 185,
+      "both_ok": 177,
+      "b": 8,
+      "c": 0,
+      "both_bad": 0,
+      "mcnemar": {
+        "b": 8,
+        "c": 0,
+        "odds_ratio": Infinity,
+        "p": 0.0078125
+      },
+      "rate_default": {
+        "k": 185,
+        "n": 185,
+        "rate": 1.0,
+        "wilson_lo": 0.9796577571223828,
+        "wilson_hi": 1.0
+      },
+      "rate_flipped": {
+        "k": 177,
+        "n": 185,
+        "rate": 0.9567567567567568,
+        "wilson_lo": 0.9170029266998063,
+        "wilson_hi": 0.9779276730498299
+      },
+      "or_haldane": 17.0,
+      "or_boot_ci": [
+        7.0,
+        29.0
+      ],
+      "q_bh": 0.05859375
+    },
+    "gemma4-31b-api|wrk|final_correct": {
+      "n_pairs": 192,
+      "both_ok": 188,
+      "b": 2,
+      "c": 2,
+      "both_bad": 0,
+      "mcnemar": {
+        "b": 2,
+        "c": 2,
+        "odds_ratio": 1.0,
+        "p": 1.0
+      },
+      "rate_default": {
+        "k": 190,
+        "n": 192,
+        "rate": 0.9895833333333334,
+        "wilson_lo": 0.9628214588546004,
+        "wilson_hi": 0.997138710621703
+      },
+      "rate_flipped": {
+        "k": 190,
+        "n": 192,
+        "rate": 0.9895833333333334,
+        "wilson_lo": 0.9628214588546004,
+        "wilson_hi": 0.997138710621703
+      },
+      "or_haldane": 1.0,
+      "or_boot_ci": [
+        0.14285714285714285,
+        7.0
+      ],
+      "q_bh": 1.0
+    },
+    "gemma4-31b-api|wrk|sign_given_mag": {
+      "n_pairs": 188,
+      "both_ok": 188,
+      "b": 0,
+      "c": 0,
+      "both_bad": 0,
+      "mcnemar": {
+        "b": 0,
+        "c": 0,
+        "odds_ratio": NaN,
+        "p": 1.0
+      },
+      "rate_default": {
+        "k": 188,
+        "n": 188,
+        "rate": 1.0,
+        "wilson_lo": 0.9799758673421861,
+        "wilson_hi": 1.0
+      },
+      "rate_flipped": {
+        "k": 188,
+        "n": 188,
+        "rate": 1.0,
+        "wilson_lo": 0.9799758673421861,
+        "wilson_hi": 1.0
+      },
+      "or_haldane": 1.0,
+      "or_boot_ci": [
+        1.0,
+        1.0
+      ],
+      "q_bh": 1.0
+    },
+    "gemma4-31b-api|inw|final_correct": {
+      "n_pairs": 204,
+      "both_ok": 203,
+      "b": 0,
+      "c": 1,
+      "both_bad": 0,
+      "mcnemar": {
+        "b": 0,
+        "c": 1,
+        "odds_ratio": 0.0,
+        "p": 1.0
+      },
+      "rate_default": {
+        "k": 203,
+        "n": 204,
+        "rate": 0.9950980392156863,
+        "wilson_lo": 0.9727604821479482,
+        "wilson_hi": 0.9991341588258068
+      },
+      "rate_flipped": {
+        "k": 204,
+        "n": 204,
+        "rate": 1.0,
+        "wilson_lo": 0.981517360191317,
+        "wilson_hi": 1.0
+      },
+      "or_haldane": 0.3333333333333333,
+      "or_boot_ci": [
+        0.14285714285714285,
+        1.0
+      ],
+      "q_bh": 1.0
+    },
+    "gemma4-31b-api|inw|sign_given_mag": {
+      "n_pairs": 203,
+      "both_ok": 203,
+      "b": 0,
+      "c": 0,
+      "both_bad": 0,
+      "mcnemar": {
+        "b": 0,
+        "c": 0,
+        "odds_ratio": NaN,
+        "p": 1.0
+      },
+      "rate_default": {
+        "k": 203,
+        "n": 203,
+        "rate": 1.0,
+        "wilson_lo": 0.9814280036381673,
+        "wilson_hi": 1.0
+      },
+      "rate_flipped": {
+        "k": 203,
+        "n": 203,
+        "rate": 1.0,
+        "wilson_lo": 0.9814280036381673,
+        "wilson_hi": 1.0
+      },
+      "or_haldane": 1.0,
+      "or_boot_ci": [
+        1.0,
+        1.0
+      ],
+      "q_bh": 1.0
+    },
+    "gpt-oss-120b-api|cw|final_correct": {
+      "n_pairs": 248,
+      "both_ok": 230,
+      "b": 16,
+      "c": 2,
+      "both_bad": 0,
+      "mcnemar": {
+        "b": 16,
+        "c": 2,
+        "odds_ratio": 8.0,
+        "p": 0.001312255859375
+      },
+      "rate_default": {
+        "k": 246,
+        "n": 248,
+        "rate": 0.9919354838709677,
+        "wilson_lo": 0.9710778853059633,
+        "wilson_hi": 0.9977856256607635
+      },
+      "rate_flipped": {
+        "k": 232,
+        "n": 248,
+        "rate": 0.9354838709677419,
+        "wilson_lo": 0.8977811195614778,
+        "wilson_hi": 0.9599013327697228
+      },
+      "or_haldane": 6.6,
+      "or_boot_ci": [
+        2.4545454545454546,
+        41.0
+      ],
+      "q_bh": 0.006561279296875
+    },
+    "gpt-oss-120b-api|cw|sign_given_mag": {
+      "n_pairs": 240,
+      "both_ok": 230,
+      "b": 10,
+      "c": 0,
+      "both_bad": 0,
+      "mcnemar": {
+        "b": 10,
+        "c": 0,
+        "odds_ratio": Infinity,
+        "p": 0.001953125
+      },
+      "rate_default": {
+        "k": 240,
+        "n": 240,
+        "rate": 1.0,
+        "wilson_lo": 0.9842460800584412,
+        "wilson_hi": 1.0
+      },
+      "rate_flipped": {
+        "k": 230,
+        "n": 240,
+        "rate": 0.9583333333333334,
+        "wilson_lo": 0.9250129960961526,
+        "wilson_hi": 0.9772125772907518
+      },
+      "or_haldane": 21.0,
+      "or_boot_ci": [
+        9.0,
+        33.0
+      ],
+      "q_bh": 0.029296875
+    },
+    "gpt-oss-120b-api|wrk|final_correct": {
+      "n_pairs": 247,
+      "both_ok": 244,
+      "b": 1,
+      "c": 2,
+      "both_bad": 0,
+      "mcnemar": {
+        "b": 1,
+        "c": 2,
+        "odds_ratio": 0.5,
+        "p": 1.0
+      },
+      "rate_default": {
+        "k": 245,
+        "n": 247,
+        "rate": 0.9919028340080972,
+        "wilson_lo": 0.970962733607108,
+        "wilson_hi": 0.9977766491984299
+      },
+      "rate_flipped": {
+        "k": 246,
+        "n": 247,
+        "rate": 0.9959514170040485,
+        "wilson_lo": 0.9774275786171014,
+        "wilson_hi": 0.9992849678329265
+      },
+      "or_haldane": 0.6,
+      "or_boot_ci": [
+        0.1111111111111111,
+        5.0
+      ],
+      "q_bh": 1.0
+    },
+    "gpt-oss-120b-api|wrk|sign_given_mag": {
+      "n_pairs": 244,
+      "both_ok": 244,
+      "b": 0,
+      "c": 0,
+      "both_bad": 0,
+      "mcnemar": {
+        "b": 0,
+        "c": 0,
+        "odds_ratio": NaN,
+        "p": 1.0
+      },
+      "rate_default": {
+        "k": 244,
+        "n": 244,
+        "rate": 1.0,
+        "wilson_lo": 0.9845003380831723,
+        "wilson_hi": 1.0
+      },
+      "rate_flipped": {
+        "k": 244,
+        "n": 244,
+        "rate": 1.0,
+        "wilson_lo": 0.9845003380831723,
+        "wilson_hi": 1.0
+      },
+      "or_haldane": 1.0,
+      "or_boot_ci": [
+        1.0,
+        1.0
+      ],
+      "q_bh": 1.0
+    },
+    "gpt-oss-120b-api|inw|final_correct": {
+      "n_pairs": 245,
+      "both_ok": 241,
+      "b": 2,
+      "c": 2,
+      "both_bad": 0,
+      "mcnemar": {
+        "b": 2,
+        "c": 2,
+        "odds_ratio": 1.0,
+        "p": 1.0
+      },
+      "rate_default": {
+        "k": 243,
+        "n": 245,
+        "rate": 0.9918367346938776,
+        "wilson_lo": 0.9707296573772748,
+        "wilson_hi": 0.9977584761602143
+      },
+      "rate_flipped": {
+        "k": 243,
+        "n": 245,
+        "rate": 0.9918367346938776,
+        "wilson_lo": 0.9707296573772748,
+        "wilson_hi": 0.9977584761602143
+      },
+      "or_haldane": 1.0,
+      "or_boot_ci": [
+        0.14285714285714285,
+        7.0
+      ],
+      "q_bh": 1.0
+    },
+    "gpt-oss-120b-api|inw|sign_given_mag": {
+      "n_pairs": 241,
+      "both_ok": 241,
+      "b": 0,
+      "c": 0,
+      "both_bad": 0,
+      "mcnemar": {
+        "b": 0,
+        "c": 0,
+        "odds_ratio": NaN,
+        "p": 1.0
+      },
+      "rate_default": {
+        "k": 241,
+        "n": 241,
+        "rate": 1.0,
+        "wilson_lo": 0.9843104234095119,
+        "wilson_hi": 1.0
+      },
+      "rate_flipped": {
+        "k": 241,
+        "n": 241,
+        "rate": 1.0,
+        "wilson_lo": 0.9843104234095119,
+        "wilson_hi": 1.0
+      },
+      "or_haldane": 1.0,
+      "or_boot_ci": [
+        1.0,
+        1.0
+      ],
+      "q_bh": 1.0
+    },
+    "gpt5-api|cw|final_correct": {
+      "n_pairs": 250,
+      "both_ok": 237,
+      "b": 11,
+      "c": 1,
+      "both_bad": 1,
+      "mcnemar": {
+        "b": 11,
+        "c": 1,
+        "odds_ratio": 11.0,
+        "p": 0.00634765625
+      },
+      "rate_default": {
+        "k": 248,
+        "n": 250,
+        "rate": 0.992,
+        "wilson_lo": 0.9713054704167919,
+        "wilson_hi": 0.9978033628796906
+      },
+      "rate_flipped": {
+        "k": 238,
+        "n": 250,
+        "rate": 0.952,
+        "wilson_lo": 0.9179876987868126,
+        "wilson_hi": 0.9723317984693053
+      },
+      "or_haldane": 7.666666666666667,
+      "or_boot_ci": [
+        2.3333333333333335,
+        33.0
+      ],
+      "q_bh": 0.0238037109375
+    },
+    "gpt5-api|cw|sign_given_mag": {
+      "n_pairs": 239,
+      "both_ok": 237,
+      "b": 2,
+      "c": 0,
+      "both_bad": 0,
+      "mcnemar": {
+        "b": 2,
+        "c": 0,
+        "odds_ratio": Infinity,
+        "p": 0.5
+      },
+      "rate_default": {
+        "k": 239,
+        "n": 239,
+        "rate": 1.0,
+        "wilson_lo": 0.984181206786727,
+        "wilson_hi": 1.0
+      },
+      "rate_flipped": {
+        "k": 237,
+        "n": 239,
+        "rate": 0.9916317991631799,
+        "wilson_lo": 0.970007425050745,
+        "wilson_hi": 0.9977021297395513
+      },
+      "or_haldane": 5.0,
+      "or_boot_ci": [
+        1.0,
+        11.0
+      ],
+      "q_bh": 1.0
+    },
+    "gpt5-api|wrk|final_correct": {
+      "n_pairs": 250,
+      "both_ok": 246,
+      "b": 2,
+      "c": 2,
+      "both_bad": 0,
+      "mcnemar": {
+        "b": 2,
+        "c": 2,
+        "odds_ratio": 1.0,
+        "p": 1.0
+      },
+      "rate_default": {
+        "k": 248,
+        "n": 250,
+        "rate": 0.992,
+        "wilson_lo": 0.9713054704167919,
+        "wilson_hi": 0.9978033628796906
+      },
+      "rate_flipped": {
+        "k": 248,
+        "n": 250,
+        "rate": 0.992,
+        "wilson_lo": 0.9713054704167919,
+        "wilson_hi": 0.9978033628796906
+      },
+      "or_haldane": 1.0,
+      "or_boot_ci": [
+        0.14285714285714285,
+        7.0
+      ],
+      "q_bh": 1.0
+    },
+    "gpt5-api|wrk|sign_given_mag": {
+      "n_pairs": 246,
+      "both_ok": 246,
+      "b": 0,
+      "c": 0,
+      "both_bad": 0,
+      "mcnemar": {
+        "b": 0,
+        "c": 0,
+        "odds_ratio": NaN,
+        "p": 1.0
+      },
+      "rate_default": {
+        "k": 246,
+        "n": 246,
+        "rate": 1.0,
+        "wilson_lo": 0.9846244140631157,
+        "wilson_hi": 1.0
+      },
+      "rate_flipped": {
+        "k": 246,
+        "n": 246,
+        "rate": 1.0,
+        "wilson_lo": 0.9846244140631157,
+        "wilson_hi": 1.0
+      },
+      "or_haldane": 1.0,
+      "or_boot_ci": [
+        1.0,
+        1.0
+      ],
+      "q_bh": 1.0
+    },
+    "gpt5-api|inw|final_correct": {
+      "n_pairs": 250,
+      "both_ok": 242,
+      "b": 6,
+      "c": 2,
+      "both_bad": 0,
+      "mcnemar": {
+        "b": 6,
+        "c": 2,
+        "odds_ratio": 3.0,
+        "p": 0.2890625
+      },
+      "rate_default": {
+        "k": 248,
+        "n": 250,
+        "rate": 0.992,
+        "wilson_lo": 0.9713054704167919,
+        "wilson_hi": 0.9978033628796906
+      },
+      "rate_flipped": {
+        "k": 244,
+        "n": 250,
+        "rate": 0.976,
+        "wilson_lo": 0.9486378761864735,
+        "wilson_hi": 0.9889552226938632
+      },
+      "or_haldane": 2.6,
+      "or_boot_ci": [
+        0.7142857142857143,
+        17.0
+      ],
+      "q_bh": 0.5419921875
+    },
+    "gpt5-api|inw|sign_given_mag": {
+      "n_pairs": 243,
+      "both_ok": 242,
+      "b": 1,
+      "c": 0,
+      "both_bad": 0,
+      "mcnemar": {
+        "b": 1,
+        "c": 0,
+        "odds_ratio": Infinity,
+        "p": 1.0
+      },
+      "rate_default": {
+        "k": 243,
+        "n": 243,
+        "rate": 1.0,
+        "wilson_lo": 0.9844375461113904,
+        "wilson_hi": 0.9999999999999999
+      },
+      "rate_flipped": {
+        "k": 242,
+        "n": 243,
+        "rate": 0.9958847736625515,
+        "wilson_lo": 0.9770619877144152,
+        "wilson_hi": 0.9992731917623138
+      },
+      "or_haldane": 3.0,
+      "or_boot_ci": [
+        1.0,
+        7.0
+      ],
+      "q_bh": 1.0
+    },
+    "llama33-70b-api|cw|final_correct": {
+      "n_pairs": 50,
+      "both_ok": 0,
+      "b": 3,
+      "c": 0,
+      "both_bad": 47,
+      "mcnemar": {
+        "b": 3,
+        "c": 0,
+        "odds_ratio": Infinity,
+        "p": 0.25
+      },
+      "rate_default": {
+        "k": 3,
+        "n": 50,
+        "rate": 0.06,
+        "wilson_lo": 0.02061497034897397,
+        "wilson_hi": 0.16217091688838173
+      },
+      "rate_flipped": {
+        "k": 0,
+        "n": 50,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.07134759913335872
+      },
+      "or_haldane": 7.0,
+      "or_boot_ci": [
+        1.0,
+        15.0
+      ],
+      "q_bh": 0.5357142857142857
+    },
+    "llama33-70b-api|cw|sign_given_mag": {
+      "n_pairs": 1,
+      "both_ok": 0,
+      "b": 1,
+      "c": 0,
+      "both_bad": 0,
+      "mcnemar": {
+        "b": 1,
+        "c": 0,
+        "odds_ratio": Infinity,
+        "p": 1.0
+      },
+      "rate_default": {
+        "k": 1,
+        "n": 1,
+        "rate": 1.0,
+        "wilson_lo": 0.20654931437723745,
+        "wilson_hi": 1.0
+      },
+      "rate_flipped": {
+        "k": 0,
+        "n": 1,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.7934506856227626
+      },
+      "or_haldane": 3.0,
+      "or_boot_ci": [
+        3.0,
+        3.0
+      ],
+      "q_bh": 1.0
+    },
+    "llama33-70b-api|wrk|final_correct": {
+      "n_pairs": 0,
+      "both_ok": 0,
+      "b": 0,
+      "c": 0,
+      "both_bad": 0,
+      "mcnemar": {
+        "b": 0,
+        "c": 0,
+        "odds_ratio": NaN,
+        "p": 1.0
+      },
+      "rate_default": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      },
+      "rate_flipped": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      }
+    },
+    "llama33-70b-api|wrk|sign_given_mag": {
+      "n_pairs": 0,
+      "both_ok": 0,
+      "b": 0,
+      "c": 0,
+      "both_bad": 0,
+      "mcnemar": {
+        "b": 0,
+        "c": 0,
+        "odds_ratio": NaN,
+        "p": 1.0
+      },
+      "rate_default": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      },
+      "rate_flipped": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      }
+    },
+    "llama33-70b-api|inw|final_correct": {
+      "n_pairs": 0,
+      "both_ok": 0,
+      "b": 0,
+      "c": 0,
+      "both_bad": 0,
+      "mcnemar": {
+        "b": 0,
+        "c": 0,
+        "odds_ratio": NaN,
+        "p": 1.0
+      },
+      "rate_default": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      },
+      "rate_flipped": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      }
+    },
+    "llama33-70b-api|inw|sign_given_mag": {
+      "n_pairs": 0,
+      "both_ok": 0,
+      "b": 0,
+      "c": 0,
+      "both_bad": 0,
+      "mcnemar": {
+        "b": 0,
+        "c": 0,
+        "odds_ratio": NaN,
+        "p": 1.0
+      },
+      "rate_default": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      },
+      "rate_flipped": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      }
+    },
+    "qwen25-72b-api|cw|final_correct": {
+      "n_pairs": 50,
+      "both_ok": 0,
+      "b": 4,
+      "c": 0,
+      "both_bad": 46,
+      "mcnemar": {
+        "b": 4,
+        "c": 0,
+        "odds_ratio": Infinity,
+        "p": 0.125
+      },
+      "rate_default": {
+        "k": 4,
+        "n": 50,
+        "rate": 0.08,
+        "wilson_lo": 0.03154951408859298,
+        "wilson_hi": 0.18838246918342838
+      },
+      "rate_flipped": {
+        "k": 0,
+        "n": 50,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.07134759913335872
+      },
+      "or_haldane": 9.0,
+      "or_boot_ci": [
+        3.0,
+        17.0
+      ],
+      "q_bh": 0.3125
+    },
+    "qwen25-72b-api|cw|sign_given_mag": {
+      "n_pairs": 1,
+      "both_ok": 0,
+      "b": 1,
+      "c": 0,
+      "both_bad": 0,
+      "mcnemar": {
+        "b": 1,
+        "c": 0,
+        "odds_ratio": Infinity,
+        "p": 1.0
+      },
+      "rate_default": {
+        "k": 1,
+        "n": 1,
+        "rate": 1.0,
+        "wilson_lo": 0.20654931437723745,
+        "wilson_hi": 1.0
+      },
+      "rate_flipped": {
+        "k": 0,
+        "n": 1,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.7934506856227626
+      },
+      "or_haldane": 3.0,
+      "or_boot_ci": [
+        3.0,
+        3.0
+      ],
+      "q_bh": 1.0
+    },
+    "qwen25-72b-api|wrk|final_correct": {
+      "n_pairs": 0,
+      "both_ok": 0,
+      "b": 0,
+      "c": 0,
+      "both_bad": 0,
+      "mcnemar": {
+        "b": 0,
+        "c": 0,
+        "odds_ratio": NaN,
+        "p": 1.0
+      },
+      "rate_default": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      },
+      "rate_flipped": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      }
+    },
+    "qwen25-72b-api|wrk|sign_given_mag": {
+      "n_pairs": 0,
+      "both_ok": 0,
+      "b": 0,
+      "c": 0,
+      "both_bad": 0,
+      "mcnemar": {
+        "b": 0,
+        "c": 0,
+        "odds_ratio": NaN,
+        "p": 1.0
+      },
+      "rate_default": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      },
+      "rate_flipped": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      }
+    },
+    "qwen25-72b-api|inw|final_correct": {
+      "n_pairs": 0,
+      "both_ok": 0,
+      "b": 0,
+      "c": 0,
+      "both_bad": 0,
+      "mcnemar": {
+        "b": 0,
+        "c": 0,
+        "odds_ratio": NaN,
+        "p": 1.0
+      },
+      "rate_default": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      },
+      "rate_flipped": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      }
+    },
+    "qwen25-72b-api|inw|sign_given_mag": {
+      "n_pairs": 0,
+      "both_ok": 0,
+      "b": 0,
+      "c": 0,
+      "both_bad": 0,
+      "mcnemar": {
+        "b": 0,
+        "c": 0,
+        "odds_ratio": NaN,
+        "p": 1.0
+      },
+      "rate_default": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      },
+      "rate_flipped": {
+        "k": 0,
+        "n": 0,
+        "rate": NaN,
+        "wilson_lo": NaN,
+        "wilson_hi": NaN
+      }
+    },
+    "qwen3-8b-nothink|cw|final_correct": {
+      "n_pairs": 173,
+      "both_ok": 0,
+      "b": 5,
+      "c": 0,
+      "both_bad": 168,
+      "mcnemar": {
+        "b": 5,
+        "c": 0,
+        "odds_ratio": Infinity,
+        "p": 0.0625
+      },
+      "rate_default": {
+        "k": 5,
+        "n": 173,
+        "rate": 0.028901734104046242,
+        "wilson_lo": 0.012406951549592947,
+        "wilson_hi": 0.06586348861188793
+      },
+      "rate_flipped": {
+        "k": 0,
+        "n": 173,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.02172261440451652
+      },
+      "or_haldane": 11.0,
+      "or_boot_ci": [
+        3.0,
+        21.0
+      ],
+      "q_bh": 0.1875
+    },
+    "qwen3-8b-nothink|cw|sign_given_mag": {
+      "n_pairs": 3,
+      "both_ok": 0,
+      "b": 3,
+      "c": 0,
+      "both_bad": 0,
+      "mcnemar": {
+        "b": 3,
+        "c": 0,
+        "odds_ratio": Infinity,
+        "p": 0.25
+      },
+      "rate_default": {
+        "k": 3,
+        "n": 3,
+        "rate": 1.0,
+        "wilson_lo": 0.43850296824495455,
+        "wilson_hi": 1.0
+      },
+      "rate_flipped": {
+        "k": 0,
+        "n": 3,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.5614970317550455
+      },
+      "or_haldane": 7.0,
+      "or_boot_ci": [
+        7.0,
+        7.0
+      ],
+      "q_bh": 0.9375
+    },
+    "qwen3-8b-nothink|wrk|final_correct": {
+      "n_pairs": 172,
+      "both_ok": 3,
+      "b": 2,
+      "c": 3,
+      "both_bad": 164,
+      "mcnemar": {
+        "b": 2,
+        "c": 3,
+        "odds_ratio": 0.6666666666666666,
+        "p": 1.0
+      },
+      "rate_default": {
+        "k": 5,
+        "n": 172,
+        "rate": 0.029069767441860465,
+        "wilson_lo": 0.012479450801779774,
+        "wilson_hi": 0.06623610873420138
+      },
+      "rate_flipped": {
+        "k": 6,
+        "n": 172,
+        "rate": 0.03488372093023256,
+        "wilson_lo": 0.016083766122096478,
+        "wilson_hi": 0.07400567539492195
+      },
+      "or_haldane": 0.7142857142857143,
+      "or_boot_ci": [
+        0.1111111111111111,
+        5.0
+      ],
+      "q_bh": 1.0
+    },
+    "qwen3-8b-nothink|wrk|sign_given_mag": {
+      "n_pairs": 4,
+      "both_ok": 3,
+      "b": 0,
+      "c": 0,
+      "both_bad": 1,
+      "mcnemar": {
+        "b": 0,
+        "c": 0,
+        "odds_ratio": NaN,
+        "p": 1.0
+      },
+      "rate_default": {
+        "k": 3,
+        "n": 4,
+        "rate": 0.75,
+        "wilson_lo": 0.30064184258240184,
+        "wilson_hi": 0.9544127391902995
+      },
+      "rate_flipped": {
+        "k": 3,
+        "n": 4,
+        "rate": 0.75,
+        "wilson_lo": 0.30064184258240184,
+        "wilson_hi": 0.9544127391902995
+      },
+      "or_haldane": 1.0,
+      "or_boot_ci": [
+        1.0,
+        1.0
+      ],
+      "q_bh": 1.0
+    },
+    "qwen3-8b-nothink|inw|final_correct": {
+      "n_pairs": 167,
+      "both_ok": 2,
+      "b": 3,
+      "c": 4,
+      "both_bad": 158,
+      "mcnemar": {
+        "b": 3,
+        "c": 4,
+        "odds_ratio": 0.75,
+        "p": 1.0
+      },
+      "rate_default": {
+        "k": 5,
+        "n": 167,
+        "rate": 0.029940119760479042,
+        "wilson_lo": 0.012855039352347983,
+        "wilson_hi": 0.0681642806431653
+      },
+      "rate_flipped": {
+        "k": 6,
+        "n": 167,
+        "rate": 0.03592814371257485,
+        "wilson_lo": 0.016568325910812816,
+        "wilson_hi": 0.0761577543395347
+      },
+      "or_haldane": 0.7777777777777778,
+      "or_boot_ci": [
+        0.1111111111111111,
+        3.6666666666666665
+      ],
+      "q_bh": 1.0
+    },
+    "qwen3-8b-nothink|inw|sign_given_mag": {
+      "n_pairs": 2,
+      "both_ok": 2,
+      "b": 0,
+      "c": 0,
+      "both_bad": 0,
+      "mcnemar": {
+        "b": 0,
+        "c": 0,
+        "odds_ratio": NaN,
+        "p": 1.0
+      },
+      "rate_default": {
+        "k": 2,
+        "n": 2,
+        "rate": 1.0,
+        "wilson_lo": 0.34238022750665303,
+        "wilson_hi": 1.0
+      },
+      "rate_flipped": {
+        "k": 2,
+        "n": 2,
+        "rate": 1.0,
+        "wilson_lo": 0.34238022750665303,
+        "wilson_hi": 1.0
+      },
+      "or_haldane": 1.0,
+      "or_boot_ci": [
+        1.0,
+        1.0
+      ],
+      "q_bh": 1.0
+    }
+  },
+  "var_level": {
+    "deepseek-v3-api|cw": {
+      "n_vars": 320,
+      "labels": {
+        "ERR_SIGN_CONVENTION": 152,
+        "ERR_VAL": 130,
+        "PASS": 31,
+        "ERR_MISSING": 7
+      },
+      "var_mag_correct": {
+        "k": 183,
+        "n": 320,
+        "rate": 0.571875,
+        "wilson_lo": 0.5171244804331181,
+        "wilson_hi": 0.6249203342348812
+      },
+      "convention_blind_given_mag": {
+        "k": 152,
+        "n": 183,
+        "rate": 0.8306010928961749,
+        "wilson_lo": 0.7695909118148678,
+        "wilson_hi": 0.8780169626029823
+      },
+      "sign_wrong_given_mag": {
+        "k": 152,
+        "n": 183,
+        "rate": 0.8306010928961749,
+        "wilson_lo": 0.7695909118148678,
+        "wilson_hi": 0.8780169626029823
+      }
+    },
+    "deepseek-v3-api|dflt": {
+      "n_vars": 320,
+      "labels": {
+        "PASS": 195,
+        "ERR_VAL": 118,
+        "ERR_MISSING": 7
+      },
+      "var_mag_correct": {
+        "k": 195,
+        "n": 320,
+        "rate": 0.609375,
+        "wilson_lo": 0.5549238624228489,
+        "wilson_hi": 0.661231290332802
+      },
+      "convention_blind_given_mag": {
+        "k": 0,
+        "n": 195,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.019319204573721077
+      },
+      "sign_wrong_given_mag": {
+        "k": 0,
+        "n": 195,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.019319204573721077
+      }
+    },
+    "gemma4-31b-api|cw": {
+      "n_vars": 1416,
+      "labels": {
+        "PASS": 1257,
+        "ERR_MISSING": 91,
+        "ERR_VAL": 9,
+        "ERR_SIGN_CONVENTION": 59
+      },
+      "var_mag_correct": {
+        "k": 1316,
+        "n": 1416,
+        "rate": 0.9293785310734464,
+        "wilson_lo": 0.9148404958528262,
+        "wilson_hi": 0.9415931520348733
+      },
+      "convention_blind_given_mag": {
+        "k": 59,
+        "n": 1316,
+        "rate": 0.044832826747720364,
+        "wilson_lo": 0.03491515195815025,
+        "wilson_hi": 0.05740007121233722
+      },
+      "sign_wrong_given_mag": {
+        "k": 59,
+        "n": 1316,
+        "rate": 0.044832826747720364,
+        "wilson_lo": 0.03491515195815025,
+        "wilson_hi": 0.05740007121233722
+      }
+    },
+    "gemma4-31b-api|dflt": {
+      "n_vars": 1430,
+      "labels": {
+        "PASS": 1416,
+        "ERR_MISSING": 12,
+        "ERR_VAL": 2
+      },
+      "var_mag_correct": {
+        "k": 1416,
+        "n": 1430,
+        "rate": 0.9902097902097902,
+        "wilson_lo": 0.983633619542536,
+        "wilson_hi": 0.9941592817403694
+      },
+      "convention_blind_given_mag": {
+        "k": 0,
+        "n": 1416,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.0027055547623498766
+      },
+      "sign_wrong_given_mag": {
+        "k": 0,
+        "n": 1416,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.0027055547623498766
+      }
+    },
+    "gemma4-31b-api|inw": {
+      "n_vars": 1458,
+      "labels": {
+        "PASS": 1458
+      },
+      "var_mag_correct": {
+        "k": 1458,
+        "n": 1458,
+        "rate": 1.0,
+        "wilson_lo": 0.9973721782225324,
+        "wilson_hi": 1.0
+      },
+      "convention_blind_given_mag": {
+        "k": 0,
+        "n": 1458,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.002627821777467668
+      },
+      "sign_wrong_given_mag": {
+        "k": 0,
+        "n": 1458,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.002627821777467668
+      }
+    },
+    "gemma4-31b-api|wrk": {
+      "n_vars": 1382,
+      "labels": {
+        "PASS": 1378,
+        "ERR_VAL": 4
+      },
+      "var_mag_correct": {
+        "k": 1378,
+        "n": 1382,
+        "rate": 0.9971056439942113,
+        "wilson_lo": 0.9925815180892287,
+        "wilson_hi": 0.9988738834321179
+      },
+      "convention_blind_given_mag": {
+        "k": 0,
+        "n": 1378,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.002779956265006366
+      },
+      "sign_wrong_given_mag": {
+        "k": 0,
+        "n": 1378,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.002779956265006366
+      }
+    },
+    "gpt-oss-120b-api|cw": {
+      "n_vars": 1600,
+      "labels": {
+        "PASS": 1569,
+        "ERR_SIGN_CONVENTION": 22,
+        "ERR_VAL": 9
+      },
+      "var_mag_correct": {
+        "k": 1591,
+        "n": 1600,
+        "rate": 0.994375,
+        "wilson_lo": 0.9893439312258746,
+        "wilson_hi": 0.9970378531452851
+      },
+      "convention_blind_given_mag": {
+        "k": 22,
+        "n": 1591,
+        "rate": 0.013827781269641735,
+        "wilson_lo": 0.009149247135374107,
+        "wilson_hi": 0.02084837962313172
+      },
+      "sign_wrong_given_mag": {
+        "k": 22,
+        "n": 1591,
+        "rate": 0.013827781269641735,
+        "wilson_lo": 0.009149247135374107,
+        "wilson_hi": 0.02084837962313172
+      }
+    },
+    "gpt-oss-120b-api|dflt": {
+      "n_vars": 1586,
+      "labels": {
+        "PASS": 1584,
+        "ERR_VAL": 2
+      },
+      "var_mag_correct": {
+        "k": 1584,
+        "n": 1586,
+        "rate": 0.9987389659520807,
+        "wilson_lo": 0.9954136622573706,
+        "wilson_hi": 0.9996541108358592
+      },
+      "convention_blind_given_mag": {
+        "k": 0,
+        "n": 1584,
+        "rate": 0.0,
+        "wilson_lo": 2.168404344971009e-19,
+        "wilson_hi": 0.0024192962082922407
+      },
+      "sign_wrong_given_mag": {
+        "k": 0,
+        "n": 1584,
+        "rate": 0.0,
+        "wilson_lo": 2.168404344971009e-19,
+        "wilson_hi": 0.0024192962082922407
+      }
+    },
+    "gpt-oss-120b-api|inw": {
+      "n_vars": 1579,
+      "labels": {
+        "PASS": 1577,
+        "ERR_VAL": 2
+      },
+      "var_mag_correct": {
+        "k": 1577,
+        "n": 1579,
+        "rate": 0.9987333755541482,
+        "wilson_lo": 0.9953933835408402,
+        "wilson_hi": 0.9996525771414528
+      },
+      "convention_blind_given_mag": {
+        "k": 0,
+        "n": 1577,
+        "rate": 0.0,
+        "wilson_lo": 2.168404344971009e-19,
+        "wilson_hi": 0.0024300089039667825
+      },
+      "sign_wrong_given_mag": {
+        "k": 0,
+        "n": 1577,
+        "rate": 0.0,
+        "wilson_lo": 2.168404344971009e-19,
+        "wilson_hi": 0.0024300089039667825
+      }
+    },
+    "gpt-oss-120b-api|wrk": {
+      "n_vars": 1593,
+      "labels": {
+        "PASS": 1590,
+        "ERR_SIGN_CONVENTION": 1,
+        "ERR_VAL": 2
+      },
+      "var_mag_correct": {
+        "k": 1591,
+        "n": 1593,
+        "rate": 0.9987445072190835,
+        "wilson_lo": 0.9954337632192295,
+        "wilson_hi": 0.9996556310488244
+      },
+      "convention_blind_given_mag": {
+        "k": 1,
+        "n": 1591,
+        "rate": 0.0006285355122564425,
+        "wilson_lo": 0.00011096056919698816,
+        "wilson_hi": 0.0035517601284537946
+      },
+      "sign_wrong_given_mag": {
+        "k": 1,
+        "n": 1591,
+        "rate": 0.0006285355122564425,
+        "wilson_lo": 0.00011096056919698816,
+        "wilson_hi": 0.0035517601284537946
+      }
+    },
+    "gpt5-api|cw": {
+      "n_vars": 1600,
+      "labels": {
+        "PASS": 1573,
+        "ERR_SIGN_CONVENTION": 16,
+        "ERR_VAL": 11
+      },
+      "var_mag_correct": {
+        "k": 1589,
+        "n": 1600,
+        "rate": 0.993125,
+        "wilson_lo": 0.9877309828194971,
+        "wilson_hi": 0.9961567894546433
+      },
+      "convention_blind_given_mag": {
+        "k": 16,
+        "n": 1589,
+        "rate": 0.010069225928256766,
+        "wilson_lo": 0.006207425854979472,
+        "wilson_hi": 0.016294159988491964
+      },
+      "sign_wrong_given_mag": {
+        "k": 16,
+        "n": 1589,
+        "rate": 0.010069225928256766,
+        "wilson_lo": 0.006207425854979472,
+        "wilson_hi": 0.016294159988491964
+      }
+    },
+    "gpt5-api|dflt": {
+      "n_vars": 1600,
+      "labels": {
+        "PASS": 1598,
+        "ERR_VAL": 2
+      },
+      "var_mag_correct": {
+        "k": 1598,
+        "n": 1600,
+        "rate": 0.99875,
+        "wilson_lo": 0.9954536887534007,
+        "wilson_hi": 0.9996571379573269
+      },
+      "convention_blind_given_mag": {
+        "k": 0,
+        "n": 1598,
+        "rate": 0.0,
+        "wilson_lo": 2.168404344971009e-19,
+        "wilson_hi": 0.002398151701930777
+      },
+      "sign_wrong_given_mag": {
+        "k": 0,
+        "n": 1598,
+        "rate": 0.0,
+        "wilson_lo": 2.168404344971009e-19,
+        "wilson_hi": 0.002398151701930777
+      }
+    },
+    "gpt5-api|inw": {
+      "n_vars": 1600,
+      "labels": {
+        "PASS": 1590,
+        "ERR_VAL": 9,
+        "ERR_SIGN_CONVENTION": 1
+      },
+      "var_mag_correct": {
+        "k": 1591,
+        "n": 1600,
+        "rate": 0.994375,
+        "wilson_lo": 0.9893439312258746,
+        "wilson_hi": 0.9970378531452851
+      },
+      "convention_blind_given_mag": {
+        "k": 1,
+        "n": 1591,
+        "rate": 0.0006285355122564425,
+        "wilson_lo": 0.00011096056919698816,
+        "wilson_hi": 0.0035517601284537946
+      },
+      "sign_wrong_given_mag": {
+        "k": 1,
+        "n": 1591,
+        "rate": 0.0006285355122564425,
+        "wilson_lo": 0.00011096056919698816,
+        "wilson_hi": 0.0035517601284537946
+      }
+    },
+    "gpt5-api|wrk": {
+      "n_vars": 1600,
+      "labels": {
+        "PASS": 1590,
+        "ERR_VAL": 3,
+        "ERR_MISSING": 7
+      },
+      "var_mag_correct": {
+        "k": 1590,
+        "n": 1600,
+        "rate": 0.99375,
+        "wilson_lo": 0.9885331897533555,
+        "wilson_hi": 0.9966015885692946
+      },
+      "convention_blind_given_mag": {
+        "k": 0,
+        "n": 1590,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.0024101887922632374
+      },
+      "sign_wrong_given_mag": {
+        "k": 0,
+        "n": 1590,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.0024101887922632374
+      }
+    },
+    "llama33-70b-api|cw": {
+      "n_vars": 320,
+      "labels": {
+        "ERR_MISSING": 55,
+        "ERR_SIGN_CONVENTION": 106,
+        "ERR_VAL": 147,
+        "PASS": 12
+      },
+      "var_mag_correct": {
+        "k": 118,
+        "n": 320,
+        "rate": 0.36875,
+        "wilson_lo": 0.3177367699509889,
+        "wilson_hi": 0.4228770467422299
+      },
+      "convention_blind_given_mag": {
+        "k": 106,
+        "n": 118,
+        "rate": 0.8983050847457628,
+        "wilson_lo": 0.8306299390150504,
+        "wilson_hi": 0.9408644349839796
+      },
+      "sign_wrong_given_mag": {
+        "k": 106,
+        "n": 118,
+        "rate": 0.8983050847457628,
+        "wilson_lo": 0.8306299390150504,
+        "wilson_hi": 0.9408644349839796
+      }
+    },
+    "llama33-70b-api|dflt": {
+      "n_vars": 320,
+      "labels": {
+        "ERR_VAL": 147,
+        "ERR_MISSING": 30,
+        "PASS": 141,
+        "ERR_SIGN_CONVENTION": 2
+      },
+      "var_mag_correct": {
+        "k": 143,
+        "n": 320,
+        "rate": 0.446875,
+        "wilson_lo": 0.39335299654846256,
+        "wilson_hi": 0.5016573578273641
+      },
+      "convention_blind_given_mag": {
+        "k": 2,
+        "n": 143,
+        "rate": 0.013986013986013986,
+        "wilson_lo": 0.0038438866303400557,
+        "wilson_hi": 0.04955696408082872
+      },
+      "sign_wrong_given_mag": {
+        "k": 2,
+        "n": 143,
+        "rate": 0.013986013986013986,
+        "wilson_lo": 0.0038438866303400557,
+        "wilson_hi": 0.04955696408082872
+      }
+    },
+    "qwen25-72b-api|cw": {
+      "n_vars": 320,
+      "labels": {
+        "ERR_SIGN_CONVENTION": 109,
+        "ERR_VAL": 146,
+        "PASS": 15,
+        "ERR_MISSING": 50
+      },
+      "var_mag_correct": {
+        "k": 124,
+        "n": 320,
+        "rate": 0.3875,
+        "wilson_lo": 0.3357572837168082,
+        "wilson_hi": 0.4419117020202365
+      },
+      "convention_blind_given_mag": {
+        "k": 109,
+        "n": 124,
+        "rate": 0.8790322580645161,
+        "wilson_lo": 0.8099807076815497,
+        "wilson_hi": 0.9253050193989043
+      },
+      "sign_wrong_given_mag": {
+        "k": 109,
+        "n": 124,
+        "rate": 0.8790322580645161,
+        "wilson_lo": 0.8099807076815497,
+        "wilson_hi": 0.9253050193989043
+      }
+    },
+    "qwen25-72b-api|dflt": {
+      "n_vars": 320,
+      "labels": {
+        "PASS": 141,
+        "ERR_VAL": 127,
+        "ERR_SIGN_CONVENTION": 4,
+        "ERR_MISSING": 48
+      },
+      "var_mag_correct": {
+        "k": 145,
+        "n": 320,
+        "rate": 0.453125,
+        "wilson_lo": 0.399461258420675,
+        "wilson_hi": 0.5079008189697604
+      },
+      "convention_blind_given_mag": {
+        "k": 4,
+        "n": 145,
+        "rate": 0.027586206896551724,
+        "wilson_lo": 0.010778902912521014,
+        "wilson_hi": 0.06877862705605621
+      },
+      "sign_wrong_given_mag": {
+        "k": 4,
+        "n": 145,
+        "rate": 0.027586206896551724,
+        "wilson_lo": 0.010778902912521014,
+        "wilson_hi": 0.06877862705605621
+      }
+    },
+    "qwen3-8b-nothink|cw": {
+      "n_vars": 1163,
+      "labels": {
+        "ERR_SIGN_CONVENTION": 348,
+        "ERR_VAL": 607,
+        "PASS": 66,
+        "ERR_MISSING": 142
+      },
+      "var_mag_correct": {
+        "k": 414,
+        "n": 1163,
+        "rate": 0.35597592433361996,
+        "wilson_lo": 0.3289731486367834,
+        "wilson_hi": 0.3839270080489601
+      },
+      "convention_blind_given_mag": {
+        "k": 348,
+        "n": 414,
+        "rate": 0.8405797101449275,
+        "wilson_lo": 0.8022094659484491,
+        "wilson_hi": 0.8726876608132421
+      },
+      "sign_wrong_given_mag": {
+        "k": 348,
+        "n": 414,
+        "rate": 0.8405797101449275,
+        "wilson_lo": 0.8022094659484491,
+        "wilson_hi": 0.8726876608132421
+      }
+    },
+    "qwen3-8b-nothink|dflt": {
+      "n_vars": 1167,
+      "labels": {
+        "PASS": 375,
+        "ERR_VAL": 623,
+        "ERR_MISSING": 149,
+        "ERR_SIGN_CONVENTION": 20
+      },
+      "var_mag_correct": {
+        "k": 395,
+        "n": 1167,
+        "rate": 0.3384747215081405,
+        "wilson_lo": 0.31189537082140706,
+        "wilson_hi": 0.3661139812050188
+      },
+      "convention_blind_given_mag": {
+        "k": 20,
+        "n": 395,
+        "rate": 0.05063291139240506,
+        "wilson_lo": 0.03301304397147464,
+        "wilson_hi": 0.07690897604702045
+      },
+      "sign_wrong_given_mag": {
+        "k": 20,
+        "n": 395,
+        "rate": 0.05063291139240506,
+        "wilson_lo": 0.03301304397147464,
+        "wilson_hi": 0.07690897604702045
+      }
+    },
+    "qwen3-8b-nothink|inw": {
+      "n_vars": 1181,
+      "labels": {
+        "PASS": 406,
+        "ERR_VAL": 557,
+        "ERR_MISSING": 194,
+        "ERR_SIGN_CONVENTION": 24
+      },
+      "var_mag_correct": {
+        "k": 430,
+        "n": 1181,
+        "rate": 0.3640982218458933,
+        "wilson_lo": 0.3371370809600158,
+        "wilson_hi": 0.39194059638636913
+      },
+      "convention_blind_given_mag": {
+        "k": 24,
+        "n": 430,
+        "rate": 0.05581395348837209,
+        "wilson_lo": 0.03779043272891824,
+        "wilson_hi": 0.08170358465156477
+      },
+      "sign_wrong_given_mag": {
+        "k": 24,
+        "n": 430,
+        "rate": 0.05581395348837209,
+        "wilson_lo": 0.03779043272891824,
+        "wilson_hi": 0.08170358465156477
+      }
+    },
+    "qwen3-8b-nothink|wrk": {
+      "n_vars": 1187,
+      "labels": {
+        "PASS": 330,
+        "ERR_VAL": 594,
+        "ERR_MISSING": 206,
+        "ERR_SIGN_CONVENTION": 57
+      },
+      "var_mag_correct": {
+        "k": 387,
+        "n": 1187,
+        "rate": 0.32603201347935973,
+        "wilson_lo": 0.29996344065242136,
+        "wilson_hi": 0.3532229705689352
+      },
+      "convention_blind_given_mag": {
+        "k": 57,
+        "n": 387,
+        "rate": 0.14728682170542637,
+        "wilson_lo": 0.1154486210544737,
+        "wilson_hi": 0.1860584380386511
+      },
+      "sign_wrong_given_mag": {
+        "k": 57,
+        "n": 387,
+        "rate": 0.14728682170542637,
+        "wilson_lo": 0.1154486210544737,
+        "wilson_hi": 0.1860584380386511
+      }
+    }
+  },
+  "var_level_diagnostic": {
+    "deepseek-v3-api|cw": {
+      "n_vars": 270,
+      "labels": {
+        "ERR_SIGN_CONVENTION": 150,
+        "ERR_VAL": 102,
+        "PASS": 11,
+        "ERR_MISSING": 7
+      },
+      "var_mag_correct": {
+        "k": 161,
+        "n": 270,
+        "rate": 0.5962962962962963,
+        "wilson_lo": 0.5368184061407665,
+        "wilson_hi": 0.6530724899417312
+      },
+      "convention_blind_given_mag": {
+        "k": 150,
+        "n": 161,
+        "rate": 0.9316770186335404,
+        "wilson_lo": 0.8818100526848196,
+        "wilson_hi": 0.9614244163282026
+      },
+      "sign_wrong_given_mag": {
+        "k": 150,
+        "n": 161,
+        "rate": 0.9316770186335404,
+        "wilson_lo": 0.8818100526848196,
+        "wilson_hi": 0.9614244163282026
+      }
+    },
+    "gemma4-31b-api|cw": {
+      "n_vars": 1193,
+      "labels": {
+        "PASS": 1054,
+        "ERR_MISSING": 79,
+        "ERR_SIGN_CONVENTION": 57,
+        "ERR_VAL": 3
+      },
+      "var_mag_correct": {
+        "k": 1111,
+        "n": 1193,
+        "rate": 0.9312657166806371,
+        "wilson_lo": 0.9154812811279547,
+        "wilson_hi": 0.9442817162317154
+      },
+      "convention_blind_given_mag": {
+        "k": 57,
+        "n": 1111,
+        "rate": 0.05130513051305131,
+        "wilson_lo": 0.03980879478176834,
+        "wilson_hi": 0.06589364199821078
+      },
+      "sign_wrong_given_mag": {
+        "k": 57,
+        "n": 1111,
+        "rate": 0.05130513051305131,
+        "wilson_lo": 0.03980879478176834,
+        "wilson_hi": 0.06589364199821078
+      }
+    },
+    "gemma4-31b-api|inw": {
+      "n_vars": 229,
+      "labels": {
+        "PASS": 229
+      },
+      "var_mag_correct": {
+        "k": 229,
+        "n": 229,
+        "rate": 1.0,
+        "wilson_lo": 0.9835018263493515,
+        "wilson_hi": 0.9999999999999999
+      },
+      "convention_blind_given_mag": {
+        "k": 0,
+        "n": 229,
+        "rate": 0.0,
+        "wilson_lo": 1.734723475976807e-18,
+        "wilson_hi": 0.016498173650648464
+      },
+      "sign_wrong_given_mag": {
+        "k": 0,
+        "n": 229,
+        "rate": 0.0,
+        "wilson_lo": 1.734723475976807e-18,
+        "wilson_hi": 0.016498173650648464
+      }
+    },
+    "gemma4-31b-api|wrk": {
+      "n_vars": 1165,
+      "labels": {
+        "PASS": 1163,
+        "ERR_VAL": 2
+      },
+      "var_mag_correct": {
+        "k": 1163,
+        "n": 1165,
+        "rate": 0.9982832618025751,
+        "wilson_lo": 0.9937621732509603,
+        "wilson_hi": 0.9995290821528258
+      },
+      "convention_blind_given_mag": {
+        "k": 0,
+        "n": 1163,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.003292185747819262
+      },
+      "sign_wrong_given_mag": {
+        "k": 0,
+        "n": 1163,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.003292185747819262
+      }
+    },
+    "gpt-oss-120b-api|cw": {
+      "n_vars": 1350,
+      "labels": {
+        "PASS": 1331,
+        "ERR_VAL": 6,
+        "ERR_SIGN_CONVENTION": 13
+      },
+      "var_mag_correct": {
+        "k": 1344,
+        "n": 1350,
+        "rate": 0.9955555555555555,
+        "wilson_lo": 0.9903373544671865,
+        "wilson_hi": 0.9979615274162998
+      },
+      "convention_blind_given_mag": {
+        "k": 13,
+        "n": 1344,
+        "rate": 0.009672619047619048,
+        "wilson_lo": 0.005661392162139547,
+        "wilson_hi": 0.016478792520118392
+      },
+      "sign_wrong_given_mag": {
+        "k": 13,
+        "n": 1344,
+        "rate": 0.009672619047619048,
+        "wilson_lo": 0.005661392162139547,
+        "wilson_hi": 0.016478792520118392
+      }
+    },
+    "gpt-oss-120b-api|inw": {
+      "n_vars": 247,
+      "labels": {
+        "PASS": 245,
+        "ERR_VAL": 2
+      },
+      "var_mag_correct": {
+        "k": 245,
+        "n": 247,
+        "rate": 0.9919028340080972,
+        "wilson_lo": 0.970962733607108,
+        "wilson_hi": 0.9977766491984299
+      },
+      "convention_blind_given_mag": {
+        "k": 0,
+        "n": 245,
+        "rate": 0.0,
+        "wilson_lo": 8.673617379884035e-19,
+        "wilson_hi": 0.015437374619565052
+      },
+      "sign_wrong_given_mag": {
+        "k": 0,
+        "n": 245,
+        "rate": 0.0,
+        "wilson_lo": 8.673617379884035e-19,
+        "wilson_hi": 0.015437374619565052
+      }
+    },
+    "gpt-oss-120b-api|wrk": {
+      "n_vars": 1344,
+      "labels": {
+        "PASS": 1342,
+        "ERR_SIGN_CONVENTION": 1,
+        "ERR_VAL": 1
+      },
+      "var_mag_correct": {
+        "k": 1343,
+        "n": 1344,
+        "rate": 0.9992559523809523,
+        "wilson_lo": 0.9957974186029435,
+        "wilson_hi": 0.9998686452486574
+      },
+      "convention_blind_given_mag": {
+        "k": 1,
+        "n": 1343,
+        "rate": 0.0007446016381236039,
+        "wilson_lo": 0.00013145256730631672,
+        "wilson_hi": 0.0042057014328452345
+      },
+      "sign_wrong_given_mag": {
+        "k": 1,
+        "n": 1343,
+        "rate": 0.0007446016381236039,
+        "wilson_lo": 0.00013145256730631672,
+        "wilson_hi": 0.0042057014328452345
+      }
+    },
+    "gpt5-api|cw": {
+      "n_vars": 1350,
+      "labels": {
+        "PASS": 1331,
+        "ERR_SIGN_CONVENTION": 13,
+        "ERR_VAL": 6
+      },
+      "var_mag_correct": {
+        "k": 1344,
+        "n": 1350,
+        "rate": 0.9955555555555555,
+        "wilson_lo": 0.9903373544671865,
+        "wilson_hi": 0.9979615274162998
+      },
+      "convention_blind_given_mag": {
+        "k": 13,
+        "n": 1344,
+        "rate": 0.009672619047619048,
+        "wilson_lo": 0.005661392162139547,
+        "wilson_hi": 0.016478792520118392
+      },
+      "sign_wrong_given_mag": {
+        "k": 13,
+        "n": 1344,
+        "rate": 0.009672619047619048,
+        "wilson_lo": 0.005661392162139547,
+        "wilson_hi": 0.016478792520118392
+      }
+    },
+    "gpt5-api|inw": {
+      "n_vars": 250,
+      "labels": {
+        "PASS": 244,
+        "ERR_VAL": 5,
+        "ERR_SIGN_CONVENTION": 1
+      },
+      "var_mag_correct": {
+        "k": 245,
+        "n": 250,
+        "rate": 0.98,
+        "wilson_lo": 0.9540443568684314,
+        "wilson_hi": 0.9914276756159417
+      },
+      "convention_blind_given_mag": {
+        "k": 1,
+        "n": 245,
+        "rate": 0.004081632653061225,
+        "wilson_lo": 0.0007208721124959076,
+        "wilson_hi": 0.02275374842854208
+      },
+      "sign_wrong_given_mag": {
+        "k": 1,
+        "n": 245,
+        "rate": 0.004081632653061225,
+        "wilson_lo": 0.0007208721124959076,
+        "wilson_hi": 0.02275374842854208
+      }
+    },
+    "gpt5-api|wrk": {
+      "n_vars": 1350,
+      "labels": {
+        "PASS": 1342,
+        "ERR_VAL": 2,
+        "ERR_MISSING": 6
+      },
+      "var_mag_correct": {
+        "k": 1342,
+        "n": 1350,
+        "rate": 0.9940740740740741,
+        "wilson_lo": 0.988350099081409,
+        "wilson_hi": 0.9969942271013793
+      },
+      "convention_blind_given_mag": {
+        "k": 0,
+        "n": 1342,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.0028543174944693993
+      },
+      "sign_wrong_given_mag": {
+        "k": 0,
+        "n": 1342,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.0028543174944693993
+      }
+    },
+    "llama33-70b-api|cw": {
+      "n_vars": 270,
+      "labels": {
+        "ERR_MISSING": 47,
+        "ERR_SIGN_CONVENTION": 106,
+        "ERR_VAL": 113,
+        "PASS": 4
+      },
+      "var_mag_correct": {
+        "k": 110,
+        "n": 270,
+        "rate": 0.4074074074074074,
+        "wilson_lo": 0.3504960844840084,
+        "wilson_hi": 0.4669165154366669
+      },
+      "convention_blind_given_mag": {
+        "k": 106,
+        "n": 110,
+        "rate": 0.9636363636363636,
+        "wilson_lo": 0.910213207186402,
+        "wilson_hi": 0.985769689173482
+      },
+      "sign_wrong_given_mag": {
+        "k": 106,
+        "n": 110,
+        "rate": 0.9636363636363636,
+        "wilson_lo": 0.910213207186402,
+        "wilson_hi": 0.985769689173482
+      }
+    },
+    "qwen25-72b-api|cw": {
+      "n_vars": 270,
+      "labels": {
+        "ERR_SIGN_CONVENTION": 109,
+        "ERR_VAL": 113,
+        "PASS": 5,
+        "ERR_MISSING": 43
+      },
+      "var_mag_correct": {
+        "k": 114,
+        "n": 270,
+        "rate": 0.4222222222222222,
+        "wilson_lo": 0.36480398205813874,
+        "wilson_hi": 0.48182260187522846
+      },
+      "convention_blind_given_mag": {
+        "k": 109,
+        "n": 114,
+        "rate": 0.956140350877193,
+        "wilson_lo": 0.9014191976891217,
+        "wilson_hi": 0.981122490446672
+      },
+      "sign_wrong_given_mag": {
+        "k": 109,
+        "n": 114,
+        "rate": 0.956140350877193,
+        "wilson_lo": 0.9014191976891217,
+        "wilson_hi": 0.981122490446672
+      }
+    },
+    "qwen3-8b-nothink|cw": {
+      "n_vars": 982,
+      "labels": {
+        "ERR_SIGN_CONVENTION": 344,
+        "ERR_VAL": 489,
+        "PASS": 28,
+        "ERR_MISSING": 121
+      },
+      "var_mag_correct": {
+        "k": 372,
+        "n": 982,
+        "rate": 0.3788187372708758,
+        "wilson_lo": 0.34900630735754395,
+        "wilson_hi": 0.4095755641284597
+      },
+      "convention_blind_given_mag": {
+        "k": 344,
+        "n": 372,
+        "rate": 0.9247311827956989,
+        "wilson_lo": 0.8933667169550047,
+        "wilson_hi": 0.9474133316099856
+      },
+      "sign_wrong_given_mag": {
+        "k": 344,
+        "n": 372,
+        "rate": 0.9247311827956989,
+        "wilson_lo": 0.8933667169550047,
+        "wilson_hi": 0.9474133316099856
+      }
+    },
+    "qwen3-8b-nothink|inw": {
+      "n_vars": 184,
+      "labels": {
+        "ERR_VAL": 116,
+        "ERR_MISSING": 27,
+        "PASS": 27,
+        "ERR_SIGN_CONVENTION": 14
+      },
+      "var_mag_correct": {
+        "k": 41,
+        "n": 184,
+        "rate": 0.22282608695652173,
+        "wilson_lo": 0.16871447615407004,
+        "wilson_hi": 0.2882744088323637
+      },
+      "convention_blind_given_mag": {
+        "k": 14,
+        "n": 41,
+        "rate": 0.34146341463414637,
+        "wilson_lo": 0.21558808257384846,
+        "wilson_hi": 0.49450163480170306
+      },
+      "sign_wrong_given_mag": {
+        "k": 14,
+        "n": 41,
+        "rate": 0.34146341463414637,
+        "wilson_lo": 0.21558808257384846,
+        "wilson_hi": 0.49450163480170306
+      }
+    },
+    "qwen3-8b-nothink|wrk": {
+      "n_vars": 1002,
+      "labels": {
+        "PASS": 293,
+        "ERR_VAL": 475,
+        "ERR_MISSING": 180,
+        "ERR_SIGN_CONVENTION": 54
+      },
+      "var_mag_correct": {
+        "k": 347,
+        "n": 1002,
+        "rate": 0.3463073852295409,
+        "wilson_lo": 0.3174848692688331,
+        "wilson_hi": 0.37630385131033584
+      },
+      "convention_blind_given_mag": {
+        "k": 54,
+        "n": 347,
+        "rate": 0.15561959654178675,
+        "wilson_lo": 0.12127238743231017,
+        "wilson_hi": 0.1975082355779635
+      },
+      "sign_wrong_given_mag": {
+        "k": 54,
+        "n": 347,
+        "rate": 0.15561959654178675,
+        "wilson_lo": 0.12127238743231017,
+        "wilson_hi": 0.1975082355779635
+      }
+    }
+  },
+  "var_level_both_denominators": {
+    "deepseek-v3-api|cw": {
+      "all_vars": {
+        "k": 152,
+        "n": 183,
+        "rate": 0.8306010928961749,
+        "wilson_lo": 0.7695909118148678,
+        "wilson_hi": 0.8780169626029823
+      },
+      "diagnostic_vars": {
+        "k": 150,
+        "n": 161,
+        "rate": 0.9316770186335404,
+        "wilson_lo": 0.8818100526848196,
+        "wilson_hi": 0.9614244163282026
+      }
+    },
+    "deepseek-v3-api|dflt": {
+      "all_vars": {
+        "k": 0,
+        "n": 195,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.019319204573721077
+      },
+      "diagnostic_vars": null
+    },
+    "gemma4-31b-api|cw": {
+      "all_vars": {
+        "k": 59,
+        "n": 1316,
+        "rate": 0.044832826747720364,
+        "wilson_lo": 0.03491515195815025,
+        "wilson_hi": 0.05740007121233722
+      },
+      "diagnostic_vars": {
+        "k": 57,
+        "n": 1111,
+        "rate": 0.05130513051305131,
+        "wilson_lo": 0.03980879478176834,
+        "wilson_hi": 0.06589364199821078
+      }
+    },
+    "gemma4-31b-api|dflt": {
+      "all_vars": {
+        "k": 0,
+        "n": 1416,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.0027055547623498766
+      },
+      "diagnostic_vars": null
+    },
+    "gemma4-31b-api|inw": {
+      "all_vars": {
+        "k": 0,
+        "n": 1458,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.002627821777467668
+      },
+      "diagnostic_vars": {
+        "k": 0,
+        "n": 229,
+        "rate": 0.0,
+        "wilson_lo": 1.734723475976807e-18,
+        "wilson_hi": 0.016498173650648464
+      }
+    },
+    "gemma4-31b-api|wrk": {
+      "all_vars": {
+        "k": 0,
+        "n": 1378,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.002779956265006366
+      },
+      "diagnostic_vars": {
+        "k": 0,
+        "n": 1163,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.003292185747819262
+      }
+    },
+    "gpt-oss-120b-api|cw": {
+      "all_vars": {
+        "k": 22,
+        "n": 1591,
+        "rate": 0.013827781269641735,
+        "wilson_lo": 0.009149247135374107,
+        "wilson_hi": 0.02084837962313172
+      },
+      "diagnostic_vars": {
+        "k": 13,
+        "n": 1344,
+        "rate": 0.009672619047619048,
+        "wilson_lo": 0.005661392162139547,
+        "wilson_hi": 0.016478792520118392
+      }
+    },
+    "gpt-oss-120b-api|dflt": {
+      "all_vars": {
+        "k": 0,
+        "n": 1584,
+        "rate": 0.0,
+        "wilson_lo": 2.168404344971009e-19,
+        "wilson_hi": 0.0024192962082922407
+      },
+      "diagnostic_vars": null
+    },
+    "gpt-oss-120b-api|inw": {
+      "all_vars": {
+        "k": 0,
+        "n": 1577,
+        "rate": 0.0,
+        "wilson_lo": 2.168404344971009e-19,
+        "wilson_hi": 0.0024300089039667825
+      },
+      "diagnostic_vars": {
+        "k": 0,
+        "n": 245,
+        "rate": 0.0,
+        "wilson_lo": 8.673617379884035e-19,
+        "wilson_hi": 0.015437374619565052
+      }
+    },
+    "gpt-oss-120b-api|wrk": {
+      "all_vars": {
+        "k": 1,
+        "n": 1591,
+        "rate": 0.0006285355122564425,
+        "wilson_lo": 0.00011096056919698816,
+        "wilson_hi": 0.0035517601284537946
+      },
+      "diagnostic_vars": {
+        "k": 1,
+        "n": 1343,
+        "rate": 0.0007446016381236039,
+        "wilson_lo": 0.00013145256730631672,
+        "wilson_hi": 0.0042057014328452345
+      }
+    },
+    "gpt5-api|cw": {
+      "all_vars": {
+        "k": 16,
+        "n": 1589,
+        "rate": 0.010069225928256766,
+        "wilson_lo": 0.006207425854979472,
+        "wilson_hi": 0.016294159988491964
+      },
+      "diagnostic_vars": {
+        "k": 13,
+        "n": 1344,
+        "rate": 0.009672619047619048,
+        "wilson_lo": 0.005661392162139547,
+        "wilson_hi": 0.016478792520118392
+      }
+    },
+    "gpt5-api|dflt": {
+      "all_vars": {
+        "k": 0,
+        "n": 1598,
+        "rate": 0.0,
+        "wilson_lo": 2.168404344971009e-19,
+        "wilson_hi": 0.002398151701930777
+      },
+      "diagnostic_vars": null
+    },
+    "gpt5-api|inw": {
+      "all_vars": {
+        "k": 1,
+        "n": 1591,
+        "rate": 0.0006285355122564425,
+        "wilson_lo": 0.00011096056919698816,
+        "wilson_hi": 0.0035517601284537946
+      },
+      "diagnostic_vars": {
+        "k": 1,
+        "n": 245,
+        "rate": 0.004081632653061225,
+        "wilson_lo": 0.0007208721124959076,
+        "wilson_hi": 0.02275374842854208
+      }
+    },
+    "gpt5-api|wrk": {
+      "all_vars": {
+        "k": 0,
+        "n": 1590,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.0024101887922632374
+      },
+      "diagnostic_vars": {
+        "k": 0,
+        "n": 1342,
+        "rate": 0.0,
+        "wilson_lo": 0.0,
+        "wilson_hi": 0.0028543174944693993
+      }
+    },
+    "llama33-70b-api|cw": {
+      "all_vars": {
+        "k": 106,
+        "n": 118,
+        "rate": 0.8983050847457628,
+        "wilson_lo": 0.8306299390150504,
+        "wilson_hi": 0.9408644349839796
+      },
+      "diagnostic_vars": {
+        "k": 106,
+        "n": 110,
+        "rate": 0.9636363636363636,
+        "wilson_lo": 0.910213207186402,
+        "wilson_hi": 0.985769689173482
+      }
+    },
+    "llama33-70b-api|dflt": {
+      "all_vars": {
+        "k": 2,
+        "n": 143,
+        "rate": 0.013986013986013986,
+        "wilson_lo": 0.0038438866303400557,
+        "wilson_hi": 0.04955696408082872
+      },
+      "diagnostic_vars": null
+    },
+    "qwen25-72b-api|cw": {
+      "all_vars": {
+        "k": 109,
+        "n": 124,
+        "rate": 0.8790322580645161,
+        "wilson_lo": 0.8099807076815497,
+        "wilson_hi": 0.9253050193989043
+      },
+      "diagnostic_vars": {
+        "k": 109,
+        "n": 114,
+        "rate": 0.956140350877193,
+        "wilson_lo": 0.9014191976891217,
+        "wilson_hi": 0.981122490446672
+      }
+    },
+    "qwen25-72b-api|dflt": {
+      "all_vars": {
+        "k": 4,
+        "n": 145,
+        "rate": 0.027586206896551724,
+        "wilson_lo": 0.010778902912521014,
+        "wilson_hi": 0.06877862705605621
+      },
+      "diagnostic_vars": null
+    },
+    "qwen3-8b-nothink|cw": {
+      "all_vars": {
+        "k": 348,
+        "n": 414,
+        "rate": 0.8405797101449275,
+        "wilson_lo": 0.8022094659484491,
+        "wilson_hi": 0.8726876608132421
+      },
+      "diagnostic_vars": {
+        "k": 344,
+        "n": 372,
+        "rate": 0.9247311827956989,
+        "wilson_lo": 0.8933667169550047,
+        "wilson_hi": 0.9474133316099856
+      }
+    },
+    "qwen3-8b-nothink|dflt": {
+      "all_vars": {
+        "k": 20,
+        "n": 395,
+        "rate": 0.05063291139240506,
+        "wilson_lo": 0.03301304397147464,
+        "wilson_hi": 0.07690897604702045
+      },
+      "diagnostic_vars": null
+    },
+    "qwen3-8b-nothink|inw": {
+      "all_vars": {
+        "k": 24,
+        "n": 430,
+        "rate": 0.05581395348837209,
+        "wilson_lo": 0.03779043272891824,
+        "wilson_hi": 0.08170358465156477
+      },
+      "diagnostic_vars": {
+        "k": 14,
+        "n": 41,
+        "rate": 0.34146341463414637,
+        "wilson_lo": 0.21558808257384846,
+        "wilson_hi": 0.49450163480170306
+      }
+    },
+    "qwen3-8b-nothink|wrk": {
+      "all_vars": {
+        "k": 57,
+        "n": 387,
+        "rate": 0.14728682170542637,
+        "wilson_lo": 0.1154486210544737,
+        "wilson_hi": 0.1860584380386511
+      },
+      "diagnostic_vars": {
+        "k": 54,
+        "n": 347,
+        "rate": 0.15561959654178675,
+        "wilson_lo": 0.12127238743231017,
+        "wilson_hi": 0.1975082355779635
+      }
+    }
+  }
+}
