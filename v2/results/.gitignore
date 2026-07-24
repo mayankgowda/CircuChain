@@ -29,3 +29,7 @@ rhr/*
 rhr_xhard/*
 !rhr_xhard/tables/
 !rhr_xhard/tables/**
+!intervention/
+intervention/*
+!intervention/tables/
+!intervention/tables/**

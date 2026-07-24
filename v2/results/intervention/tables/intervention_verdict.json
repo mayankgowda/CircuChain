@@ -1,0 +1,22 @@
+{
+  "registered": "commit 9f8ceae \u2014 if reversion is unrepresented-reversal-driven, 1-shot in-context demonstration collapses it",
+  "verdict": "NULL / REFUTED-STRONG-FORM: the prior is decode-dominant; in-context demonstration barely moves it",
+  "gemma": {
+    "baseline": "436/560 (77.9%)",
+    "one_shot": "344/491 (70.1%)",
+    "delta_pp": -7.8,
+    "paired": "b=140/c=4"
+  },
+  "gpt_oss": {
+    "baseline": "322/434 (74.2%)",
+    "one_shot": "210/282 (74.5%)",
+    "delta_pp": 0.3,
+    "paired": "b=39/c=0"
+  },
+  "incoherent": 0,
+  "caveats": [
+    "1-shot only (k-shot dose curve = follow-up)",
+    "exemplar topology=supermesh (cross-topology transfer)",
+    "gemma n=443/500, gpt-oss n=280/500 (second credit wall; salvaged partials)"
+  ]
+}
