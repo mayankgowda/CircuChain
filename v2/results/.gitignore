@@ -33,3 +33,7 @@ rhr_xhard/*
 intervention/*
 !intervention/tables/
 !intervention/tables/**
+!intervention_3shot/
+intervention_3shot/*
+!intervention_3shot/tables/
+!intervention_3shot/tables/**
