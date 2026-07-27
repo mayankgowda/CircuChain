@@ -10,3 +10,8 @@ __pycache__/
 .env
 circuchain-v2-review-bundle.zip
 circuchain-v2-review-bundle/
+v2/paper/iclr/*.aux
+v2/paper/iclr/*.bbl
+v2/paper/iclr/*.blg
+v2/paper/iclr/*.log
+v2/paper/iclr/*.out
