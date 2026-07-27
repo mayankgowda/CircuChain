@@ -1,0 +1,61 @@
+{
+  "gpt5_dose_curve": {
+    "0shot": "36/51 (70.6%, v2 248-subset baseline)",
+    "1shot": "395/526 (75.1%, full)",
+    "3shot": "139/190 (73.2%, partial \u2014 OpenAI quota wall at 184/500)",
+    "verdict": "FLAT \u2014 the frontier-est model gains nothing from demonstrations; final k-shot picture: gemma shallow slope (~4.5pp/shot), gpt-oss flat, GPT-5 flat"
+  },
+  "contour_c1_full_ladder": {
+    "1.7b": {
+      "nothink": {
+        "mag": "0%",
+        "revert": "93.6%"
+      },
+      "think": {
+        "mag": "24%",
+        "revert": "96.2%"
+      }
+    },
+    "4b": {
+      "nothink": {
+        "mag": "4%",
+        "revert": "97.1%"
+      },
+      "think": {
+        "mag": "59%",
+        "revert": "98.6%"
+      }
+    },
+    "8b": {
+      "nothink": {
+        "mag": "5%",
+        "revert": "93.7%"
+      },
+      "think": {
+        "mag": "75%",
+        "revert": "94.3%"
+      }
+    },
+    "14b": {
+      "nothink": {
+        "mag": "15%",
+        "revert": "95.3%"
+      },
+      "think": {
+        "mag": "74%",
+        "revert": "91.4%"
+      }
+    },
+    "32b": {
+      "nothink": {
+        "mag": "12%",
+        "revert": "96.8%"
+      },
+      "think": {
+        "mag": "88%",
+        "revert": "94.6%"
+      }
+    },
+    "verdict": "five scales, both modes: competence 0-88%, reversion pinned 91-99% \u2014 the complete dissociation table"
+  }
+}
