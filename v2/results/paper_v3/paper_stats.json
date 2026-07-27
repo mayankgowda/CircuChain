@@ -1,0 +1,884 @@
+{
+  "circuits": {
+    "gpt5-api": {
+      "mag": {
+        "k": 19,
+        "n": 62,
+        "rate": 0.3064516129032258
+      },
+      "ccw": {
+        "revert": 36,
+        "n": 51,
+        "incoherent": 0,
+        "rate": 0.7058823529411765
+      },
+      "act": {
+        "revert": 0,
+        "n": 50,
+        "incoherent": 0,
+        "rate": 0.0
+      },
+      "top": {
+        "revert": 0,
+        "n": 15,
+        "incoherent": 0,
+        "rate": 0.0
+      }
+    },
+    "gpt-oss-120b-api": {
+      "mag": {
+        "k": 150,
+        "n": 250,
+        "rate": 0.6
+      },
+      "ccw": {
+        "revert": 322,
+        "n": 434,
+        "incoherent": 0,
+        "rate": 0.7419354838709677
+      },
+      "act": {
+        "revert": 31,
+        "n": 268,
+        "incoherent": 0,
+        "rate": 0.11567164179104478
+      },
+      "top": {
+        "revert": 2,
+        "n": 172,
+        "incoherent": 11,
+        "rate": 0.011627906976744186
+      }
+    },
+    "gemma4-31b-api": {
+      "mag": {
+        "k": 213,
+        "n": 250,
+        "rate": 0.852
+      },
+      "ccw": {
+        "revert": 436,
+        "n": 560,
+        "incoherent": 0,
+        "rate": 0.7785714285714286
+      },
+      "act": {
+        "revert": 15,
+        "n": 437,
+        "incoherent": 0,
+        "rate": 0.034324942791762014
+      },
+      "top": {
+        "revert": 0,
+        "n": 250,
+        "incoherent": 4,
+        "rate": 0.0
+      }
+    },
+    "deepseek-v3-api": {
+      "mag": {
+        "k": 47,
+        "n": 250,
+        "rate": 0.188
+      },
+      "ccw": {
+        "revert": 147,
+        "n": 185,
+        "incoherent": 0,
+        "rate": 0.7945945945945946
+      },
+      "act": {
+        "revert": 93,
+        "n": 150,
+        "incoherent": 0,
+        "rate": 0.62
+      },
+      "top": {
+        "revert": 2,
+        "n": 30,
+        "incoherent": 16,
+        "rate": 0.06666666666666667
+      }
+    },
+    "llama33-70b-api": {
+      "mag": {
+        "k": 13,
+        "n": 250,
+        "rate": 0.052
+      },
+      "ccw": {
+        "revert": 85,
+        "n": 108,
+        "incoherent": 0,
+        "rate": 0.7870370370370371
+      },
+      "act": {
+        "revert": 71,
+        "n": 97,
+        "incoherent": 0,
+        "rate": 0.7319587628865979
+      },
+      "top": {
+        "revert": 1,
+        "n": 8,
+        "incoherent": 7,
+        "rate": 0.125
+      }
+    },
+    "qwen25-72b-api": {
+      "mag": {
+        "k": 10,
+        "n": 250,
+        "rate": 0.04
+      },
+      "ccw": {
+        "revert": 67,
+        "n": 88,
+        "incoherent": 0,
+        "rate": 0.7613636363636364
+      },
+      "act": {
+        "revert": 44,
+        "n": 78,
+        "incoherent": 0,
+        "rate": 0.5641025641025641
+      },
+      "top": {
+        "revert": 2,
+        "n": 28,
+        "incoherent": 25,
+        "rate": 0.07142857142857142
+      }
+    },
+    "qwen3-32b-think": {
+      "mag": {
+        "k": 31,
+        "n": 250,
+        "rate": 0.124
+      },
+      "ccw": {
+        "revert": 47,
+        "n": 62,
+        "incoherent": 0,
+        "rate": 0.7580645161290323
+      },
+      "act": {
+        "revert": 29,
+        "n": 58,
+        "incoherent": 0,
+        "rate": 0.5
+      },
+      "top": {
+        "revert": 0,
+        "n": 19,
+        "incoherent": 3,
+        "rate": 0.0
+      }
+    },
+    "qwen3-32b-nothink": {
+      "mag": {
+        "k": 18,
+        "n": 250,
+        "rate": 0.072
+      },
+      "ccw": {
+        "revert": 79,
+        "n": 102,
+        "incoherent": 0,
+        "rate": 0.7745098039215687
+      },
+      "act": {
+        "revert": 53,
+        "n": 85,
+        "incoherent": 0,
+        "rate": 0.6235294117647059
+      },
+      "top": {
+        "revert": 2,
+        "n": 16,
+        "incoherent": 8,
+        "rate": 0.125
+      }
+    }
+  },
+  "contour_easy": {
+    "gpt5-api": {
+      "mag": {
+        "k": 248,
+        "n": 250,
+        "rate": 0.992
+      },
+      "cw": {
+        "revert": 13,
+        "n": 1344,
+        "incoherent": 0,
+        "rate": 0.009672619047619048
+      },
+      "wrk": {
+        "revert": 0,
+        "n": 1342,
+        "incoherent": 0,
+        "rate": 0.0
+      },
+      "inw": {
+        "revert": 1,
+        "n": 245,
+        "incoherent": 0,
+        "rate": 0.004081632653061225
+      }
+    },
+    "gpt-oss-120b-api": {
+      "mag": {
+        "k": 246,
+        "n": 248,
+        "rate": 0.9919354838709677
+      },
+      "cw": {
+        "revert": 13,
+        "n": 1344,
+        "incoherent": 0,
+        "rate": 0.009672619047619048
+      },
+      "wrk": {
+        "revert": 1,
+        "n": 1343,
+        "incoherent": 0,
+        "rate": 0.0007446016381236039
+      },
+      "inw": {
+        "revert": 0,
+        "n": 245,
+        "incoherent": 0,
+        "rate": 0.0
+      }
+    },
+    "gemma4-31b-api": {
+      "mag": {
+        "k": 246,
+        "n": 249,
+        "rate": 0.9879518072289156
+      },
+      "cw": {
+        "revert": 64,
+        "n": 1214,
+        "incoherent": 0,
+        "rate": 0.05271828665568369
+      },
+      "wrk": {
+        "revert": 0,
+        "n": 1338,
+        "incoherent": 0,
+        "rate": 0.0
+      },
+      "inw": {
+        "revert": 0,
+        "n": 246,
+        "incoherent": 0,
+        "rate": 0.0
+      }
+    },
+    "deepseek-v3-api": {
+      "mag": {
+        "k": 70,
+        "n": 250,
+        "rate": 0.28
+      },
+      "cw": {
+        "revert": 806,
+        "n": 872,
+        "incoherent": 0,
+        "rate": 0.9243119266055045
+      },
+      "wrk": {
+        "revert": 290,
+        "n": 829,
+        "incoherent": 0,
+        "rate": 0.3498190591073583
+      },
+      "inw": {
+        "revert": 59,
+        "n": 94,
+        "incoherent": 0,
+        "rate": 0.6276595744680851
+      }
+    },
+    "llama33-70b-api": {
+      "mag": {
+        "k": 7,
+        "n": 250,
+        "rate": 0.028
+      },
+      "cw": {
+        "revert": 482,
+        "n": 518,
+        "incoherent": 0,
+        "rate": 0.9305019305019305
+      },
+      "wrk": {
+        "revert": 243,
+        "n": 491,
+        "incoherent": 0,
+        "rate": 0.49490835030549896
+      },
+      "inw": {
+        "revert": 16,
+        "n": 33,
+        "incoherent": 0,
+        "rate": 0.48484848484848486
+      }
+    },
+    "qwen25-72b-api": {
+      "mag": {
+        "k": 17,
+        "n": 250,
+        "rate": 0.068
+      },
+      "cw": {
+        "revert": 564,
+        "n": 602,
+        "incoherent": 0,
+        "rate": 0.9368770764119602
+      },
+      "wrk": {
+        "revert": 93,
+        "n": 572,
+        "incoherent": 0,
+        "rate": 0.16258741258741258
+      },
+      "inw": {
+        "revert": 29,
+        "n": 50,
+        "incoherent": 0,
+        "rate": 0.58
+      }
+    },
+    "qwen3-1.7b-nothink": {
+      "mag": {
+        "k": 1,
+        "n": 250,
+        "rate": 0.004
+      },
+      "cw": {
+        "revert": 190,
+        "n": 203,
+        "incoherent": 0,
+        "rate": 0.9359605911330049
+      },
+      "wrk": {
+        "revert": 211,
+        "n": 241,
+        "incoherent": 0,
+        "rate": 0.8755186721991701
+      },
+      "inw": {
+        "revert": 13,
+        "n": 15,
+        "incoherent": 0,
+        "rate": 0.8666666666666667
+      }
+    },
+    "qwen3-1.7b-think": {
+      "mag": {
+        "k": 59,
+        "n": 250,
+        "rate": 0.236
+      },
+      "cw": {
+        "revert": 782,
+        "n": 813,
+        "incoherent": 0,
+        "rate": 0.9618696186961869
+      },
+      "wrk": {
+        "revert": 241,
+        "n": 839,
+        "incoherent": 0,
+        "rate": 0.2872467222884386
+      },
+      "inw": {
+        "revert": 8,
+        "n": 66,
+        "incoherent": 0,
+        "rate": 0.12121212121212122
+      }
+    },
+    "qwen3-4b-nothink": {
+      "mag": {
+        "k": 9,
+        "n": 250,
+        "rate": 0.036
+      },
+      "cw": {
+        "revert": 402,
+        "n": 414,
+        "incoherent": 0,
+        "rate": 0.9710144927536232
+      },
+      "wrk": {
+        "revert": 93,
+        "n": 398,
+        "incoherent": 0,
+        "rate": 0.23366834170854273
+      },
+      "inw": {
+        "revert": 23,
+        "n": 46,
+        "incoherent": 0,
+        "rate": 0.5
+      }
+    },
+    "qwen3-4b-think": {
+      "mag": {
+        "k": 148,
+        "n": 250,
+        "rate": 0.592
+      },
+      "cw": {
+        "revert": 704,
+        "n": 714,
+        "incoherent": 0,
+        "rate": 0.9859943977591037
+      },
+      "wrk": {
+        "revert": 2,
+        "n": 917,
+        "incoherent": 0,
+        "rate": 0.0021810250817884407
+      },
+      "inw": {
+        "revert": 40,
+        "n": 161,
+        "incoherent": 0,
+        "rate": 0.2484472049689441
+      }
+    },
+    "qwen3-8b-nothink": {
+      "mag": {
+        "k": 12,
+        "n": 250,
+        "rate": 0.048
+      },
+      "cw": {
+        "revert": 483,
+        "n": 515,
+        "incoherent": 0,
+        "rate": 0.9378640776699029
+      },
+      "wrk": {
+        "revert": 63,
+        "n": 464,
+        "incoherent": 0,
+        "rate": 0.13577586206896552
+      },
+      "inw": {
+        "revert": 18,
+        "n": 56,
+        "incoherent": 0,
+        "rate": 0.32142857142857145
+      }
+    },
+    "qwen3-8b-think": {
+      "mag": {
+        "k": 187,
+        "n": 250,
+        "rate": 0.748
+      },
+      "cw": {
+        "revert": 601,
+        "n": 637,
+        "incoherent": 0,
+        "rate": 0.9434850863422292
+      },
+      "wrk": {
+        "revert": 0,
+        "n": 1028,
+        "incoherent": 0,
+        "rate": 0.0
+      },
+      "inw": {
+        "revert": 49,
+        "n": 196,
+        "incoherent": 0,
+        "rate": 0.25
+      }
+    },
+    "qwen3-14b-nothink": {
+      "mag": {
+        "k": 38,
+        "n": 250,
+        "rate": 0.152
+      },
+      "cw": {
+        "revert": 648,
+        "n": 680,
+        "incoherent": 0,
+        "rate": 0.9529411764705882
+      },
+      "wrk": {
+        "revert": 184,
+        "n": 608,
+        "incoherent": 0,
+        "rate": 0.3026315789473684
+      },
+      "inw": {
+        "revert": 41,
+        "n": 65,
+        "incoherent": 0,
+        "rate": 0.6307692307692307
+      }
+    },
+    "qwen3-14b-think": {
+      "mag": {
+        "k": 186,
+        "n": 250,
+        "rate": 0.744
+      },
+      "cw": {
+        "revert": 709,
+        "n": 776,
+        "incoherent": 0,
+        "rate": 0.913659793814433
+      },
+      "wrk": {
+        "revert": 0,
+        "n": 1106,
+        "incoherent": 0,
+        "rate": 0.0
+      },
+      "inw": {
+        "revert": 64,
+        "n": 188,
+        "incoherent": 0,
+        "rate": 0.3404255319148936
+      }
+    },
+    "qwen3-32b-nothink": {
+      "mag": {
+        "k": 29,
+        "n": 250,
+        "rate": 0.116
+      },
+      "cw": {
+        "revert": 633,
+        "n": 654,
+        "incoherent": 0,
+        "rate": 0.9678899082568807
+      },
+      "wrk": {
+        "revert": 87,
+        "n": 621,
+        "incoherent": 0,
+        "rate": 0.14009661835748793
+      },
+      "inw": {
+        "revert": 16,
+        "n": 68,
+        "incoherent": 0,
+        "rate": 0.23529411764705882
+      }
+    },
+    "qwen3-32b-think": {
+      "mag": {
+        "k": 219,
+        "n": 250,
+        "rate": 0.876
+      },
+      "cw": {
+        "revert": 647,
+        "n": 684,
+        "incoherent": 0,
+        "rate": 0.945906432748538
+      },
+      "wrk": {
+        "revert": 0,
+        "n": 1178,
+        "incoherent": 0,
+        "rate": 0.0
+      },
+      "inw": {
+        "revert": 36,
+        "n": 216,
+        "incoherent": 0,
+        "rate": 0.16666666666666666
+      }
+    }
+  },
+  "contour_hard": {
+    "gpt5-api": {
+      "mag": {
+        "k": 189,
+        "n": 249,
+        "rate": 0.7590361445783133
+      },
+      "cw": {
+        "revert": 183,
+        "n": 1336,
+        "incoherent": 0,
+        "rate": 0.13697604790419163
+      },
+      "wrk": {
+        "revert": 1,
+        "n": 1548,
+        "incoherent": 0,
+        "rate": 0.0006459948320413437
+      }
+    },
+    "gpt-oss-120b-api": {
+      "mag": {
+        "k": 183,
+        "n": 197,
+        "rate": 0.9289340101522843
+      },
+      "cw": {
+        "revert": 66,
+        "n": 1319,
+        "incoherent": 0,
+        "rate": 0.050037907505686124
+      },
+      "wrk": {
+        "revert": 6,
+        "n": 1404,
+        "incoherent": 0,
+        "rate": 0.004273504273504274
+      }
+    },
+    "gemma4-31b-api": {
+      "mag": {
+        "k": 94,
+        "n": 183,
+        "rate": 0.5136612021857924
+      },
+      "cw": {
+        "revert": 327,
+        "n": 914,
+        "incoherent": 0,
+        "rate": 0.35776805251641136
+      },
+      "wrk": {
+        "revert": 3,
+        "n": 1021,
+        "incoherent": 0,
+        "rate": 0.002938295788442703
+      }
+    }
+  },
+  "rhr_xhard": {
+    "gpt5-api": {
+      "mag": {
+        "k": 244,
+        "n": 250,
+        "rate": 0.976
+      },
+      "lh": {
+        "revert": 7,
+        "n": 1236,
+        "incoherent": 0,
+        "rate": 0.0056634304207119745
+      },
+      "rxn": {
+        "revert": 3,
+        "n": 1192,
+        "incoherent": 0,
+        "rate": 0.0025167785234899327
+      }
+    },
+    "gpt-oss-120b-api": {
+      "mag": {
+        "k": 219,
+        "n": 228,
+        "rate": 0.9605263157894737
+      },
+      "lh": {
+        "revert": 0,
+        "n": 1143,
+        "incoherent": 0,
+        "rate": 0.0
+      },
+      "rxn": {
+        "revert": 50,
+        "n": 1143,
+        "incoherent": 0,
+        "rate": 0.04374453193350831
+      }
+    },
+    "gemma4-31b-api": {
+      "mag": {
+        "k": 243,
+        "n": 250,
+        "rate": 0.972
+      },
+      "lh": {
+        "revert": 0,
+        "n": 1231,
+        "incoherent": 0,
+        "rate": 0.0
+      },
+      "rxn": {
+        "revert": 0,
+        "n": 1235,
+        "incoherent": 0,
+        "rate": 0.0
+      }
+    }
+  },
+  "intervention": {
+    "gemma4-31b-api": {
+      "shot0": {
+        "revert": 436,
+        "n": 560,
+        "incoherent": 0,
+        "rate": 0.7785714285714286
+      },
+      "shot1": {
+        "revert": 380,
+        "n": 532,
+        "incoherent": 0,
+        "rate": 0.7142857142857143
+      },
+      "shot3": {
+        "revert": 323,
+        "n": 502,
+        "incoherent": 0,
+        "rate": 0.6434262948207171
+      }
+    },
+    "gpt-oss-120b-api": {
+      "shot0": {
+        "revert": 322,
+        "n": 434,
+        "incoherent": 0,
+        "rate": 0.7419354838709677
+      },
+      "shot1": {
+        "revert": 366,
+        "n": 475,
+        "incoherent": 0,
+        "rate": 0.7705263157894737
+      },
+      "shot3": {
+        "revert": 281,
+        "n": 382,
+        "incoherent": 0,
+        "rate": 0.7356020942408377
+      }
+    },
+    "gpt5-api": {
+      "shot0": {
+        "revert": 36,
+        "n": 51,
+        "incoherent": 0,
+        "rate": 0.7058823529411765
+      },
+      "shot1": {
+        "revert": 395,
+        "n": 526,
+        "incoherent": 0,
+        "rate": 0.7509505703422054
+      },
+      "shot3": {
+        "revert": 139,
+        "n": 190,
+        "incoherent": 0,
+        "rate": 0.7315789473684211
+      }
+    }
+  },
+  "entrenchment": {
+    "ccw": {
+      "revert": 794,
+      "n": 1045,
+      "rate": 0.7598086124401914,
+      "wilson": [
+        0.7329852530469997,
+        0.7847287659240251
+      ]
+    },
+    "act": {
+      "revert": 46,
+      "n": 755,
+      "rate": 0.060927152317880796,
+      "wilson": [
+        0.04598633687739173,
+        0.08031353914416536
+      ]
+    },
+    "top": {
+      "revert": 2,
+      "n": 437,
+      "rate": 0.004576659038901602,
+      "wilson": [
+        0.0012559572292417265,
+        0.016531837751994162
+      ]
+    },
+    "cw": {
+      "revert": 90,
+      "n": 3902,
+      "rate": 0.023065094823167605,
+      "wilson": [
+        0.018803167717318613,
+        0.028265202899656745
+      ]
+    },
+    "wrk": {
+      "revert": 1,
+      "n": 4023,
+      "rate": 0.00024857071836937607,
+      "wilson": [
+        4.3879054381025214e-05,
+        0.0014067864001528704
+      ]
+    },
+    "inw": {
+      "revert": 1,
+      "n": 736,
+      "rate": 0.001358695652173913,
+      "wilson": [
+        0.00023987725080457925,
+        0.007655866919298858
+      ]
+    },
+    "lh": {
+      "revert": 7,
+      "n": 3610,
+      "rate": 0.0019390581717451524,
+      "wilson": [
+        0.0009395921496118563,
+        0.003997425565829794
+      ]
+    },
+    "rxn": {
+      "revert": 53,
+      "n": 3570,
+      "rate": 0.01484593837535014,
+      "wilson": [
+        0.011368282106219686,
+        0.019366599932200818
+      ]
+    }
+  },
+  "entrenchment_tiers": {
+    "ccw": 2,
+    "act": 1,
+    "top": 1,
+    "cw": 0,
+    "wrk": 0,
+    "inw": 0,
+    "lh": 1,
+    "rxn": 0
+  },
+  "trend_tier": {
+    "slope": 3.3518091145888422,
+    "z": 45.365039158806894,
+    "p": 0.0
+  },
+  "trend_strain": {
+    "slope": 2.0981757472865024,
+    "z": 18.096018337248097,
+    "p": 3.425535770089374e-73
+  },
+  "incoherence": {
+    "incoherent": 74,
+    "total_diag_vars": 49014
+  }
+}
