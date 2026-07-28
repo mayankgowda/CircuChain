@@ -1,0 +1,49 @@
+# CircuChain V3 — RHR-domain LOCAL panel (qwen3 ladder on v3rhrxhard) (mirror of the frozen v2 circuits panel).
+#
+# Same decoding policy, same serving stacks, same pinned providers as v2 so the
+# cross-domain within-model contrast is stack-clean:
+#   * qwen3 1.7b/4b/8b think+nothink : LOCAL M5 LM Studio MLX (same stack as v2)
+#   * qwen3 14b/32b think+nothink    : OpenRouter DeepInfra fp8 (same as v2 C1 columns)
+#   * anchors                        : same providers/pins as v2
+# The ONLY intended difference vs v2 is the domain: dataset + system prompt.
+#
+# Run everything with --dataset results/contour/datasets/v3contour_seed20260720
+#                     --out results/contour  and ALWAYS --only <keys>.
+defaults:
+  backend: lmstudio
+  host: "http://localhost:1234"
+  temperature: 0.6
+  top_p: 0.95
+  top_k: 20
+  seed: 20260720            # provenance; MLX ignores it (v2 policy note applies)
+  max_tokens: 16384
+  num_ctx: 24576            # matches the explicit per-size load; think crash-guard, ample for nothink
+  concurrency: 4
+  system_prompt: "You are a careful classical-mechanics and electromagnetism assistant. Solve vector problems exactly as specified: follow the stated cross-product handedness, sign, and reporting conventions and the required method, and end with the mandatory ANSWER line in the requested format."
+
+models:
+  # --- LOCAL M5 ladder (run one at a time via scripts/run_contour_ladder.sh) ---
+  # All think columns at concurrency 2 + 24k ctx: the durable-fix policy from v2
+  # (conc 3/4 destabilized MLX on think columns; do not raise).
+  - {key: qwen3-1.7b-think,   serve_id: "sweep-qwen3-1.7b", concurrency: 2, num_ctx: 24576, model_id: "qwen/qwen3-1.7b", family: qwen3, role_axis: reasoning, scale_tier: 1.7b, engine: mlx, quant: 8bit, think: true,  think_style: qwen_slash, contrast: "C1-reason,C3-scale", enabled: true}
+  - {key: qwen3-1.7b-nothink, serve_id: "sweep-qwen3-1.7b", model_id: "qwen/qwen3-1.7b", family: qwen3, role_axis: base, scale_tier: 1.7b, engine: mlx, quant: 8bit, think: false, think_style: qwen_slash, contrast: "C1-reason", max_tokens: 4096, enabled: true}
+  - {key: qwen3-4b-think,     serve_id: "sweep-qwen3-4b", concurrency: 2, num_ctx: 24576, model_id: "qwen/qwen3-4b", family: qwen3, role_axis: reasoning, scale_tier: 4b, engine: mlx, quant: 8bit, think: true,  think_style: qwen_slash, contrast: "C1-reason,C3-scale", enabled: true}
+  - {key: qwen3-4b-nothink,   serve_id: "sweep-qwen3-4b", model_id: "qwen/qwen3-4b", family: qwen3, role_axis: base, scale_tier: 4b, engine: mlx, quant: 8bit, think: false, think_style: qwen_slash, contrast: "C1-reason", max_tokens: 4096, enabled: true}
+  - {key: qwen3-8b-think,     serve_id: "sweep-qwen3-8b", concurrency: 2, num_ctx: 24576, model_id: "qwen/qwen3-8b", family: qwen3, role_axis: reasoning, scale_tier: 8b, engine: mlx, quant: 8bit, think: true,  think_style: qwen_slash, contrast: "C1-reason,C3-scale", enabled: true}
+  - {key: qwen3-8b-nothink,   serve_id: "sweep-qwen3-8b", model_id: "qwen/qwen3-8b", family: qwen3, role_axis: base, scale_tier: 8b, engine: mlx, quant: 8bit, think: false, think_style: qwen_slash, contrast: "C1-reason", max_tokens: 4096, enabled: true}
+
+  # --- OpenRouter C1 pairs, DeepInfra fp8 pinned (same stack as v2 14b/32b) ---
+  - {key: qwen3-14b-think,   backend: openai_compat, provider: openrouter, base_url: "https://openrouter.ai/api/v1", api_key_env: OPENROUTER_API_KEY, model_id: "qwen/qwen3-14b", family: qwen3, role_axis: reasoning, scale_tier: 14b, engine: api, quant: fp8, think: true,  think_style: qwen_slash, contrast: "C1-reason,C3-scale", max_tokens: 16384, concurrency: 32, api_quant: "fp8", enabled: true, extra_body: {provider: {order: ["DeepInfra"], allow_fallbacks: false, quantizations: ["fp8"], require_parameters: true}}}
+  - {key: qwen3-14b-nothink, backend: openai_compat, provider: openrouter, base_url: "https://openrouter.ai/api/v1", api_key_env: OPENROUTER_API_KEY, model_id: "qwen/qwen3-14b", family: qwen3, role_axis: base,      scale_tier: 14b, engine: api, quant: fp8, think: false, think_style: qwen_slash, contrast: "C1-reason",         max_tokens: 4096,  concurrency: 32, api_quant: "fp8", enabled: true, extra_body: {provider: {order: ["DeepInfra"], allow_fallbacks: false, quantizations: ["fp8"], require_parameters: true}}}
+  - {key: qwen3-32b-think,   backend: openai_compat, provider: openrouter, base_url: "https://openrouter.ai/api/v1", api_key_env: OPENROUTER_API_KEY, model_id: "qwen/qwen3-32b", family: qwen3, role_axis: reasoning, scale_tier: 32b, engine: api, quant: fp8, think: true,  think_style: qwen_slash, contrast: "C1-reason,C3-scale", max_tokens: 16384, concurrency: 32, api_quant: "fp8", enabled: true, extra_body: {provider: {order: ["DeepInfra"], allow_fallbacks: false, quantizations: ["fp8"], require_parameters: true}}}
+  - {key: qwen3-32b-nothink, backend: openai_compat, provider: openrouter, base_url: "https://openrouter.ai/api/v1", api_key_env: OPENROUTER_API_KEY, model_id: "qwen/qwen3-32b", family: qwen3, role_axis: base,      scale_tier: 32b, engine: api, quant: fp8, think: false, think_style: qwen_slash, contrast: "C1-reason",         max_tokens: 4096,  concurrency: 32, api_quant: "fp8", enabled: true, extra_body: {provider: {order: ["DeepInfra"], allow_fallbacks: false, quantizations: ["fp8"], require_parameters: true}}}
+
+  # --- Competent anchors (same providers/pins as v2) ---
+  - {key: gemma4-31b-api, backend: openai_compat, provider: together, base_url: "https://api.together.xyz/v1", api_key_env: TOGETHER_API_KEY, model_id: "google/gemma-4-31B-it", family: gemma4, role_axis: base, scale_tier: 31b, think_style: none, max_tokens: 16384, concurrency: 16, enabled: true}
+  - {key: gpt-oss-120b-api, backend: openai_compat, provider: together, base_url: "https://api.together.xyz/v1", api_key_env: TOGETHER_API_KEY, model_id: "openai/gpt-oss-120b", family: openai-oss, role_axis: reasoning, scale_tier: 120b-moe, think_style: none, max_tokens: 16384, concurrency: 16, enabled: true}
+  - {key: llama33-70b-api, backend: openai_compat, provider: openrouter, base_url: "https://openrouter.ai/api/v1", api_key_env: OPENROUTER_API_KEY, model_id: "meta-llama/llama-3.3-70b-instruct", family: llama3, role_axis: base, scale_tier: 70b, think_style: none, max_tokens: 4096, concurrency: 16, api_quant: "fp8", enabled: true, extra_body: {provider: {order: ["DeepInfra"], allow_fallbacks: false, quantizations: ["fp8"], require_parameters: true}}}
+  - {key: qwen25-72b-api, backend: openai_compat, provider: openrouter, base_url: "https://openrouter.ai/api/v1", api_key_env: OPENROUTER_API_KEY, model_id: "qwen/qwen-2.5-72b-instruct", family: qwen2.5, role_axis: base, scale_tier: 72b, think_style: none, max_tokens: 4096, concurrency: 16, api_quant: "fp8", enabled: true, extra_body: {provider: {order: ["DeepInfra"], allow_fallbacks: false, quantizations: ["fp8"], require_parameters: true}}}
+  - {key: deepseek-v3-api, backend: openai_compat, provider: openrouter, base_url: "https://openrouter.ai/api/v1", api_key_env: OPENROUTER_API_KEY, model_id: "deepseek/deepseek-chat", family: deepseek, role_axis: base, scale_tier: v3-moe, think_style: none, max_tokens: 4096, concurrency: 16, api_quant: "fp8", enabled: true, extra_body: {provider: {order: ["Novita"], allow_fallbacks: false, quantizations: ["fp8"], require_parameters: true}}}
+
+  # --- Frontier (GPT-5@low: the proven config from v2; cost-gate before full runs) ---
+  - {key: gpt5-api, backend: openai_compat, provider: openrouter, base_url: "https://openrouter.ai/api/v1", api_key_env: OPENROUTER_API_KEY, model_id: "openai/gpt-5", family: gpt, role_axis: reasoning, scale_tier: frontier, think_style: none, max_tokens: 8192, concurrency: 8, top_k: null, api_quant: "native", enabled: true, extra_body: {reasoning: {effort: "low"}}}
