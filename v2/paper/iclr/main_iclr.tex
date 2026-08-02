@@ -32,11 +32,14 @@ raising task difficulty reactivates the prior dose-dependently
 requiring the \emph{identical} output edit stays $\le$\wrkHGptOss--\wrkHGemma\%,
 isolating convention entrenchment from generic instruction loss. (3) \emph{Capability}:
 mid-scale models revert on even taught-reversal conventions ($91$--$99\%$) that frontier
-models obey. Two mitigations fail: enabling reasoning raises competence by up to $76$
-points while moving compliance by $2$--$4$ points (five model scales, two domains), and
-in-context worked demonstrations of the required convention leave reversion essentially
-unchanged in two of three frontier models (GPT-5: \shotZeroGptFive\%$\to$%
-\shotThreeGptFive\% after three examples). Two pre-registered predictions were refuted
+models obey. Mitigations are conditional at best: enabling reasoning raises competence by up to
+$76$ points while moving compliance by $2$--$4$ points on untrained and
+procedurally-deep conventions (five model scales, two domains) --- yet the same toggle
+\emph{does} restore compliance on the taught, shallow handedness rule
+(\LhNothinkMid\%$\to$\LhThinkMid\% at 4B) while report-time framing conventions
+keep slipping (\RxnThinkBig\%); and in-context worked demonstrations leave reversion
+essentially unchanged in two of three frontier models (GPT-5:
+\shotZeroGptFive\%$\to$\shotThreeGptFive\% after three examples). Two pre-registered predictions were refuted
 and are reported as such. All answers are graded sign-exactly against four-way
 independent oracles; the benchmark regenerates deterministically by seed.
 \end{abstract}
@@ -72,8 +75,9 @@ occurs only under the study's single affine (non-sign-flip) transform
 (3)~\emph{An anatomy}: reversion is governed by reversal pedagogy, load, and capability
 (Section~\ref{sec:anatomy}), including a dose-response with a transform-matched control
 that isolates entrenchment causally.
-(4)~\emph{Two negative results on mitigation}: reasoning modes and in-context worked
-demonstrations both fail to restore compliance (Section~\ref{sec:nofix}).
+(4)~\emph{A conditional map of mitigation}: in-context demonstrations barely move any
+convention, and reasoning modes restore compliance only where the reversal is both
+taught and procedurally shallow (Section~\ref{sec:nofix}).
 (5)~\emph{A falsification record}: two predictions pre-registered in the project
 history were refuted by the data and are reported as refuted
 (Section~\ref{sec:prereg}).
@@ -217,7 +221,15 @@ taught reversal under load is itself an emergent capability.
 magnitude-competence from 0--15\% to 24--88\% across five scales while moving
 orientation reversion by $2$--$4$ points (Table~\ref{tab:c1},
 Figure~\ref{fig:c1})---replicating, in a second domain, the dissociation we first
-observed in circuits. Test-time compute purchases competence, not compliance.
+observed in circuits. The same toggle on the vectors domain reveals the boundary of
+this dissociation: handedness reversion \emph{collapses} under reasoning
+(\LhNothinkMid\%$\to$\LhThinkMid\% at 4B, $\to$\LhThinkBig\% at 8B;
+Table~\ref{tab:rhrladder}, Appendix), while reaction-pair slippage persists at
+\LhThinkSmall--\RxnThinkBig\% in the same responses. Test-time compute retrieves a
+convention reversal only when it is both \emph{taught} and \emph{procedurally
+shallow} (a per-operation sign rule that the chain of thought can verbalize); it does
+not conjure untrained reversals, does not sustain reversals woven through a long
+derivation, and does not reliably hold report-time framing conventions.
 
 \begin{table}[t]
 \centering\small
@@ -300,6 +312,16 @@ under contamination.
 \bibliographystyle{iclr2026_conference}
 
 \appendix
+\section{Reasoning toggle on the vectors domain}
+\begin{table}[h]
+\centering\small
+\caption{Qwen3 reasoning toggle on vectors (xhard): competence \% / reversion \% per
+convention. Reasoning collapses the taught, shallow handedness reversal but not the
+reaction framing.}
+\label{tab:rhrladder}
+\input{generated/table_rhr_ladder_full}
+\end{table}
+
 \section{Reproducibility}
 All datasets are deterministic functions of (config, seed); regeneration commands,
 manifests with canary GUIDs, transform-validation reports (125/125 per domain), the

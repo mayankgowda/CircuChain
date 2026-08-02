@@ -204,3 +204,20 @@ json.dump(S, open(os.path.join(out, "paper_stats.json"), "w"), indent=2, default
 print(f"paper_stats.json frozen: {tot} diagnostic vars audited, {inco} incoherent")
 print(f"trend tier: z={S['trend_tier']['z']:.2f} p={S['trend_tier']['p']:.2g}")
 print(f"trend strain: z={S['trend_strain']['z']:.2f} p={S['trend_strain']['p']:.2g}")
+
+# ---------------- rhr ladder (3-scale C1 on the vectors domain) ----------------
+S["rhr_ladder"] = {}
+for s_ in ("1.7b", "4b", "8b"):
+    for mode in ("nothink", "think"):
+        m = f"qwen3-{s_}-{mode}"
+        g = f"results/rhr_xhard/graded/{m}.jsonl"
+        S["rhr_ladder"][m] = {"mag": mag_rate(g, RHR_X),
+                              "lh": var_level(g, RHR_X, "lh"),
+                              "rxn": var_level(g, RHR_X, "rxn")}
+for m, d in S["rhr_ladder"].items():
+    for k, v in d.items():
+        if k != "mag" and v:
+            inco += v["incoherent"]; tot += v["n"]
+S["incoherence"] = {"incoherent": inco, "total_diag_vars": tot}
+json.dump(S, open(os.path.join(out, "paper_stats.json"), "w"), indent=2, default=float)
+print(f"re-frozen with rhr_ladder: {tot} vars, {inco} incoherent")

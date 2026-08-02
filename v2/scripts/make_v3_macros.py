@@ -86,3 +86,33 @@ body_c = open(os.path.join(OUT, "table_c1.tex")).read()
 open(os.path.join(OUT, "table_c1_full.tex"), "w").write(
     head_c + body_c + "\\bottomrule\n\\end{tabular}\n")
 print("full tabular files emitted")
+
+# RHR ladder appendix table + updated macros
+RL = S.get("rhr_ladder", {})
+if RL:
+    rows = []
+    for s_ in ("1.7b", "4b", "8b"):
+        nt, th = RL[f"qwen3-{s_}-nothink"], RL[f"qwen3-{s_}-think"]
+        rows.append(f"{s_} & {pct(nt['mag']['rate'],0)} & {pct(nt['lh']['rate'])} & "
+                    f"{pct(nt['rxn']['rate'])} & {pct(th['mag']['rate'],0)} & "
+                    f"{pct(th['lh']['rate'])} & {pct(th['rxn']['rate'])} \\\\")
+    head = ("\\begin{tabular}{lcccccc}\n\\toprule\n& \\multicolumn{3}{c}{no-think} & "
+            "\\multicolumn{3}{c}{think} \\\\\nScale & Comp. & lh rev. & rxn rev. & "
+            "Comp. & lh rev. & rxn rev. \\\\\n\\midrule\n")
+    open(os.path.join(OUT, "table_rhr_ladder_full.tex"), "w").write(
+        head + "\n".join(rows) + "\n\\bottomrule\n\\end{tabular}\n")
+    ex = []
+    for tag, m in (("LhThinkSmall", "qwen3-1.7b-think"), ("LhThinkMid", "qwen3-4b-think"),
+                   ("LhThinkBig", "qwen3-8b-think"), ("RxnThinkBig", "qwen3-8b-think")):
+        cell = "rxn" if tag.startswith("Rxn") else "lh"
+        ex.append(f"\\newcommand{{\\{tag}}}{{{pct(RL[m][cell]['rate'])}}}")
+    ex.append(f"\\newcommand{{\\LhNothinkMid}}{{{pct(RL['qwen3-4b-nothink']['lh']['rate'])}}}")
+    with open(os.path.join(OUT, "macros.tex"), "a") as f:
+        f.write("\n" + "\n".join(ex) + "\n")
+    # keep the study-wide totals macros in sync with the re-frozen counts
+    inc2 = S["incoherence"]
+    with open(os.path.join(OUT, "macros.tex"), "a") as f:
+        f.write(f"\\renewcommand{{\\totalDiagVars}}{{{inc2['total_diag_vars']:,}}}\n")
+        f.write(f"\\renewcommand{{\\incoherentN}}{{{inc2['incoherent']}}}\n")
+        f.write(f"\\renewcommand{{\\coherencePct}}{{{(1-inc2['incoherent']/inc2['total_diag_vars'])*100:.2f}}}\n")
+    print("rhr ladder table + macros appended")
