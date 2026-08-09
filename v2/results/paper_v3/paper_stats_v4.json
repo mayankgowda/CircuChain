@@ -1,0 +1,1848 @@
+{
+  "circuits": {
+    "gpt5-api": {
+      "mag": {
+        "k": 19,
+        "n": 62,
+        "rate": 0.3064516129032258
+      },
+      "ccw": {
+        "pass": 15,
+        "revert": 36,
+        "incoherent": 0,
+        "magwrong_or_missing": 109,
+        "n_magcorrect": 51,
+        "rate": 0.7058823529411765,
+        "err_default_share": 0.2482758620689655,
+        "boot_ci": [
+          0.58,
+          0.8297872340425532
+        ]
+      },
+      "act": {
+        "pass": 50,
+        "revert": 0,
+        "incoherent": 0,
+        "magwrong_or_missing": 74,
+        "n_magcorrect": 50,
+        "rate": 0.0,
+        "err_default_share": 0.0,
+        "boot_ci": [
+          0.0,
+          0.0
+        ]
+      },
+      "top": {
+        "pass": 15,
+        "revert": 0,
+        "incoherent": 0,
+        "magwrong_or_missing": 65,
+        "n_magcorrect": 15,
+        "rate": 0.0,
+        "err_default_share": 0.0,
+        "boot_ci": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "gpt-oss-120b-api": {
+      "mag": {
+        "k": 150,
+        "n": 250,
+        "rate": 0.6
+      },
+      "ccw": {
+        "pass": 112,
+        "revert": 322,
+        "incoherent": 0,
+        "magwrong_or_missing": 208,
+        "n_magcorrect": 434,
+        "rate": 0.7419354838709677,
+        "err_default_share": 0.6075471698113207,
+        "boot_ci": [
+          0.6952380952380952,
+          0.7860576923076923
+        ]
+      },
+      "act": {
+        "pass": 237,
+        "revert": 31,
+        "incoherent": 0,
+        "magwrong_or_missing": 232,
+        "n_magcorrect": 268,
+        "rate": 0.11567164179104478,
+        "err_default_share": 0.11787072243346007,
+        "boot_ci": [
+          0.07905138339920949,
+          0.15298507462686567
+        ]
+      },
+      "top": {
+        "pass": 159,
+        "revert": 2,
+        "incoherent": 11,
+        "magwrong_or_missing": 156,
+        "n_magcorrect": 172,
+        "rate": 0.011627906976744186,
+        "err_default_share": 0.011834319526627219,
+        "boot_ci": [
+          0.0,
+          0.038834951456310676
+        ]
+      }
+    },
+    "gemma4-31b-api": {
+      "mag": {
+        "k": 213,
+        "n": 250,
+        "rate": 0.852
+      },
+      "ccw": {
+        "pass": 124,
+        "revert": 436,
+        "incoherent": 0,
+        "magwrong_or_missing": 82,
+        "n_magcorrect": 560,
+        "rate": 0.7785714285714286,
+        "err_default_share": 0.8416988416988417,
+        "boot_ci": [
+          0.7321428571428571,
+          0.8249534450651769
+        ]
+      },
+      "act": {
+        "pass": 422,
+        "revert": 15,
+        "incoherent": 0,
+        "magwrong_or_missing": 63,
+        "n_magcorrect": 437,
+        "rate": 0.034324942791762014,
+        "err_default_share": 0.19230769230769232,
+        "boot_ci": [
+          0.01647058823529412,
+          0.05491990846681922
+        ]
+      },
+      "top": {
+        "pass": 246,
+        "revert": 0,
+        "incoherent": 4,
+        "magwrong_or_missing": 78,
+        "n_magcorrect": 250,
+        "rate": 0.0,
+        "err_default_share": 0.0,
+        "boot_ci": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "deepseek-v3-api": {
+      "mag": {
+        "k": 47,
+        "n": 250,
+        "rate": 0.188
+      },
+      "ccw": {
+        "pass": 38,
+        "revert": 147,
+        "incoherent": 0,
+        "magwrong_or_missing": 457,
+        "n_magcorrect": 185,
+        "rate": 0.7945945945945946,
+        "err_default_share": 0.2433774834437086,
+        "boot_ci": [
+          0.7180851063829787,
+          0.8601036269430051
+        ]
+      },
+      "act": {
+        "pass": 57,
+        "revert": 93,
+        "incoherent": 0,
+        "magwrong_or_missing": 350,
+        "n_magcorrect": 150,
+        "rate": 0.62,
+        "err_default_share": 0.20993227990970656,
+        "boot_ci": [
+          0.5472972972972973,
+          0.6906474820143885
+        ]
+      },
+      "top": {
+        "pass": 12,
+        "revert": 2,
+        "incoherent": 16,
+        "magwrong_or_missing": 298,
+        "n_magcorrect": 30,
+        "rate": 0.06666666666666667,
+        "err_default_share": 0.006329113924050633,
+        "boot_ci": [
+          0.0,
+          0.17857142857142858
+        ]
+      }
+    },
+    "llama33-70b-api": {
+      "mag": {
+        "k": 13,
+        "n": 250,
+        "rate": 0.052
+      },
+      "ccw": {
+        "pass": 23,
+        "revert": 85,
+        "incoherent": 0,
+        "magwrong_or_missing": 534,
+        "n_magcorrect": 108,
+        "rate": 0.7870370370370371,
+        "err_default_share": 0.13731825525040386,
+        "boot_ci": [
+          0.6875,
+          0.8773584905660378
+        ]
+      },
+      "act": {
+        "pass": 26,
+        "revert": 71,
+        "incoherent": 0,
+        "magwrong_or_missing": 403,
+        "n_magcorrect": 97,
+        "rate": 0.7319587628865979,
+        "err_default_share": 0.14978902953586498,
+        "boot_ci": [
+          0.6304347826086957,
+          0.8208955223880597
+        ]
+      },
+      "top": {
+        "pass": 0,
+        "revert": 1,
+        "incoherent": 7,
+        "magwrong_or_missing": 320,
+        "n_magcorrect": 8,
+        "rate": 0.125,
+        "err_default_share": 0.003048780487804878,
+        "boot_ci": [
+          0.0,
+          0.5
+        ]
+      }
+    },
+    "qwen25-72b-api": {
+      "mag": {
+        "k": 10,
+        "n": 250,
+        "rate": 0.04
+      },
+      "ccw": {
+        "pass": 21,
+        "revert": 67,
+        "incoherent": 0,
+        "magwrong_or_missing": 554,
+        "n_magcorrect": 88,
+        "rate": 0.7613636363636364,
+        "err_default_share": 0.10789049919484701,
+        "boot_ci": [
+          0.6307692307692307,
+          0.875
+        ]
+      },
+      "act": {
+        "pass": 34,
+        "revert": 44,
+        "incoherent": 0,
+        "magwrong_or_missing": 422,
+        "n_magcorrect": 78,
+        "rate": 0.5641025641025641,
+        "err_default_share": 0.0944206008583691,
+        "boot_ci": [
+          0.4375,
+          0.6805555555555556
+        ]
+      },
+      "top": {
+        "pass": 1,
+        "revert": 2,
+        "incoherent": 25,
+        "magwrong_or_missing": 300,
+        "n_magcorrect": 28,
+        "rate": 0.07142857142857142,
+        "err_default_share": 0.0061162079510703364,
+        "boot_ci": [
+          0.0,
+          0.1935483870967742
+        ]
+      }
+    },
+    "qwen3-32b-think": {
+      "mag": {
+        "k": 31,
+        "n": 250,
+        "rate": 0.124
+      },
+      "ccw": {
+        "pass": 15,
+        "revert": 47,
+        "incoherent": 0,
+        "magwrong_or_missing": 580,
+        "n_magcorrect": 62,
+        "rate": 0.7580645161290323,
+        "err_default_share": 0.07496012759170653,
+        "boot_ci": [
+          0.64,
+          0.868421052631579
+        ]
+      },
+      "act": {
+        "pass": 29,
+        "revert": 29,
+        "incoherent": 0,
+        "magwrong_or_missing": 442,
+        "n_magcorrect": 58,
+        "rate": 0.5,
+        "err_default_share": 0.06157112526539278,
+        "boot_ci": [
+          0.38461538461538464,
+          0.6129032258064516
+        ]
+      },
+      "top": {
+        "pass": 16,
+        "revert": 0,
+        "incoherent": 3,
+        "magwrong_or_missing": 309,
+        "n_magcorrect": 19,
+        "rate": 0.0,
+        "err_default_share": 0.0,
+        "boot_ci": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "qwen3-32b-nothink": {
+      "mag": {
+        "k": 18,
+        "n": 250,
+        "rate": 0.072
+      },
+      "ccw": {
+        "pass": 23,
+        "revert": 79,
+        "incoherent": 0,
+        "magwrong_or_missing": 540,
+        "n_magcorrect": 102,
+        "rate": 0.7745098039215687,
+        "err_default_share": 0.12762520193861066,
+        "boot_ci": [
+          0.6761904761904762,
+          0.8611111111111112
+        ]
+      },
+      "act": {
+        "pass": 32,
+        "revert": 53,
+        "incoherent": 0,
+        "magwrong_or_missing": 415,
+        "n_magcorrect": 85,
+        "rate": 0.6235294117647059,
+        "err_default_share": 0.11324786324786325,
+        "boot_ci": [
+          0.5194805194805194,
+          0.7160493827160493
+        ]
+      },
+      "top": {
+        "pass": 6,
+        "revert": 2,
+        "incoherent": 8,
+        "magwrong_or_missing": 312,
+        "n_magcorrect": 16,
+        "rate": 0.125,
+        "err_default_share": 0.006211180124223602,
+        "boot_ci": [
+          0.0,
+          0.3333333333333333
+        ]
+      }
+    }
+  },
+  "contour_easy": {
+    "gpt5-api": {
+      "mag": {
+        "k": 248,
+        "n": 250,
+        "rate": 0.992
+      },
+      "cw": {
+        "pass": 1331,
+        "revert": 13,
+        "incoherent": 0,
+        "magwrong_or_missing": 6,
+        "n_magcorrect": 1344,
+        "rate": 0.009672619047619048,
+        "err_default_share": 0.6842105263157895,
+        "boot_ci": [
+          0.0007230657989877079,
+          0.022813688212927757
+        ]
+      },
+      "wrk": {
+        "pass": 1342,
+        "revert": 0,
+        "incoherent": 0,
+        "magwrong_or_missing": 8,
+        "n_magcorrect": 1342,
+        "rate": 0.0,
+        "err_default_share": 0.0,
+        "boot_ci": [
+          0.0,
+          0.0
+        ]
+      },
+      "inw": {
+        "pass": 244,
+        "revert": 1,
+        "incoherent": 0,
+        "magwrong_or_missing": 5,
+        "n_magcorrect": 245,
+        "rate": 0.004081632653061225,
+        "err_default_share": 0.16666666666666666,
+        "boot_ci": [
+          0.0,
+          0.012396694214876033
+        ]
+      }
+    },
+    "gpt-oss-120b-api": {
+      "mag": {
+        "k": 246,
+        "n": 248,
+        "rate": 0.9919354838709677
+      },
+      "cw": {
+        "pass": 1331,
+        "revert": 13,
+        "incoherent": 0,
+        "magwrong_or_missing": 6,
+        "n_magcorrect": 1344,
+        "rate": 0.009672619047619048,
+        "err_default_share": 0.6842105263157895,
+        "boot_ci": [
+          0.0007401924500370096,
+          0.02329075882794891
+        ]
+      },
+      "wrk": {
+        "pass": 1342,
+        "revert": 1,
+        "incoherent": 0,
+        "magwrong_or_missing": 1,
+        "n_magcorrect": 1343,
+        "rate": 0.0007446016381236039,
+        "err_default_share": 0.5,
+        "boot_ci": [
+          0.0,
+          0.002260738507912585
+        ]
+      },
+      "inw": {
+        "pass": 245,
+        "revert": 0,
+        "incoherent": 0,
+        "magwrong_or_missing": 2,
+        "n_magcorrect": 245,
+        "rate": 0.0,
+        "err_default_share": 0.0,
+        "boot_ci": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "gemma4-31b-api": {
+      "mag": {
+        "k": 246,
+        "n": 249,
+        "rate": 0.9879518072289156
+      },
+      "cw": {
+        "pass": 1150,
+        "revert": 64,
+        "incoherent": 0,
+        "magwrong_or_missing": 111,
+        "n_magcorrect": 1214,
+        "rate": 0.05271828665568369,
+        "err_default_share": 0.3657142857142857,
+        "boot_ci": [
+          0.024650780608052588,
+          0.08433734939759036
+        ]
+      },
+      "wrk": {
+        "pass": 1338,
+        "revert": 0,
+        "incoherent": 0,
+        "magwrong_or_missing": 6,
+        "n_magcorrect": 1338,
+        "rate": 0.0,
+        "err_default_share": 0.0,
+        "boot_ci": [
+          0.0,
+          0.0
+        ]
+      },
+      "inw": {
+        "pass": 246,
+        "revert": 0,
+        "incoherent": 0,
+        "magwrong_or_missing": 2,
+        "n_magcorrect": 246,
+        "rate": 0.0,
+        "err_default_share": 0.0,
+        "boot_ci": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "deepseek-v3-api": {
+      "mag": {
+        "k": 70,
+        "n": 250,
+        "rate": 0.28
+      },
+      "cw": {
+        "pass": 66,
+        "revert": 806,
+        "incoherent": 0,
+        "magwrong_or_missing": 478,
+        "n_magcorrect": 872,
+        "rate": 0.9243119266055045,
+        "err_default_share": 0.6277258566978193,
+        "boot_ci": [
+          0.9084967320261438,
+          0.9390862944162437
+        ]
+      },
+      "wrk": {
+        "pass": 539,
+        "revert": 290,
+        "incoherent": 0,
+        "magwrong_or_missing": 521,
+        "n_magcorrect": 829,
+        "rate": 0.3498190591073583,
+        "err_default_share": 0.35758323057953145,
+        "boot_ci": [
+          0.28878281622911695,
+          0.41007194244604317
+        ]
+      },
+      "inw": {
+        "pass": 35,
+        "revert": 59,
+        "incoherent": 0,
+        "magwrong_or_missing": 156,
+        "n_magcorrect": 94,
+        "rate": 0.6276595744680851,
+        "err_default_share": 0.2744186046511628,
+        "boot_ci": [
+          0.5294117647058824,
+          0.7176470588235294
+        ]
+      }
+    },
+    "llama33-70b-api": {
+      "mag": {
+        "k": 7,
+        "n": 250,
+        "rate": 0.028
+      },
+      "cw": {
+        "pass": 36,
+        "revert": 482,
+        "incoherent": 0,
+        "magwrong_or_missing": 832,
+        "n_magcorrect": 518,
+        "rate": 0.9305019305019305,
+        "err_default_share": 0.3668188736681887,
+        "boot_ci": [
+          0.8994082840236687,
+          0.9576107899807321
+        ]
+      },
+      "wrk": {
+        "pass": 248,
+        "revert": 243,
+        "incoherent": 0,
+        "magwrong_or_missing": 859,
+        "n_magcorrect": 491,
+        "rate": 0.49490835030549896,
+        "err_default_share": 0.22050816696914702,
+        "boot_ci": [
+          0.3947939262472885,
+          0.5962732919254659
+        ]
+      },
+      "inw": {
+        "pass": 17,
+        "revert": 16,
+        "incoherent": 0,
+        "magwrong_or_missing": 217,
+        "n_magcorrect": 33,
+        "rate": 0.48484848484848486,
+        "err_default_share": 0.06866952789699571,
+        "boot_ci": [
+          0.3055555555555556,
+          0.6666666666666666
+        ]
+      }
+    },
+    "qwen25-72b-api": {
+      "mag": {
+        "k": 17,
+        "n": 250,
+        "rate": 0.068
+      },
+      "cw": {
+        "pass": 38,
+        "revert": 564,
+        "incoherent": 0,
+        "magwrong_or_missing": 748,
+        "n_magcorrect": 602,
+        "rate": 0.9368770764119602,
+        "err_default_share": 0.4298780487804878,
+        "boot_ci": [
+          0.9094076655052264,
+          0.9622950819672131
+        ]
+      },
+      "wrk": {
+        "pass": 479,
+        "revert": 93,
+        "incoherent": 0,
+        "magwrong_or_missing": 778,
+        "n_magcorrect": 572,
+        "rate": 0.16258741258741258,
+        "err_default_share": 0.10677382319173363,
+        "boot_ci": [
+          0.11049723756906077,
+          0.22039473684210525
+        ]
+      },
+      "inw": {
+        "pass": 21,
+        "revert": 29,
+        "incoherent": 0,
+        "magwrong_or_missing": 200,
+        "n_magcorrect": 50,
+        "rate": 0.58,
+        "err_default_share": 0.12663755458515283,
+        "boot_ci": [
+          0.44642857142857145,
+          0.717391304347826
+        ]
+      }
+    },
+    "qwen3-1.7b-nothink": {
+      "mag": {
+        "k": 1,
+        "n": 250,
+        "rate": 0.004
+      },
+      "cw": {
+        "pass": 13,
+        "revert": 190,
+        "incoherent": 0,
+        "magwrong_or_missing": 1147,
+        "n_magcorrect": 203,
+        "rate": 0.9359605911330049,
+        "err_default_share": 0.14210919970082272,
+        "boot_ci": [
+          0.891566265060241,
+          0.9733333333333334
+        ]
+      },
+      "wrk": {
+        "pass": 30,
+        "revert": 211,
+        "incoherent": 0,
+        "magwrong_or_missing": 1109,
+        "n_magcorrect": 241,
+        "rate": 0.8755186721991701,
+        "err_default_share": 0.15984848484848485,
+        "boot_ci": [
+          0.8062015503875969,
+          0.9389671361502347
+        ]
+      },
+      "inw": {
+        "pass": 2,
+        "revert": 13,
+        "incoherent": 0,
+        "magwrong_or_missing": 235,
+        "n_magcorrect": 15,
+        "rate": 0.8666666666666667,
+        "err_default_share": 0.05241935483870968,
+        "boot_ci": [
+          0.6666666666666666,
+          1.0
+        ]
+      }
+    },
+    "qwen3-1.7b-think": {
+      "mag": {
+        "k": 59,
+        "n": 250,
+        "rate": 0.236
+      },
+      "cw": {
+        "pass": 31,
+        "revert": 782,
+        "incoherent": 0,
+        "magwrong_or_missing": 537,
+        "n_magcorrect": 813,
+        "rate": 0.9618696186961869,
+        "err_default_share": 0.5928733889310084,
+        "boot_ci": [
+          0.9453883495145631,
+          0.9776609724047306
+        ]
+      },
+      "wrk": {
+        "pass": 598,
+        "revert": 241,
+        "incoherent": 0,
+        "magwrong_or_missing": 511,
+        "n_magcorrect": 839,
+        "rate": 0.2872467222884386,
+        "err_default_share": 0.3204787234042553,
+        "boot_ci": [
+          0.22677925211097708,
+          0.35206422018348627
+        ]
+      },
+      "inw": {
+        "pass": 58,
+        "revert": 8,
+        "incoherent": 0,
+        "magwrong_or_missing": 184,
+        "n_magcorrect": 66,
+        "rate": 0.12121212121212122,
+        "err_default_share": 0.041666666666666664,
+        "boot_ci": [
+          0.047619047619047616,
+          0.20833333333333334
+        ]
+      }
+    },
+    "qwen3-4b-nothink": {
+      "mag": {
+        "k": 9,
+        "n": 250,
+        "rate": 0.036
+      },
+      "cw": {
+        "pass": 12,
+        "revert": 402,
+        "incoherent": 0,
+        "magwrong_or_missing": 936,
+        "n_magcorrect": 414,
+        "rate": 0.9710144927536232,
+        "err_default_share": 0.3004484304932735,
+        "boot_ci": [
+          0.9504373177842566,
+          0.9877750611246944
+        ]
+      },
+      "wrk": {
+        "pass": 305,
+        "revert": 93,
+        "incoherent": 0,
+        "magwrong_or_missing": 952,
+        "n_magcorrect": 398,
+        "rate": 0.23366834170854273,
+        "err_default_share": 0.08899521531100478,
+        "boot_ci": [
+          0.17297297297297298,
+          0.30120481927710846
+        ]
+      },
+      "inw": {
+        "pass": 23,
+        "revert": 23,
+        "incoherent": 0,
+        "magwrong_or_missing": 204,
+        "n_magcorrect": 46,
+        "rate": 0.5,
+        "err_default_share": 0.1013215859030837,
+        "boot_ci": [
+          0.35714285714285715,
+          0.6388888888888888
+        ]
+      }
+    },
+    "qwen3-4b-think": {
+      "mag": {
+        "k": 148,
+        "n": 250,
+        "rate": 0.592
+      },
+      "cw": {
+        "pass": 10,
+        "revert": 704,
+        "incoherent": 0,
+        "magwrong_or_missing": 636,
+        "n_magcorrect": 714,
+        "rate": 0.9859943977591037,
+        "err_default_share": 0.5253731343283582,
+        "boot_ci": [
+          0.9656652360515021,
+          0.9984779299847792
+        ]
+      },
+      "wrk": {
+        "pass": 915,
+        "revert": 2,
+        "incoherent": 0,
+        "magwrong_or_missing": 433,
+        "n_magcorrect": 917,
+        "rate": 0.0021810250817884407,
+        "err_default_share": 0.004597701149425287,
+        "boot_ci": [
+          0.0,
+          0.005720823798627002
+        ]
+      },
+      "inw": {
+        "pass": 121,
+        "revert": 40,
+        "incoherent": 0,
+        "magwrong_or_missing": 89,
+        "n_magcorrect": 161,
+        "rate": 0.2484472049689441,
+        "err_default_share": 0.31007751937984496,
+        "boot_ci": [
+          0.18857142857142858,
+          0.3103448275862069
+        ]
+      }
+    },
+    "qwen3-8b-nothink": {
+      "mag": {
+        "k": 12,
+        "n": 250,
+        "rate": 0.048
+      },
+      "cw": {
+        "pass": 32,
+        "revert": 483,
+        "incoherent": 0,
+        "magwrong_or_missing": 835,
+        "n_magcorrect": 515,
+        "rate": 0.9378640776699029,
+        "err_default_share": 0.36646433990895294,
+        "boot_ci": [
+          0.913894324853229,
+          0.9572953736654805
+        ]
+      },
+      "wrk": {
+        "pass": 401,
+        "revert": 63,
+        "incoherent": 0,
+        "magwrong_or_missing": 886,
+        "n_magcorrect": 464,
+        "rate": 0.13577586206896552,
+        "err_default_share": 0.06638566912539515,
+        "boot_ci": [
+          0.09276018099547512,
+          0.18318965517241378
+        ]
+      },
+      "inw": {
+        "pass": 38,
+        "revert": 18,
+        "incoherent": 0,
+        "magwrong_or_missing": 194,
+        "n_magcorrect": 56,
+        "rate": 0.32142857142857145,
+        "err_default_share": 0.08490566037735849,
+        "boot_ci": [
+          0.2033898305084746,
+          0.4423076923076923
+        ]
+      }
+    },
+    "qwen3-8b-think": {
+      "mag": {
+        "k": 187,
+        "n": 250,
+        "rate": 0.748
+      },
+      "cw": {
+        "pass": 36,
+        "revert": 601,
+        "incoherent": 0,
+        "magwrong_or_missing": 713,
+        "n_magcorrect": 637,
+        "rate": 0.9434850863422292,
+        "err_default_share": 0.4573820395738204,
+        "boot_ci": [
+          0.9028400597907325,
+          0.9775112443778111
+        ]
+      },
+      "wrk": {
+        "pass": 1028,
+        "revert": 0,
+        "incoherent": 0,
+        "magwrong_or_missing": 322,
+        "n_magcorrect": 1028,
+        "rate": 0.0,
+        "err_default_share": 0.0,
+        "boot_ci": [
+          0.0,
+          0.0
+        ]
+      },
+      "inw": {
+        "pass": 147,
+        "revert": 49,
+        "incoherent": 0,
+        "magwrong_or_missing": 54,
+        "n_magcorrect": 196,
+        "rate": 0.25,
+        "err_default_share": 0.47572815533980584,
+        "boot_ci": [
+          0.19791666666666666,
+          0.3034825870646766
+        ]
+      }
+    },
+    "qwen3-14b-nothink": {
+      "mag": {
+        "k": 38,
+        "n": 250,
+        "rate": 0.152
+      },
+      "cw": {
+        "pass": 32,
+        "revert": 648,
+        "incoherent": 0,
+        "magwrong_or_missing": 670,
+        "n_magcorrect": 680,
+        "rate": 0.9529411764705882,
+        "err_default_share": 0.49165402124430957,
+        "boot_ci": [
+          0.9357249626307922,
+          0.9696
+        ]
+      },
+      "wrk": {
+        "pass": 424,
+        "revert": 184,
+        "incoherent": 0,
+        "magwrong_or_missing": 742,
+        "n_magcorrect": 608,
+        "rate": 0.3026315789473684,
+        "err_default_share": 0.19870410367170627,
+        "boot_ci": [
+          0.24161073825503357,
+          0.36429608127721336
+        ]
+      },
+      "inw": {
+        "pass": 24,
+        "revert": 41,
+        "incoherent": 0,
+        "magwrong_or_missing": 185,
+        "n_magcorrect": 65,
+        "rate": 0.6307692307692307,
+        "err_default_share": 0.18141592920353983,
+        "boot_ci": [
+          0.5081967213114754,
+          0.7538461538461538
+        ]
+      }
+    },
+    "qwen3-14b-think": {
+      "mag": {
+        "k": 186,
+        "n": 250,
+        "rate": 0.744
+      },
+      "cw": {
+        "pass": 67,
+        "revert": 709,
+        "incoherent": 0,
+        "magwrong_or_missing": 574,
+        "n_magcorrect": 776,
+        "rate": 0.913659793814433,
+        "err_default_share": 0.5526110678098207,
+        "boot_ci": [
+          0.8743386243386243,
+          0.9514824797843666
+        ]
+      },
+      "wrk": {
+        "pass": 1106,
+        "revert": 0,
+        "incoherent": 0,
+        "magwrong_or_missing": 244,
+        "n_magcorrect": 1106,
+        "rate": 0.0,
+        "err_default_share": 0.0,
+        "boot_ci": [
+          0.0,
+          0.0
+        ]
+      },
+      "inw": {
+        "pass": 124,
+        "revert": 64,
+        "incoherent": 0,
+        "magwrong_or_missing": 62,
+        "n_magcorrect": 188,
+        "rate": 0.3404255319148936,
+        "err_default_share": 0.5079365079365079,
+        "boot_ci": [
+          0.2857142857142857,
+          0.39378238341968913
+        ]
+      }
+    },
+    "qwen3-32b-nothink": {
+      "mag": {
+        "k": 29,
+        "n": 250,
+        "rate": 0.116
+      },
+      "cw": {
+        "pass": 21,
+        "revert": 633,
+        "incoherent": 0,
+        "magwrong_or_missing": 696,
+        "n_magcorrect": 654,
+        "rate": 0.9678899082568807,
+        "err_default_share": 0.4762979683972912,
+        "boot_ci": [
+          0.953125,
+          0.9808
+        ]
+      },
+      "wrk": {
+        "pass": 534,
+        "revert": 87,
+        "incoherent": 0,
+        "magwrong_or_missing": 729,
+        "n_magcorrect": 621,
+        "rate": 0.14009661835748793,
+        "err_default_share": 0.10661764705882353,
+        "boot_ci": [
+          0.09437386569872959,
+          0.19281663516068054
+        ]
+      },
+      "inw": {
+        "pass": 52,
+        "revert": 16,
+        "incoherent": 0,
+        "magwrong_or_missing": 182,
+        "n_magcorrect": 68,
+        "rate": 0.23529411764705882,
+        "err_default_share": 0.08080808080808081,
+        "boot_ci": [
+          0.13559322033898305,
+          0.33783783783783783
+        ]
+      }
+    },
+    "qwen3-32b-think": {
+      "mag": {
+        "k": 219,
+        "n": 250,
+        "rate": 0.876
+      },
+      "cw": {
+        "pass": 37,
+        "revert": 647,
+        "incoherent": 0,
+        "magwrong_or_missing": 666,
+        "n_magcorrect": 684,
+        "rate": 0.945906432748538,
+        "err_default_share": 0.49276466108149275,
+        "boot_ci": [
+          0.9078125,
+          0.977810650887574
+        ]
+      },
+      "wrk": {
+        "pass": 1178,
+        "revert": 0,
+        "incoherent": 0,
+        "magwrong_or_missing": 172,
+        "n_magcorrect": 1178,
+        "rate": 0.0,
+        "err_default_share": 0.0,
+        "boot_ci": [
+          0.0,
+          0.0
+        ]
+      },
+      "inw": {
+        "pass": 180,
+        "revert": 36,
+        "incoherent": 0,
+        "magwrong_or_missing": 34,
+        "n_magcorrect": 216,
+        "rate": 0.16666666666666666,
+        "err_default_share": 0.5142857142857142,
+        "boot_ci": [
+          0.12135922330097088,
+          0.21171171171171171
+        ]
+      }
+    }
+  },
+  "contour_hard": {
+    "gpt5-api": {
+      "mag": {
+        "k": 189,
+        "n": 249,
+        "rate": 0.7590361445783133
+      },
+      "cw": {
+        "pass": 1153,
+        "revert": 183,
+        "incoherent": 0,
+        "magwrong_or_missing": 474,
+        "n_magcorrect": 1336,
+        "rate": 0.13697604790419163,
+        "err_default_share": 0.2785388127853881,
+        "boot_ci": [
+          0.087248322147651,
+          0.19077568134171907
+        ]
+      },
+      "wrk": {
+        "pass": 1547,
+        "revert": 1,
+        "incoherent": 0,
+        "magwrong_or_missing": 255,
+        "n_magcorrect": 1548,
+        "rate": 0.0006459948320413437,
+        "err_default_share": 0.00390625,
+        "boot_ci": [
+          0.0,
+          0.002028397565922921
+        ]
+      }
+    },
+    "gpt-oss-120b-api": {
+      "mag": {
+        "k": 183,
+        "n": 197,
+        "rate": 0.9289340101522843
+      },
+      "cw": {
+        "pass": 1253,
+        "revert": 66,
+        "incoherent": 0,
+        "magwrong_or_missing": 50,
+        "n_magcorrect": 1319,
+        "rate": 0.050037907505686124,
+        "err_default_share": 0.5689655172413793,
+        "boot_ci": [
+          0.02195306585919758,
+          0.08597285067873303
+        ]
+      },
+      "wrk": {
+        "pass": 1398,
+        "revert": 6,
+        "incoherent": 0,
+        "magwrong_or_missing": 54,
+        "n_magcorrect": 1404,
+        "rate": 0.004273504273504274,
+        "err_default_share": 0.1,
+        "boot_ci": [
+          0.0,
+          0.011387900355871887
+        ]
+      }
+    },
+    "gemma4-31b-api": {
+      "mag": {
+        "k": 94,
+        "n": 183,
+        "rate": 0.5136612021857924
+      },
+      "cw": {
+        "pass": 587,
+        "revert": 327,
+        "incoherent": 0,
+        "magwrong_or_missing": 436,
+        "n_magcorrect": 914,
+        "rate": 0.35776805251641136,
+        "err_default_share": 0.42857142857142855,
+        "boot_ci": [
+          0.2779623477297896,
+          0.44493882091212456
+        ]
+      },
+      "wrk": {
+        "pass": 1018,
+        "revert": 3,
+        "incoherent": 0,
+        "magwrong_or_missing": 398,
+        "n_magcorrect": 1021,
+        "rate": 0.002938295788442703,
+        "err_default_share": 0.007481296758104738,
+        "boot_ci": [
+          0.0,
+          0.006910167818361303
+        ]
+      }
+    }
+  },
+  "rhr_xhard": {
+    "gpt5-api": {
+      "mag": {
+        "k": 244,
+        "n": 250,
+        "rate": 0.976
+      },
+      "lh": {
+        "pass": 1229,
+        "revert": 7,
+        "incoherent": 0,
+        "magwrong_or_missing": 12,
+        "n_magcorrect": 1236,
+        "rate": 0.0056634304207119745,
+        "err_default_share": 0.3684210526315789,
+        "boot_ci": [
+          0.0,
+          0.017094017094017096
+        ]
+      },
+      "rxn": {
+        "pass": 1189,
+        "revert": 3,
+        "incoherent": 0,
+        "magwrong_or_missing": 56,
+        "n_magcorrect": 1192,
+        "rate": 0.0025167785234899327,
+        "err_default_share": 0.05084745762711865,
+        "boot_ci": [
+          0.0,
+          0.006902502157031924
+        ]
+      }
+    },
+    "gpt-oss-120b-api": {
+      "mag": {
+        "k": 237,
+        "n": 247,
+        "rate": 0.9595141700404858
+      },
+      "lh": {
+        "pass": 1231,
+        "revert": 0,
+        "incoherent": 0,
+        "magwrong_or_missing": 11,
+        "n_magcorrect": 1231,
+        "rate": 0.0,
+        "err_default_share": 0.0,
+        "boot_ci": [
+          0.0,
+          0.0
+        ]
+      },
+      "rxn": {
+        "pass": 1184,
+        "revert": 50,
+        "incoherent": 0,
+        "magwrong_or_missing": 8,
+        "n_magcorrect": 1234,
+        "rate": 0.04051863857374392,
+        "err_default_share": 0.8620689655172413,
+        "boot_ci": [
+          0.023291925465838508,
+          0.061025223759153785
+        ]
+      }
+    },
+    "gemma4-31b-api": {
+      "mag": {
+        "k": 243,
+        "n": 250,
+        "rate": 0.972
+      },
+      "lh": {
+        "pass": 1231,
+        "revert": 0,
+        "incoherent": 0,
+        "magwrong_or_missing": 17,
+        "n_magcorrect": 1231,
+        "rate": 0.0,
+        "err_default_share": 0.0,
+        "boot_ci": [
+          0.0,
+          0.0
+        ]
+      },
+      "rxn": {
+        "pass": 1235,
+        "revert": 0,
+        "incoherent": 0,
+        "magwrong_or_missing": 13,
+        "n_magcorrect": 1235,
+        "rate": 0.0,
+        "err_default_share": 0.0,
+        "boot_ci": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "qwen3-1.7b-nothink": {
+      "mag": {
+        "k": 40,
+        "n": 250,
+        "rate": 0.16
+      },
+      "lh": {
+        "pass": 52,
+        "revert": 428,
+        "incoherent": 0,
+        "magwrong_or_missing": 768,
+        "n_magcorrect": 480,
+        "rate": 0.8916666666666667,
+        "err_default_share": 0.35785953177257523,
+        "boot_ci": [
+          0.8534653465346534,
+          0.9282786885245902
+        ]
+      },
+      "rxn": {
+        "pass": 35,
+        "revert": 468,
+        "incoherent": 0,
+        "magwrong_or_missing": 745,
+        "n_magcorrect": 503,
+        "rate": 0.9304174950298211,
+        "err_default_share": 0.38582028029678483,
+        "boot_ci": [
+          0.9094412331406551,
+          0.9524714828897338
+        ]
+      }
+    },
+    "qwen3-1.7b-think": {
+      "mag": {
+        "k": 93,
+        "n": 250,
+        "rate": 0.372
+      },
+      "lh": {
+        "pass": 499,
+        "revert": 280,
+        "incoherent": 0,
+        "magwrong_or_missing": 469,
+        "n_magcorrect": 779,
+        "rate": 0.3594351732991014,
+        "err_default_share": 0.37383177570093457,
+        "boot_ci": [
+          0.2925877763328999,
+          0.42912873862158646
+        ]
+      },
+      "rxn": {
+        "pass": 146,
+        "revert": 731,
+        "incoherent": 0,
+        "magwrong_or_missing": 371,
+        "n_magcorrect": 877,
+        "rate": 0.8335233751425314,
+        "err_default_share": 0.6633393829401089,
+        "boot_ci": [
+          0.7722772277227723,
+          0.8906426155580609
+        ]
+      }
+    },
+    "qwen3-4b-nothink": {
+      "mag": {
+        "k": 60,
+        "n": 250,
+        "rate": 0.24
+      },
+      "lh": {
+        "pass": 20,
+        "revert": 474,
+        "incoherent": 0,
+        "magwrong_or_missing": 754,
+        "n_magcorrect": 494,
+        "rate": 0.9595141700404858,
+        "err_default_share": 0.38599348534201955,
+        "boot_ci": [
+          0.9249448123620309,
+          0.986328125
+        ]
+      },
+      "rxn": {
+        "pass": 38,
+        "revert": 471,
+        "incoherent": 0,
+        "magwrong_or_missing": 739,
+        "n_magcorrect": 509,
+        "rate": 0.925343811394892,
+        "err_default_share": 0.38925619834710745,
+        "boot_ci": [
+          0.8802816901408451,
+          0.9625668449197861
+        ]
+      }
+    },
+    "qwen3-4b-think": {
+      "mag": {
+        "k": 179,
+        "n": 250,
+        "rate": 0.716
+      },
+      "lh": {
+        "pass": 1054,
+        "revert": 32,
+        "incoherent": 0,
+        "magwrong_or_missing": 162,
+        "n_magcorrect": 1086,
+        "rate": 0.029465930018416207,
+        "err_default_share": 0.16494845360824742,
+        "boot_ci": [
+          0.011505273250239693,
+          0.05235602094240838
+        ]
+      },
+      "rxn": {
+        "pass": 657,
+        "revert": 477,
+        "incoherent": 0,
+        "magwrong_or_missing": 114,
+        "n_magcorrect": 1134,
+        "rate": 0.42063492063492064,
+        "err_default_share": 0.8071065989847716,
+        "boot_ci": [
+          0.3470540758676352,
+          0.49642857142857144
+        ]
+      }
+    },
+    "qwen3-8b-nothink": {
+      "mag": {
+        "k": 57,
+        "n": 250,
+        "rate": 0.228
+      },
+      "lh": {
+        "pass": 336,
+        "revert": 142,
+        "incoherent": 0,
+        "magwrong_or_missing": 770,
+        "n_magcorrect": 478,
+        "rate": 0.29707112970711297,
+        "err_default_share": 0.15570175438596492,
+        "boot_ci": [
+          0.22270742358078602,
+          0.38095238095238093
+        ]
+      },
+      "rxn": {
+        "pass": 398,
+        "revert": 113,
+        "incoherent": 0,
+        "magwrong_or_missing": 737,
+        "n_magcorrect": 511,
+        "rate": 0.22113502935420742,
+        "err_default_share": 0.13294117647058823,
+        "boot_ci": [
+          0.16205533596837945,
+          0.29190751445086704
+        ]
+      }
+    },
+    "qwen3-8b-think": {
+      "mag": {
+        "k": 198,
+        "n": 250,
+        "rate": 0.792
+      },
+      "lh": {
+        "pass": 1117,
+        "revert": 0,
+        "incoherent": 0,
+        "magwrong_or_missing": 131,
+        "n_magcorrect": 1117,
+        "rate": 0.0,
+        "err_default_share": 0.0,
+        "boot_ci": [
+          0.0,
+          0.0
+        ]
+      },
+      "rxn": {
+        "pass": 735,
+        "revert": 348,
+        "incoherent": 0,
+        "magwrong_or_missing": 165,
+        "n_magcorrect": 1083,
+        "rate": 0.32132963988919666,
+        "err_default_share": 0.6783625730994152,
+        "boot_ci": [
+          0.25472547254725475,
+          0.38693957115009747
+        ]
+      }
+    }
+  },
+  "intervention": {
+    "gemma4-31b-api": {
+      "shot1": {
+        "pass": 152,
+        "revert": 380,
+        "incoherent": 0,
+        "magwrong_or_missing": 95,
+        "n_magcorrect": 532,
+        "rate": 0.7142857142857143,
+        "err_default_share": 0.8,
+        "boot_ci": [
+          0.6609848484848485,
+          0.7696629213483146
+        ]
+      },
+      "shot3": {
+        "pass": 179,
+        "revert": 323,
+        "incoherent": 0,
+        "magwrong_or_missing": 62,
+        "n_magcorrect": 502,
+        "rate": 0.6434262948207171,
+        "err_default_share": 0.8389610389610389,
+        "boot_ci": [
+          0.5822306238185255,
+          0.7060998151571165
+        ]
+      }
+    },
+    "gpt-oss-120b-api": {
+      "shot1": {
+        "pass": 109,
+        "revert": 366,
+        "incoherent": 0,
+        "magwrong_or_missing": 120,
+        "n_magcorrect": 475,
+        "rate": 0.7705263157894737,
+        "err_default_share": 0.7530864197530864,
+        "boot_ci": [
+          0.7264770240700219,
+          0.8118393234672304
+        ]
+      },
+      "shot3": {
+        "pass": 101,
+        "revert": 281,
+        "incoherent": 0,
+        "magwrong_or_missing": 131,
+        "n_magcorrect": 382,
+        "rate": 0.7356020942408377,
+        "err_default_share": 0.6820388349514563,
+        "boot_ci": [
+          0.683377308707124,
+          0.7862595419847328
+        ]
+      }
+    },
+    "gpt5-api": {
+      "shot1": {
+        "pass": 131,
+        "revert": 395,
+        "incoherent": 0,
+        "magwrong_or_missing": 116,
+        "n_magcorrect": 526,
+        "rate": 0.7509505703422054,
+        "err_default_share": 0.7729941291585127,
+        "boot_ci": [
+          0.7061143984220908,
+          0.7928436911487758
+        ]
+      },
+      "shot3": {
+        "pass": 51,
+        "revert": 139,
+        "incoherent": 0,
+        "magwrong_or_missing": 42,
+        "n_magcorrect": 190,
+        "rate": 0.7315789473684211,
+        "err_default_share": 0.7679558011049724,
+        "boot_ci": [
+          0.6473988439306358,
+          0.8090452261306532
+        ]
+      }
+    }
+  },
+  "totals": {
+    "magcorrect_diag_vars": 57199,
+    "reverted": 17720,
+    "incoherent": 74,
+    "magwrong_or_missing_diag": 35447,
+    "err_default_share_study": 0.3328262053680434,
+    "note": "err_default_share is NON-tautological: magnitude-wrong errors are the alternative outcome"
+  },
+  "tier_table": {
+    "ccw": {
+      "tier": 2,
+      "per_model": {
+        "gpt5-api": {
+          "rate": 0.7058823529411765,
+          "ci": [
+            0.58,
+            0.8297872340425532
+          ],
+          "n": 51
+        },
+        "gpt-oss-120b-api": {
+          "rate": 0.7419354838709677,
+          "ci": [
+            0.6952380952380952,
+            0.7860576923076923
+          ],
+          "n": 434
+        },
+        "gemma4-31b-api": {
+          "rate": 0.7785714285714286,
+          "ci": [
+            0.7321428571428571,
+            0.8249534450651769
+          ],
+          "n": 560
+        }
+      }
+    },
+    "act": {
+      "tier": 1,
+      "per_model": {
+        "gpt5-api": {
+          "rate": 0.0,
+          "ci": [
+            0.0,
+            0.0
+          ],
+          "n": 50
+        },
+        "gpt-oss-120b-api": {
+          "rate": 0.11567164179104478,
+          "ci": [
+            0.07905138339920949,
+            0.15298507462686567
+          ],
+          "n": 268
+        },
+        "gemma4-31b-api": {
+          "rate": 0.034324942791762014,
+          "ci": [
+            0.01647058823529412,
+            0.05491990846681922
+          ],
+          "n": 437
+        }
+      }
+    },
+    "top": {
+      "tier": 1,
+      "per_model": {
+        "gpt5-api": {
+          "rate": 0.0,
+          "ci": [
+            0.0,
+            0.0
+          ],
+          "n": 15
+        },
+        "gpt-oss-120b-api": {
+          "rate": 0.011627906976744186,
+          "ci": [
+            0.0,
+            0.038834951456310676
+          ],
+          "n": 172
+        },
+        "gemma4-31b-api": {
+          "rate": 0.0,
+          "ci": [
+            0.0,
+            0.0
+          ],
+          "n": 250
+        }
+      }
+    },
+    "cw": {
+      "tier": 0,
+      "per_model": {
+        "gpt5-api": {
+          "rate": 0.009672619047619048,
+          "ci": [
+            0.0007230657989877079,
+            0.022813688212927757
+          ],
+          "n": 1344
+        },
+        "gpt-oss-120b-api": {
+          "rate": 0.009672619047619048,
+          "ci": [
+            0.0007401924500370096,
+            0.02329075882794891
+          ],
+          "n": 1344
+        },
+        "gemma4-31b-api": {
+          "rate": 0.05271828665568369,
+          "ci": [
+            0.024650780608052588,
+            0.08433734939759036
+          ],
+          "n": 1214
+        }
+      }
+    },
+    "wrk": {
+      "tier": 0,
+      "per_model": {
+        "gpt5-api": {
+          "rate": 0.0,
+          "ci": [
+            0.0,
+            0.0
+          ],
+          "n": 1342
+        },
+        "gpt-oss-120b-api": {
+          "rate": 0.0007446016381236039,
+          "ci": [
+            0.0,
+            0.002260738507912585
+          ],
+          "n": 1343
+        },
+        "gemma4-31b-api": {
+          "rate": 0.0,
+          "ci": [
+            0.0,
+            0.0
+          ],
+          "n": 1338
+        }
+      }
+    },
+    "inw": {
+      "tier": 0,
+      "per_model": {
+        "gpt5-api": {
+          "rate": 0.004081632653061225,
+          "ci": [
+            0.0,
+            0.012396694214876033
+          ],
+          "n": 245
+        },
+        "gpt-oss-120b-api": {
+          "rate": 0.0,
+          "ci": [
+            0.0,
+            0.0
+          ],
+          "n": 245
+        },
+        "gemma4-31b-api": {
+          "rate": 0.0,
+          "ci": [
+            0.0,
+            0.0
+          ],
+          "n": 246
+        }
+      }
+    },
+    "lh": {
+      "tier": 1,
+      "per_model": {
+        "gpt5-api": {
+          "rate": 0.0056634304207119745,
+          "ci": [
+            0.0,
+            0.017094017094017096
+          ],
+          "n": 1236
+        },
+        "gpt-oss-120b-api": {
+          "rate": 0.0,
+          "ci": [
+            0.0,
+            0.0
+          ],
+          "n": 1231
+        },
+        "gemma4-31b-api": {
+          "rate": 0.0,
+          "ci": [
+            0.0,
+            0.0
+          ],
+          "n": 1231
+        }
+      }
+    },
+    "rxn": {
+      "tier": 0,
+      "per_model": {
+        "gpt5-api": {
+          "rate": 0.0025167785234899327,
+          "ci": [
+            0.0,
+            0.006902502157031924
+          ],
+          "n": 1192
+        },
+        "gpt-oss-120b-api": {
+          "rate": 0.04051863857374392,
+          "ci": [
+            0.023291925465838508,
+            0.061025223759153785
+          ],
+          "n": 1234
+        },
+        "gemma4-31b-api": {
+          "rate": 0.0,
+          "ci": [
+            0.0,
+            0.0
+          ],
+          "n": 1235
+        }
+      }
+    }
+  },
+  "tier_separation_min_pp": 69.62097338935574,
+  "mcnemar_ccw_aggregate": {
+    "b": 401,
+    "c": 6
+  },
+  "competence_span": {
+    "min": 0.004,
+    "max": 0.992,
+    "ratio": 248.0
+  }
+}

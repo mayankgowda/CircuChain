@@ -2,9 +2,9 @@
 \usepackage{iclr2026_conference,times}
 \usepackage{amsmath,amssymb,booktabs,graphicx,url,multirow}
 \usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
-\input{generated/macros}
+\input{generated/macros_v4}
 
-\title{The Clockwise Prior: Silent, Directed Convention Reversion in Language Models}
+\title{The Clockwise Prior: Convention Reversion in Language Models}
 
 \author{Anonymous authors\\Paper under double-blind review}
 
@@ -12,34 +12,35 @@
 \maketitle
 
 \begin{abstract}
-Many quantities in science and engineering carry a sign that is fixed only by
-convention: a mesh current is positive if it circulates clockwise, a line integral is
-positive if the curve is traversed counter-clockwise, a cross product follows the
-right hand. Both choices are always physically valid, so an instruction to use the
-non-standard choice is legitimate, unambiguous, and easy to state. We study what
-language models do with such instructions. Across three physics and mathematics
-domains whose answers are verified to the sign by four independent solvers, eight
-instructable conventions, and fifteen model configurations, we find that when models
-get these signs wrong, they do not fail randomly. Among \totalDiagVars{} graded
-variables, \coherencePct\% of all sign errors reproduce, exactly, the value that the
-\emph{trained} convention would give; on the seven conventions whose transform is a
-pure sign flip, the figure is 100\%. We call this failure mode \emph{reversion}, and
-we map what governs it. First, reversion tracks how the convention's reversal is
-taught: the one convention whose reversal is absent from textbooks (counter-clockwise
-mesh currents) defeats every frontier model we test (\ccwRate\% reversion), while
-conventions whose reversal is itself part of the curriculum are obeyed
-($\le$\rxnRate\%). Second, task difficulty reactivates the prior: within a domain
-that models obey when problems are easy, hardening the problems raises reversion from
-\cwEGptOss\% to \cwHGemma\%, while a control instruction demanding the identical
-output change stays below 1\%. Third, compliance is capability-gated: mid-scale
-models revert on conventions frontier models obey. Mitigations help less than one
-would hope. Enabling a reasoning mode raises accuracy dramatically while leaving
-reversion nearly unchanged on most conventions, restoring compliance only where the
-reversal is both taught and procedurally shallow; and placing fully worked examples
-of the required convention in the prompt leaves reversion essentially unchanged in
-two of three frontier models. Two predictions we pre-registered were refuted by the
-data, and we report both. The benchmark regenerates deterministically from seeds and
-uses no language-model judges anywhere.
+Many quantities in science and engineering carry a sign fixed only by convention: a
+mesh current is positive if it circulates clockwise, a line integral is positive if
+the curve is traversed counter-clockwise, a cross product follows the right hand.
+Both choices are always physically valid, so an instruction to use the non-standard
+choice is legitimate and unambiguous. We study what language models do with such
+instructions across three physics and mathematics domains whose answers are verified
+to the sign by four independent solvers, eight instructable conventions, and sixteen
+model configurations spanning a \spanRatio$\times$ range of problem-solving
+competence. The central phenomenon, which we call \emph{reversion}, is that models
+often solve the problem correctly and report the signs of the convention they were
+trained on rather than the one they were instructed to use. Reversion is highly
+convention-specific. Posing the same problems under a counter-clockwise mesh-current
+instruction breaks \bAgg{} previously-solved problems across our panel while fixing
+\cAgg{}, and the three most capable models revert on \ccwGptFive--\ccwGemma\% of
+their correctly-computed variables; yet the same models comply almost perfectly with
+conventions whose reversal is itself part of the standard curriculum, and in every
+one of them the gap between the curriculum-absent reversal and every
+curriculum-taught reversal exceeds \tierSepMin{} percentage points. Compliance is
+also load-sensitive and capability-gated: hardening problems within an obeyed domain
+raises each model's reversion (Gemma-4-31B from \vCwEGemma\% to \vCwHGemma\%) while
+a control instruction demanding the identical output change stays below 1\%, and
+mid-scale models revert at 91--99\% on conventions the capable trio obeys.
+Mitigation is conditional at best. A reasoning toggle that raises accuracy by up to
+64 points moves reversion on most conventions by only a few points, restoring
+compliance only where the reversal is both taught and procedurally shallow; and one
+to three fully worked in-context demonstrations of the required convention change
+reversion by at most 13.6 points in one model and not at all in the other two. Two
+predictions we pre-registered were refuted, and we report both. Grading is
+deterministic throughout, with no language-model judges.
 \end{abstract}
 
 \section{Introduction}\label{sec:intro}
@@ -47,69 +48,67 @@ Ask a language model to analyze a simple circuit, but add one sentence: ``mesh
 currents are defined counter-clockwise.'' Circuit textbooks almost universally draw
 mesh currents clockwise, but nothing in physics prefers one direction; the choice
 only fixes which currents are reported as positive. A model that follows the
-instruction produces the same magnitudes as usual with certain signs flipped. What we
-observe, across every capable model we test, is different: the model sets up correct
+instruction produces the usual magnitudes with certain signs flipped. What we
+observe, in every capable model we test, is different: the model sets up correct
 equations, solves them correctly, recovers every magnitude, and then reports the
-signs that a \emph{clockwise} analysis would have produced. The response contains no
-warning and no inconsistency a reader could notice. Unless the answer is checked
-against a solver that knows which convention was requested, the substitution is
-invisible.
+signs that a \emph{clockwise} analysis would produce. Nothing in the response marks
+the substitution: the requested format is followed, the magnitudes are right, and no
+caveat appears. Unless the answer is checked against a solver that knows which
+convention was requested, the failure is invisible.
 
 This paper names that behavior, measures it at scale, identifies three factors that
-govern it, and tests two mitigations that mostly fail to fix it. Throughout, we use
-one term for the central phenomenon, defined precisely in
-Section~\ref{sec:defs}: a model \emph{reverts} on a variable when its answer has the
-correct magnitude but carries the sign of the training-default convention rather
-than the instructed one. Reversion is a compliance failure that standard evaluations
-cannot see, because they either grade magnitudes, accept answers up to sign, or use
-language-model judges that share the same training priors.
+predict it, and tests two mitigations that mostly fail. Throughout, we use one term
+for the central outcome, defined precisely in Section~\ref{sec:defs}: a model
+\emph{reverts} on a variable when its answer has the correct magnitude but carries
+the sign of the training-default convention rather than the instructed one.
+Reversion is a compliance failure that most evaluations cannot see, because they
+grade magnitudes, accept answers up to sign, or use judges that need not check the
+instructed frame.
 
-Sign conventions turn out to be an unusually clean instrument for separating
-\emph{competence} (can the model solve the problem?) from \emph{compliance} (does the
-instruction win when it conflicts with training?). Three properties make them so.
-They are \emph{arbitrary}: both choices are physically valid, so the instruction is
-never a trick. They are \emph{binary}: on any single variable, compliance is a sign.
-And they are \emph{exactly gradable}: a conventional solver can compute the correct
-answer under either convention, so no judgment call, rubric, or judge model is
-involved. Because magnitude and sign are graded separately, a single response yields
-independent measurements of both axes.
+Sign conventions are an unusually clean instrument for separating \emph{competence}
+(can the model solve the problem?) from \emph{compliance} (does the instruction win
+when it conflicts with training?). They are \emph{arbitrary}: both choices are
+physically valid, so the instruction is never a trick. They are \emph{binary}: on
+any single variable, compliance is a sign. And they are \emph{exactly gradable}: a
+conventional solver computes the correct answer under either convention, so no
+rubric or judge model is involved. Because magnitude and sign are graded separately,
+one response yields independent measurements of both axes.
 
 \textbf{What we find.} Our results are organized as four claims.
-(1)~Reversion is \emph{silent and directed} (Section~\ref{sec:directed}): sign errors
-almost never land on arbitrary values; they land on the trained convention's value,
-variable by variable, in \coherencePct\% of \totalDiagVars{} graded cases.
-(2)~Reversion is governed by three measurable factors
-(Section~\ref{sec:anatomy}): how the convention's \emph{reversal} is represented in
-pedagogy, how hard the problem is, and how capable the model is.
-(3)~Mitigation is conditional at best (Section~\ref{sec:nofix}): reasoning modes buy
-large competence gains and, on most conventions, no compliance; worked in-context
-examples buy almost nothing anywhere.
-(4)~The framework is falsifiable, and was falsified twice
-(Section~\ref{sec:prereg}): two predictions recorded in the project's version history
-before data collection came out opposite to what we predicted, and both refutations
-are reported and interpreted.
+(1)~Reversion is \emph{large, asymmetric, and convention-specific}
+(Section~\ref{sec:pheno}): flipping one convention instruction breaks \bAgg{}
+solved problems and fixes \cAgg{}, while matched unusual-but-non-convention
+instructions are followed at 85--97\%.
+(2)~Three factors predict where reversion appears (Section~\ref{sec:anatomy}): how
+the convention's \emph{reversal} is represented in standard pedagogy, how hard the
+problem is, and how capable the model is.
+(3)~Mitigation is conditional at best (Section~\ref{sec:nofix}): reasoning modes
+buy large competence gains and, on most conventions, little compliance; worked
+in-context examples buy little to nothing.
+(4)~The framework is falsifiable and was falsified twice
+(Section~\ref{sec:prereg}): two predictions recorded in the project's version
+history before data collection came out opposite to our expectation, and both
+refutations are reported.
 
 \textbf{Why it matters.} A sign is the difference between tension and compression,
-charging and discharging, stable and unstable. The failure mode we document is
-worst-case shaped: it is invisible in the answer text, it points consistently toward
-the training distribution, it grows when problems get harder, and it resists the
-first mitigation a practitioner would try. Evaluations that do not grade signs
-against the instructed frame will report such a model as excellent.
+charging and discharging, stable and unstable. The failure mode we document leaves
+no trace in the response, grows when problems get harder, and resists the first
+mitigation a practitioner would try. Evaluations that do not grade signs against
+the instructed frame will report such a model as excellent.
 
 \section{Definitions and instrument}\label{sec:defs}
 
 \subsection{Conventions, contracts, and cells}\label{sec:contracts}
-A \emph{convention} is a sign or orientation choice that is fixed by custom rather
-than physics. A \emph{convention contract} is the block of an instance's prompt that
-states which conventions the answer must use. Every instance in our benchmark states
-its contract explicitly, including the default one; models are never expected to
-guess. A \emph{cell} is a version of the same underlying physics problem posed under
-a particular contract. The \emph{default cell} states the textbook conventions. A
-\emph{flip cell} changes exactly one convention and leaves everything else
-identical. Because the physics is shared, a model's behavior on the default cell and
-a flip cell of the same problem forms a matched pair, and causal claims about the
-flipped convention come from within-problem comparisons rather than across-problem
-averages.
+A \emph{convention} is a sign or orientation choice fixed by custom rather than
+physics. A \emph{convention contract} is the block of an instance's prompt that
+states which conventions the answer must use. Every instance states its contract
+explicitly, including the default one; models never have to guess. A \emph{cell} is
+a version of the same underlying physics problem posed under a particular contract.
+The \emph{default cell} states the textbook conventions. A \emph{flip cell} changes
+exactly one convention and leaves everything else identical. Because the physics is
+shared, a model's behavior on the default cell and a flip cell of the same problem
+forms a matched pair, and causal claims about the flipped convention come from
+within-problem comparisons rather than across-problem averages.
 
 A concrete example makes the design tangible. One circuits instance shows a
 five-element network and states, among other conventions, ``mesh currents
@@ -119,7 +118,7 @@ cell). The requested output is a fixed line of \texttt{name=value} pairs. Under 
 flip, the correct values of $i_1, i_2, i_3$ are the negations of their default-cell
 values; every other requested quantity is unchanged. A model that answers the flip
 cell with the default cell's signs has followed its training rather than its
-instructions, and the grader can detect this exactly.
+instructions, and the grader detects this exactly.
 
 \subsection{Reversion, precisely}\label{sec:reversion}
 For every instance we compute two reference answers with conventional solvers: the
@@ -129,39 +128,52 @@ cell when these two answers differ in sign; only diagnostic variables can reveal
 convention behavior, and all rates in this paper are computed over them. A model's
 value for a diagnostic variable is graded into exactly one of four categories:
 \emph{compliant} (matches the instructed answer within a 5\% relative tolerance),
-\emph{reverted} (magnitude correct but the value matches the \emph{default} answer),
-\emph{incoherent} (magnitude correct but the sign matches neither reference), or
-\emph{magnitude-wrong} (a competence error, excluded from compliance rates). The
-\emph{reversion rate} of a model on a cell is the fraction of its magnitude-correct
-diagnostic variables that are reverted. Conditioning on magnitude-correctness is
-what separates the axes: a model can only revert on a variable it was competent
-enough to compute.
+\emph{reverted} (matches the \emph{default} answer), \emph{incoherent} (magnitude
+correct but matching neither reference), or \emph{magnitude-wrong} (a competence
+error). The \emph{reversion rate} of a model on a cell is the fraction of its
+magnitude-correct diagnostic variables that are reverted.
+
+One property of this grading must be stated openly, because it bounds what we may
+claim. For the seven conventions whose transform is a pure sign flip, the
+instructed and default answers have equal magnitudes, so a magnitude-correct value
+has only two possible signs: the instructed one or the default one. On those
+conventions, ``reverted'' and ``magnitude-correct with the wrong sign'' are the
+same event by construction, and the incoherent category is reachable only under
+the study's single affine transform (the circuits reference-node shift). We
+therefore make no claim that sign errors are ``directed'' as a separate discovery;
+the informative quantities are the reversion \emph{rates}, their contrast with
+matched controls, and the asymmetry of the paired design, all of which are
+falsifiable. (In the one cell where direction is testable, most magnitude-correct
+errors in fact land between the two frames; see Section~\ref{sec:pheno}.)
 
 \subsection{Three domains, eight conventions}\label{sec:domains}
 \emph{Circuits}: linear DC networks across seven topology families; requested
-variables are mesh currents, node voltages, and branch quantities. Its three
-conventions are mesh direction (default clockwise), the passive sign convention, and
-the reference node. \emph{Contour}: line integrals of polynomial vector fields
-around lattice polygons; requested variables are per-edge work integrals, the total
-circulation, and the flux. Its conventions are traversal orientation (default
-counter-clockwise), the sign of reported work, and the flux normal. \emph{Vectors}:
-multi-body torque, angular-momentum, and magnetic-force problems in three
-dimensions. Its conventions are cross-product handedness (default right-hand rule)
-and the Newton's-third-law reporting choice. Difficulty in every domain is a
-generator setting (element count, polynomial degree, coordinate size), and each
-domain ships an easy and a hardened tier.
+variables are mesh currents, node voltages, and branch quantities. Its conventions
+are mesh direction (default clockwise), the passive sign convention, and the
+reference node. \emph{Contour}: line integrals of polynomial vector fields around
+lattice polygons; requested variables are per-edge work integrals, total
+circulation, and flux. Its conventions are traversal orientation (default
+counter-clockwise), the sign of reported work, and the flux normal.
+\emph{Vectors}: multi-body torque, angular-momentum, and magnetic-force problems
+in three dimensions; its conventions are cross-product handedness (default
+right-hand rule) and the Newton's-third-law reporting choice. Difficulty in every
+domain is a generator setting, and the contour domain ships an easy and a hardened
+tier drawn from widened generator settings (higher polynomial degree, more edges;
+the two tiers are distinct distributions, a caveat we return to in
+Section~\ref{sec:dose}). The vectors domain is evaluated at its most hardened
+setting, which still leaves the capable trio near ceiling.
 
-Two design choices matter for later sections. First, the contour cells for
-clockwise orientation (\texttt{cw}) and for reporting work done \emph{against} the
-field (\texttt{wrk}) demand the \emph{byte-identical} output transform: negate every
-work value. They differ only in which convention is named. Any behavioral difference
-between them therefore isolates the identity of the convention with the output
-demand perfectly matched; we use this as a control against ``models just get sloppy
-under load.'' Second, each domain also poses every problem under two required
-solution procedures (mesh vs.\ nodal analysis; direct integration vs.\ Green's
-theorem; direct summation vs.\ the transfer theorem), which lets us check that
-reversion is a property of the \emph{reported frame}, not of any particular solving
-procedure.
+Two design choices matter later. First, the contour cells for clockwise
+orientation (\texttt{cw}) and for reporting work done \emph{against} the field
+(\texttt{wrk}) demand the byte-identical output transform: negate every work
+value. They differ in which convention is named, and in one further respect that we
+do not control: the orientation convention participates in how each integral is
+set up, while the work-sign convention can be applied once at reporting time. The
+pair therefore matches the output demand exactly and the internal computational
+burden only approximately. Second, each domain poses every problem under two
+required solution procedures (mesh vs.\ nodal analysis; direct integration vs.\
+Green's theorem; direct summation vs.\ the transfer theorem), which lets us check
+that reversion follows the reported frame rather than any particular procedure.
 
 \subsection{Verification and grading}\label{sec:verification}
 Every accepted instance is solved by four independent routes before any model sees
@@ -172,116 +184,135 @@ exact triangulation, an independently implemented rational-arithmetic engine, an
 numerical quadrature; in vectors, textbook component formulas, Levi-Civita
 summation, symbolic cross products, and floating-point evaluation, together with
 exact transfer-theorem identities. Three of the four routes use exact rational
-arithmetic and must agree to the bit; instances are rejected otherwise, so the
-released datasets contain zero solver disagreements. The instructed answers for
-every flip cell are additionally validated by \emph{independent physical
-realization} rather than by re-applying the same transform: the counter-clockwise
-circuit cell by re-grounded re-simulation, the left-handed cell by re-solving the
-entire problem with the Levi-Civita symbol negated, the reaction cell by negating
-the force sources (125/125 problems pass in each domain). Grading is a deterministic
-parser over a mandated answer line. No language model participates in generation,
-verification, grading, or analysis.
+arithmetic and must agree to the bit; instances are rejected otherwise. The
+instructed answers for flip cells are additionally validated by \emph{independent
+physical realization} rather than by re-applying the same transform: the
+reference-node cell by re-grounded re-simulation, the counter-clockwise and
+active-sign cells by re-derivation from raw observables, the left-handed cell by
+re-solving the entire problem with the Levi-Civita symbol negated, and the
+reaction cell by negating the force sources (125/125 problems pass in each
+domain). Grading is a deterministic parser over a mandated answer line; no
+language model participates in generation, verification, grading, or analysis.
 
 \subsection{Model panel}\label{sec:panel}
-We evaluate fifteen configurations: GPT-5 at low reasoning effort, gpt-oss-120b,
+We evaluate sixteen configurations: GPT-5 at low reasoning effort, gpt-oss-120b,
 Gemma-4-31B, DeepSeek-V3, Llama-3.3-70B, Qwen2.5-72B, and the Qwen3 dense family
-(1.7B, 4B, 8B, 14B, 32B), each Qwen3 size in both its reasoning and non-reasoning
-mode, which toggles behavior while holding weights fixed. Whole-problem competence
-spans roughly 790$\times$ across the panel. Decoding settings are uniform;
-serving stack and quantization are pinned and recorded per response. We refer to
-GPT-5, gpt-oss-120b, and Gemma-4-31B as the \emph{frontier} models: they are the
-only panel members that solve the majority of problems in every domain, and
-several claims are therefore stated for them separately.
+(1.7B--32B), each Qwen3 size in both its reasoning and non-reasoning mode, which
+toggles behavior at fixed weights. Default-cell competence spans
+\spanLo\%--\spanHi\% across configurations and domains, a \spanRatio$\times$
+range. Decoding settings are uniform; serving stack and quantization are pinned
+and recorded per response. We refer to GPT-5, gpt-oss-120b, and Gemma-4-31B as the
+\emph{capable trio}; they are the panel's most capable members in every domain,
+though not uniformly near ceiling (GPT-5 at low effort solves \vCircMagGptFive\%
+of circuit magnitudes, and the trio sits at 95--100\% on vectors and 98--99\% on
+easy contour).
 
-\section{Reversion is silent and directed}\label{sec:directed}
-Our first result is about the \emph{structure} of sign errors, and it holds
-everywhere we look. Across all domains, tiers, cells, and models, we grade
-\totalDiagVars{} magnitude-correct diagnostic variables. If sign errors were noise,
-errors would scatter between the default frame and incoherent values. They do not:
-\coherencePct\% of all sign errors equal the trained convention's value exactly. The
-\incoherentN{} incoherent cases (0.15\%) all occur in a single place, the circuits
-reference-node cell, which is the one convention in the study whose transform is
-affine (subtract a reference potential) rather than a sign flip; a model that
-applies the shift partially lands between frames. On all seven pure sign-flip
-conventions, spanning tens of thousands of variables, the incoherence count is
-exactly zero. When these models get a sign wrong, they are not guessing. They are
-reproducing their training distribution, one variable at a time.
+\section{Reversion is large, asymmetric, and convention-specific}
+\label{sec:pheno}
+Three facts establish the phenomenon. First, its \emph{size}: under the
+counter-clockwise mesh instruction, the capable trio reverts on
+\ccwGptFive\%, \ccwGptOss\%, and \ccwGemma\% of their magnitude-correct diagnostic
+variables respectively (Table~\ref{tab:entrench}), and competence does not protect
+a model: Gemma-4-31B solves \vCircMagGemma\% of circuit magnitudes and still
+reverts on \ccwGemma\% of its diagnostic signs. Second, its \emph{asymmetry}: in
+the within-problem paired design, flipping the mesh convention breaks \bAgg{}
+problems that the panel solved under the default and fixes \cAgg{}; exact McNemar
+tests on these pairs are significant at $q_{\mathrm{BH}}\le 0.006$ in every
+competent family. Third, its \emph{specificity}: the same models comply at
+85--97\% with matched instructions that are equally unusual but touch no
+convention (Gemma-4-31B and DeepSeek-V3, the two models tested with these
+controls), and they obey several other convention flips almost perfectly
+(Section~\ref{sec:tier}).
 
-The matched-pair design makes the effect causal rather than correlational. In
-circuits, posing the same problem under the counter-clockwise contract instead of
-the default breaks 401 previously-solved problems across the panel while fixing 6;
-exact McNemar tests on these within-problem pairs are significant at
-$q_{\mathrm{BH}}\le 0.006$ in every competent family. Competence does not protect a
-model: Gemma-4-31B solves \circMagGemma\% of circuit magnitudes and still reverts on
-\circCcwGemma\% of its diagnostic signs. Nor is this a general inability to follow
-unusual instructions: the same models comply at 85--97\% with matched instructions
-that are equally unusual but touch no convention (e.g., reporting variables in
-reverse order), and re-sampling the entire measurement five times moves the headline
-rates by only a few points.
+Two stability checks bound sampling noise. Re-running Gemma's counter-clockwise
+measurement five times on a resampled subset gives run-level rates between 82.0\%
+and 94.1\% (mean 86.2\%); the primary full-panel figure is \ccwGemma\%. The
+run-to-run spread is a few points, so headline rates are stable, but item-level
+agreement across runs is only 39.6\%: \emph{which} problems revert varies from
+sample to sample even though \emph{how many} revert does not. The rate, not any
+per-item behavior, is the reproducible object. In the hardened contour tier the
+corresponding five-fold resampling gives mean 34.4\% (SD 6.4 points).
 
-\section{What governs reversion}\label{sec:anatomy}
+Finally, the one cell whose transform is affine rather than a pure flip deserves
+its own sentence, because it is the only place where the two reference frames
+differ in magnitude and error direction is genuinely testable: there, most
+magnitude-correct errors (74 of 83) match \emph{neither} frame, consistent with
+partial application of the potential shift rather than wholesale frame
+substitution. We flag this as an open question about affine conventions rather
+than evidence either way about the sign-flip ones.
+
+\section{What predicts reversion}\label{sec:anatomy}
 
 \subsection{How the reversal is taught}\label{sec:tier}
-The eight conventions we instruct differ sharply in how their \emph{reversal} is
-represented in the material models learn from, and this, more than anything else,
-predicts what models do. We code each convention on a three-level ordinal scale by
-auditing standard textbooks (the audited list and coding criteria are in
-Appendix~\ref{app:audit}). \emph{Tier 0}: the reversal is taught as a routine
-operation. Reversing a contour's orientation negates the integral; this is a theorem
-statement in every calculus text, with exercises. Reaction forces and inward normals
-are likewise curriculum material. \emph{Tier 1}: the reversal appears only as an
-error contrast or a partial treatment; every introductory physics text warns that
-using the left hand gives the opposite direction, which teaches the flip while
-forbidding it. \emph{Tier 2}: the reversal is essentially absent. We could not find
-a single worked counter-clockwise mesh example in any circuits text we audited, and
-our own search for a second tier-2 convention failed (Section~\ref{sec:prereg}).
+The eight conventions differ sharply in how their \emph{reversal} is represented
+in the material models learn from. We code each on a three-level ordinal scale by
+auditing standard textbooks (Appendix~\ref{app:audit} lists the books and
+criteria; the audit was performed by one author after the vectors-domain result
+prompted it, a timeline we disclose because it makes the scale descriptive and
+hypothesis-generating rather than pre-registered). \emph{Tier 0}: the reversal is
+taught as a routine operation (reversing a contour's orientation negates the
+integral; reaction forces; inward normals; work done against a field).
+\emph{Tier 1}: the reversal appears as an error contrast or partial treatment
+(the left-hand rule as a warning; the active sign convention; non-ground
+references). \emph{Tier 2}: we found no worked treatment of the reversal in any
+audited text (counter-clockwise mesh currents).
 
-Table~\ref{tab:entrench} and Figure~\ref{fig:entrench} show frontier reversion at
-low difficulty against this scale. The separation is stark. Tier-0 conventions are
-obeyed at \cwRate--\rxnRate\%. The single tier-2 convention is disobeyed at
-\ccwRate\%. Tier-1 conventions fall between or split by model. A weighted logistic
-regression of reversion on tier across all eight conventions yields $z=\tierZ$. We
-emphasize what this gradient means: the models are not incapable of sign-flipped
-reporting, since they perform the identical transform when the convention naming it
-is one whose reversal they have seen taught. What they lack is any trained
-representation of \emph{this} reversal, and no instruction we found supplies it at
-inference time (Section~\ref{sec:nofix}).
+Table~\ref{tab:entrench} reports per-model reversion for all eight conventions
+with problem-clustered bootstrap confidence intervals; we deliberately avoid
+pooling across models and avoid variable-level test statistics, since variables
+within a problem are correlated. The pattern is a strong ordering with honest
+wrinkles. In every one of the three models separately, the tier-2 convention's
+reversion exceeds that of every tier-0 convention by at least \tierSepMin{}
+percentage points. Tier-1 conventions are heterogeneous rather than intermediate
+(the reference node draws \topGptOss\%--\topGemma\%, handedness
+\lhGptFive\%--\lhGemma\%), and one tier-0 convention (orientation, at
+\cwGemma\% for Gemma) sits above two tier-1 rates, so the scale orders the
+extremes cleanly but not the middle. With one convention at tier 2 and the coding
+performed post hoc, we present pedagogy as the strongest \emph{organizing}
+variable we found, not as a demonstrated cause; the tier-2 pole's uniqueness is
+itself search-conditioned (Section~\ref{sec:prereg}).
 
 \begin{table}[t]
 \centering\small
-\caption{Frontier reversion at low difficulty for all eight conventions, by
-reversal-pedagogy tier (0 = reversal taught as an operation, 1 = taught as an error
-contrast, 2 = absent from pedagogy). Pooled over GPT-5, gpt-oss-120b, and
-Gemma-4-31B, with Wilson 95\% confidence intervals.}
+\caption{Reversion for all eight conventions at each model's low-strain setting,
+by reversal-pedagogy tier (0 = reversal taught as an operation, 1 = taught as an
+error contrast or partial treatment, 2 = no worked treatment found). Confidence
+intervals are 95\% bootstrap intervals clustering on the underlying problem.}
 \label{tab:entrench}
-\input{generated/table_entrench_full}
+\input{generated/table_entrench_v4}
 \end{table}
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=0.72\linewidth]{generated/fig_entrenchment}
-\caption{Reversion against reversal-pedagogy tier across all eight conventions.}
+\includegraphics[width=0.8\linewidth]{generated/fig_entrenchment}
+\caption{Per-model reversion for all eight conventions, grouped by
+reversal-pedagogy tier.}
 \label{fig:entrench}
 \end{figure}
 
 \subsection{How hard the problem is}\label{sec:dose}
-Obedience on taught-reversal conventions is not unconditional; it has a load limit.
-Within the contour domain, we harden the problems (higher polynomial degree, more
-polygon edges) and measure reversion as each model's competence strain rises, where
-strain is simply the fraction of default-cell problems whose magnitudes the model
-now gets wrong. Reversion on the orientation convention climbs monotonically:
-gpt-oss from \cwEGptOss\% to \cwHGptOss\% at \strainHGptOss\% strain, GPT-5 from
-\cwEGptFive\% to \cwHGptFive\% at \strainHGptFive\%, and Gemma from \cwEGemma\% to
-\cwHGemma\% at \strainHGemma\% (a five-fold resampling of this last, largest figure
-gives mean 34.4\%, SD 6.4 points). The crucial comparison is the \texttt{wrk}
-control cell, which demands the identical negation of the same variables: it stays
-below 1\% for every frontier model at every difficulty
-(Figure~\ref{fig:dose}; weighted logistic $z=\strainZ$). Difficulty does not cause
-generic instruction-forgetting. It selectively reactivates the trained default of
-the specific convention under pressure. One consequence is worth stating plainly:
-the failure is worst exactly where users need the model most, on hard problems.
-(Rows lost to truncation in the hardened tier are the most-strained instances, so
-observed rates are, if anything, underestimates.)
+Obedience on taught-reversal conventions has a load limit. We harden the contour
+problems (degree-3--4 fields, five-to-eight-edge polygons) and compare each
+model's reversion on the easy and hardened tiers: gpt-oss moves from
+\vCwEGptOss\% to \vCwHGptOss\% as its share of magnitude-wrong default-cell
+problems rises to \vStrainHGptOss\%; GPT-5 from \vCwEGptFive\% to \vCwHGptFive\%
+at \vStrainHGptFive\%; Gemma from \vCwEGemma\% to \vCwHGemma\% at
+\vStrainHGemma\% (five-fold resampling of this last figure: mean 34.4\%, SD 6.4
+points). The \texttt{wrk} control, which demands the identical negation of the
+same variables, stays at or below \vWrkHGemma--\vWrkHGptOss\% for every model at
+every difficulty (Figure~\ref{fig:dose}). Whatever hard problems do to these
+models, it is not general instruction loss; it is selective to the orientation
+convention.
+
+Two caveats qualify the causal reading. The two tiers are distinct generated
+distributions (different seeds, polygon families, and rejection thresholds), so
+the comparison is between difficulty regimes rather than a controlled
+perturbation of identical items; and ``strain'' is the model's own error rate, a
+model-relative quantity, although the design knobs that produce it (degree, edge
+count) are set exogenously. Row availability also differs on the hardened tier
+(gpt-oss 197/250 default-cell rows, Gemma 183/250) because long generations
+truncate; we do not know the direction of the resulting bias and report
+availability rather than claiming conservativeness.
 
 \begin{figure}[t]
 \centering
@@ -291,69 +322,71 @@ observed rates are, if anything, underestimates.)
 \begin{minipage}{0.48\linewidth}
 \includegraphics[width=\linewidth]{generated/fig_c1}
 \end{minipage}
-\caption{Left: reversion against competence strain in the contour domain; dashed
-lines are the transform-matched \texttt{wrk} control. Right: the Qwen3 reasoning
-toggle raises competence at every scale while orientation reversion stays above
-90\%.}
+\caption{Left: contour reversion against competence strain; dashed lines are the
+transform-matched \texttt{wrk} control. Right: the Qwen3 reasoning toggle raises
+competence at every scale while orientation reversion stays above 90\%.}
 \label{fig:dose}\label{fig:c1}
 \end{figure}
 
 \subsection{How capable the model is}\label{sec:cap}
-The pedagogy gradient of Section~\ref{sec:tier} describes frontier models. Below
-the frontier, compliance degrades even on tier-0 conventions: the Qwen3 family
-reverts on contour orientation at 91--99\% at every scale and in both reasoning
-modes (Table~\ref{tab:c1}), and DeepSeek-V3, Llama-3.3-70B, and Qwen2.5-72B revert
-at 92--94\%. Even at this floor, convention identity still matters: the same weak
-models revert far less on the transform-matched \texttt{wrk} cell (for example, 92\%
-versus 35\% for DeepSeek-V3), so the gradient's fingerprint is visible below the
-capability threshold even though absolute compliance is not achievable there.
-Following a taught reversal under load is, itself, an emergent capability.
+Below the capable trio, compliance degrades even on tier-0 conventions: the Qwen3
+family reverts on contour orientation at 91--99\% at every scale in both modes
+(Table~\ref{tab:c1}), and DeepSeek-V3, Llama-3.3-70B, and Qwen2.5-72B revert at
+92--94\%. Convention identity still matters at this floor (DeepSeek-V3: 92\% on
+orientation versus 35\% on the transform-matched work-sign cell), but capability
+ordering is not clean everywhere: on handedness, the 4B and 8B non-reasoning
+models have similar competence yet revert at 96.0\% and 29.7\% respectively, so
+scale alone does not determine convention behavior below the frontier.
 
 \section{What mitigation does and does not do}\label{sec:nofix}
 
 \subsection{Reasoning modes: large competence gains, conditional compliance}
-The Qwen3 family can run with its reasoning mode on or off at identical weights,
-which isolates the effect of test-time deliberation. On contour, the toggle raises
-magnitude-competence from 0--15\% to 24--88\% across five scales while moving
-orientation reversion by two to four points (Table~\ref{tab:c1}); the same
-dissociation holds in circuits. Deliberation, by itself, does not make the
-instruction win.
+On contour, toggling Qwen3's reasoning mode raises magnitude-competence from
+0--15\% to 24--88\% across five scales while orientation reversion stays between
+91\% and 99\% in every configuration (Table~\ref{tab:c1}). In circuits we can
+check the same contrast at 32B, where the toggle raises competence substantially
+and leaves counter-clockwise reversion essentially unchanged; we did not run the
+smaller circuit think columns, so the circuits version of this claim rests on one
+scale. Deliberation, by itself, does not make the orientation or mesh
+instructions win.
 
 \begin{table}[t]
 \centering\small
 \caption{The Qwen3 reasoning toggle on contour: competence rises at every scale;
-orientation reversion does not move.}
+orientation reversion does not follow.}
 \label{tab:c1}
 \input{generated/table_c1_full}
 \end{table}
 
-The vectors domain, however, reveals the boundary of this negative result, and we
-report it because it sharpens rather than weakens the claim. On the handedness
-convention, reasoning \emph{does} restore compliance: reversion falls from
-\LhNothinkMid\% to \LhThinkMid\% at 4B and to \LhThinkBig\% at 8B
+The vectors domain shows the boundary of this negative result. On handedness,
+reasoning restores compliance: reversion falls from \vLhNothinkMid\% to
+\vLhThinkMid\% at 4B and to \vLhThinkBig\% at 8B
 (Table~\ref{tab:rhrladder}, Appendix~\ref{app:rhrladder}). In the same responses,
-the reaction-reporting convention keeps slipping at \RxnThinkBig--\LhThinkSmall\%.
-The pattern across all three domains is consistent: test-time deliberation can
-\emph{retrieve} a reversal that is taught and procedurally shallow, a per-operation
-sign rule the chain of thought can state and apply each time it is needed. It does
-not conjure a reversal that was never taught (circuits), it does not sustain one
-that must be maintained across every step of a long derivation (contour
-orientation under load), and it does not reliably hold a framing convention that
-applies once at reporting time (reaction). What compute buys is retrieval, not
-override.
+the reaction-reporting convention keeps slipping at
+\vRxnThinkBig\%--\vRxnThinkSmall\% across the three scales. A consistent reading
+of all three domains, which we offer as an interpretation of behavioral data
+rather than a mechanistic finding, is that deliberation can \emph{retrieve} a
+reversal that is taught and procedurally shallow (a per-operation sign rule the
+chain of thought can state and apply), while it does not supply a reversal that
+was never taught, does not sustain one that must be maintained across a long
+derivation, and does not reliably hold a framing convention applied once at
+reporting time.
 
-\subsection{Worked demonstrations: almost nothing}
-If reversion reflects a missing training representation, perhaps supplying that
-representation in-context cures it. We prepend one or three fully worked,
-solver-verified examples of counter-clockwise mesh analysis (held-out problems,
-different topologies) to the same circuit instances. The result is a nearly flat
-dose-response (Figure~\ref{fig:kshot}): Gemma declines modestly
-(\shotZeroGemma\%$\to$\shotOneGemma\%$\to$\shotThreeGemma\%, about 4.5 points per
-example), while gpt-oss (\shotZeroGptOss\%$\to$\shotThreeGptOss\%) and GPT-5
-(\shotZeroGptFive\%$\to$\shotOneGptFive\%$\to$\shotThreeGptFive\%) do not move at
-all. Reading a correct demonstration of exactly the required behavior, immediately
-before the problem, does not override the prior. The mitigation practitioners would
-reach for first is the one we can most confidently say does not work.
+\subsection{Worked demonstrations: little to nothing}
+If reversion reflects a missing representation, supplying it in-context should
+help. We prepend one or three fully worked, solver-verified examples of
+counter-clockwise mesh analysis (held-out problems, different topologies) to the
+same circuit instances. Gemma improves by 13.6 points over the three-example
+curve (\vShotZeroGemma\%$\to$\vShotOneGemma\%$\to$\vShotThreeGemma\%), roughly
+4.5 points per example, a real but shallow effect at that exchange rate; gpt-oss
+(\vShotZeroGptOss\%$\to$\vShotThreeGptOss\%) and GPT-5
+(\vShotZeroGptFive\%$\to$\vShotOneGptFive\%$\to$\vShotThreeGptFive\%) do not
+improve at all (Figure~\ref{fig:kshot}). GPT-5's baseline rests on 51 diagnostic
+variables against 526 and 190 for its one- and three-example arms, so its curve
+is read as flat-within-noise rather than as a precise trajectory. We tested one
+demonstration format on one convention; stronger interventions (explicit
+verification instructions, self-check scaffolds, fine-tuning) are untested and
+may behave differently.
 
 \begin{figure}[t]
 \centering
@@ -365,71 +398,83 @@ counter-clockwise examples.}
 
 \section{Two pre-registered predictions, both refuted}\label{sec:prereg}
 Before collecting the corresponding data, we committed two predictions to the
-project's version history. \textbf{Prediction 1}: left-handed cross products would
-behave like counter-clockwise mesh currents, an untrained reversal, and frontier
-models would revert heavily. \emph{Refuted}: across three difficulty tiers and
-roughly 3{,}700 diagnostic variables, frontier reversion on the left-hand rule is
-\lhGptOss--\lhGptFive\% ($0/\lhNGemma$ for Gemma at 95\% competence). In hindsight
-the pedagogy explains the miss: every textbook teaches the left-hand outcome as an
-explicit warning, which is training signal for the flip. This refutation is what
-forced the ordinal coding of Section~\ref{sec:tier}, and our subsequent failure to
-find any second tier-2 convention is itself evidence for how unusual the mesh
-convention's pedagogical silence is. \textbf{Prediction 2}: in-context
-demonstrations would collapse reversion if it stems from a missing representation.
-\emph{Refuted}, as Section~\ref{sec:nofix} shows. We report both because a
-measurement framework that only ever confirms its authors' expectations is not
-measuring anything; the claims that survive are the ones these refutations
-disciplined.
+project's version history. \textbf{Prediction 1}: left-handed cross products
+would behave like counter-clockwise mesh currents, an untrained reversal, and the
+capable trio would revert heavily. \emph{Refuted}: across the vectors panel
+(3{,}698 diagnostic variables at the most hardened setting, plus two easier
+calibration rounds), reversion on the left-hand rule is
+\lhGptOss\%--\lhGptFive\% for the trio, with Gemma at \lhGemma\% at
+\vRhrMagGemma\% competence. The refutation prompted the pedagogy audit of
+Section~\ref{sec:tier}: the left-hand outcome is taught, as a warning, in every
+audited text. We stress the epistemic status this gives the tier scale: it is a
+post hoc organization that the refutation motivated, not a confirmed prediction,
+and our failure to find a second tier-2 convention is a search-conditioned
+observation, not evidence of impossibility. \textbf{Prediction 2}: in-context
+demonstrations would collapse reversion if it stems from a missing
+representation. \emph{Refuted} in two of three models; the third improved
+shallowly (Section~\ref{sec:nofix}). We report both refutations because a
+measurement framework that only confirms its authors' expectations is not
+measuring anything.
 
 \section{Related work}\label{sec:related}
 Instruction-following benchmarks grade compliance with formatting and content
-constraints \citep{zhou2023ifeval}; counter-default instructions have been studied
-as inverse instructions \citep{stephan2024inverse} and counterfactual task variants
-\citep{wu2024reasoning}. Relative to these, our contribution is machinery that
-separates compliance from competence \emph{within} a single response using
-sign-exact oracles, plus controls (transform-matched cells, procedure contracts)
-that localize the failure to convention identity. Sycophancy work documents
-deference to user framing \citep{sharma2023sycophancy}; reversion persists with no
-user stance to defer to. Test-time-scaling studies measure capability gains from
-deliberation \citep{muennighoff2025s1,deepseekr1}; we show those gains transfer to
-compliance only under narrow conditions. The benchmark extends a published
-single-domain probe \citep{ravishankara2026circuchain} and follows deterministic
-evaluation practice from engineering-plot benchmarks
-\citep{ravishankara2026plotchain}; canary-based contamination protection follows
-\citet{srivastava2022bigbench}; statistics use exact McNemar tests
-\citep{mcnemar1947} and Wilson intervals \citep{wilson1927}.
+constraints \citep{zhou2023ifeval}; counter-default instructions have been
+studied as inverse instructions \citep{stephan2024inverse} and counterfactual
+task variants \citep{wu2024reasoning}. Our contribution is machinery that
+separates compliance from competence within a single response using sign-exact
+oracles, with matched-transform and procedure controls. Conflicts between
+context and parametric knowledge, and instruction-hierarchy designs that
+arbitrate them, are studied in question answering and alignment; our setting is
+the special case where the parametric side is a notational custom and the
+conflict is resolvable exactly. Sycophancy work documents deference to user
+framing \citep{sharma2023sycophancy}; reversion persists with no user stance to
+defer to. Test-time-scaling studies measure capability gains from deliberation
+\citep{muennighoff2025s1,deepseekr1}; we show those gains transfer to compliance
+only narrowly. Steering and activation-intervention methods that modify behavior
+at inference time are complementary and untested here. The benchmark extends a
+published single-domain probe \citep{ravishankara2026circuchain}, follows
+deterministic evaluation practice from engineering-plot benchmarks
+\citep{ravishankara2026plotchain}, and uses canary-based contamination
+protection in the tradition of \citet{srivastava2022bigbench}; statistics use
+exact McNemar tests \citep{mcnemar1947} and clustered bootstrap intervals.
 
 \section{Discussion}\label{sec:discussion}
-\textbf{Implications for evaluation.} Any benchmark that grades magnitudes, accepts
-answers modulo sign, or scores with a language-model judge will award full credit to
-every reverted answer in this study. Sign-exact grading against the instructed
-frame is cheap when the domain permits it, and our results suggest it measures a
-dimension of controllability that accuracy does not.
+\textbf{Implications for evaluation.} A benchmark that grades magnitudes,
+accepts answers modulo sign, or uses a judge that does not explicitly check the
+instructed frame will award full credit to every reverted answer in this study.
+Sign-exact grading against the instructed frame is cheap where the domain
+permits it and measures a dimension of controllability that accuracy does not.
 
-\textbf{Implications for deployment.} The failure mode is silent, directed toward
-the training distribution, load-sensitive, and robust to prompting. In engineering
-use, a deterministic frame-check layer (recompute the requested convention's signs
-from the model's own magnitudes) costs almost nothing and, on this evidence, is
-worth more than any reasoning budget.
+\textbf{Implications for deployment.} The failure mode leaves no trace in the
+response, points toward the textbook default, worsens with difficulty, and is
+robust to the prompting mitigation we tested. A deterministic frame-check layer
+(recomputing the requested convention's signs from the model's own magnitudes)
+is a natural guard; we propose it as an engineering direction and note we have
+not evaluated it, and that affine conventions and coupled derived quantities
+would need care.
 
-\textbf{Limitations.} The tier-2 pole of the pedagogy scale is occupied by a single
-convention; we searched for a second and found only a tier-1 case, so we present a
-measured gradient rather than a two-point law. Difficulty could not be raised
-enough in the vectors domain to strain frontier models, so the taught-reversal
-$\times$ high-load cell is measured only in contour. Pedagogy tiers are coded from
-a finite audit of standard textbooks (Appendix~\ref{app:audit}). Our analysis is
-behavioral; we do not localize the mechanism inside the network. Serving stacks are
-mixed across the panel, though pinned and recorded, and hardened-tier truncation
-censors the most-strained rows in the conservative direction.
+\textbf{Limitations.} The tier-2 pole is one convention, coded post hoc by one
+author from a finite textbook audit without blinded or independent coding; we
+present the scale as organizing, not causal. The interpretation of reversion as
+a \emph{training} prior is an inference from behavior against textbook defaults;
+we never observe training corpora, and ``curriculum-default convention'' is the
+measured object. Strain is model-relative; the two contour tiers are distinct
+distributions; hardened-tier truncation censors rows in an unknown direction
+(availability is reported). Most columns are single-sample, with five-fold
+retests at two headline cells only; item-level behavior is unstable across
+resamples even where rates are stable. The demonstration experiment covers one
+format on one convention. Our analysis is behavioral; nothing here localizes a
+mechanism inside the network.
 
-\textbf{Release.} The generators, oracles, validators, grading, and analysis code
-are released publicly; every dataset regenerates byte-identically from a seed, so
-the public artifact is a one-command generator rather than a crawlable answer key.
-Frozen instances and model outputs are available under gated access with embedded
-canaries. We take this structure seriously because this benchmark measures a
-training-frequency effect: if its instances and instructed answers entered a future
-training corpus, they would not merely inflate scores, they would administer the
-treatment and invert the measurement.
+\textbf{Release.} Generators, oracles, validators, grading, and analysis code
+are released publicly; every dataset regenerates byte-identically from a seed,
+so the public artifact is a one-command generator rather than a crawlable answer
+key. Frozen instances and model outputs are available under gated access with
+embedded canaries. We adopt this structure because our measurements are made
+against curriculum-default conventions: if these instances and their instructed
+answers entered future training corpora, the measurement itself, under our
+working hypothesis about its origin, would be altered rather than merely
+inflated.
 
 \bibliography{refs}
 \bibliographystyle{iclr2026_conference}
@@ -439,9 +484,9 @@ treatment and invert the measurement.
 \section{Reasoning toggle on the vectors domain}\label{app:rhrladder}
 \begin{table}[h]
 \centering\small
-\caption{Qwen3 reasoning toggle on the vectors domain (hardened tier): competence
-\% and reversion \% per convention. Reasoning collapses the taught, shallow
-handedness reversal but not the reaction-reporting convention.}
+\caption{Qwen3 reasoning toggle on the vectors domain (hardened tier):
+competence \% and reversion \% per convention. Reasoning collapses the taught,
+shallow handedness reversal but not the reaction-reporting convention.}
 \label{tab:rhrladder}
 \input{generated/table_rhr_ladder_full}
 \end{table}
@@ -451,23 +496,23 @@ For each convention we examined the treatment of its \emph{reversal} in standard
 textbooks: for circuits, Nilsson \& Riedel; Hayt, Kemmerly \& Durbin; Irwin \&
 Nelms; Sadiku; and Kuphaldt's open text; for multivariable calculus, Stewart;
 Thomas; Marsden \& Tromba; and the OpenStax Calculus series; for mechanics and
-electromagnetism, Halliday, Resnick \& Walker; Serway \& Jewett; Young \& Freedman;
-Griffiths; and OpenStax University Physics. A convention's reversal is coded
-\emph{tier 0} if at least one audited text states it as a rule or theorem and at
-least one provides exercises using it (orientation reversal, reaction pairs, inward
-normals, work against a field); \emph{tier 1} if audited texts mention the reversal
-only as an error contrast or partial treatment without worked examples (left-hand
-rule warnings, active sign convention, non-ground references); \emph{tier 2} if no
-audited text provides any worked treatment of the reversal (counter-clockwise mesh
-currents; we found none). The coding predates the vectors-domain results
-(Section~\ref{sec:prereg} describes how a mis-anticipation of the left-hand rule's
-tier motivated this audit).
+electromagnetism, Halliday, Resnick \& Walker; Serway \& Jewett; Young \&
+Freedman; Griffiths; and OpenStax University Physics. A convention's reversal is
+coded \emph{tier 0} if at least one audited text states it as a rule or theorem
+and at least one provides exercises using it; \emph{tier 1} if audited texts
+mention the reversal only as an error contrast or partial treatment without
+worked examples; \emph{tier 2} if no audited text provides any worked treatment
+of it. The audit was performed by a single author, after the vectors-domain
+refutation and before the drafting of Section~\ref{sec:tier}; it is not blinded,
+has no second coder or agreement statistic, and should be read as a documented
+coding rather than a validated instrument.
 
 \section{Reproducibility}\label{app:repro}
 All datasets are deterministic functions of a configuration file and a seed;
 regeneration commands, manifests with canary identifiers, transform-validation
-reports (125/125 per domain), the complete statistical freeze backing every number
-in this paper, and per-response provenance (model identifier, serving stack,
-quantization, sampling parameters) accompany the code. No language model is
-involved at any point in generation, verification, grading, or analysis.
+reports (125/125 per domain), the complete statistical freeze backing every
+number in this paper (including per-problem clustering used for all confidence
+intervals), and per-response provenance (model identifier, serving stack,
+quantization, sampling parameters) accompany the code release. No language model
+is involved at any point in generation, verification, grading, or analysis.
 \end{document}
