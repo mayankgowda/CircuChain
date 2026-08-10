@@ -54,3 +54,56 @@ head=("\\begin{tabular}{lcccc}\n\\toprule\n & & \\multicolumn{3}{c}{Reversion \\
 open(os.path.join(OUT,"table_entrench_v4.tex"),"w").write(head+"\n".join(rows)+"\n\\bottomrule\n\\end{tabular}\n")
 open(os.path.join(OUT,"macros_v4.tex"),"w").write("\n".join(L)+"\n")
 print(f"{len(L)} v4 macros + per-model tier table")
+
+# ---- v5 additions: precise separation, appendix tables ----
+L2=[]
+M2=lambda n,v: L2.append(f"\\newcommand{{\\{n}}}{{{v}}}")
+M2("tierSepMinPrec", f"{S['tier_separation_min_pp']:.1f}")
+CS=S.get("common_support_v5",{})
+if CS:
+    ARMN={"shot1":"ShotOne","shot3":"ShotThree"}
+    for m,tag in F.items():
+        for arm in ("shot1","shot3"):
+            v=CS[m][arm]
+            M2(f"cs{ARMN[arm]}N{tag}", v["n_common"])
+            M2(f"cs{ARMN[arm]}Base{tag}", pct(v["rate_base"]))
+            M2(f"cs{ARMN[arm]}Arm{tag}", pct(v["rate_arm"]))
+    rows=[]
+    nm={"gpt5-api":"GPT-5","gpt-oss-120b-api":"gpt-oss-120b","gemma4-31b-api":"Gemma-4-31B"}
+    for m in F:
+        for arm,lbl in (("shot1","1 example"),("shot3","3 examples")):
+            v=CS[m][arm]
+            rows.append(f"{nm[m]} & {lbl} & {v['n_common']} & {pct(v['rate_base'])} & "
+                        f"{pct(v['rate_arm'])} & {v['fixed_by_demo']} & {v['broken_by_demo']} \\\\")
+    head=("\\begin{tabular}{llccccc}\n\\toprule\nModel & Arm & $n$ common & Base \\% & "
+          "Arm \\% & Fixed & Broken \\\\\n\\midrule\n")
+    open(os.path.join(OUT,"table_commonsupport.tex"),"w").write(head+"\n".join(rows)+"\n\\bottomrule\n\\end{tabular}\n")
+TS=S.get("tolerance_sweep_v5",{})
+if TS:
+    rows=[]
+    nm={"gpt5-api":"GPT-5","gpt-oss-120b-api":"gpt-oss-120b","gemma4-31b-api":"Gemma-4-31B"}
+    for m in F:
+        for cell,lbl in (("circuits_ccw","circuits ccw"),("contour_hard_cw","contour hard cw")):
+            sw=TS[m][cell]
+            vals=" & ".join(pct(sw[k]["rate"]) for k in ("0.01","0.02","0.05","0.10"))
+            rows.append(f"{nm[m]} & {lbl} & {vals} \\\\")
+    head=("\\begin{tabular}{llcccc}\n\\toprule\nModel & Cell & 1\\% & 2\\% & 5\\% & 10\\% \\\\\n\\midrule\n")
+    open(os.path.join(OUT,"table_tolerance.tex"),"w").write(head+"\n".join(rows)+"\n\\bottomrule\n\\end{tabular}\n")
+# unconditional outcome shares over ALL diagnostic variables (trio, 8 conventions)
+CONV2={"ccw":"circuits","act":"circuits","top":"circuits","cw":"contour_easy",
+       "wrk":"contour_easy","inw":"contour_easy","lh":"rhr_xhard","rxn":"rhr_xhard"}
+rows=[]
+nm={"gpt5-api":"GPT-5","gpt-oss-120b-api":"gpt-oss","gemma4-31b-api":"Gemma"}
+for conv,blk in CONV2.items():
+    for m in F:
+        v=S[blk][m][conv]
+        tot=v["n_magcorrect"]+v["magwrong_or_missing"]
+        if not tot: continue
+        rows.append(f"{conv} & {nm[m]} & {pct(v['pass']/tot)} & {pct(v['revert']/tot)} & "
+                    f"{pct(v['incoherent']/tot)} & {pct(v['magwrong_or_missing']/tot)} & {tot:,} \\\\")
+head=("\\begin{tabular}{llccccc}\n\\toprule\nConvention & Model & Compliant & Reverted & "
+      "Incoherent & Mag.-wrong & $n$ all diag \\\\\n\\midrule\n")
+open(os.path.join(OUT,"table_outcomes.tex"),"w").write(head+"\n".join(rows)+"\n\\bottomrule\n\\end{tabular}\n")
+with open(os.path.join(OUT,"macros_v4.tex"),"a") as f:
+    f.write("\n"+"\n".join(L2)+"\n")
+print(f"v5: +{len(L2)} macros, 3 appendix tables")

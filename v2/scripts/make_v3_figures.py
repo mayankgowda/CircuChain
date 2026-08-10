@@ -53,7 +53,7 @@ for m, mark in (("gpt-oss-120b-api", "o"), ("gpt5-api", "s"), ("gemma4-31b-api",
     ax.plot(xs, wk, marker=mark, ls="--", color="#4878CF", alpha=0.7)
 ax.set_xlabel("competence strain (100 − magnitude-correct %)")
 ax.set_ylabel("reversion (%)")
-ax.set_title("Load reactivates the prior — matched transform (dashed) does not",
+ax.set_title("Contour reversion vs. competence strain; dashed = matched-transform control",
              fontsize=8.5)
 ax.legend(fontsize=7)
 fig.tight_layout(); fig.savefig(f"{OUT}/fig_dose.pdf"); plt.close(fig)
@@ -67,7 +67,7 @@ for mode, color in (("nothink", "#777777"), ("think", "#2E7D32")):
     ax.plot(sizes, mags, marker="o", color=color, label=f"{mode}: competence")
     ax.plot(sizes, revs, marker="x", ls=":", color=color, label=f"{mode}: reversion")
 ax.set_ylabel("%"); ax.set_ylim(0, 100)
-ax.set_title("Reasoning buys competence, not compliance (contour, Qwen3)", fontsize=8.5)
+ax.set_title("Qwen3 reasoning toggle on contour: competence and reversion by scale", fontsize=8.5)
 ax.legend(fontsize=7)
 fig.tight_layout(); fig.savefig(f"{OUT}/fig_c1.pdf"); plt.close(fig)
 
@@ -82,7 +82,7 @@ for m, mark in (("gemma4-31b-api", "^"), ("gpt-oss-120b-api", "o"), ("gpt5-api",
     ax.plot(ks, rs, marker=mark, label=m.split("-")[0])
 ax.set_xticks([0, 1, 3]); ax.set_xlabel("worked CCW examples in context")
 ax.set_ylabel("reversion (%)"); ax.set_ylim(0, 100)
-ax.set_title("In-context demonstrations barely move the prior", fontsize=8.5)
+ax.set_title("Circuits reversion vs. number of worked counter-clockwise examples", fontsize=8.5)
 ax.legend(fontsize=7)
 fig.tight_layout(); fig.savefig(f"{OUT}/fig_kshot.pdf"); plt.close(fig)
 

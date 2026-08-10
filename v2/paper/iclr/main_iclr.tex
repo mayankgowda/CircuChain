@@ -20,16 +20,17 @@ choice is legitimate and unambiguous. We study what language models do with such
 instructions across three physics and mathematics domains whose answers are verified
 to the sign by four independent solvers, eight instructable conventions, and sixteen
 model configurations spanning a \spanRatio$\times$ range of problem-solving
-competence. The central phenomenon, which we call \emph{reversion}, is that models
-often solve the problem correctly and report the signs of the convention they were
-trained on rather than the one they were instructed to use. Reversion is highly
+competence. The central phenomenon, which we call \emph{reversion}, is that models often solve
+the problem correctly and report the signs of the textbook-default convention rather
+than the instructed one. (The title's ``prior'' is a behavioral label for this
+default-seeking regularity, not an identified training-data mechanism.) Reversion is highly
 convention-specific. Posing the same problems under a counter-clockwise mesh-current
 instruction breaks \bAgg{} previously-solved problems across our panel while fixing
 \cAgg{}, and the three most capable models revert on \ccwGptFive--\ccwGemma\% of
 their correctly-computed variables; yet the same models comply almost perfectly with
 conventions whose reversal is itself part of the standard curriculum, and in every
 one of them the gap between the curriculum-absent reversal and every
-curriculum-taught reversal exceeds \tierSepMin{} percentage points. Compliance is
+curriculum-taught reversal is at least \tierSepMinPrec{} percentage points. Compliance is
 also load-sensitive and capability-gated: hardening problems within an obeyed domain
 raises each model's reversion (Gemma-4-31B from \vCwEGemma\% to \vCwHGemma\%) while
 a control instruction demanding the identical output change stays below 1\%, and
@@ -38,7 +39,8 @@ Mitigation is conditional at best. A reasoning toggle that raises accuracy by up
 64 points moves reversion on most conventions by only a few points, restoring
 compliance only where the reversal is both taught and procedurally shallow; and one
 to three fully worked in-context demonstrations of the required convention change
-reversion by at most 13.6 points in one model and not at all in the other two. Two
+reversion by at most 13.6 points in one model, with no consistent improvement in
+the other two. Two
 predictions we pre-registered were refuted, and we report both. Grading is
 deterministic throughout, with no language-model judges.
 \end{abstract}
@@ -51,16 +53,17 @@ only fixes which currents are reported as positive. A model that follows the
 instruction produces the usual magnitudes with certain signs flipped. What we
 observe, in every capable model we test, is different: the model sets up correct
 equations, solves them correctly, recovers every magnitude, and then reports the
-signs that a \emph{clockwise} analysis would produce. Nothing in the response marks
-the substitution: the requested format is followed, the magnitudes are right, and no
-caveat appears. Unless the answer is checked against a solver that knows which
-convention was requested, the failure is invisible.
+signs that a \emph{clockwise} analysis would produce. The requested format is followed and the magnitudes are right, so the substitution
+is not detectable from magnitude-only grading; only a sign-exact check against the
+instructed convention reveals it. (We grade the mandated answer line and do not
+audit the surrounding prose for caveats; a model that flagged its own substitution
+elsewhere in the response would still be scored as reverted.)
 
 This paper names that behavior, measures it at scale, identifies three factors that
 predict it, and tests two mitigations that mostly fail. Throughout, we use one term
 for the central outcome, defined precisely in Section~\ref{sec:defs}: a model
 \emph{reverts} on a variable when its answer has the correct magnitude but carries
-the sign of the training-default convention rather than the instructed one.
+the sign of the textbook-default convention rather than the instructed one.
 Reversion is a compliance failure that most evaluations cannot see, because they
 grade magnitudes, accept answers up to sign, or use judges that need not check the
 instructed frame.
@@ -91,9 +94,8 @@ history before data collection came out opposite to our expectation, and both
 refutations are reported.
 
 \textbf{Why it matters.} A sign is the difference between tension and compression,
-charging and discharging, stable and unstable. The failure mode we document leaves
-no trace in the response, grows when problems get harder, and resists the first
-mitigation a practitioner would try. Evaluations that do not grade signs against
+charging and discharging, stable and unstable. The failure mode we document is undetectable by magnitude-only grading, grows when
+problems get harder, and resists the first mitigation a practitioner would try. Evaluations that do not grade signs against
 the instructed frame will report such a model as excellent.
 
 \section{Definitions and instrument}\label{sec:defs}
@@ -117,7 +119,7 @@ COUNTER-CLOCKWISE, i.e., the reverse of the usual clockwise choice'' (the flip
 cell). The requested output is a fixed line of \texttt{name=value} pairs. Under the
 flip, the correct values of $i_1, i_2, i_3$ are the negations of their default-cell
 values; every other requested quantity is unchanged. A model that answers the flip
-cell with the default cell's signs has followed its training rather than its
+cell with the default cell's signs has matched the textbook default rather than its
 instructions, and the grader detects this exactly.
 
 \subsection{Reversion, precisely}\label{sec:reversion}
@@ -200,8 +202,11 @@ Gemma-4-31B, DeepSeek-V3, Llama-3.3-70B, Qwen2.5-72B, and the Qwen3 dense family
 (1.7B--32B), each Qwen3 size in both its reasoning and non-reasoning mode, which
 toggles behavior at fixed weights. Default-cell competence spans
 \spanLo\%--\spanHi\% across configurations and domains, a \spanRatio$\times$
-range. Decoding settings are uniform; serving stack and quantization are pinned
-and recorded per response. We refer to GPT-5, gpt-oss-120b, and Gemma-4-31B as the
+range. Decoding settings are uniform; serving stack and quantization are pinned and
+recorded per response. Because models were not served on a common inference stack,
+cross-model capability comparisons are descriptive; the fixed-weight Qwen3
+reasoning toggle, which holds model, stack, and data constant, is the panel's
+strongest controlled contrast. We refer to GPT-5, gpt-oss-120b, and Gemma-4-31B as the
 \emph{capable trio}; they are the panel's most capable members in every domain,
 though not uniformly near ceiling (GPT-5 at low effort solves \vCircMagGptFive\%
 of circuit magnitudes, and the trio sits at 95--100\% on vectors and 98--99\% on
@@ -262,8 +267,8 @@ with problem-clustered bootstrap confidence intervals; we deliberately avoid
 pooling across models and avoid variable-level test statistics, since variables
 within a problem are correlated. The pattern is a strong ordering with honest
 wrinkles. In every one of the three models separately, the tier-2 convention's
-reversion exceeds that of every tier-0 convention by at least \tierSepMin{}
-percentage points. Tier-1 conventions are heterogeneous rather than intermediate
+reversion exceeds that of every tier-0 convention by at least \tierSepMinPrec{}
+percentage points (69.6 for GPT-5, larger for the other two). Tier-1 conventions are heterogeneous rather than intermediate
 (the reference node draws \topGptOss\%--\topGemma\%, handedness
 \lhGptFive\%--\lhGemma\%), and one tier-0 convention (orientation, at
 \cwGemma\% for Gemma) sits above two tier-1 rates, so the scale orders the
@@ -300,9 +305,10 @@ at \vStrainHGptFive\%; Gemma from \vCwEGemma\% to \vCwHGemma\% at
 \vStrainHGemma\% (five-fold resampling of this last figure: mean 34.4\%, SD 6.4
 points). The \texttt{wrk} control, which demands the identical negation of the
 same variables, stays at or below \vWrkHGemma--\vWrkHGptOss\% for every model at
-every difficulty (Figure~\ref{fig:dose}). Whatever hard problems do to these
-models, it is not general instruction loss; it is selective to the orientation
-convention.
+every difficulty (Figure~\ref{fig:dose}). The contrast rules out a generic inability to perform the required final negation
+under load; it does not by itself separate convention identity from differences in
+intermediate bookkeeping, since orientation participates in every integral while
+the work-sign flip applies once at reporting time.
 
 Two caveats qualify the causal reading. The two tiers are distinct generated
 distributions (different seeds, polygon families, and rejection thresholds), so
@@ -380,8 +386,16 @@ same circuit instances. Gemma improves by 13.6 points over the three-example
 curve (\vShotZeroGemma\%$\to$\vShotOneGemma\%$\to$\vShotThreeGemma\%), roughly
 4.5 points per example, a real but shallow effect at that exchange rate; gpt-oss
 (\vShotZeroGptOss\%$\to$\vShotThreeGptOss\%) and GPT-5
-(\vShotZeroGptFive\%$\to$\vShotOneGptFive\%$\to$\vShotThreeGptFive\%) do not
-improve at all (Figure~\ref{fig:kshot}). GPT-5's baseline rests on 51 diagnostic
+(\vShotZeroGptFive\%$\to$\vShotOneGptFive\%$\to$\vShotThreeGptFive\%) show no
+consistent improvement (Figure~\ref{fig:kshot}). Because conditional denominators
+shift across arms, we also run a paired common-support analysis restricted to
+variables that are magnitude-correct in both arms of a comparison
+(Appendix~\ref{app:robust}): on identical variables, Gemma's three-example arm
+moves \csShotThreeBaseGemma\%$\to$\csShotThreeArmGemma\% ($n$=\csShotThreeNGemma;
+113 fixed, 52 newly broken), gpt-oss is exactly flat
+(\csShotThreeBaseGptOss\%$\to$\csShotThreeArmGptOss\%; 26 fixed, 26 broken), and
+GPT-5's common support is too small for a paired read
+($n$=\csShotThreeNGptFive). GPT-5's baseline rests on 51 diagnostic
 variables against 526 and 190 for its one- and three-example arms, so its curve
 is read as flat-within-noise rather than as a precise trajectory. We tested one
 demonstration format on one convention; stronger interventions (explicit
@@ -422,16 +436,23 @@ constraints \citep{zhou2023ifeval}; counter-default instructions have been
 studied as inverse instructions \citep{stephan2024inverse} and counterfactual
 task variants \citep{wu2024reasoning}. Our contribution is machinery that
 separates compliance from competence within a single response using sign-exact
-oracles, with matched-transform and procedure controls. Conflicts between
-context and parametric knowledge, and instruction-hierarchy designs that
-arbitrate them, are studied in question answering and alignment; our setting is
-the special case where the parametric side is a notational custom and the
-conflict is resolvable exactly. Sycophancy work documents deference to user
+oracles, with matched-transform and procedure controls. Conflicts between contextual evidence and parametric knowledge are studied in
+question answering \citep{longpre2021entity,xie2024knowledgeconflict}, and
+instruction hierarchies arbitrate conflicting directives
+\citep{wallace2024hierarchy}; our setting is the special case where the parametric
+side is a notational custom and the conflict is resolvable exactly. Evidence that
+procedural knowledge in pretraining shapes reasoning strategies
+\citep{ruis2025procedural} is consistent with the curriculum-default account we
+hypothesize. Sycophancy work documents deference to user
 framing \citep{sharma2023sycophancy}; reversion persists with no user stance to
 defer to. Test-time-scaling studies measure capability gains from deliberation
 \citep{muennighoff2025s1,deepseekr1}; we show those gains transfer to compliance
-only narrowly. Steering and activation-intervention methods that modify behavior
-at inference time are complementary and untested here. The benchmark extends a
+only narrowly. Context-aware decoding \citep{shi2024trusting} and activation steering
+\citep{rimsky2024steering} modify behavior at inference time and are natural
+follow-ups we do not test. Known biases of model-based judging
+\citep{zheng2023judging} motivate our judge-free design, and our release protocol
+follows contamination-aware benchmark practice
+\citep{jacovi2023stop,srivastava2022bigbench}. The benchmark extends a
 published single-domain probe \citep{ravishankara2026circuchain}, follows
 deterministic evaluation practice from engineering-plot benchmarks
 \citep{ravishankara2026plotchain}, and uses canary-based contamination
@@ -445,9 +466,9 @@ instructed frame will award full credit to every reverted answer in this study.
 Sign-exact grading against the instructed frame is cheap where the domain
 permits it and measures a dimension of controllability that accuracy does not.
 
-\textbf{Implications for deployment.} The failure mode leaves no trace in the
-response, points toward the textbook default, worsens with difficulty, and is
-robust to the prompting mitigation we tested. A deterministic frame-check layer
+\textbf{Implications for deployment.} The failure mode is invisible to magnitude-only grading, points toward the textbook
+default, worsens with difficulty, and is robust to the prompting mitigation we
+tested. A deterministic frame-check layer
 (recomputing the requested convention's signs from the model's own magnitudes)
 is a natural guard; we propose it as an engineering direction and note we have
 not evaluated it, and that affine conventions and coupled derived quantities
@@ -460,9 +481,11 @@ a \emph{training} prior is an inference from behavior against textbook defaults;
 we never observe training corpora, and ``curriculum-default convention'' is the
 measured object. Strain is model-relative; the two contour tiers are distinct
 distributions; hardened-tier truncation censors rows in an unknown direction
-(availability is reported). Most columns are single-sample, with five-fold
-retests at two headline cells only; item-level behavior is unstable across
-resamples even where rates are stable. The demonstration experiment covers one
+(availability is reported). Most columns are single-sample, with five-fold retests at two headline cells only;
+item-level behavior is unstable across resamples even where rates are stable. The
+5\% relative grading tolerance (with an absolute floor near zero) is not tuned:
+re-grading the headline cells at 1\%, 2\%, 5\%, and 10\% moves reversion rates by
+at most 2.5 points (Appendix~\ref{app:robust}). The demonstration experiment covers one
 format on one convention. Our analysis is behavioral; nothing here localizes a
 mechanism inside the network.
 
@@ -506,6 +529,34 @@ of it. The audit was performed by a single author, after the vectors-domain
 refutation and before the drafting of Section~\ref{sec:tier}; it is not blinded,
 has no second coder or agreement statistic, and should be read as a documented
 coding rather than a validated instrument.
+
+\section{Robustness analyses}\label{app:robust}
+\textbf{Unconditional outcomes.} Table~\ref{tab:outcomes} reports, for every
+convention and capable-trio model, the shares of all four grading outcomes over
+\emph{all} diagnostic variables (no conditioning on magnitude correctness).
+\begin{table}[h]\centering\scriptsize
+\caption{Unconditional outcome shares over all diagnostic variables.}
+\label{tab:outcomes}
+\input{generated/table_outcomes}
+\end{table}
+
+\textbf{Common-support pairing for the demonstration experiment.}
+Table~\ref{tab:cs} restricts each comparison to variables magnitude-correct in
+both arms, removing denominator-composition effects.
+\begin{table}[h]\centering\small
+\caption{Paired common-support analysis of worked demonstrations (circuits,
+counter-clockwise cell).}
+\label{tab:cs}
+\input{generated/table_commonsupport}
+\end{table}
+
+\textbf{Grading-tolerance sweep.} Table~\ref{tab:tol} re-grades the headline
+cells at four relative tolerances; rates move by at most 2.5 points.
+\begin{table}[h]\centering\small
+\caption{Reversion rate by grading tolerance.}
+\label{tab:tol}
+\input{generated/table_tolerance}
+\end{table}
 
 \section{Reproducibility}\label{app:repro}
 All datasets are deterministic functions of a configuration file and a seed;
