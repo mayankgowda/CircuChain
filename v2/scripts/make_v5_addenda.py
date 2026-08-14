@@ -51,7 +51,10 @@ S["common_support_v5"]=CS
 # (c) tolerance sweep on headline cells
 def sweep(resp, inst, cell, tols=(0.01,0.02,0.05,0.10)):
     out={f"{t:.2f}":[0,0] for t in tols}   # revert, n_magcorrect
+    seen=set()   # dedupe retry rows first-wins, matching grade_responses exactly
     for r in rows(resp):
+        if r["instance_id"] in seen: continue
+        seen.add(r["instance_id"])
         i=inst.get(r["instance_id"])
         if not i: continue
         if i["id"].rsplit("-",2)[-2]!=cell: continue

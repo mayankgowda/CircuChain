@@ -25,19 +25,21 @@ the problem correctly and report the signs of the textbook-default convention ra
 than the instructed one. (The title's ``prior'' is a behavioral label for this
 default-seeking regularity, not an identified training-data mechanism.) Reversion is highly
 convention-specific. Posing the same problems under a counter-clockwise mesh-current
-instruction breaks \bAgg{} previously-solved problems across our panel while fixing
-\cAgg{}, and the three most capable models revert on \ccwGptFive--\ccwGemma\% of
-their correctly-computed variables; yet the same models comply almost perfectly with
-conventions whose reversal is itself part of the standard curriculum, and in every
-one of them the gap between the curriculum-absent reversal and every
-curriculum-taught reversal is at least \tierSepMinPrec{} percentage points. Compliance is
-also load-sensitive and capability-gated: hardening problems within an obeyed domain
+instruction breaks \bAgg{} previously-solved model--problem--procedure pairs
+across our panel while fixing \cAgg{}, and the three most capable models revert on \ccwGptFive--\ccwGemma\% of
+their correctly-computed variables; yet the same models comply almost perfectly with conventions whose reversal has
+worked treatment in the textbooks we audited, and in every one of them the gap
+between the one reversal with no worked treatment found and every reversal with
+worked treatment is at least \tierSepMinPrec{} percentage points. Compliance is
+also load-sensitive and capability-associated (nonmonotonically so below the most
+capable models): hardening problems within an obeyed domain
 raises each model's reversion (Gemma-4-31B from \vCwEGemma\% to \vCwHGemma\%) while
 a control instruction demanding the identical output change stays below 1\%, and
 mid-scale models revert at 91--99\% on conventions the capable trio obeys.
 Mitigation is conditional at best. A reasoning toggle that raises accuracy by up to
-64 points moves reversion on most conventions by only a few points, restoring
-compliance only where the reversal is both taught and procedurally shallow; and one
+64 points moves reversion on most conventions by only a few points, while
+restoring handedness compliance at 4B and 8B but not consistently across other
+conventions; and one
 to three fully worked in-context demonstrations of the required convention change
 reversion by at most 13.6 points in one model, with no consistent improvement in
 the other two. Two
@@ -80,7 +82,7 @@ one response yields independent measurements of both axes.
 \textbf{What we find.} Our results are organized as four claims.
 (1)~Reversion is \emph{large, asymmetric, and convention-specific}
 (Section~\ref{sec:pheno}): flipping one convention instruction breaks \bAgg{}
-solved problems and fixes \cAgg{}, while matched unusual-but-non-convention
+solved model--problem--procedure pairs and fixes \cAgg{}, while matched unusual-but-non-convention
 instructions are followed at 85--97\%.
 (2)~Three factors predict where reversion appears (Section~\ref{sec:anatomy}): how
 the convention's \emph{reversal} is represented in standard pedagogy, how hard the
@@ -220,9 +222,10 @@ counter-clockwise mesh instruction, the capable trio reverts on
 variables respectively (Table~\ref{tab:entrench}), and competence does not protect
 a model: Gemma-4-31B solves \vCircMagGemma\% of circuit magnitudes and still
 reverts on \ccwGemma\% of its diagnostic signs. Second, its \emph{asymmetry}: in
-the within-problem paired design, flipping the mesh convention breaks \bAgg{}
-problems that the panel solved under the default and fixes \cAgg{}; exact McNemar
-tests on these pairs are significant at $q_{\mathrm{BH}}\le 0.006$ in every
+the within-problem paired design, flipping the mesh convention breaks \bAgg{} model--problem--procedure paired
+observations that were solved under the default and fixes \cAgg{} (each pair is
+the same problem and required procedure for the same model, graded under the
+default and flipped contracts); exact McNemar tests on these pairs are significant at $q_{\mathrm{BH}}\le 0.006$ in every
 competent family. Third, its \emph{specificity}: the same models comply at
 85--97\% with matched instructions that are equally unusual but touch no
 convention (Gemma-4-31B and DeepSeek-V3, the two models tested with these
@@ -231,11 +234,11 @@ controls), and they obey several other convention flips almost perfectly
 
 Two stability checks bound sampling noise. Re-running Gemma's counter-clockwise
 measurement five times on a resampled subset gives run-level rates between 82.0\%
-and 94.1\% (mean 86.2\%); the primary full-panel figure is \ccwGemma\%. The
-run-to-run spread is a few points, so headline rates are stable, but item-level
-agreement across runs is only 39.6\%: \emph{which} problems revert varies from
-sample to sample even though \emph{how many} revert does not. The rate, not any
-per-item behavior, is the reproducible object. In the hardened contour tier the
+and 94.1\% (mean 86.2\%); the primary full-panel figure is \ccwGemma\%. Aggregate reversion remains high in every run, but its precise level moves by
+several points (the primary estimate sits below all five replicates) and
+item-level agreement across runs is only 39.6\%: \emph{which} problems revert
+varies from sample to sample. The reproducible object is the qualitative
+high-reversion conclusion, not a precise rate or any per-item behavior. In the hardened contour tier the
 corresponding five-fold resampling gives mean 34.4\% (SD 6.4 points).
 
 Finally, the one cell whose transform is affine rather than a pure flip deserves
@@ -318,7 +321,11 @@ model-relative quantity, although the design knobs that produce it (degree, edge
 count) are set exogenously. Row availability also differs on the hardened tier
 (gpt-oss 197/250 default-cell rows, Gemma 183/250) because long generations
 truncate; we do not know the direction of the resulting bias and report
-availability rather than claiming conservativeness.
+availability rather than claiming conservativeness. More generally, conditional
+reversion comparisons across difficulty tiers, reasoning modes, or scales may
+combine genuine compliance changes with changes in which variables enter the
+magnitude-correct subset; common-support pairing is available only for the
+demonstration experiment (Appendix~\ref{app:robust}).
 
 \begin{figure}[t]
 \centering
@@ -369,14 +376,13 @@ reasoning restores compliance: reversion falls from \vLhNothinkMid\% to
 \vLhThinkMid\% at 4B and to \vLhThinkBig\% at 8B
 (Table~\ref{tab:rhrladder}, Appendix~\ref{app:rhrladder}). In the same responses,
 the reaction-reporting convention keeps slipping at
-\vRxnThinkBig\%--\vRxnThinkSmall\% across the three scales. A consistent reading
-of all three domains, which we offer as an interpretation of behavioral data
-rather than a mechanistic finding, is that deliberation can \emph{retrieve} a
-reversal that is taught and procedurally shallow (a per-operation sign rule the
-chain of thought can state and apply), while it does not supply a reversal that
-was never taught, does not sustain one that must be maintained across a long
-derivation, and does not reliably hold a framing convention applied once at
-reporting time.
+\vRxnThinkBig\%--\vRxnThinkSmall\% across the three scales. Reasoning therefore has convention-specific behavioral effects: it substantially
+reduces handedness reversion at 4B and 8B while contour-orientation reversion
+remains above 91\% at every scale, and reaction-frame slippage persists in the
+same responses. These results do not identify whether the differences arise from
+retrieval of a taught rule, intermediate-state maintenance, final-report framing,
+or another mechanism; we note only that the conventions that improve under
+deliberation are those whose reversal is short to state and apply per operation.
 
 \subsection{Worked demonstrations: little to nothing}
 If reversion reflects a missing representation, supplying it in-context should
@@ -499,6 +505,17 @@ answers entered future training corpora, the measurement itself, under our
 working hypothesis about its origin, would be altered rather than merely
 inflated.
 
+\subsubsection*{AI-use statement}
+Large language models were used in this project as engineering and writing
+assistants: implementing harness and analysis code under author direction,
+drafting and editing manuscript text, suggesting related work, and generating
+adversarial methodological critique that informed several revisions (including
+the removal of an earlier overclaimed result). All experimental design decisions,
+data collection, and final claims were reviewed and are owned by the authors. No
+language model is used in dataset generation, solver verification, model-output
+grading, or statistical computation; evaluated models appear only as study
+subjects.
+
 \bibliography{refs}
 \bibliographystyle{iclr2026_conference}
 
@@ -550,8 +567,17 @@ counter-clockwise cell).}
 \input{generated/table_commonsupport}
 \end{table}
 
-\textbf{Grading-tolerance sweep.} Table~\ref{tab:tol} re-grades the headline
-cells at four relative tolerances; rates move by at most 2.5 points.
+\textbf{Exact grading rule.} A predicted value $\hat y$ matches a reference $y$
+when $|\hat y-y|\le 0.05\,|y|$ if $|y|\ge 10^{-6}$, and $|\hat y-y|<10^{-5}$
+otherwise. ``Magnitude correct'' means $\big||\hat y|-|y_{\mathrm{instr}}|\big|
+\le 0.05\,|y_{\mathrm{instr}}|$ against the \emph{instructed-frame} value
+$y_{\mathrm{instr}}$, including in the affine reference-node cell, where the two
+frames differ in magnitude; ``reverted'' additionally requires a full match to the
+default-frame value, and ``incoherent'' is magnitude-correct with no full match to
+either reference. \textbf{Tolerance sweep.} Table~\ref{tab:tol} re-grades the
+headline cells at four relative tolerances with the same rule; rates move by at
+most 2.5 points. (Sweep and main-text values at 5\% agree exactly; both derive
+from the same deduplicated grading pass.)
 \begin{table}[h]\centering\small
 \caption{Reversion rate by grading tolerance.}
 \label{tab:tol}
@@ -564,6 +590,6 @@ regeneration commands, manifests with canary identifiers, transform-validation
 reports (125/125 per domain), the complete statistical freeze backing every
 number in this paper (including per-problem clustering used for all confidence
 intervals), and per-response provenance (model identifier, serving stack,
-quantization, sampling parameters) accompany the code release. No language model
-is involved at any point in generation, verification, grading, or analysis.
+quantization, sampling parameters) accompany the code release. No language model is used in dataset generation, solver verification,
+model-output grading, or statistical computation.
 \end{document}
